@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jqg-Tg-5iv">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Page View Controller-->
+        <scene sceneID="wXQ-2z-rjk">
+            <objects>
+                <viewController storyboardIdentifier="MainPageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jqg-Tg-5iv" customClass="MainPageViewController" customModule="missthebus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WN9-36-gAN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Every HKers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eES-qP-xTl">
+                                <rect key="frame" x="131" y="94" width="152" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who Always Miss The Bus." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6UJ-fU-ZLe">
+                                <rect key="frame" x="40" y="126" width="334" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="k6i-fr-Cqe"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6UJ-fU-ZLe" firstAttribute="top" secondItem="eES-qP-xTl" secondAttribute="bottom" constant="5" id="MEB-Mf-489"/>
+                            <constraint firstItem="eES-qP-xTl" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" constant="50" id="eLy-sG-Bts"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="6UJ-fU-ZLe" secondAttribute="trailing" constant="40" id="fSH-6D-N4D"/>
+                            <constraint firstItem="eES-qP-xTl" firstAttribute="centerX" secondItem="WN9-36-gAN" secondAttribute="centerX" id="kSH-cW-vuE"/>
+                            <constraint firstItem="6UJ-fU-ZLe" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" constant="40" id="wro-qE-mpS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainMsg1" destination="eES-qP-xTl" id="6YM-Es-Vdx"/>
+                        <outlet property="mainMsg2" destination="6UJ-fU-ZLe" id="eYr-ax-XSZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8H-AN-xyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-141" y="-117"/>
+        </scene>
+    </scenes>
+</document>

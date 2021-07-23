@@ -1,0 +1,36 @@
+PODS:
+  - Alamofire (4.7.0)
+  - MarqueeLabel (4.1.0)
+  - PromiseKit (6.2.1):
+    - PromiseKit/CorePromise (= 6.2.1)
+    - PromiseKit/Foundation (= 6.2.1)
+    - PromiseKit/UIKit (= 6.2.1)
+  - PromiseKit/CorePromise (6.2.1)
+  - PromiseKit/Foundation (6.2.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.2.1):
+    - PromiseKit/CorePromise
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Alamofire (= 4.7.0)
+  - MarqueeLabel
+  - PromiseKit (= 6.2.1)
+  - SVProgressHUD (= 2.2.5)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - MarqueeLabel
+    - PromiseKit
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  MarqueeLabel: 47ee0c9b3f8da874bb376aef59e8f31c40feaeda
+  PromiseKit: edaca6f0a7ed73b08c287600537d13867a7fabc7
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: 257b2d68f80d8447753f68281a24b7c39f29f807
+
+COCOAPODS: 1.10.1

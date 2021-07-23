@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search Page View Controller-->
+        <scene sceneID="wXQ-2z-rjk">
+            <objects>
+                <viewController storyboardIdentifier="SearchPageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jqg-Tg-5iv" customClass="SearchPageViewController" customModule="missthebus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WN9-36-gAN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lu8-Ek-oZ6" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
+                                <rect key="frame" x="20" y="64" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oVc-5C-c5C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XN3-Jh-eam">
+                                <rect key="frame" x="0.0" y="134" width="414" height="728"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="k6i-fr-Cqe"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Lu8-Ek-oZ6" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" constant="20" id="1bc-pd-odO"/>
+                            <constraint firstItem="Lu8-Ek-oZ6" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" constant="20" id="Hhq-Bt-LYB"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="Lu8-Ek-oZ6" secondAttribute="trailing" constant="20" id="S9l-BV-qWW"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="XN3-Jh-eam" secondAttribute="trailing" id="V5f-Uv-1gk"/>
+                            <constraint firstItem="XN3-Jh-eam" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="eFc-jm-C8g"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="bottom" secondItem="XN3-Jh-eam" secondAttribute="bottom" id="ekQ-Ew-Agx"/>
+                            <constraint firstItem="XN3-Jh-eam" firstAttribute="top" secondItem="Lu8-Ek-oZ6" secondAttribute="bottom" constant="20" id="uOJ-PO-8XK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchTextfield" destination="Lu8-Ek-oZ6" id="C70-1S-oq3"/>
+                        <outlet property="tableView" destination="XN3-Jh-eam" id="zSp-wq-SBZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8H-AN-xyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-141" y="-117"/>
+        </scene>
+    </scenes>
+</document>
