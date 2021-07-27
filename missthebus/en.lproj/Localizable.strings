@@ -21,30 +21,30 @@
 "route_from" = "From";
 "route_to" = "To";
 
+// Stop Item
+"stop_mins" = "min(s)";
+
+// Set Reminder
+"create_reminder_title" = "Add Reminder";
+"update_reminder_title" = "Update Reminder";
+"day_mon" = "Mon";
+"day_tue" = "Tue";
+"day_wed" = "Wed";
+"day_thu" = "Thu";
+"day_fri" = "Fri";
+"day_sat" = "Sat";
+"day_sun" = "Sun";
+
+
+
+
+
+
 // General
 "switch_keyboard" = "Switch keyboard";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"general_create" = "Create";
+"general_update" = "Update";
+"general_delete" = "Delete";
 
 
 

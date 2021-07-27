@@ -7,11 +7,17 @@
 
 import UIKit
 
+
+protocol StopItemCellDelegate: class {
+    func setReminder(stop: KmbStop)
+}
+
 class StopItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var softBgView: SoftUIView!
     @IBOutlet weak var touchArea: UIView! // allow touch happen when has SoftUIView
     @IBOutlet weak var stopNameLabel: UILabel!
+    @IBOutlet weak var indexLabel: UILabel!
     @IBOutlet weak var bookmarkBtn: UIButton!
     
     @IBOutlet weak var routePoint: UIView!
@@ -25,6 +31,7 @@ class StopItemTableViewCell: UITableViewCell {
         case itemCell = "StopETAItemCollectionViewCell"
     }
     
+    var delegate: StopItemCellDelegate?
     var stop: KmbStop?
     var isBookmarked = false
     var etaList: StopListPage.DisplayItem.ViewModel?
@@ -61,12 +68,16 @@ extension StopItemTableViewCell{
     }
     
     @objc func onClickBookmark(){
-        self.setIsBookMark(!self.isBookmarked)
+//        self.setIsBookMark(!self.isBookmarked)
+        if let stop = self.stop {
+            self.delegate?.setReminder(stop: stop)
+        }
+        
     }
     
     private func setIsBookMark(_ bookmark: Bool){
         self.isBookmarked = bookmark
-        let imgName = (self.isBookmarked) ? "bookmarked" : "bookmark"
+        let imgName = (self.isBookmarked) ? "bell2" : "bell"
         self.bookmarkBtn.setImage(UIImage(named: imgName)!.withRenderingMode((self.isBookmarked) ? .alwaysOriginal : .alwaysTemplate), for: .normal)
         self.missBusIcon.isHidden = !self.isBookmarked
         
@@ -86,8 +97,12 @@ extension StopItemTableViewCell{
         self.etaCollectionView.dataSource = self
         
         self.stop = stop
-        self.stopNameLabel.text = "\(index). \(self.stop?.name ?? "---")"
-        self.stopNameLabel.font = UIFont.init(name: "AvenirNext-Regular", size: 16)
+        self.indexLabel.text = "\(index)."
+        self.indexLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+        
+        self.stopNameLabel.text = "\(self.stop?.name ?? "---")"
+        self.stopNameLabel.useTextStyle(.label)
+        self.stopNameLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
         self.softBgView.cornerRadius = 10
         self.softBgView.shadowOffset = .init(width: 1, height: 1.5)

@@ -11,7 +11,7 @@ import UIKit
 // MARK: - The main interface to be called by others
 protocol StopListPageRoutingLogic
 {
-    
+    func routeToSetReminderPage(route: KmbRoute, stop: KmbStop)
 }
 
 // MARK: - The possible elements that can be
@@ -29,5 +29,9 @@ class StopListPageRouter: NSObject, StopListPageRoutingLogic, StopListPageDataPa
 
 // MARK: - Routing and datapassing for one nav action
 extension StopListPageRouter {
-
+    func routeToSetReminderPage(route: KmbRoute, stop: KmbStop){
+        let request = SetReminderPageBuilder.BuildRequest(route: route, stop: stop)
+        let vc = SetReminderPageBuilder.createScene(request: request)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
 }

@@ -73,22 +73,31 @@
                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbm-mN-4K3" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
                         <rect key="frame" x="80" y="10" width="314" height="100"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4G5-Xu-QkF">
+                                <rect key="frame" x="5" y="20.5" width="30" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="E8M-to-E9l"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYS-y5-Nla">
-                                <rect key="frame" x="10" y="20.5" width="254" height="19.5"/>
+                                <rect key="frame" x="40" y="21" width="224" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="FXx-Kt-O1e">
-                                <rect key="frame" x="42" y="45" width="230" height="60"/>
+                                <rect key="frame" x="42" y="45.5" width="230" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="230" id="2V4-gt-TkH"/>
                                     <constraint firstAttribute="height" constant="60" id="A9v-eb-9eY"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="izV-sF-Hjh">
-                                    <size key="itemSize" width="79" height="58"/>
-                                    <size key="estimatedItemSize" width="79" height="58"/>
+                                    <size key="itemSize" width="79" height="60"/>
+                                    <size key="estimatedItemSize" width="79" height="60"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -97,9 +106,10 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="FXx-Kt-O1e" firstAttribute="top" secondItem="tYS-y5-Nla" secondAttribute="bottom" constant="5" id="Ij5-H3-AW8"/>
-                            <constraint firstItem="tYS-y5-Nla" firstAttribute="top" secondItem="wbm-mN-4K3" secondAttribute="top" constant="20.5" id="hx5-2H-LtH"/>
+                            <constraint firstItem="tYS-y5-Nla" firstAttribute="leading" secondItem="4G5-Xu-QkF" secondAttribute="trailing" constant="5" id="JZm-tv-Hop"/>
+                            <constraint firstItem="4G5-Xu-QkF" firstAttribute="centerY" secondItem="tYS-y5-Nla" secondAttribute="centerY" id="lsW-6o-ddf"/>
                             <constraint firstItem="FXx-Kt-O1e" firstAttribute="centerX" secondItem="wbm-mN-4K3" secondAttribute="centerX" id="tgH-Bq-Mzs"/>
-                            <constraint firstItem="tYS-y5-Nla" firstAttribute="leading" secondItem="wbm-mN-4K3" secondAttribute="leading" constant="10" id="v6f-X2-lpN"/>
+                            <constraint firstItem="4G5-Xu-QkF" firstAttribute="leading" secondItem="wbm-mN-4K3" secondAttribute="leading" constant="5" id="zeN-X4-VVM"/>
                         </constraints>
                     </view>
                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5w1-DC-Y3R" userLabel="TouchArea">
@@ -111,11 +121,12 @@
                                     <constraint firstAttribute="height" constant="40" id="2ns-2D-4qF"/>
                                     <constraint firstAttribute="width" constant="40" id="YAZ-dd-KSe"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="bookmark"/>
+                                <inset key="imageEdgeInsets" minX="20" minY="10" maxX="0.0" maxY="10"/>
+                                <state key="normal" image="bell"/>
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="V8b-kN-xlL" firstAttribute="top" secondItem="5w1-DC-Y3R" secondAttribute="top" constant="10.5" id="GyR-n4-96M"/>
                             <constraint firstAttribute="trailing" secondItem="V8b-kN-xlL" secondAttribute="trailing" constant="20" symbolic="YES" id="jSR-oO-zWZ"/>
                         </constraints>
                     </view>
@@ -125,13 +136,13 @@
                     <constraint firstAttribute="bottom" secondItem="pCf-7E-tW9" secondAttribute="bottom" id="DEa-nQ-xbw"/>
                     <constraint firstAttribute="bottom" secondItem="5w1-DC-Y3R" secondAttribute="bottom" constant="10" id="FFG-Xs-4e9"/>
                     <constraint firstItem="5w1-DC-Y3R" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" constant="10" id="OJE-Jy-Wxe"/>
-                    <constraint firstItem="V8b-kN-xlL" firstAttribute="top" secondItem="tYS-y5-Nla" secondAttribute="top" constant="-10" id="Pu1-Am-plU"/>
                     <constraint firstAttribute="trailing" secondItem="5w1-DC-Y3R" secondAttribute="trailing" constant="10" id="Vhs-xt-U1F"/>
                     <constraint firstAttribute="bottom" secondItem="wbm-mN-4K3" secondAttribute="bottom" constant="10" id="X6V-hR-oQU"/>
                     <constraint firstItem="wbm-mN-4K3" firstAttribute="leading" secondItem="pCf-7E-tW9" secondAttribute="trailing" id="e3u-wp-a4Q"/>
                     <constraint firstItem="5w1-DC-Y3R" firstAttribute="top" secondItem="yPv-4U-TpL" secondAttribute="top" constant="10" id="lLZ-oL-ZtP"/>
                     <constraint firstAttribute="trailing" secondItem="wbm-mN-4K3" secondAttribute="trailing" constant="20" id="lmG-6k-J3K"/>
                     <constraint firstItem="pCf-7E-tW9" firstAttribute="top" secondItem="yPv-4U-TpL" secondAttribute="top" id="rh1-RR-bT6"/>
+                    <constraint firstItem="tYS-y5-Nla" firstAttribute="centerY" secondItem="V8b-kN-xlL" secondAttribute="centerY" id="tus-0w-mha"/>
                     <constraint firstItem="wbm-mN-4K3" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" constant="80" id="vb9-uw-im5"/>
                     <constraint firstItem="V8b-kN-xlL" firstAttribute="leading" secondItem="tYS-y5-Nla" secondAttribute="trailing" id="y7U-zm-xiR"/>
                     <constraint firstItem="pCf-7E-tW9" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" id="zhY-Rk-Pzc"/>
@@ -140,6 +151,7 @@
             <connections>
                 <outlet property="bookmarkBtn" destination="V8b-kN-xlL" id="T9v-IQ-srp"/>
                 <outlet property="etaCollectionView" destination="FXx-Kt-O1e" id="2C3-lX-1I4"/>
+                <outlet property="indexLabel" destination="4G5-Xu-QkF" id="pl5-lg-dbi"/>
                 <outlet property="lowerRouteLine" destination="JhB-Q3-D2n" id="yZx-B5-3kO"/>
                 <outlet property="missBusIcon" destination="fnQ-SX-3SK" id="V3g-Bq-rop"/>
                 <outlet property="routePoint" destination="KIl-jl-3h1" id="qMu-r6-aBG"/>
@@ -152,6 +164,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bookmark" width="64" height="64"/>
+        <image name="bell" width="64" height="64"/>
     </resources>
 </document>

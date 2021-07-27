@@ -27,7 +27,6 @@ class StopListPagePresenter: StopListPagePresentationLogic
 // MARK: - Presentation receiver
 extension StopListPagePresenter {
     func displayInitialState(route: KmbRoute, stopList: [KmbStop]){
-        print("displayInitialState()")
         self.route = route
         self.stopList = stopList
         self.viewController?.displayInitialState(route: route, stopList: stopList)
@@ -44,14 +43,14 @@ extension StopListPagePresenter {
                         if let etaTime = eta.eta{
                             let etaDate = Utils.convert2Date(time: etaTime, pattern: "yyyy-MM-dd'T'HH:mm:ssZ")
                             let nowDate = Date()
-                            print("\(nowDate) \(etaDate) = ")
-                            if let diffMin = Calendar.current.dateComponents([.minute, .second], from: nowDate, to: etaDate).minute{
-                                print("diff: \(diffMin)")
+                            let diff = Calendar.current.dateComponents([.minute, .second], from: nowDate, to: etaDate)
+                            if let diffMin = diff.minute, let diffSec = diff.second{
+                                print("\(nowDate) | \(etaDate) | diff: \(diffMin)mins \(diffSec)sec")
 //                                display = (diffMin == 0) ? String(diffMin) : "-"
-                                display = String(diffMin)
+
+                                display = (diffMin > 0) ? String(diffMin) : "0"
                             }
                         }
-                        print("time diff = \(display)")
                         etaList.append(StopListPage.ETA(company: .KMB, seq: eta.seq ?? -1, display: display, remark: eta.rmk))
                     }
                 }

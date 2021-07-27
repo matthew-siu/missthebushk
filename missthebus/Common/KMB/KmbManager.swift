@@ -69,9 +69,9 @@ class KmbManager{
         }
     }
     
-    static func requestOneStopETA(stopId: String, route: String, serviceType: String) -> Promise<KmbETAResponse?> {
+    static func requestOneStopETA(query: KmbETAQuery) -> Promise<KmbETAResponse?> {
         
-        let repo = KmbETAAPIRepository(stopId: stopId, route: route, serviceType: serviceType)
+        let repo = KmbETAAPIRepository(query: query)
         return Promise{ promise in
             KMBAPI.send(repository: repo)
                 .done { (response) in

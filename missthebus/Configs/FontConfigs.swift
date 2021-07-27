@@ -19,6 +19,7 @@ fileprivate extension Configs {
             case heavy  = "Heavy"
             case bold   = "Bold"
             case italic = "Italic"
+            case regular = "Regular"
         }
         
         // Helper, defines the name of font
@@ -45,35 +46,29 @@ enum TextStyle {
     case header2
     case subhead1
     case title1
-    case button
-    case body2
-    case body1
-    case caption1
-    case remarks1
+    case title2
+    case label
+    case label_en
+    case label_sub
+    case label_sub_bold
     
     fileprivate var style: Style {
         switch self {
-        case .header1:      return (35, .avenirNext(.medium))
-        case .header2:      return (30, .avenirNext(.medium))
-        case .title1:       return (19, .avenirNext(.medium))
-        case .subhead1:     return (17, .avenirNext(.medium))
-        case .button:       return (16, .avenirNext(.medium))
-        case .body2:        return (14, .avenirNext(.heavy))
-        case .body1:        return (14, .avenirNext(.medium))
-        case .caption1:     return (12, .avenirNext(.medium))
-        case .remarks1:     return (9, .avenirNext(.medium))
+        case .header1:      return (35, .avenirNext(.regular))
+        case .header2:      return (30, .avenirNext(.regular))
+        case .title1:       return (24, .avenirNext(.regular))
+        case .title2:       return (20, .avenirNext(.regular))
+        case .subhead1:     return (17, .avenirNext(.bold))
+        case .label:       return (16, .avenirNext(.regular))
+        case .label_en:       return (20, .avenirNext(.regular))
+        case .label_sub:       return (14, .avenirNext(.regular))
+        case .label_sub_bold:       return (14, .avenirNext(.bold))
         }
     }
     
     var font: UIFont {
         let font = UIFont.init(name: self.style.font.fontIdentifier, size: self.style.size)
 
-//        for family: String in UIFont.familyNames {
-//            print("%@", family)
-//            for name: String in UIFont.fontNames(forFamilyName: family) {
-//                print("  %@", name)
-//            }
-//        }
         
         assert(font != nil, "Font config fail! Check FontConfig.swift!")
         

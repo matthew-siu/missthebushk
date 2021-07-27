@@ -48,6 +48,15 @@ extension StopListPageViewController {
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         self.interactor?.loadAllStopsFromRoute()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.interactor?.dismissETATimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 }
 
 extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource{
@@ -58,6 +67,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! StopItemTableViewCell
         let item = self.stopList[indexPath.row]
+        cell.delegate = self
         cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: (indexPath.row == selectedIndex), count: self.stopList.count)
         if let etaViewModel = self.selectedStopETAView{
             if etaViewModel.etaViews.contains(where: {$0.seq == indexPath.row + 1}) {
@@ -89,7 +99,16 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
         
         // request stop ETA API
         let stop = self.stopList[indexPath.row]
-        self.interactor?.requestAllKmbStaticInfo(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+//        self.interactor?.requestOneStopETA(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+        self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+    }
+}
+
+extension StopListPageViewController: StopItemCellDelegate{
+    func setReminder(stop: KmbStop) {
+        if let route = self.route {
+            self.router?.routeToSetReminderPage(route: route, stop: stop)
+        }
     }
 }
 
@@ -98,7 +117,7 @@ extension StopListPageViewController {
 
     func displayInitialState(route: KmbRoute, stopList: [KmbStop]){
         
-        self.title = "\(route.route) \("route_to".localized()) \(route.destStop) [\(route.bound)]"
+        self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route
         self.stopList = stopList
         self.tableView.reloadData()

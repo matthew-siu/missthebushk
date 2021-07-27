@@ -21,30 +21,30 @@
 "route_from" = "由";
 "route_to" = "往";
 
+// Stop Item
+"stop_mins" = "分鐘";
+
+// Set Reminder
+"create_reminder_title" = "建立提醒";
+"update_reminder_title" = "更新提醒";
+"day_mon" = "一";
+"day_tue" = "二";
+"day_wed" = "三";
+"day_thu" = "四";
+"day_fri" = "五";
+"day_sat" = "六";
+"day_sun" = "日";
+
+
+
+
+
+
 // General
 "switch_keyboard" = "切換鍵盤";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"general_create" = "創建";
+"general_update" = "更新";
+"general_delete" = "刪除";
 
 
 

@@ -68,12 +68,8 @@ extension MainPageViewController {
     }
     
     private func initUI(){
-        if let font = UIFont.init(name: "AvenirNext-Regular", size: 24){
-            self.mainMsg1.useFont(font: font)
-        }
-        if let font = UIFont.init(name: "AvenirNext-Regular", size: 14){
-            self.mainMsg2.useFont(font: font)
-        }
+        self.mainMsg1.useTextStyle(.header2)
+        self.mainMsg2.useTextStyle(.label_sub)
         
         setSearchBtn()
     }

@@ -35,18 +35,20 @@ class KmbETAAPIRepository: APIRepository<KmbETAResponse> {
         return headers
     }
     
-    init(stopId: String, route: String, serviceType: String) {
-        self.stopId = stopId
-        self.route = route
-        self.serviceType = serviceType
-        let request = KmbETARequest()
+    init(query: KmbETAQuery) {
+        self.stopId = query.stopId
+        self.route = query.route
+        self.serviceType = query.serviceType
+        let request = EmptyRequest()
         super.init(request: request)
     }
     
 }
 
-struct KmbETARequest: APIRequest {
-    
+struct KmbETAQuery: APIQuery{
+    let stopId: String
+    let route: String
+    let serviceType: String
 }
 
 

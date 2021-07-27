@@ -41,12 +41,9 @@ extension RouteItemTableViewCell{
     func setInfo(vc: UIViewController, route: KmbRoute){
         self.route = route
         self.routeNumLabel.text = route.route
-        if (currentLanguage != .english){
-            self.routeDestLabel.font = UIFont.init(name: "AvenirNext-Regular", size: 20)
-        }else{
-            self.routeDestLabel.font = UIFont.init(name: "AvenirNext-Regular", size: 16)
-        }
+        self.routeNumLabel.useTextStyle(.title1)
         self.routeDestLabel.text = "\(route.destStop)"
+        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         self.routeOrigLabel.text = "route_from".localized() + " \(route.originStop)"
         
         if (route.company == .KMB){

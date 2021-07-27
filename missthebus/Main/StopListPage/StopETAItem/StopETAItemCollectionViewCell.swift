@@ -22,11 +22,9 @@ class StopETAItemCollectionViewCell: UICollectionViewCell {
 
 extension StopETAItemCollectionViewCell{
     func setInfo(viewModel: StopListPage.ETA?){
-        print("StopETAItemCollectionViewCell: setInfo")
         if let viewModel = viewModel{
-            print("display: \(viewModel.display)")
             self.etaDisplayLabel.text = viewModel.display
-            self.minuteLabel.text = "min(s)"
+            self.minuteLabel.text = "stop_mins".localized()
             if (viewModel.company == .KMB){
                 
             }

@@ -13,7 +13,9 @@ import PromiseKit
 protocol StopListPageBusinessLogic
 {
     func loadAllStopsFromRoute()
-    func requestAllKmbStaticInfo(stopId: String, route: String, serviceType: String)
+//    func requestOneStopETA(stopId: String, route: String, serviceType: String)
+    func startETATimer(stopId: String, route: String, serviceType: String)
+    func dismissETATimer()
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -31,6 +33,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     
     // State
     var route: KmbRoute
+    var etaTimer: Timer?
     
     // Init
     init(request: StopListPageBuilder.BuildRequest) {
@@ -41,6 +44,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
 
 // MARK: - Business
 extension StopListPageInteractor {
+    
     func loadAllStopsFromRoute(){
         var stopList = [KmbStop]()
         guard let allStopList = KmbManager.getAllStops() else {return}
@@ -54,10 +58,25 @@ extension StopListPageInteractor {
         self.presenter?.displayInitialState(route: route, stopList: stopList)
     }
     
+    func startETATimer(stopId: String, route: String, serviceType: String){
+        let query = KmbETAQuery(stopId: stopId, route: route, serviceType: serviceType)
+        self.requestOneStopETA(query: query)
+        self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: query, repeats: true)
+    }
     
-    func requestAllKmbStaticInfo(stopId: String, route: String, serviceType: String){
+    @objc
+    func requestETA(_ timer: Timer)
+    {
+        guard let query = timer.userInfo as? KmbETAQuery else {
+            return
+        }
+        self.requestOneStopETA(query: query)
+    }
+    
+    func requestOneStopETA(query: KmbETAQuery){
         DispatchQueue.main.async {
-            KmbManager.requestOneStopETA(stopId: stopId, route: route, serviceType: serviceType)
+            
+            KmbManager.requestOneStopETA(query: query)
                 .done{response in
                     if let resp = response?.data{
                         self.presenter?.displayETA(data: resp)
@@ -69,5 +88,11 @@ extension StopListPageInteractor {
                     print("fail")
                 }
         }
+    }
+    
+    func dismissETATimer(){
+        print("dismiss ETA time")
+        self.etaTimer?.invalidate()
+        self.etaTimer = nil
     }
 }

@@ -45,7 +45,21 @@ class BaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+}
 
+extension BaseViewController{
+    func initSoftUI(_ obj: SoftUIView, inverted: Bool? = false, type: SoftUIViewType? = .pushButton){
+        obj.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
+        obj.cornerRadius = 10
+        obj.shadowOffset = .init(width: 2, height: 2)
+        obj.shadowOpacity = 1
+        
+        if let inverted = inverted, let type = type {
+            obj.isSelected = inverted
+            obj.type = type
+        }
     }
 }
 

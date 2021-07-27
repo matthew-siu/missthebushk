@@ -95,7 +95,7 @@ extension SearchPageViewController {
         self.searchTextfield.enablesReturnKeyAutomatically = true
         self.searchTextfield.placeholder = "search_label".localized()
         self.searchTextfield.textColor = .darkText
-        self.searchTextfield.font = UIFont.init(name: "AvenirNext-Regular", size: 16)
+        self.searchTextfield.useTextStyle(.label)
         self.searchTextfield.setLeftPaddingPoints(15)
         self.searchTextfield.setRightPaddingPoints(15)
         

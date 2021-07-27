@@ -9,6 +9,9 @@
 import Foundation
 import Alamofire
 
+// MARK: - Request Query
+public typealias APIQuery = Codable
+
 // MARK: - Request protocol
 public typealias APIRequest = Codable
 public class EmptyRequest: APIRequest {
