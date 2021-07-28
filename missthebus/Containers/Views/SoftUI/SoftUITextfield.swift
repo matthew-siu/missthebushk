@@ -12,17 +12,19 @@ open class SoftUITextfield: UITextField {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.initUI()
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.initUI()
     }
     
-    open var softUIBackgroundLayer: SoftUIView!
+    open var softUIBackgroundLayer = SoftUIView()
     
     open func setThemeColor(majorColor: UIColor, darkColor: UIColor, lightColor: UIColor){
-        initUI()
-        setThemeColor(majorColor, darkColor, lightColor)
+        self.createSubLayers()
+        self.setThemeColor(majorColor, darkColor, lightColor)
     }
     
 }
@@ -30,11 +32,13 @@ open class SoftUITextfield: UITextField {
 private extension SoftUITextfield {
     
     func initUI(){
-        createSubLayers()
+        self.softUIBackgroundLayer = createSoftUIView()
+        print("bg: \(self.softUIBackgroundLayer.frame.size.width)")
+//        createSubLayers()
     }
 
     func createSubLayers() {
-        softUIBackgroundLayer = {
+        self.softUIBackgroundLayer = {
             let softUIView = createSoftUIView()
             softUIView.isSelected = true
             softUIView.type = .staticView
@@ -43,6 +47,7 @@ private extension SoftUITextfield {
             self.sendSubviewToBack(softUIView)
             return softUIView
         }()
+        
     }
     
     func createSoftUIView() -> SoftUIView{

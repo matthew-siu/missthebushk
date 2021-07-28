@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,13 +18,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ggu-JU-Dr2">
-                                <rect key="frame" x="20" y="44" width="374" height="518"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="530"/>
                                 <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qll-nP-m0T" userLabel="NameView" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-uH-7xb">
+                                                <rect key="frame" x="0.0" y="90" width="414" height="30"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="10" id="25u-qv-UeC">
+                                                    <size key="itemSize" width="160" height="40"/>
+                                                    <size key="estimatedItemSize" width="160" height="40"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells/>
+                                            </collectionView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-mh-FzE" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="6Sy-6H-ELc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="Hh5-oC-qZz"/>
+                                            <constraint firstAttribute="trailing" secondItem="tUb-uH-7xb" secondAttribute="trailing" id="TYI-hi-Z0g"/>
+                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="top" secondItem="fGg-mh-FzE" secondAttribute="bottom" constant="20" id="UoL-j0-zN0"/>
+                                            <constraint firstAttribute="trailing" secondItem="fGg-mh-FzE" secondAttribute="trailing" constant="20" id="ZMh-ii-ARD"/>
+                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" id="cLM-FN-A1N"/>
+                                            <constraint firstAttribute="bottom" secondItem="tUb-uH-7xb" secondAttribute="bottom" constant="20" id="mW1-IX-ciY"/>
+                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="top" constant="20" id="qmD-zj-9sK"/>
+                                            <constraint firstAttribute="height" constant="140" id="uoK-9y-gzO"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pL-bn-IPW" userLabel="RouteView">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
+                                        <rect key="frame" x="0.0" y="150" width="414" height="120"/>
                                         <subviews>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIa-v5-J0r" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="10" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="10" width="374" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="286M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDg-Jq-kbI">
                                                         <rect key="frame" x="0.0" y="34.5" width="90" height="31.5"/>
@@ -88,95 +121,17 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="ZIa-v5-J0r" firstAttribute="top" secondItem="8pL-bn-IPW" secondAttribute="top" constant="10" id="PUe-XZ-jNS"/>
-                                            <constraint firstItem="ZIa-v5-J0r" firstAttribute="leading" secondItem="8pL-bn-IPW" secondAttribute="leading" id="e9B-HH-I29"/>
+                                            <constraint firstItem="ZIa-v5-J0r" firstAttribute="leading" secondItem="8pL-bn-IPW" secondAttribute="leading" constant="20" id="e9B-HH-I29"/>
                                             <constraint firstAttribute="height" priority="250" constant="120" id="mK1-Gc-oQB"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZIa-v5-J0r" secondAttribute="trailing" id="voo-qn-wpg"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZIa-v5-J0r" secondAttribute="trailing" constant="20" id="voo-qn-wpg"/>
                                             <constraint firstAttribute="bottom" secondItem="ZIa-v5-J0r" secondAttribute="bottom" constant="10" id="wfj-4e-yxg"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qll-nP-m0T" userLabel="NameView" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="374" height="128"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-mh-FzE" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="20" width="334" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="6Sy-6H-ELc"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-uH-7xb">
-                                                <rect key="frame" x="20" y="80" width="334" height="38"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G5x-X3-SbA">
-                                                    <size key="itemSize" width="80" height="40"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BbB-cm-ejp" customClass="ReminderNameCollectionViewCell" customModule="missthebus" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FfI-8S-tqf">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GoD-UX-IfJ" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                                                                    <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell2" translatesAutoresizingMaskIntoConstraints="NO" id="hOG-tf-jXe">
-                                                                            <rect key="frame" x="10" y="10" width="20" height="20"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="20" id="DTn-A5-pNj"/>
-                                                                                <constraint firstAttribute="width" constant="20" id="raW-HV-R2E"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wake" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGJ-cw-v9K">
-                                                                            <rect key="frame" x="35" y="10" width="42" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="NGJ-cw-v9K" firstAttribute="centerY" secondItem="hOG-tf-jXe" secondAttribute="centerY" id="MgU-uJ-WVX"/>
-                                                                        <constraint firstItem="hOG-tf-jXe" firstAttribute="leading" secondItem="GoD-UX-IfJ" secondAttribute="leading" constant="10" id="eoo-uk-mVT"/>
-                                                                        <constraint firstItem="NGJ-cw-v9K" firstAttribute="leading" secondItem="hOG-tf-jXe" secondAttribute="trailing" constant="5" id="h8O-Sa-fIg"/>
-                                                                        <constraint firstItem="hOG-tf-jXe" firstAttribute="centerY" secondItem="GoD-UX-IfJ" secondAttribute="centerY" id="wz6-Af-LQ4"/>
-                                                                    </constraints>
-                                                                </view>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="GoD-UX-IfJ" firstAttribute="top" secondItem="FfI-8S-tqf" secondAttribute="top" id="5SR-SW-WLL"/>
-                                                                <constraint firstAttribute="bottom" secondItem="GoD-UX-IfJ" secondAttribute="bottom" id="Dvm-kh-vZL"/>
-                                                                <constraint firstItem="GoD-UX-IfJ" firstAttribute="leading" secondItem="FfI-8S-tqf" secondAttribute="leading" id="qs6-Ef-eAM"/>
-                                                                <constraint firstAttribute="trailing" secondItem="GoD-UX-IfJ" secondAttribute="trailing" id="zOy-9h-wkA"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <connections>
-                                                            <outlet property="tagImage" destination="hOG-tf-jXe" id="5mU-JF-z5H"/>
-                                                            <outlet property="tagLabel" destination="NGJ-cw-v9K" id="Ksr-OY-4ps"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="Hh5-oC-qZz"/>
-                                            <constraint firstAttribute="trailing" secondItem="tUb-uH-7xb" secondAttribute="trailing" constant="20" id="TYI-hi-Z0g"/>
-                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="top" secondItem="fGg-mh-FzE" secondAttribute="bottom" constant="10" id="UoL-j0-zN0"/>
-                                            <constraint firstAttribute="trailing" secondItem="fGg-mh-FzE" secondAttribute="trailing" constant="20" id="ZMh-ii-ARD"/>
-                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="cLM-FN-A1N"/>
-                                            <constraint firstAttribute="bottom" secondItem="tUb-uH-7xb" secondAttribute="bottom" constant="10" id="mW1-IX-ciY"/>
-                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="top" constant="20" id="qmD-zj-9sK"/>
-                                            <constraint firstAttribute="height" constant="128" id="uoK-9y-gzO"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2E-M0-v1L" userLabel="TimeView">
-                                        <rect key="frame" x="0.0" y="268" width="374" height="250"/>
+                                        <rect key="frame" x="0.0" y="280" width="414" height="250"/>
                                         <subviews>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsm-B6-WXc" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="10" width="374" height="230"/>
+                                                <rect key="frame" x="20" y="10" width="374" height="230"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCt-i1-YYB">
                                                         <rect key="frame" x="20" y="20" width="334" height="20.5"/>
@@ -263,11 +218,11 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="rsm-B6-WXc" secondAttribute="trailing" id="7g6-l5-rdg"/>
+                                            <constraint firstAttribute="trailing" secondItem="rsm-B6-WXc" secondAttribute="trailing" constant="20" id="7g6-l5-rdg"/>
                                             <constraint firstAttribute="bottom" secondItem="rsm-B6-WXc" secondAttribute="bottom" constant="10" id="UyP-Ka-tFl"/>
                                             <constraint firstAttribute="height" priority="250" constant="250" id="W12-Xw-7i6"/>
                                             <constraint firstItem="rsm-B6-WXc" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="top" constant="10" id="kGw-LE-9ul"/>
-                                            <constraint firstItem="rsm-B6-WXc" firstAttribute="leading" secondItem="i2E-M0-v1L" secondAttribute="leading" id="oCa-XL-5Lt"/>
+                                            <constraint firstItem="rsm-B6-WXc" firstAttribute="leading" secondItem="i2E-M0-v1L" secondAttribute="leading" constant="20" id="oCa-XL-5Lt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -281,8 +236,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ggu-JU-Dr2" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" id="55p-Au-wHC"/>
-                            <constraint firstItem="ggu-JU-Dr2" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" constant="20" id="8wE-6V-fJ0"/>
-                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="ggu-JU-Dr2" secondAttribute="trailing" constant="20" id="bcq-im-bEX"/>
+                            <constraint firstItem="ggu-JU-Dr2" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="8wE-6V-fJ0"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="ggu-JU-Dr2" secondAttribute="trailing" id="bcq-im-bEX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -314,7 +269,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bell2" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -46,6 +46,14 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     @IBOutlet weak var weekFriBtn: WeekDayPicker!
     @IBOutlet weak var weekSatBtn: WeekDayPicker!
     @IBOutlet weak var timePickerLabel: UILabel!
+    
+    var reminderType: StopReminder.ReminderType = .OTHER
+    
+    
+    
+    enum CollectionViewCell: String, CollectionViewCellConfiguration {
+        case itemCell = "ReminderNameCollectionViewCell"
+    }
 }
 
 // MARK: - View Lifecycle
@@ -54,12 +62,16 @@ extension SetReminderPageViewController {
     {
         super.viewDidLoad()
         self.nameTextfield.delegate = self
+        self.reminderNamesCollectionView.delegate = self
+        self.reminderNamesCollectionView.dataSource = self
+        
+        self.reminderNamesCollectionView.register(CollectionViewCell.itemCell.nib, forCellWithReuseIdentifier: CollectionViewCell.itemCell.reuseId)
         self.initUI()
         self.interactor?.displayInitialState()
     }
     
     override func viewDidLayoutSubviews() {
-        print("")
+        super.viewDidLayoutSubviews()
         self.setNameTextfield()
     }
 }
@@ -79,6 +91,7 @@ extension SetReminderPageViewController {
         self.weekSatBtn.text = "day_sat".localized()
         
         self.reminderNamesCollectionView.backgroundColor = UIColor.SoftUI.major
+        self.reminderNamesCollectionView.clipsToBounds = false
         
         let saveBtn = UIBarButtonItem(title: "general_create".localized(), style: .plain, target: self, action: #selector(self.onSave))
         saveBtn.tintColor = .systemBlue
@@ -87,7 +100,7 @@ extension SetReminderPageViewController {
     
     
     @objc func onSave(){
-        print("hihi")
+        
     }
     
     func displayCreateState(route: KmbRoute, stop: KmbStop){
@@ -97,7 +110,7 @@ extension SetReminderPageViewController {
         self.initSoftUI(self.routeView)
         self.initSoftUI(self.timeView, type: .staticView)
         self.initSoftUI(self.timePickerView, inverted: true, type: .staticView)
-        self.initSoftUI(self.nameView)
+        self.initSoftUI(self.nameView, type: .staticView)
         
         self.routeNumLabel.text = route.route
         self.routeNumLabel.useTextStyle(.header2)
@@ -118,6 +131,48 @@ extension SetReminderPageViewController {
         self.timePicker.locale = Locale(identifier: "en_GB")
         
     }
+}
+
+extension SetReminderPageViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReminderTagDelegate{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SetReminderPage.DisplayItem.ViewModel.nameSamples.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = self.reminderNamesCollectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.itemCell.reuseId, for: indexPath) as! ReminderNameCollectionViewCell
+        cell.delegate = self
+        let type = SetReminderPage.DisplayItem.ViewModel.nameSamples[indexPath.row]
+        cell.setInfo(type: type, selected: self.reminderType == type.type)
+        cell.clipsToBounds = false
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+    
+    func onClickTag(type: SetReminderPage.NameSample?) {
+        if let type = type{
+            self.reminderType = (self.reminderType == type.type) ? .OTHER : type.type
+            self.reminderNamesCollectionView.reloadData()
+            self.nameTextfield.text = type.name
+        }
+    }
+}
+
+extension SetReminderPageViewController: UITextFieldDelegate{
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}
+
+
+extension SetReminderPageViewController{
+    
     
     private func setNameTextfield(){
 //        self.nameTextfield.enablesReturnKeyAutomatically = true
@@ -137,14 +192,5 @@ extension SetReminderPageViewController {
             obj.layer.shadowOffset = offset
             obj.layer.shadowColor = color
         }
-    }
-}
-
-extension SetReminderPageViewController: UITextFieldDelegate{
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
     }
 }
