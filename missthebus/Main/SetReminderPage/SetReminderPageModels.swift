@@ -18,27 +18,43 @@ enum SetReminderPage
         let type: StopReminder.ReminderType
     }
     
+    enum Mode {
+        case CREATE, UPDATE
+    }
+    
     enum DisplayItem
     {
-        struct Request
+        struct Request // vc -> interactor
         {
+            let reminderName: String
+            let reminderType: StopReminder.ReminderType
+            let time: Date
+            let period: [Int]?
         }
-        struct Response
+        struct Response // interactor -> presenter
         {
-            let route: KmbRoute
-            let stop: KmbStop
+//            let route: KmbRoute
+//            let stop: KmbStop
         }
-        struct ViewModel
+        struct ViewModel // presenter -> vc
         {
-            let routeNum: Int
+            let mode: Mode
+            var reminderName: String
+            var reminderType: StopReminder.ReminderType
+            let routeNum: String
             let busCompany: BusCompany
             let destStopName: String
             let currentStopName: String
+            var time: Date?
+            var period: [Int]?
             static let nameSamples: [NameSample] = [
-                NameSample(img: "bell", name: "Work", type: .WORK),
-                NameSample(img: "bell2", name: "Back Home", type: .OFF),
-                NameSample(img: "bookmark", name: "Dating", type: .DATING),
-                NameSample(img: "bookmarked", name: "Gathering", type: .GATHERING),
+                NameSample(img: "tagGoToWork", name: "reminder_tag_work".localized(), type: .WORK),
+                NameSample(img: "tagBackHome", name: "reminder_tag_off_work".localized(), type: .BACK_HOME),
+                NameSample(img: "tagSchool", name: "reminder_tag_school".localized(), type: .SCHOOL),
+                NameSample(img: "tagGathering", name: "reminder_tag_gathering".localized(), type: .GATHERING),
+                NameSample(img: "tagDating", name: "reminder_tag_dating".localized(), type: .DATING),
+                NameSample(img: "tagLastBus", name: "reminder_tag_last".localized(), type: .LAST_BUS),
+                NameSample(img: "tagOther", name: "reminder_tag_other".localized(), type: .OTHER),
             ]
         }
     }

@@ -34,6 +34,21 @@
 "day_fri" = "五";
 "day_sat" = "六";
 "day_sun" = "日";
+"reminder_name" = "提醒名稱";
+"reminder_time_label" = "請選擇提醒時間和週期。";
+"reminder_create_succeed" = "建立成功";
+"reminder_update_succeed" = "更新成功";
+
+"reminder_tag_work" = "上班";
+"reminder_tag_school" = "上學";
+"reminder_tag_off_work" = "回家";
+"reminder_tag_dating" = "約會";
+"reminder_tag_gathering" = "聚會";
+"reminder_tag_last" = "尾班車";
+"reminder_tag_other" = "其它";
+
+
+
 
 
 
@@ -42,31 +57,16 @@
 
 // General
 "switch_keyboard" = "切換鍵盤";
-"general_create" = "創建";
+"general_create" = "建立";
 "general_update" = "更新";
 "general_delete" = "刪除";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"general_ok" = "確認";
+"general_confirm" = "確認";
+"general_cancel" = "取消";
+"general_delete" = "刪除";
+"general_save" = "儲存";
+"general_saved" = "已儲存";
+"general_done" = "完成";
 
 
 

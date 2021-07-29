@@ -34,6 +34,21 @@
 "day_fri" = "五";
 "day_sat" = "六";
 "day_sun" = "日";
+"reminder_name" = "提醒名称";
+"reminder_time_label" = "请选择提醒时间和周期。";
+"reminder_create_succeed" = "建立成功";
+"reminder_update_succeed" = "更新成功";
+
+"reminder_tag_work" = "上班";
+"reminder_tag_school" = "上学";
+"reminder_tag_off_work" = "回家";
+"reminder_tag_dating" = "约会";
+"reminder_tag_gathering" = "聚会";
+"reminder_tag_last" = "尾班车";
+"reminder_tag_other" = "其它";
+
+
+
 
 
 
@@ -42,31 +57,16 @@
 
 // General
 "switch_keyboard" = "切换键盘";
-"general_create" = "创建";
+"general_create" = "建立";
 "general_update" = "更新";
 "general_delete" = "删除";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"general_ok" = "确认";
+"general_confirm" = "确认";
+"general_cancel" = "取消";
+"general_delete" = "删除";
+"general_save" = "保存";
+"general_saved" = "已保存";
+"general_done" = "完成";
 
 
 

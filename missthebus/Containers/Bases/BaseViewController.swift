@@ -61,5 +61,30 @@ extension BaseViewController{
             obj.type = type
         }
     }
+    
+    func showAlert(_ title: String, _ msg: String, completion: @escaping(Bool?) -> ()){
+        let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        
+        // Cancel action
+        let okAction = UIAlertAction(title: "general_ok".localized(), style: .default) { (_) in
+            completion(nil)
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showYesNoAlert(_ title: String, _ msg: String, completion: @escaping(Bool) -> ()){
+        let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "general_confirm".localized(), style: .default, handler: { (action: UIAlertAction!) in
+            completion(true)
+          }))
+
+        alertController.addAction(UIAlertAction(title: "general_cancel".localized(), style: .cancel, handler: { (action: UIAlertAction!) in
+            completion(false)
+          }))
+
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 

@@ -34,6 +34,21 @@
 "day_fri" = "Fri";
 "day_sat" = "Sat";
 "day_sun" = "Sun";
+"reminder_name" = "Reminder Name";
+"reminder_time_label" = "Please choose the notice time and period.";
+"reminder_create_succeed" = "Create succeed.";
+"reminder_update_succeed" = "Update succeed.";
+
+"reminder_tag_work" = "Work";
+"reminder_tag_school" = "School";
+"reminder_tag_off_work" = "Back home";
+"reminder_tag_dating" = "Dating";
+"reminder_tag_gathering" = "Gathering";
+"reminder_tag_last" = "Last bus";
+"reminder_tag_other" = "Other";
+
+
+
 
 
 
@@ -42,31 +57,16 @@
 
 // General
 "switch_keyboard" = "Switch keyboard";
-"general_create" = "Create";
+"general_create" = "Add";
 "general_update" = "Update";
 "general_delete" = "Delete";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"general_ok" = "OK";
+"general_confirm" = "Confirm";
+"general_cancel" = "Cancel";
+"general_delete" = "Delete";
+"general_save" = "Save";
+"general_saved" = "Saved";
+"general_done" = "Done";
 
 
 

@@ -15,11 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        guard let rootVC = UIStoryboard.init(name: "MainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
-//            return true
-//        }
-        let request = SearchPageBuilder.BuildRequest()
-        let rootVC = SearchPageBuilder.createScene(request: request)
+        guard let rootVC = UIStoryboard.init(name: "MainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
+            return true
+        }
+//        let request = SearchPageBuilder.BuildRequest()
+//        let rootVC = SearchPageBuilder.createScene(request: request)
         
         let navVC = NavigationController(rootViewController: rootVC)
         UIApplication.shared.windows.first?.rootViewController = navVC

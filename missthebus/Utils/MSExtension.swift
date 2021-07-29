@@ -86,6 +86,7 @@ extension UIImageView{
         self.image = templateImage
         self.tintColor = color
     }
+    
 }
 
 // UILabel inline support multiple colors
@@ -348,6 +349,15 @@ extension UIView{
             constraint.constant = gone ? 0.0 : dimension
             self.layoutIfNeeded()
             self.isHidden = gone
+        }
+    }
+    
+    
+    func addShadow(_ opacity: Float? = 0.7, offset: CGSize? = CGSize(width: 1, height: 1), color: CGColor? = UIColor.darkGray.cgColor){
+        if let opacity = opacity, let offset = offset, let color = color {
+            self.layer.shadowOpacity = opacity
+            self.layer.shadowOffset = offset
+            self.layer.shadowColor = color
         }
     }
     

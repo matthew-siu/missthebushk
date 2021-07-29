@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol SetReminderPagePresentationLogic
 {
-    func displayInitialState(route: KmbRoute, stop: KmbStop)
+    func displayInitialState(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop, reminder: StopReminder)
 }
 
 // MARK: - Presenter main body
@@ -23,8 +23,9 @@ class SetReminderPagePresenter: SetReminderPagePresentationLogic
 
 // MARK: - Presentation receiver
 extension SetReminderPagePresenter {
-    func displayInitialState(route: KmbRoute, stop: KmbStop){
-        print("self.viewController?.displayInitialState(route: route, stop: stop)")
-        self.viewController?.displayCreateState(route: route, stop: stop)
+    func displayInitialState(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop, reminder: StopReminder){
+        
+        let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: mode, reminderName: reminder.name, reminderType: reminder.type, routeNum: reminder.route, busCompany: reminder.company, destStopName: route.destStop, currentStopName: stop.name, time: reminder.time, period: reminder.period)
+        self.viewController?.displayCreateState(viewModel: viewModel)
     }
 }

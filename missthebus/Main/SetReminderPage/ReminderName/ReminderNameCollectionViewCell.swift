@@ -34,6 +34,7 @@ class ReminderNameCollectionViewCell: UICollectionViewCell {
         
         self.softBgView.type = .toggleButton
         self.tagImage.image = UIImage(named: type.img)
+        self.tagImage.addShadow()
         self.tagLabel.text = type.name
         self.tagLabel.useTextStyle(.label_sub)
         

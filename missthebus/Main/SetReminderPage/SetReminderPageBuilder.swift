@@ -41,5 +41,7 @@ extension SetReminderPageBuilder {
     struct BuildRequest {
         let route: KmbRoute
         let stop: KmbStop
+        let mode: SetReminderPage.Mode
+        let reminder: StopReminder?
     }
 }

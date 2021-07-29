@@ -34,23 +34,43 @@
                                                 </collectionViewFlowLayout>
                                                 <cells/>
                                             </collectionView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-mh-FzE" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdT-Rq-CSa">
                                                 <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-mh-FzE" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
+                                                        <rect key="frame" x="40" y="0.0" width="334" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="6Sy-6H-ELc"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell2" translatesAutoresizingMaskIntoConstraints="NO" id="otM-tg-8mY">
+                                                        <rect key="frame" x="5" y="15" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="BZ1-5R-XA4"/>
+                                                            <constraint firstAttribute="height" constant="20" id="dAF-OV-MHd"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="6Sy-6H-ELc"/>
+                                                    <constraint firstItem="fGg-mh-FzE" firstAttribute="centerY" secondItem="otM-tg-8mY" secondAttribute="centerY" id="9Xl-Wk-icv"/>
+                                                    <constraint firstAttribute="height" constant="50" id="VUn-gX-AUP"/>
+                                                    <constraint firstItem="fGg-mh-FzE" firstAttribute="leading" secondItem="otM-tg-8mY" secondAttribute="trailing" constant="15" id="WjW-7E-xsv"/>
+                                                    <constraint firstItem="otM-tg-8mY" firstAttribute="leading" secondItem="XdT-Rq-CSa" secondAttribute="leading" constant="5" id="jBX-6K-A8Q"/>
+                                                    <constraint firstItem="otM-tg-8mY" firstAttribute="centerY" secondItem="XdT-Rq-CSa" secondAttribute="centerY" id="jkD-IC-Mmx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fGg-mh-FzE" secondAttribute="trailing" id="qYi-W9-kDK"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                            </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="Hh5-oC-qZz"/>
+                                            <constraint firstAttribute="trailing" secondItem="XdT-Rq-CSa" secondAttribute="trailing" constant="20" id="5hz-Zk-V43"/>
+                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="top" secondItem="XdT-Rq-CSa" secondAttribute="bottom" constant="20" id="Ixs-70-6c9"/>
                                             <constraint firstAttribute="trailing" secondItem="tUb-uH-7xb" secondAttribute="trailing" id="TYI-hi-Z0g"/>
-                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="top" secondItem="fGg-mh-FzE" secondAttribute="bottom" constant="20" id="UoL-j0-zN0"/>
-                                            <constraint firstAttribute="trailing" secondItem="fGg-mh-FzE" secondAttribute="trailing" constant="20" id="ZMh-ii-ARD"/>
                                             <constraint firstItem="tUb-uH-7xb" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" id="cLM-FN-A1N"/>
+                                            <constraint firstItem="XdT-Rq-CSa" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="top" constant="20" id="etB-5t-StB"/>
                                             <constraint firstAttribute="bottom" secondItem="tUb-uH-7xb" secondAttribute="bottom" constant="20" id="mW1-IX-ciY"/>
-                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="top" constant="20" id="qmD-zj-9sK"/>
+                                            <constraint firstItem="XdT-Rq-CSa" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="rnV-7j-550"/>
                                             <constraint firstAttribute="height" constant="140" id="uoK-9y-gzO"/>
                                         </constraints>
                                     </view>
@@ -245,6 +265,7 @@
                         <outlet property="iconLayout" destination="Snv-jx-bZf" id="M9P-2a-wGz"/>
                         <outlet property="nameTextfield" destination="fGg-mh-FzE" id="ebg-uG-vRC"/>
                         <outlet property="nameView" destination="qll-nP-m0T" id="XFD-Su-LWw"/>
+                        <outlet property="reminderIcon" destination="otM-tg-8mY" id="49e-AN-cQu"/>
                         <outlet property="reminderNamesCollectionView" destination="tUb-uH-7xb" id="mRQ-Zw-iVB"/>
                         <outlet property="routeDestLabel" destination="liw-RB-Gtj" id="2nu-Yd-bc5"/>
                         <outlet property="routeNumLabel" destination="JDg-Jq-kbI" id="Mql-Yo-aNP"/>
@@ -255,7 +276,7 @@
                         <outlet property="timePickerView" destination="2zD-h7-Wea" id="n0C-0q-ni2"/>
                         <outlet property="timeView" destination="rsm-B6-WXc" id="cWy-yP-0bU"/>
                         <outlet property="weekFriBtn" destination="L1P-Ca-7lQ" id="g9H-eU-HKM"/>
-                        <outlet property="weekMonBtn" destination="amd-Cd-DeS" id="7x1-pe-bdz"/>
+                        <outlet property="weekMonBtn" destination="AUI-LZ-DVp" id="oJY-K6-Z61"/>
                         <outlet property="weekSatBtn" destination="zau-qN-eHx" id="a5V-kj-PlA"/>
                         <outlet property="weekSunBtn" destination="iYE-j9-zSG" id="rxP-cY-fSW"/>
                         <outlet property="weekThuBtn" destination="DCf-Ej-rfA" id="u8W-mB-zFf"/>
@@ -269,6 +290,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bell2" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

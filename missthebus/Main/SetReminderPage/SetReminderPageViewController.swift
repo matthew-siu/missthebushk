@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Display logic, receive view model from presenter and present
 protocol SetReminderPageDisplayLogic: class
 {
-    func displayCreateState(route: KmbRoute, stop: KmbStop)
+    func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel)
 }
 
 // MARK: - View Controller body
@@ -31,6 +31,7 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     
     // name view
     @IBOutlet weak var nameView: SoftUIView!
+    @IBOutlet weak var reminderIcon: UIImageView!
     @IBOutlet weak var nameTextfield: SoftUITextfield!
     @IBOutlet weak var reminderNamesCollectionView: UICollectionView!
     
@@ -38,17 +39,17 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     @IBOutlet weak var timeView: SoftUIView!
     @IBOutlet weak var timePickerView: SoftUIView!
     @IBOutlet weak var timePicker: UIDatePicker!
-    @IBOutlet weak var weekSunBtn: WeekDayPicker!
-    @IBOutlet weak var weekMonBtn: WeekDayPicker!
+    @IBOutlet weak var weekSunBtn: WeekDayPicker! // 0
+    @IBOutlet weak var weekMonBtn: WeekDayPicker! // 1
     @IBOutlet weak var weekTueBtn: WeekDayPicker!
     @IBOutlet weak var weekWedBtn: WeekDayPicker!
     @IBOutlet weak var weekThuBtn: WeekDayPicker!
     @IBOutlet weak var weekFriBtn: WeekDayPicker!
-    @IBOutlet weak var weekSatBtn: WeekDayPicker!
+    @IBOutlet weak var weekSatBtn: WeekDayPicker! // 6
     @IBOutlet weak var timePickerLabel: UILabel!
     
     var reminderType: StopReminder.ReminderType = .OTHER
-    
+    var daysOfWeekList = [WeekDayPicker]()
     
     
     enum CollectionViewCell: String, CollectionViewCellConfiguration {
@@ -66,6 +67,7 @@ extension SetReminderPageViewController {
         self.reminderNamesCollectionView.dataSource = self
         
         self.reminderNamesCollectionView.register(CollectionViewCell.itemCell.nib, forCellWithReuseIdentifier: CollectionViewCell.itemCell.reuseId)
+        self.daysOfWeekList = [self.weekSunBtn, self.weekMonBtn, self.weekTueBtn, self.weekWedBtn, self.weekThuBtn, self.weekFriBtn, self.weekSatBtn]
         self.initUI()
         self.interactor?.displayInitialState()
     }
@@ -80,7 +82,6 @@ extension SetReminderPageViewController {
 extension SetReminderPageViewController {
     
     func initUI(){
-        self.title = "create_reminder_title".localized()
         
         self.weekSunBtn.text = "day_sun".localized()
         self.weekMonBtn.text = "day_mon".localized()
@@ -92,19 +93,21 @@ extension SetReminderPageViewController {
         
         self.reminderNamesCollectionView.backgroundColor = UIColor.SoftUI.major
         self.reminderNamesCollectionView.clipsToBounds = false
-        
-        let saveBtn = UIBarButtonItem(title: "general_create".localized(), style: .plain, target: self, action: #selector(self.onSave))
-        saveBtn.tintColor = .systemBlue
-        self.navigationItem.rightBarButtonItem = saveBtn
     }
     
     
     @objc func onSave(){
-        
+        self.saveReminder()
     }
     
-    func displayCreateState(route: KmbRoute, stop: KmbStop){
-        print("displayInitialState")
+    func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel){
+        
+        // nav bar
+        self.title = (viewModel.mode == .CREATE) ? "create_reminder_title".localized() : "update_reminder_title".localized()
+        
+        let saveBtn = UIBarButtonItem(title: (viewModel.mode == .CREATE) ? "general_create".localized() : "general_update".localized(), style: .plain, target: self, action: #selector(self.onSave))
+        saveBtn.tintColor = .systemBlue
+        self.navigationItem.rightBarButtonItem = saveBtn
         
         // init soft UI
         self.initSoftUI(self.routeView)
@@ -112,20 +115,23 @@ extension SetReminderPageViewController {
         self.initSoftUI(self.timePickerView, inverted: true, type: .staticView)
         self.initSoftUI(self.nameView, type: .staticView)
         
-        self.routeNumLabel.text = route.route
-        self.routeNumLabel.useTextStyle(.header2)
-        self.routeDestLabel.text = "\(route.destStop)"
-        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
-        self.routeOrigLabel.text = stop.name
         
-        if (route.company == .KMB){
+        self.reminderIcon.image = UIImage(named: self.getIconNameFromNameSampleList(type: viewModel.reminderType))
+        self.reminderIcon.addShadow()
+        self.routeNumLabel.text = String(viewModel.routeNum)
+        self.routeNumLabel.useTextStyle(.header2)
+        self.routeDestLabel.text = viewModel.destStopName
+        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+        self.routeOrigLabel.text = viewModel.currentStopName
+        
+        if (viewModel.busCompany == .KMB){
             if let image = UIImage(named: "KmbLogo") {
                 self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
                 self.busCompanyIcon.sizeToFit()
             }
         }
         
-        self.timePickerLabel.text = "Please choose the notice time and period."
+        self.timePickerLabel.text = "reminder_time_label".localized()
         self.timePickerLabel.useTextStyle(.label_sub)
         self.timePicker.datePickerMode = .time
         self.timePicker.locale = Locale(identifier: "en_GB")
@@ -152,11 +158,13 @@ extension SetReminderPageViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
     
+    // ReminderTagDelegate
     func onClickTag(type: SetReminderPage.NameSample?) {
         if let type = type{
             self.reminderType = (self.reminderType == type.type) ? .OTHER : type.type
             self.reminderNamesCollectionView.reloadData()
             self.nameTextfield.text = type.name
+            self.reminderIcon.image = UIImage(named: type.img)
         }
     }
 }
@@ -170,13 +178,17 @@ extension SetReminderPageViewController: UITextFieldDelegate{
     }
 }
 
-
+// logic
 extension SetReminderPageViewController{
     
+    private func getIconNameFromNameSampleList(type: StopReminder.ReminderType) -> String{
+        let imgName = SetReminderPage.DisplayItem.ViewModel.nameSamples.first(where: {$0.type == self.reminderType})?.img
+        return imgName ?? "tagOther"
+    }
     
     private func setNameTextfield(){
 //        self.nameTextfield.enablesReturnKeyAutomatically = true
-        self.nameTextfield.placeholder = "Reminder Name"
+        self.nameTextfield.placeholder = "reminder_name".localized()
         self.nameTextfield.textColor = .darkText
         self.nameTextfield.useTextStyle(.label)
         self.nameTextfield.setLeftPaddingPoints(15)
@@ -186,11 +198,25 @@ extension SetReminderPageViewController{
         
     }
     
-    private func addShadow(_ obj: UIView, opacity: Float? = 0.7, offset: CGSize? = CGSize(width: 1, height: 1), color: CGColor? = UIColor.darkGray.cgColor){
-        if let opacity = opacity, let offset = offset, let color = color {
-            obj.layer.shadowOpacity = opacity
-            obj.layer.shadowOffset = offset
-            obj.layer.shadowColor = color
+    private func saveReminder(){
+        
+        var period = [Int]()
+        for (index, day) in self.daysOfWeekList.enumerated() {
+            if (day.isSelected){
+                period.append(index)
+            }
+        }
+        var name = self.nameTextfield.text ?? ""
+        if (name.count == 0){
+            name = SetReminderPage.DisplayItem.ViewModel.nameSamples.first(where: {$0.type == self.reminderType})?.name ?? "reminder_tag_other".localized()
+        }
+        let data = SetReminderPage.DisplayItem.Request(reminderName: name, reminderType: self.reminderType, time: self.timePicker.date, period: period)
+        self.interactor?.saveReminder(request: data)
+        
+        
+        self.showAlert("general_saved".localized(), "reminder_create_succeed".localized()) { (_) in
+            self.navigationController?.popViewController(animated: true)
         }
     }
+    
 }

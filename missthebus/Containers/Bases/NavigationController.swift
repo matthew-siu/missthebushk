@@ -85,7 +85,6 @@ class NavigationController: UINavigationController {
 
 extension UINavigationController {
     func popViewController(animated:Bool, completion: @escaping ()->()) {
-        print("pop")
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         self.popViewController(animated: animated)

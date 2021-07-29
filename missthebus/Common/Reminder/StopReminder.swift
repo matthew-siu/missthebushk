@@ -25,9 +25,11 @@ class StopReminder: Codable{
     
     enum ReminderType: String, Codable {
         case WORK = "GOTOWORK"
-        case OFF = "BACKHOME"
+        case BACK_HOME = "BACKHOME"
+        case SCHOOL = "SCHOOL"
         case DATING = "DATING"
         case GATHERING = "GATHERING"
+        case LAST_BUS = "LASTBUS"
         case OTHER = "OTHER"
     }
     
@@ -47,5 +49,9 @@ class StopReminder: Codable{
     
     var oneTimeOnly: Bool{
         return (period == nil || period?.count == 0)
+    }
+    
+    func printDetails(){
+        print("\(self.name) | [\(self.route)-\(self.bound)-\(self.serviceType)] | \(self.type.rawValue) | \(self.time) | \(String(describing: self.period))")
     }
 }

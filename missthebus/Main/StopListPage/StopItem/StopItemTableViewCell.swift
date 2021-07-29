@@ -10,6 +10,7 @@ import UIKit
 
 protocol StopItemCellDelegate: class {
     func setReminder(stop: KmbStop)
+    func readReminder()
 }
 
 class StopItemTableViewCell: UITableViewCell {
@@ -70,7 +71,12 @@ extension StopItemTableViewCell{
     @objc func onClickBookmark(){
 //        self.setIsBookMark(!self.isBookmarked)
         if let stop = self.stop {
-            self.delegate?.setReminder(stop: stop)
+            if (!isBookmarked){
+                self.delegate?.setReminder(stop: stop)
+            }else{
+                self.delegate?.readReminder()
+            }
+            
         }
         
     }
@@ -91,7 +97,7 @@ extension StopItemTableViewCell{
         }
     }
     
-    func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int){
+    func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int, isBookmarked: Bool){
         
         self.etaCollectionView.delegate = self
         self.etaCollectionView.dataSource = self
@@ -114,7 +120,7 @@ extension StopItemTableViewCell{
         
         self.softBgView.isSelected = isSelected
         
-        self.setIsBookMark(false)
+        self.setIsBookMark(isBookmarked)
         
         if (isSelected){ // expanded view
             self.stopNameLabel.numberOfLines = 0

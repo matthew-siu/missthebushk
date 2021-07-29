@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop])
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder])
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ViewModel)
 }
 
@@ -27,6 +27,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     
     var route: KmbRoute?
     var stopList = [KmbStop]()
+    var reminders = [StopReminder]()
     var selectedIndex = -1
     var selectedStopETAView: StopListPage.DisplayItem.ViewModel?
     
@@ -46,6 +47,11 @@ extension StopListPageViewController {
         self.tableView.separatorStyle = .none
         self.tableView.allowsSelection = true
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
+//        self.interactor?.loadAllStopsFromRoute()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.interactor?.loadAllStopsFromRoute()
     }
     
@@ -67,8 +73,9 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! StopItemTableViewCell
         let item = self.stopList[indexPath.row]
+        let bookmarked = self.reminders.contains(where: {$0.stopId == item.stopId})
         cell.delegate = self
-        cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: (indexPath.row == selectedIndex), count: self.stopList.count)
+        cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: (indexPath.row == selectedIndex), count: self.stopList.count, isBookmarked: bookmarked)
         if let etaViewModel = self.selectedStopETAView{
             if etaViewModel.etaViews.contains(where: {$0.seq == indexPath.row + 1}) {
                 cell.setETA(etaList: self.selectedStopETAView)
@@ -99,7 +106,6 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
         
         // request stop ETA API
         let stop = self.stopList[indexPath.row]
-//        self.interactor?.requestOneStopETA(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
         self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
     }
 }
@@ -107,7 +113,19 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
 extension StopListPageViewController: StopItemCellDelegate{
     func setReminder(stop: KmbStop) {
         if let route = self.route {
-            self.router?.routeToSetReminderPage(route: route, stop: stop)
+            self.router?.routeToSetReminderPage(mode: .CREATE, route: route, stop: stop)
+        }
+    }
+    
+    
+    // TODO: view all reminder
+    func readReminder() {
+        self.showAlert("Not yet finish", "Next view: All reminder of this stop.") { (_) in }
+    }
+    
+    func updateReminder(stop: KmbStop, reminder: StopReminder) {
+        if let route = self.route {
+            self.router?.routeToSetReminderPage(mode: .UPDATE, route: route, stop: stop)
         }
     }
 }
@@ -115,11 +133,12 @@ extension StopListPageViewController: StopItemCellDelegate{
 // MARK:- View Display logic entry point
 extension StopListPageViewController {
 
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop]){
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder]){
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route
         self.stopList = stopList
+        self.reminders = reminders
         self.tableView.reloadData()
     }
     

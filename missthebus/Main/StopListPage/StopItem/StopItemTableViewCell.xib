@@ -83,13 +83,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYS-y5-Nla">
-                                <rect key="frame" x="40" y="21" width="224" height="19.5"/>
+                                <rect key="frame" x="40" y="20.5" width="224" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="FXx-Kt-O1e">
-                                <rect key="frame" x="42" y="45.5" width="230" height="60"/>
+                                <rect key="frame" x="42" y="45" width="230" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="230" id="2V4-gt-TkH"/>
@@ -107,7 +107,7 @@
                         <constraints>
                             <constraint firstItem="FXx-Kt-O1e" firstAttribute="top" secondItem="tYS-y5-Nla" secondAttribute="bottom" constant="5" id="Ij5-H3-AW8"/>
                             <constraint firstItem="tYS-y5-Nla" firstAttribute="leading" secondItem="4G5-Xu-QkF" secondAttribute="trailing" constant="5" id="JZm-tv-Hop"/>
-                            <constraint firstItem="4G5-Xu-QkF" firstAttribute="centerY" secondItem="tYS-y5-Nla" secondAttribute="centerY" id="lsW-6o-ddf"/>
+                            <constraint firstItem="4G5-Xu-QkF" firstAttribute="top" secondItem="tYS-y5-Nla" secondAttribute="top" id="tZe-Sc-3nU"/>
                             <constraint firstItem="FXx-Kt-O1e" firstAttribute="centerX" secondItem="wbm-mN-4K3" secondAttribute="centerX" id="tgH-Bq-Mzs"/>
                             <constraint firstItem="4G5-Xu-QkF" firstAttribute="leading" secondItem="wbm-mN-4K3" secondAttribute="leading" constant="5" id="zeN-X4-VVM"/>
                         </constraints>
@@ -142,8 +142,8 @@
                     <constraint firstItem="5w1-DC-Y3R" firstAttribute="top" secondItem="yPv-4U-TpL" secondAttribute="top" constant="10" id="lLZ-oL-ZtP"/>
                     <constraint firstAttribute="trailing" secondItem="wbm-mN-4K3" secondAttribute="trailing" constant="20" id="lmG-6k-J3K"/>
                     <constraint firstItem="pCf-7E-tW9" firstAttribute="top" secondItem="yPv-4U-TpL" secondAttribute="top" id="rh1-RR-bT6"/>
-                    <constraint firstItem="tYS-y5-Nla" firstAttribute="centerY" secondItem="V8b-kN-xlL" secondAttribute="centerY" id="tus-0w-mha"/>
                     <constraint firstItem="wbm-mN-4K3" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" constant="80" id="vb9-uw-im5"/>
+                    <constraint firstItem="tYS-y5-Nla" firstAttribute="top" secondItem="V8b-kN-xlL" secondAttribute="top" constant="10" id="wBU-Az-boK"/>
                     <constraint firstItem="V8b-kN-xlL" firstAttribute="leading" secondItem="tYS-y5-Nla" secondAttribute="trailing" id="y7U-zm-xiR"/>
                     <constraint firstItem="pCf-7E-tW9" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" id="zhY-Rk-Pzc"/>
                 </constraints>

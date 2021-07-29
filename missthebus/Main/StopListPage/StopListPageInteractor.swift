@@ -33,6 +33,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     
     // State
     var route: KmbRoute
+    var reminders: [StopReminder]?
     var etaTimer: Timer?
     
     // Init
@@ -46,6 +47,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
 extension StopListPageInteractor {
     
     func loadAllStopsFromRoute(){
+        // load all stops
         var stopList = [KmbStop]()
         guard let allStopList = KmbManager.getAllStops() else {return}
         for stop in route.stopList{
@@ -55,10 +57,19 @@ extension StopListPageInteractor {
         }
         print("stopList: \(stopList.count)")
         
-        self.presenter?.displayInitialState(route: route, stopList: stopList)
+        // load all related reminder()
+        self.loadAllStopRemindersOfRoute()
+        
+        self.presenter?.displayInitialState(route: route, stopList: stopList, reminders: self.reminders ?? [])
+    }
+    
+    private func loadAllStopRemindersOfRoute(){
+        self.reminders = StopReminderManager.getRemindersFromRoute(route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType)
+        print("reminders: \(String(describing: self.reminders?.count))")
     }
     
     func startETATimer(stopId: String, route: String, serviceType: String){
+        self.dismissETATimer()
         let query = KmbETAQuery(stopId: stopId, route: route, serviceType: serviceType)
         self.requestOneStopETA(query: query)
         self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: query, repeats: true)
