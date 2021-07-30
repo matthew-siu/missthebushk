@@ -308,14 +308,14 @@ extension UIView{
         layer.mask = maskLayer1
     }
     
-    func fade(_ show: Bool){
+    func fade(_ show: Bool, _ duration : Double? = 0.1){
         /*
          fadein = true
          fadeout = false
          */
         self.isHidden = false
         if (show) { self.alpha = 0 }
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: duration!, animations: {
             self.alpha = (show) ? 1 : 0
         }) { (val: Bool) in
             if (!show) { self.isHidden = !show}

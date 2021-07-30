@@ -173,3 +173,15 @@ class KmbManager{
         return nil
     }
 }
+
+// search method
+
+extension KmbManager{
+    static func getRoute(route: String, bound: String, serviceType: String) -> KmbRoute?{
+        return getAllRoutes()?.first(where: {$0.route == route && $0.bound == bound && $0.serviceType == serviceType})
+    }
+    
+    static func getStop(stopId: String) -> KmbStop?{
+        return getAllStops()?.first(where: { $0.stopId == stopId})
+    }
+}

@@ -1,79 +1,71 @@
 //
-//  MainPageInteractor.swift
+//  SplashScreenInteractor.swift
 //  missthebus
 //
-//  Created by Matthew Siu on 6/7/2021.
+//  Created by Matthew Siu on 30/7/2021.
 //  Copyright © 2021 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
 import UIKit
 import PromiseKit
-import SVProgressHUD
 
 // MARK: - Requests from view
-protocol MainPageBusinessLogic
+protocol SplashScreenBusinessLogic
 {
-    func requestAllKmbStaticInfo()
-    func loadAllStopRemindersOfRoute()
+    func requestAllKmbStaticInfo() -> Promise<Bool>
 }
 
 // MARK: - Datas retain in interactor defines here
-protocol MainPageDataStore
+protocol SplashScreenDataStore
 {
     
 }
 
 // MARK: - Interactor Body
-class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
+class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
 {
     // VIP Properties
-    var presenter: MainPagePresentationLogic?
-    var worker: MainPageWorker?
+    var presenter: SplashScreenPresentationLogic?
+    var worker: SplashScreenWorker?
     
     // State
-    var reminders: [StopReminder]?
     
-    init(request: MainPageBuilder.BuildRequest) {
+    
+    // Init
+    init(request: SplashScreenBuilder.BuildRequest) {
         
     }
 }
-// MARK: - Business
-extension MainPageInteractor {
-    
-    func requestAllKmbStaticInfo(){
-        if (!self.needUpdate()) { return }
-        DispatchQueue.main.async {
-            SVProgressHUD.show()
-            KmbManager.requestAllRoutes()
-                .done{data in self.saveRoutes(data)}
-                .then{_ in KmbManager.requestAllStops()}
-                .done{data in self.saveStops(data)}
-                .then{_ in KmbManager.requestAllRouteStops()}
-                .done{data in
-                    SVProgressHUD.dismiss()
-                    self.insertRouteStopsIntoRoutes(data)
-                    self.saveLastUpdate()
-                }
-                .catch{err in
-                    SVProgressHUD.dismiss()
-                    print("error: \(err.localizedDescription)")
-                }
-        }
-    }
-    
-    func loadAllStopRemindersOfRoute(){
-        if let reminders = StopReminderManager.getStopReminders(){
-            self.reminders = reminders
-            print("loadAllStopRemindersOfRoute \(reminders.count)")
-            self.presenter?.displayReminders(reminders: reminders)
-        }else{
-            print("loadAllStopRemindersOfRoute nil")
-        }
-    }
-}
 
-// MARK: - Logic
-extension MainPageInteractor {
+// MARK: - Business
+extension SplashScreenInteractor {
+    
+    func requestAllKmbStaticInfo() -> Promise<Bool>{
+        return Promise { promise in
+            if (!self.needUpdate()) {
+                promise.fulfill(false)
+                return
+            }
+            DispatchQueue.main.async {
+                KmbManager.requestAllRoutes()
+                    .done{data in self.saveRoutes(data)}
+                    .then{_ in KmbManager.requestAllStops()}
+                    .done{data in self.saveStops(data)}
+                    .then{_ in KmbManager.requestAllRouteStops()}
+                    .done{data in
+                        self.insertRouteStopsIntoRoutes(data)
+                        self.saveLastUpdate()
+                        promise.fulfill(true)
+                    }
+                    .catch{err in
+                        print("error: \(err.localizedDescription)")
+                        promise.reject(err)
+                    }
+            }
+        }
+    }
+    
+    
     func saveRoutes(_ response: KmbRouteResponse?){
         if let resp = response?.data{
             let routes = resp.map{ KmbRoute(data: $0)}
@@ -124,4 +116,5 @@ extension MainPageInteractor {
         let now = Utils.getCurrentTime(pattern: "yyyy-MM-dd")
         Storage.save(Configs.Storage.KEY_LAST_UPDATE, now)
     }
+    
 }

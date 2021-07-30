@@ -23,11 +23,18 @@ enum Color {
 // check out https://neumorphism.io/#ad0101
 
 extension UIColor {
-  struct SoftUI {
-    static var major: UIColor  { return UIColor(hexString: "DCE4F2") }
-    static var dark: UIColor { return UIColor(hexString: "bbc2ce") }
-    static var light: UIColor { return UIColor(hexString: "fdffff") }
-  }
+    struct SoftUI {
+        static var major: UIColor  { return UIColor(hexString: "DCE4F2") }
+        static var dark: UIColor { return UIColor(hexString: "bbc2ce") }
+        static var light: UIColor { return UIColor(hexString: "fdffff") }
+    }
+
+    struct SoftLaunch{
+        
+        static var major: UIColor  { return UIColor(hexString: "555555") }
+        static var dark: UIColor { return UIColor(hexString: "282828") }
+        static var light: UIColor { return UIColor(hexString: "828282") }
+    }
 }
 
 extension Color {

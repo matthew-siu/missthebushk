@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol MainPagePresentationLogic
 {
-
+    func displayReminders(reminders: [StopReminder])
 }
 
 // MARK: - Presenter main body
@@ -23,5 +23,8 @@ class MainPagePresenter: MainPagePresentationLogic
 
 // MARK: - Presentation receiver
 extension MainPagePresenter {
-
+    
+    func displayReminders(reminders: [StopReminder]){
+        self.viewController?.displayReminders(reminders: reminders)
+    }
 }

@@ -52,19 +52,19 @@ extension SearchPageViewController {
         // hide keyboard when tap anywhere
         self.hideKeyboardWhenTappedAround()
         
-        
-        // auto open keyboard
-        self.searchTextfield.becomeFirstResponder()
+        self.initUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.requestKmbRouteList()
+        
+        // auto open keyboard
+        self.searchTextfield.becomeFirstResponder()
     }
     
     private func initUI(){
         self.addFadedEdgeToTableView()
-        self.setSearchTextfield()
         self.setSwitchKeyboard()
     }
     
@@ -106,7 +106,7 @@ extension SearchPageViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        initUI()
+        self.setSearchTextfield()
     }
 }
 

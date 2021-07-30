@@ -31,7 +31,7 @@ class SearchPageRouter: NSObject, SearchPageRoutingLogic, SearchPageDataPassing
 extension SearchPageRouter {
 
     func routeToStopListPage(route: KmbRoute){
-        let request = StopListPageBuilder.BuildRequest(route: route)
+        let request = StopListPageBuilder.BuildRequest(route: route, stop: nil)
         let vc = StopListPageBuilder.createScene(request: request)
         
         self.viewController?.navigationController?.pushViewController(vc, animated: true)

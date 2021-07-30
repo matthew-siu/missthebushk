@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="wXQ-2z-rjk">
+            <objects>
+                <viewController storyboardIdentifier="SplashScreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jqg-Tg-5iv" customClass="SplashScreenViewController" customModule="missthebus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WN9-36-gAN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jj7-il-12d" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                <rect key="frame" x="132" y="373" width="150" height="150"/>
+                                <subviews>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="tc0-eH-uKh">
+                                        <rect key="frame" x="5" y="5" width="140" height="140"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="tc0-eH-uKh" secondAttribute="bottom" constant="5" id="DZg-6w-v0i"/>
+                                    <constraint firstItem="tc0-eH-uKh" firstAttribute="top" secondItem="Jj7-il-12d" secondAttribute="top" constant="5" id="KTh-o1-AL5"/>
+                                    <constraint firstAttribute="height" constant="150" id="Smr-vv-BBB"/>
+                                    <constraint firstAttribute="trailing" secondItem="tc0-eH-uKh" secondAttribute="trailing" constant="5" id="WVZ-ms-nOz"/>
+                                    <constraint firstAttribute="width" constant="150" id="dCP-qi-emH"/>
+                                    <constraint firstItem="tc0-eH-uKh" firstAttribute="leading" secondItem="Jj7-il-12d" secondAttribute="leading" constant="5" id="xVa-cB-DDl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="k6i-fr-Cqe"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jj7-il-12d" firstAttribute="centerY" secondItem="WN9-36-gAN" secondAttribute="centerY" id="o5b-oT-2qU"/>
+                            <constraint firstItem="Jj7-il-12d" firstAttribute="centerX" secondItem="WN9-36-gAN" secondAttribute="centerX" id="wAx-dP-Uz1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="iconImg" destination="tc0-eH-uKh" id="Zd0-L4-tHc"/>
+                        <outlet property="softIconView" destination="Jj7-il-12d" id="ktn-gr-xne"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8H-AN-xyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-141" y="-117"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splashScreen" width="1024" height="1024"/>
+    </resources>
+</document>

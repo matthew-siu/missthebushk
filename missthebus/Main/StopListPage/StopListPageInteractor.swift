@@ -35,10 +35,12 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     var route: KmbRoute
     var reminders: [StopReminder]?
     var etaTimer: Timer?
+    var selectedStopId: String?
     
     // Init
     init(request: StopListPageBuilder.BuildRequest) {
         print("route: \(request.route.route)")
+        self.selectedStopId = request.stop?.stopId
         self.route = request.route
     }
 }
@@ -60,7 +62,7 @@ extension StopListPageInteractor {
         // load all related reminder()
         self.loadAllStopRemindersOfRoute()
         
-        self.presenter?.displayInitialState(route: route, stopList: stopList, reminders: self.reminders ?? [])
+        self.presenter?.displayInitialState(route: route, stopList: stopList, reminders: self.reminders ?? [], selectedStopId: self.selectedStopId)
     }
     
     private func loadAllStopRemindersOfRoute(){

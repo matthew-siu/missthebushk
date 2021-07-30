@@ -40,5 +40,6 @@ class StopListPageBuilder
 extension StopListPageBuilder {
     struct BuildRequest {
         let route: KmbRoute
+        let stop: KmbStop?
     }
 }
