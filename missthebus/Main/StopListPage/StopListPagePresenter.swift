@@ -29,7 +29,7 @@ extension StopListPagePresenter {
     func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String? = nil){
         self.route = route
         self.stopList = stopList
-        self.viewController?.displayInitialState(route: route, stopList: stopList, reminders: reminders)
+        self.viewController?.displayInitialState(route: route, stopList: stopList, reminders: reminders, selectedStopId: selectedStopId)
     }
     
     func displayETA(data: [KmbETAResponse.KmbETAData]?){

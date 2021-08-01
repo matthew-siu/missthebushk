@@ -8,7 +8,7 @@
 import UIKit
 
 protocol StopReminderCellDelegate: class {
-//    func onSelect(stop: KmbStop)
+    func onSelect(_ index: Int)
 }
 
 class StopReminderTableViewCell: UITableViewCell {
@@ -21,6 +21,9 @@ class StopReminderTableViewCell: UITableViewCell {
     @IBOutlet weak var routeDestLabel: UILabel!
     @IBOutlet weak var routeOrigLabel: UILabel!
 
+    var index = -1
+    var delegate: StopReminderCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,8 +40,8 @@ class StopReminderTableViewCell: UITableViewCell {
         self.initSoftUI(self.routeView)
     }
     
-    func setInfo(routeNum: String, destStopName: String, currentStopName: String, busCompany: BusCompany){
-        
+    func setInfo(index: Int, routeNum: String, destStopName: String, currentStopName: String, busCompany: BusCompany){
+        self.index = index
         self.routeNumLabel.text = String(routeNum)
         self.routeNumLabel.useTextStyle(.header2)
         self.routeDestLabel.text = destStopName
@@ -52,11 +55,12 @@ class StopReminderTableViewCell: UITableViewCell {
             }
         }
         
-        self.routeView.addTarget(self, action: #selector(onSelected), for: .touchUpInside)
+        self.routeView.addTarget(self, action: #selector(onSelected), for: .touchDown)
     }
     
     @objc func onSelected(){
-        
+        print("onSelected")
+        self.delegate?.onSelect(self.index)
     }
     
 }
@@ -68,6 +72,7 @@ extension StopReminderTableViewCell{
         obj.cornerRadius = 10
         obj.shadowOffset = .init(width: 2, height: 2)
         obj.shadowOpacity = 1
+        obj.type = .toggleButton
         
         if let inverted = inverted, let type = type {
             obj.isSelected = inverted

@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder])
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String?)
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ViewModel)
 }
 
@@ -133,12 +133,15 @@ extension StopListPageViewController: StopItemCellDelegate{
 // MARK:- View Display logic entry point
 extension StopListPageViewController {
 
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder]){
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String?){
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route
         self.stopList = stopList
         self.reminders = reminders
+        if let selectedStopId = selectedStopId{
+            self.selectedIndex = self.stopList.firstIndex(where: {$0.stopId == selectedStopId}) ?? -1
+        }
         self.tableView.reloadData()
     }
     

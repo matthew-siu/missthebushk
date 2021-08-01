@@ -30,7 +30,7 @@ class ReminderNameCollectionViewCell: UICollectionViewCell {
         self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
         self.softBgView.cornerRadius = 10
         self.softBgView.shadowOffset = .init(width: 3, height: 3)
-        self.softBgView.shadowOpacity = 1
+        self.softBgView.shadowOpacity = 	1
         
         self.softBgView.type = .toggleButton
         self.tagImage.image = UIImage(named: type.img)
@@ -39,7 +39,7 @@ class ReminderNameCollectionViewCell: UICollectionViewCell {
         self.tagLabel.useTextStyle(.label_sub)
         
         self.toggleView(selected)
-        self.softBgView.addTarget(self, action: #selector(onClick), for: .touchDown)
+        self.softBgView.addTarget(self, action: #selector(onClick), for: .touchUpInside)
     }
     
     @objc func onClick(){

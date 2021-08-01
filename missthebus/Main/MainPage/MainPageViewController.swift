@@ -82,7 +82,14 @@ extension MainPageViewController {
     }
 }
 
-extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
+extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, StopReminderCellDelegate{
+    func onSelect(_ index: Int) {
+        if (index >= 0){
+            
+            self.router?.routeToStopListPage(reminder: self.reminders[index])
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -95,7 +102,8 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
         let reminder = reminders[indexPath.row]
         if let route = KmbManager.getRoute(route: reminder.route, bound: reminder.bound, serviceType: reminder.serviceType),
            let stop = KmbManager.getStop(stopId: reminder.stopId){
-            cell.setInfo(routeNum: route.route, destStopName: route.destStop, currentStopName: stop.name, busCompany: route.company)
+            cell.setInfo(index: indexPath.row, routeNum: route.route, destStopName: route.destStop, currentStopName: stop.name, busCompany: route.company)
+            cell.delegate = self
             cell.backgroundColor = .clear
         }
         

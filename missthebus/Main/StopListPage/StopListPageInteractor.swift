@@ -63,6 +63,10 @@ extension StopListPageInteractor {
         self.loadAllStopRemindersOfRoute()
         
         self.presenter?.displayInitialState(route: route, stopList: stopList, reminders: self.reminders ?? [], selectedStopId: self.selectedStopId)
+        
+        if let selectedStopId = self.selectedStopId {
+            self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
+        }
     }
     
     private func loadAllStopRemindersOfRoute(){
