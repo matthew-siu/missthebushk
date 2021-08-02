@@ -36,6 +36,24 @@ extension Configs {
         static let KEY_REMINDERS = "KEY_REMINDERS"
     }
     
+    // admob
+    enum Admob{
+        static let appId: String = "ca-app-pub-8400536240691918~9985074453"
+        static var bannerUnitId: String {
+            #if DEV
+                return "ca-app-pub-3940256099942544/2934735716"
+            #elseif PROD
+                return "ca-app-pub-8400536240691918/6265321295"
+            #else
+                return ""
+            #endif
+        }
+    }
+    
+    enum GoogleMap{
+        static let apiKey: String = "AIzaSyDBsWsJD0Lv2qtk_C9bhCHo73DlQSyQXxU"
+    }
+    
     enum App {
         static var releaseVersionNumber: String? {
             return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String

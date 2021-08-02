@@ -27,6 +27,8 @@ extension UIColor {
         static var major: UIColor  { return UIColor(hexString: "DCE4F2") }
         static var dark: UIColor { return UIColor(hexString: "bbc2ce") }
         static var light: UIColor { return UIColor(hexString: "fdffff") }
+        
+        static var opacity : Float = 1
     }
 
     struct SoftLaunch{

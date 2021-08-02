@@ -7,7 +7,25 @@
 		<key>missthebus.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>12</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>8F89B59C269411FF006312EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8F89B5B226941201006312EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8F89B5BD26941201006312EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -30,46 +30,57 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJb-TS-lLB" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                <rect key="frame" x="157" y="732" width="100" height="100"/>
+                                <rect key="frame" x="177" y="742" width="60" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="Agj-pv-QuZ">
-                                        <rect key="frame" x="35" y="35" width="30" height="30"/>
+                                        <rect key="frame" x="20" y="20" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="t1w-y8-Anm"/>
-                                            <constraint firstAttribute="height" constant="30" id="wVD-66-Jxg"/>
+                                            <constraint firstAttribute="width" constant="20" id="t1w-y8-Anm"/>
+                                            <constraint firstAttribute="height" constant="20" id="wVD-66-Jxg"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="Agj-pv-QuZ" firstAttribute="centerX" secondItem="rJb-TS-lLB" secondAttribute="centerX" id="Bb1-fp-JWf"/>
-                                    <constraint firstAttribute="width" constant="100" id="Shm-J3-ino"/>
+                                    <constraint firstAttribute="width" constant="60" id="Shm-J3-ino"/>
                                     <constraint firstItem="Agj-pv-QuZ" firstAttribute="centerY" secondItem="rJb-TS-lLB" secondAttribute="centerY" id="a1J-Qz-0Oj"/>
-                                    <constraint firstAttribute="height" constant="100" id="nL7-9i-xvQ"/>
+                                    <constraint firstAttribute="height" constant="60" id="nL7-9i-xvQ"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="49C-X8-wlP">
-                                <rect key="frame" x="0.0" y="108" width="414" height="604"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="614"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xf6-Zs-JDj" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VYH-5i-OcD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k6i-fr-Cqe"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="xf6-Zs-JDj" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="4Co-CZ-FbY"/>
                             <constraint firstItem="rJb-TS-lLB" firstAttribute="centerX" secondItem="WN9-36-gAN" secondAttribute="centerX" id="ECe-zI-I3f"/>
                             <constraint firstItem="6UJ-fU-ZLe" firstAttribute="top" secondItem="eES-qP-xTl" secondAttribute="bottom" id="MEB-Mf-489"/>
-                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="bottom" secondItem="rJb-TS-lLB" secondAttribute="bottom" constant="30" id="UVz-bH-hkt"/>
                             <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="49C-X8-wlP" secondAttribute="trailing" id="W0J-G8-5bE"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="bottom" secondItem="xf6-Zs-JDj" secondAttribute="bottom" id="cwe-IY-dS0"/>
                             <constraint firstItem="eES-qP-xTl" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" id="eLy-sG-Bts"/>
                             <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="6UJ-fU-ZLe" secondAttribute="trailing" constant="40" id="fSH-6D-N4D"/>
                             <constraint firstItem="eES-qP-xTl" firstAttribute="centerX" secondItem="WN9-36-gAN" secondAttribute="centerX" id="kSH-cW-vuE"/>
                             <constraint firstItem="49C-X8-wlP" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="n9B-2p-Z4b"/>
                             <constraint firstItem="49C-X8-wlP" firstAttribute="top" secondItem="6UJ-fU-ZLe" secondAttribute="bottom" constant="20" id="nCa-KK-pok"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="xf6-Zs-JDj" secondAttribute="trailing" id="qqQ-gA-8Ma"/>
+                            <constraint firstItem="xf6-Zs-JDj" firstAttribute="top" secondItem="rJb-TS-lLB" secondAttribute="bottom" constant="10" id="tBO-US-Bl4"/>
                             <constraint firstItem="6UJ-fU-ZLe" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" constant="40" id="wro-qE-mpS"/>
                             <constraint firstItem="rJb-TS-lLB" firstAttribute="top" secondItem="49C-X8-wlP" secondAttribute="bottom" constant="20" id="wy8-i8-CAR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adsBannerView" destination="xf6-Zs-JDj" id="zd8-id-MYr"/>
                         <outlet property="mainMsg1" destination="eES-qP-xTl" id="6YM-Es-Vdx"/>
                         <outlet property="mainMsg2" destination="6UJ-fU-ZLe" id="eYr-ax-XSZ"/>
                         <outlet property="searchImg" destination="Agj-pv-QuZ" id="kmn-Yw-j8w"/>

@@ -135,7 +135,12 @@
 /* Begin PBXFileReference section */
 		181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAA535F1D675EA0E2879F74 /* Pods-missthebusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.release.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.release.xcconfig"; sourceTree = "<group>"; };
+		1D927B0F1285E2E8EB506B2C /* Pods-missthebusTests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.prod.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.prod.xcconfig"; sourceTree = "<group>"; };
+		1FAC3DFD914DADF3CB93CD2E /* Pods-missthebus-missthebusUITests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.dev.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.dev.xcconfig"; sourceTree = "<group>"; };
 		24D63641BCA0F1273102A670 /* Pods_missthebus_missthebusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebus_missthebusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E13968637DFE3136EC8B868 /* Pods-missthebusTests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.dev.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.dev.xcconfig"; sourceTree = "<group>"; };
+		5571D37DBB5802259EE4B549 /* Pods-missthebus.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus.dev.xcconfig"; path = "Target Support Files/Pods-missthebus/Pods-missthebus.dev.xcconfig"; sourceTree = "<group>"; };
+		62881CEB96DBB62B92F1D681 /* Pods-missthebus-missthebusUITests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.prod.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.prod.xcconfig"; sourceTree = "<group>"; };
 		8F09F2AD269693C70083B2CD /* SoftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUIView.swift; sourceTree = "<group>"; };
 		8F09F2B5269694250083B2CD /* SoftUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUIButton.swift; sourceTree = "<group>"; };
 		8F09F2BB2696967C0083B2CD /* SoftUITextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUITextfield.swift; sourceTree = "<group>"; };
@@ -172,7 +177,6 @@
 		8F89B5A7269411FF006312EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F89B5A926941201006312EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F89B5AC26941201006312EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8F89B5AE26941201006312EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F89B5B326941201006312EA /* missthebusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = missthebusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F89B5B726941201006312EA /* missthebusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = missthebusTests.swift; sourceTree = "<group>"; };
 		8F89B5B926941201006312EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 		8FB5A09826A909BF0013540D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8FB5A0B726AA7A860013540D /* StopETAItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopETAItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		8FB5A0B826AA7A860013540D /* StopETAItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopETAItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		8FC67B1326B7E8D000BEE56D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FFF6C6A2697F0720033D2CE /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		8FFF6C6C2697F0720033D2CE /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		8FFF6C6D2697F0720033D2CE /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
@@ -257,6 +262,7 @@
 		D8093F8CC47B9CB9151224AF /* Pods_missthebus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D884A01FA63B159504265A93 /* Pods-missthebusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.debug.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE6C9749CB72B9DF538C2F0B /* Pods-missthebus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus.debug.xcconfig"; path = "Target Support Files/Pods-missthebus/Pods-missthebus.debug.xcconfig"; sourceTree = "<group>"; };
+		EA98B8FFA57C7355C63C3526 /* Pods-missthebus.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus.prod.xcconfig"; path = "Target Support Files/Pods-missthebus/Pods-missthebus.prod.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,10 +423,10 @@
 				8F09F2C3269707F70083B2CD /* APIs */,
 				8F89B63C26944E37006312EA /* Utils */,
 				8F89B5A0269411FF006312EA /* AppDelegate.swift */,
+				8FC67B1326B7E8D000BEE56D /* Info.plist */,
 				8F89B5A6269411FF006312EA /* Main.storyboard */,
 				8F89B5A926941201006312EA /* Assets.xcassets */,
 				8F89B5AB26941201006312EA /* LaunchScreen.storyboard */,
-				8F89B5AE26941201006312EA /* Info.plist */,
 				8FFF6CE5269FDE1F0033D2CE /* Localizable.strings */,
 			);
 			path = missthebus;
@@ -671,6 +677,12 @@
 				CBEBB3ADF2EDEA0D18B53898 /* Pods-missthebus-missthebusUITests.release.xcconfig */,
 				D884A01FA63B159504265A93 /* Pods-missthebusTests.debug.xcconfig */,
 				1BAA535F1D675EA0E2879F74 /* Pods-missthebusTests.release.xcconfig */,
+				5571D37DBB5802259EE4B549 /* Pods-missthebus.dev.xcconfig */,
+				EA98B8FFA57C7355C63C3526 /* Pods-missthebus.prod.xcconfig */,
+				1FAC3DFD914DADF3CB93CD2E /* Pods-missthebus-missthebusUITests.dev.xcconfig */,
+				62881CEB96DBB62B92F1D681 /* Pods-missthebus-missthebusUITests.prod.xcconfig */,
+				4E13968637DFE3136EC8B868 /* Pods-missthebusTests.dev.xcconfig */,
+				1D927B0F1285E2E8EB506B2C /* Pods-missthebusTests.prod.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -687,6 +699,7 @@
 				8F89B59A269411FF006312EA /* Frameworks */,
 				8F89B59B269411FF006312EA /* Resources */,
 				8862C84AAEC0A88DD79AD597 /* [CP] Embed Pods Frameworks */,
+				59A000038E4DFB6ECBBE5956 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -725,6 +738,7 @@
 				8F89B5BB26941201006312EA /* Frameworks */,
 				8F89B5BC26941201006312EA /* Resources */,
 				C53D1FE66B92336D21FADFE8 /* [CP] Embed Pods Frameworks */,
+				1A678AC3D62554B5EB9ED9A5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -820,6 +834,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1A678AC3D62554B5EB9ED9A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		558AA5FCB0B49AC7A6975440 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -840,6 +871,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59A000038E4DFB6ECBBE5956 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-missthebus/Pods-missthebus-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-missthebus/Pods-missthebus-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-missthebus/Pods-missthebus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8862C84AAEC0A88DD79AD597 /* [CP] Embed Pods Frameworks */ = {
@@ -1081,7 +1129,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8F89B5C526941201006312EA /* Debug */ = {
+		8F5661AB26B79F21005AB134 /* DEV */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1141,9 +1189,78 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = DEV;
 		};
-		8F89B5C626941201006312EA /* Release */ = {
+		8F5661AC26B79F21005AB134 /* DEV */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5571D37DBB5802259EE4B549 /* Pods-missthebus.dev.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
+				DEVELOPMENT_TEAM = 2878VNJAM4;
+				INFOPLIST_FILE = missthebus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nipohc.missthebus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEV;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DEV;
+		};
+		8F5661AD26B79F21005AB134 /* DEV */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E13968637DFE3136EC8B868 /* Pods-missthebusTests.dev.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2878VNJAM4;
+				INFOPLIST_FILE = missthebusTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nipohc.missthebusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/missthebus.app/missthebus";
+			};
+			name = DEV;
+		};
+		8F5661AE26B79F21005AB134 /* DEV */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FAC3DFD914DADF3CB93CD2E /* Pods-missthebus-missthebusUITests.dev.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2878VNJAM4;
+				INFOPLIST_FILE = missthebusUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nipohc.missthebusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = missthebus;
+			};
+			name = DEV;
+		};
+		8F5661AF26B79F28005AB134 /* PROD */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1197,17 +1314,17 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = PROD;
 		};
-		8F89B5C826941201006312EA /* Debug */ = {
+		8F5661B026B79F28005AB134 /* PROD */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE6C9749CB72B9DF538C2F0B /* Pods-missthebus.debug.xcconfig */;
+			baseConfigurationReference = EA98B8FFA57C7355C63C3526 /* Pods-missthebus.prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				INFOPLIST_FILE = missthebus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1218,38 +1335,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nipohc.missthebus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PROD;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = PROD;
 		};
-		8F89B5C926941201006312EA /* Release */ = {
+		8F5661B126B79F28005AB134 /* PROD */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4F3B26E280927D33FFFB669 /* Pods-missthebus.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2878VNJAM4;
-				INFOPLIST_FILE = missthebus/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nipohc.missthebus;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		8F89B5CB26941201006312EA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D884A01FA63B159504265A93 /* Pods-missthebusTests.debug.xcconfig */;
+			baseConfigurationReference = 1D927B0F1285E2E8EB506B2C /* Pods-missthebusTests.prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1268,34 +1362,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/missthebus.app/missthebus";
 			};
-			name = Debug;
+			name = PROD;
 		};
-		8F89B5CC26941201006312EA /* Release */ = {
+		8F5661B226B79F28005AB134 /* PROD */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BAA535F1D675EA0E2879F74 /* Pods-missthebusTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2878VNJAM4;
-				INFOPLIST_FILE = missthebusTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = nipohc.missthebusTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/missthebus.app/missthebus";
-			};
-			name = Release;
-		};
-		8F89B5CE26941201006312EA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2D9AB089D4AC05E4DCC9DDC /* Pods-missthebus-missthebusUITests.debug.xcconfig */;
+			baseConfigurationReference = 62881CEB96DBB62B92F1D681 /* Pods-missthebus-missthebusUITests.prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1312,28 +1383,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = missthebus;
 			};
-			name = Debug;
-		};
-		8F89B5CF26941201006312EA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBEBB3ADF2EDEA0D18B53898 /* Pods-missthebus-missthebusUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2878VNJAM4;
-				INFOPLIST_FILE = missthebusUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = nipohc.missthebusUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = missthebus;
-			};
-			name = Release;
+			name = PROD;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1341,38 +1391,38 @@
 		8F89B598269411FF006312EA /* Build configuration list for PBXProject "missthebus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8F89B5C526941201006312EA /* Debug */,
-				8F89B5C626941201006312EA /* Release */,
+				8F5661AB26B79F21005AB134 /* DEV */,
+				8F5661AF26B79F28005AB134 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = DEV;
 		};
 		8F89B5C726941201006312EA /* Build configuration list for PBXNativeTarget "missthebus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8F89B5C826941201006312EA /* Debug */,
-				8F89B5C926941201006312EA /* Release */,
+				8F5661AC26B79F21005AB134 /* DEV */,
+				8F5661B026B79F28005AB134 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = DEV;
 		};
 		8F89B5CA26941201006312EA /* Build configuration list for PBXNativeTarget "missthebusTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8F89B5CB26941201006312EA /* Debug */,
-				8F89B5CC26941201006312EA /* Release */,
+				8F5661AD26B79F21005AB134 /* DEV */,
+				8F5661B126B79F28005AB134 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = DEV;
 		};
 		8F89B5CD26941201006312EA /* Build configuration list for PBXNativeTarget "missthebusUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8F89B5CE26941201006312EA /* Debug */,
-				8F89B5CF26941201006312EA /* Release */,
+				8F5661AE26B79F21005AB134 /* DEV */,
+				8F5661B226B79F28005AB134 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = DEV;
 		};
 /* End XCConfigurationList section */
 	};

@@ -107,7 +107,6 @@ extension StopItemTableViewCell{
         self.indexLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         
         self.stopNameLabel.text = "\(self.stop?.name ?? "---")"
-        self.stopNameLabel.useTextStyle(.label)
         self.stopNameLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
         self.softBgView.cornerRadius = 10

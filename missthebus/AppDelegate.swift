@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import GoogleMaps
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,17 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let request = SplashScreenBuilder.BuildRequest()
-        let rootVC = SplashScreenBuilder.createScene(request: request)
+        let splashScreenVC = SplashScreenBuilder.createScene(request: request)
         
-//        guard let rootVC = UIStoryboard.init(name: "MainPageViewController", bundle: nil).instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
-//            return true
-//        }
-//        let request = SearchPageBuilder.BuildRequest()
-//        let rootVC = SearchPageBuilder.createScene(request: request)
-//
-//        let navVC = NavigationController(rootViewController: rootVC)
-        let navVC = rootVC
-        UIApplication.shared.windows.first?.rootViewController = navVC
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GMSServices.provideAPIKey(Configs.GoogleMap.apiKey)
+        
+        UIApplication.shared.windows.first?.rootViewController = splashScreenVC
         UIApplication.shared.windows.first?.makeKeyAndVisible()
         
         return true

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
@@ -24,6 +25,9 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var router: (NSObjectProtocol & StopListPageRoutingLogic & StopListPageDataPassing)?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    let locationManager = CLLocationManager()
     
     var route: KmbRoute?
     var stopList = [KmbStop]()
@@ -47,7 +51,20 @@ extension StopListPageViewController {
         self.tableView.separatorStyle = .none
         self.tableView.allowsSelection = true
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
-//        self.interactor?.loadAllStopsFromRoute()
+        self.tableView.rowHeight = UITableView.automaticDimension
+        
+        
+        locationManager.delegate = self
+        if CLLocationManager.locationServicesEnabled() {
+            print("location service disabled")
+            locationManager.requestLocation()
+
+//            mapView.isMyLocationEnabled = true
+//            mapView.settings.myLocationButton = true
+        } else {
+            print("location service disabled")
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +93,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
         let bookmarked = self.reminders.contains(where: {$0.stopId == item.stopId})
         cell.delegate = self
         cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: (indexPath.row == selectedIndex), count: self.stopList.count, isBookmarked: bookmarked)
+        
         if let etaViewModel = self.selectedStopETAView{
             if etaViewModel.etaViews.contains(where: {$0.seq == indexPath.row + 1}) {
                 cell.setETA(etaList: self.selectedStopETAView)
@@ -96,6 +114,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         print("select \(indexPath.row)")
         selectedIndex = (selectedIndex != indexPath.row) ? indexPath.row : -1
         if (selectedIndex == -1) {
@@ -107,6 +126,8 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
         // request stop ETA API
         let stop = self.stopList[indexPath.row]
         self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+        
+        self.zoomToLocation(stop)
     }
 }
 
@@ -130,6 +151,36 @@ extension StopListPageViewController: StopItemCellDelegate{
     }
 }
 
+// MARK:- Google Map API
+extension StopListPageViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+          return
+        }
+        print("GoogleMap: didChangeAuthorization")
+        
+        manager.requestLocation()
+
+        //5
+//        self.mapView.isMyLocationEnabled = true
+//        self.mapView.settings.myLocationButton = true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let location = locations.first else {
+          return
+        }
+        print("GoogleMap: didUpdateLocations")
+
+        self.mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("GoogleMap: didFailWithError: \(error.localizedDescription)")
+    }
+}
+
 // MARK:- View Display logic entry point
 extension StopListPageViewController {
 
@@ -143,6 +194,45 @@ extension StopListPageViewController {
             self.selectedIndex = self.stopList.firstIndex(where: {$0.stopId == selectedStopId}) ?? -1
         }
         self.tableView.reloadData()
+        self.displayGoogleMapView()
+    }
+    
+    func displayGoogleMapView(){
+        
+        var bounds = GMSCoordinateBounds()
+        
+        // 1. set google map marker
+        // 2. joint all the stop
+        let path = GMSMutablePath()
+        for stop  in self.stopList{
+            guard let latitude = stop.latitude, let longitude = stop.longitude else {return}
+            let position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let marker = GMSMarker(position: position)
+            path.add(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            marker.title = stop.name
+            marker.map = self.mapView
+            bounds = bounds.includingCoordinate(marker.position)
+        }
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = UIColor.black
+        polyline.strokeWidth = 3.0
+        polyline.map = mapView
+        
+        // resize google map size
+        self.mapView.setMinZoom(1, maxZoom: 15) // prevent to over zoom on fit and animate if bounds be too small
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+        mapView.animate(with: update)
+        self.mapView.setMinZoom(1, maxZoom: 20) // allow the user zoom in more than level 15 again
+    }
+    
+    func zoomToLocation(_ stop: KmbStop){
+        guard let latitude = stop.latitude, let longitude = stop.longitude else {return}
+        let pos = GMSCameraPosition.camera(
+            withLatitude: latitude,
+            longitude: longitude,
+            zoom: 15
+        )
+        self.mapView.animate(to: pos)
     }
     
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ViewModel){

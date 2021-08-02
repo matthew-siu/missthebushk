@@ -55,7 +55,7 @@ class StopReminderTableViewCell: UITableViewCell {
             }
         }
         
-        self.routeView.addTarget(self, action: #selector(onSelected), for: .touchDown)
+        self.routeView.addTarget(self, action: #selector(onSelected), for: .touchUpInside)
     }
     
     @objc func onSelected(){

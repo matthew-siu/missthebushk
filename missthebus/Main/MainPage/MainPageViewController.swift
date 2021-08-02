@@ -8,6 +8,7 @@
 
 
 import UIKit
+import GoogleMobileAds
 
 // MARK: - Display logic, receive view model from presenter and present
 protocol MainPageDisplayLogic: class
@@ -27,6 +28,8 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     @IBOutlet weak var searchSoftUIView: SoftUIView! // button behaviour
     @IBOutlet weak var searchImg: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var adsBannerView: GADBannerView!
     
     var stopList = [KmbStop]()
     var reminders = [StopReminder]()
@@ -48,6 +51,7 @@ extension MainPageViewController {
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         
         self.initUI()
+        self.initBanner(self.adsBannerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,9 +66,8 @@ extension MainPageViewController {
         self.mainMsg1.useTextStyle(.label)
         self.mainMsg2.useTextStyle(.label_sub)
         
-        setSearchBtn()
+        self.setSearchBtn()
     }
-    
     
     private func setSearchBtn(){
         self.searchSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)

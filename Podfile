@@ -10,7 +10,8 @@ target 'missthebus' do
   pod 'Alamofire', '4.7.0'
   pod 'PromiseKit', '6.2.1'
   pod 'SVProgressHUD', '2.2.5'
-  pod 'MarqueeLabel'
+  pod 'Google-Mobile-Ads-SDK'
+  pod 'GoogleMaps', '~> 3.7.0'
 
   target 'missthebusTests' do
     inherit! :search_paths
