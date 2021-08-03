@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Display logic, receive view model from presenter and present
 protocol SearchPageDisplayLogic: class
 {
-    func presentTableView(routeData: [KmbRoute])
+    func presentTableView(viewModel: SearchPage.DisplayItem.ViewModel)
 
 }
 
@@ -27,8 +27,8 @@ class SearchPageViewController: BaseViewController, SearchPageDisplayLogic
     @IBOutlet weak var tableView: UITableView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
     
-    private var routeList = [KmbRoute]()
-    private var filteredRouteList = [KmbRoute]()
+    private var routeList = [SearchPage.RouteItem]()
+    private var filteredRouteList = [SearchPage.RouteItem]()
     
     enum TableViewCell: String, TableViewCellConfiguration {
         case itemCell = "RouteItemTableViewCell"
@@ -127,7 +127,7 @@ extension SearchPageViewController: UITextFieldDelegate{
         print("changing.")
         if (self.searchTextfield.text?.count ?? "".count > 0){
             
-            self.filteredRouteList = self.routeList.filter{$0.route.contains(self.searchTextfield.text?.uppercased() ?? "")}
+            self.filteredRouteList = self.routeList.filter{$0.routeNum.contains(self.searchTextfield.text?.uppercased() ?? "")}
         }else{
             self.filteredRouteList = self.routeList
         }
@@ -147,7 +147,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource{
         
         let item = self.filteredRouteList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! RouteItemTableViewCell
-        cell.setInfo(vc:self, route: item)
+        cell.setInfo(route: item)
         cell.selectionStyle = .none
         return cell
     }
@@ -157,7 +157,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selecting \(self.filteredRouteList[indexPath.row].route)")
+        print("selecting \(self.filteredRouteList[indexPath.row].routeNum)")
         self.router?.routeToStopListPage(route: self.filteredRouteList[indexPath.row])
     }
     
@@ -191,8 +191,8 @@ extension SearchPageViewController {
     }
     
     
-    func presentTableView(routeData: [KmbRoute]) {
-        self.routeList = routeData
+    func presentTableView(viewModel: SearchPage.DisplayItem.ViewModel){
+        self.routeList = viewModel.routeList
         self.filteredRouteList = self.routeList
         self.tableView.reloadData()
         

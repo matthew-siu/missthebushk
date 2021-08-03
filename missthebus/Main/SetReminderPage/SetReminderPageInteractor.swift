@@ -42,7 +42,7 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
         if let reminder = request.reminder{
             self.reminder = reminder
         }else{
-            self.reminder = StopReminder(name: "", type: .OTHER, route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: self.stop.stopId, time: Date(), period: nil)
+            self.reminder = StopReminder(name: "", type: .OTHER, routeNum: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: self.stop.stopId, time: Date(), period: nil)
         }
     }
     

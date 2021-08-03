@@ -13,14 +13,13 @@ import SVProgressHUD
 // MARK: - Requests from view
 protocol MainPageBusinessLogic
 {
-    func requestAllKmbStaticInfo()
     func loadAllStopRemindersOfRoute()
 }
 
 // MARK: - Datas retain in interactor defines here
 protocol MainPageDataStore
 {
-    
+    func getStopReminder(stopId: String) -> StopReminder?
 }
 
 // MARK: - Interactor Body
@@ -32,6 +31,7 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
     
     // State
     var reminders: [StopReminder]?
+    var etaTimer: Timer?
     
     init(request: MainPageBuilder.BuildRequest) {
         
@@ -40,32 +40,16 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
 // MARK: - Business
 extension MainPageInteractor {
     
-    func requestAllKmbStaticInfo(){
-        if (!self.needUpdate()) { return }
-        DispatchQueue.main.async {
-            SVProgressHUD.show()
-            KmbManager.requestAllRoutes()
-                .done{data in self.saveRoutes(data)}
-                .then{_ in KmbManager.requestAllStops()}
-                .done{data in self.saveStops(data)}
-                .then{_ in KmbManager.requestAllRouteStops()}
-                .done{data in
-                    SVProgressHUD.dismiss()
-                    self.insertRouteStopsIntoRoutes(data)
-                    self.saveLastUpdate()
-                }
-                .catch{err in
-                    SVProgressHUD.dismiss()
-                    print("error: \(err.localizedDescription)")
-                }
-        }
+    func getStopReminder(stopId: String) -> StopReminder?{
+        return self.reminders?.first(where: {$0.stopId == stopId})
     }
     
     func loadAllStopRemindersOfRoute(){
         if let reminders = StopReminderManager.getStopReminders(){
             self.reminders = reminders
             print("loadAllStopRemindersOfRoute \(reminders.count)")
-            self.presenter?.displayReminders(reminders: reminders)
+            self.startETATimer()
+            self.presenter?.displayBookmarks(reminders: reminders)
         }else{
             print("loadAllStopRemindersOfRoute nil")
         }
@@ -74,54 +58,42 @@ extension MainPageInteractor {
 
 // MARK: - Logic
 extension MainPageInteractor {
-    func saveRoutes(_ response: KmbRouteResponse?){
-        if let resp = response?.data{
-            let routes = resp.map{ KmbRoute(data: $0)}
-            KmbManager.saveAllRoutes(routes)
-        }
+    func startETATimer(){
+        self.dismissETATimer()
+        
+        self.requestETA(nil)
+        self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: nil, repeats: true)
     }
     
-    func saveStops(_ response: KmbStopResponse?){
-        
-        
-        if let resp = response?.data{
-            let stops = resp.map{ KmbStop(data: $0)}
-            KmbManager.saveAllStops(stops)
-        }
-    }
-    
-    func insertRouteStopsIntoRoutes(_ response: KmbRouteStopResponse?){
-        
-        guard let routes = KmbManager.getAllRoutes() else{
-            print("no routes")
-            return
-        }
-        
-        if let resp = response?.data{
-            
-            let routeStops = resp.map {KmbRouteStop(data: $0)}
-            
-            for routeStop in routeStops{
-                routes.first(where: {
-                    $0.route == routeStop.route &&
-                    $0.bound == routeStop.bound &&
-                    $0.serviceType == routeStop.serviceType
-                })?.appendStopList(routeStop)
-            }
-            KmbManager.saveAllRoutes(routes)
-            
-            for i in 0..<5{
-                routes[i].printSelf()
+    @objc
+    func requestETA(_ timer: Timer?)
+    {
+        if let reminders = self.reminders{
+            for reminder in reminders{
+                let query = KmbETAQuery(stopId: reminder.stopId, route: reminder.routeNum, serviceType: reminder.serviceType)
+                self.requestOneStopETA(query: query, bound: reminder.bound)
             }
         }
     }
     
-    func needUpdate() -> Bool{
-        return Storage.getString(Configs.Storage.KEY_LAST_UPDATE) != Utils.getCurrentTime(pattern: "yyyy-MM-dd")
+    func requestOneStopETA(query: KmbETAQuery, bound: String){
+        DispatchQueue.main.async {
+            
+            KmbManager.requestOneStopETA(query: query)
+                .done{response in
+                    if let resp = response?.data{
+                        self.presenter?.updateETAs(query: query, bound: bound, data: resp)
+                    }
+                }
+                .catch{err in
+                    print("fail")
+                }
+        }
     }
     
-    func saveLastUpdate(){
-        let now = Utils.getCurrentTime(pattern: "yyyy-MM-dd")
-        Storage.save(Configs.Storage.KEY_LAST_UPDATE, now)
+    func dismissETATimer(){
+        print("dismiss ETA time")
+        self.etaTimer?.invalidate()
+        self.etaTimer = nil
     }
 }

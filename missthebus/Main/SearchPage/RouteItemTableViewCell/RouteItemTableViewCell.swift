@@ -16,7 +16,7 @@ class RouteItemTableViewCell: UITableViewCell {
     @IBOutlet weak var routeDestLabel: UILabel!
     @IBOutlet weak var routeOrigLabel: UILabel!
     
-    var route: KmbRoute?
+    var route: SearchPage.RouteItem?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,13 +37,13 @@ extension RouteItemTableViewCell{
     func initUI(){
     }
     
-    func setInfo(vc: UIViewController, route: KmbRoute){
+    func setInfo(route: SearchPage.RouteItem){
         self.route = route
-        self.routeNumLabel.text = route.route
+        self.routeNumLabel.text = route.routeNum
         self.routeNumLabel.useTextStyle(.title1)
         self.routeDestLabel.text = "\(route.destStop)"
         self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
-        self.routeOrigLabel.text = "route_from".localized() + " \(route.originStop)"
+        self.routeOrigLabel.text = "route_from".localized() + " \(route.origStop)"
         
         if (route.company == .KMB){
             if let image = UIImage(named: "KmbLogo") {

@@ -20,6 +20,11 @@ enum StopListPage
         var remark: String?
     }
     
+    struct BookMarkImgName {
+        static let bookmark = "pin"
+        static let bookmarked = "pinned"
+    }
+    
     enum DisplayItem {
         struct Request {
             

@@ -12,7 +12,7 @@ import UIKit
 protocol MainPageRoutingLogic
 {
     func routeToSearchPage()
-    func routeToStopListPage(reminder: StopReminder)
+    func routeToStopListPage(item: MainPage.BookmarkItem)
 }
 
 // MARK: - The possible elements that can be
@@ -32,14 +32,13 @@ class MainPageRouter: NSObject, MainPageRoutingLogic, MainPageDataPassing
 extension MainPageRouter {
     
     
-    func routeToStopListPage(reminder: StopReminder){
-        if let route = KmbManager.getRoute(route: reminder.route, bound: reminder.bound, serviceType: reminder.serviceType),
-           let stop = KmbManager.getStop(stopId: reminder.stopId){
+    func routeToStopListPage(item: MainPage.BookmarkItem){
+        if let reminder = dataStore?.getStopReminder(stopId: item.stopId), let route = reminder.route, let stop = reminder.stop{
+            
             let request = StopListPageBuilder.BuildRequest(route: route, stop: stop)
             let vc = StopListPageBuilder.createScene(request: request)
-            
+
             self.viewController?.navigationController?.pushViewController(vc, animated: true)
-            
         }
     }
     

@@ -25,7 +25,7 @@ class SetReminderPagePresenter: SetReminderPagePresentationLogic
 extension SetReminderPagePresenter {
     func displayInitialState(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop, reminder: StopReminder){
         
-        let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: mode, reminderName: reminder.name, reminderType: reminder.type, routeNum: reminder.route, busCompany: reminder.company, destStopName: route.destStop, currentStopName: stop.name, time: reminder.time, period: reminder.period)
+        let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: mode, reminderName: reminder.name, reminderType: reminder.type, routeNum: reminder.routeNum, busCompany: reminder.company, destStopName: route.destStop, currentStopName: stop.name, time: reminder.time, period: reminder.period)
         self.viewController?.displayCreateState(viewModel: viewModel)
     }
 }

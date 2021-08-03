@@ -24,6 +24,8 @@ class SearchPagePresenter: SearchPagePresentationLogic
 // MARK: - Presentation receiver
 extension SearchPagePresenter {
     func presentTableView(routes: [KmbRoute]){
-        self.viewController?.presentTableView(routeData: routes)
+        let routes: [SearchPage.RouteItem] = routes.map{SearchPage.RouteItem(routeNum: $0.route, bound: $0.bound, serviceType: $0.serviceType, company: $0.company, destStop: $0.destStop, origStop: $0.originStop)}
+        self.viewController?.presentTableView(viewModel: SearchPage.DisplayItem.ViewModel(routeList: routes))
+        
     }
 }

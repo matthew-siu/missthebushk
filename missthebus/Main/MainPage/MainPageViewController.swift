@@ -13,7 +13,8 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol MainPageDisplayLogic: class
 {
-    func displayReminders(reminders: [StopReminder])
+    func displayReminders(reminders: [MainPage.BookmarkItem])
+    func updateETAs(etaList: MainPage.DisplayItem.ETAViewModel)
 }
 
 // MARK: - View Controller body
@@ -32,7 +33,8 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     @IBOutlet weak var adsBannerView: GADBannerView!
     
     var stopList = [KmbStop]()
-    var reminders = [StopReminder]()
+    var bookmarkItems = [MainPage.BookmarkItem]()
+    var etaViewModel = MainPage.DisplayItem.ETAViewModel()
     
     enum TableViewCell: String, TableViewCellConfiguration {
         case itemCell = "StopReminderTableViewCell"
@@ -89,43 +91,46 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
     func onSelect(_ index: Int) {
         if (index >= 0){
             
-            self.router?.routeToStopListPage(reminder: self.reminders[index])
+            self.router?.routeToStopListPage(item: self.bookmarkItems[index])
         }
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-            return self.reminders.count
+            return self.bookmarkItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! StopReminderTableViewCell
 
-        let reminder = reminders[indexPath.row]
-        if let route = KmbManager.getRoute(route: reminder.route, bound: reminder.bound, serviceType: reminder.serviceType),
-           let stop = KmbManager.getStop(stopId: reminder.stopId){
-            cell.setInfo(index: indexPath.row, routeNum: route.route, destStopName: route.destStop, currentStopName: stop.name, busCompany: route.company)
-            cell.delegate = self
-            cell.backgroundColor = .clear
-        }
-        
+        let bookmarkItem = self.bookmarkItems[indexPath.row]
+        let etaItem = self.etaViewModel.etaList.first(where: {$0.stopId == bookmarkItem.stopId})
+        cell.setInfo(stop: bookmarkItem, etaItem: etaItem)
+        cell.delegate = self
+        cell.backgroundColor = .clear
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt")
-        self.router?.routeToStopListPage(reminder: self.reminders[indexPath.row])
+        self.router?.routeToStopListPage(item: self.bookmarkItems[indexPath.row])
     }
     
 }
 
 // MARK:- View Display logic entry point
 extension MainPageViewController {
-    func displayReminders(reminders: [StopReminder]){
-        self.reminders = reminders
-        print("# reminder = \(self.reminders.count)")
+    func displayReminders(reminders: [MainPage.BookmarkItem]){
+        self.bookmarkItems = reminders
+        print("# reminder = \(self.bookmarkItems.count)")
+        self.tableView.reloadData()
+    }
+    
+    func updateETAs(etaList: MainPage.DisplayItem.ETAViewModel){
+        print("update ETA: \(etaList.etaList.count)")
+        self.etaViewModel = etaList
         self.tableView.reloadData()
     }
 }

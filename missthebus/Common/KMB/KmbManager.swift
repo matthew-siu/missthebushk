@@ -185,3 +185,20 @@ extension KmbManager{
         return getAllStops()?.first(where: { $0.stopId == stopId})
     }
 }
+
+// algorithms
+
+extension KmbManager{
+    static func getETA(raw: String?) -> String{
+        var display = ""
+        if let etaTime = raw{
+            let etaDate = Utils.convert2Date(time: etaTime, pattern: "yyyy-MM-dd'T'HH:mm:ssZ")
+            let nowDate = Date()
+            let diff = Calendar.current.dateComponents([.minute, .second], from: nowDate, to: etaDate)
+            if let diffMin = diff.minute{
+                display = (diffMin > 0) ? String(diffMin) : "0"
+            }
+        }
+        return display
+    }
+}

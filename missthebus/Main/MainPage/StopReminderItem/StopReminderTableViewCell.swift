@@ -20,6 +20,20 @@ class StopReminderTableViewCell: UITableViewCell {
     @IBOutlet weak var iconLayout: UIView!
     @IBOutlet weak var routeDestLabel: UILabel!
     @IBOutlet weak var routeOrigLabel: UILabel!
+    
+    
+    @IBOutlet weak var eta1view: UIStackView!
+    @IBOutlet weak var eta1label: UILabel!
+    @IBOutlet weak var eta1unit: UILabel!
+    
+    @IBOutlet weak var eta2view: UIStackView!
+    @IBOutlet weak var eta2label: UILabel!
+    @IBOutlet weak var eta2unit: UILabel!
+    
+    @IBOutlet weak var eta3view: UIStackView!
+    @IBOutlet weak var eta3label: UILabel!
+    @IBOutlet weak var eta3unit: UILabel!
+    
 
     var index = -1
     var delegate: StopReminderCellDelegate?
@@ -40,19 +54,42 @@ class StopReminderTableViewCell: UITableViewCell {
         self.initSoftUI(self.routeView)
     }
     
-    func setInfo(index: Int, routeNum: String, destStopName: String, currentStopName: String, busCompany: BusCompany){
-        self.index = index
-        self.routeNumLabel.text = String(routeNum)
-        self.routeNumLabel.useTextStyle(.header2)
-        self.routeDestLabel.text = destStopName
+    func setInfo(stop: MainPage.BookmarkItem, etaItem: MainPage.ETAItem?){
+        self.index = stop.index
+        self.routeNumLabel.text = String(stop.routeNum)
+        self.routeNumLabel.useTextStyle(.title1)
+        self.routeDestLabel.text = stop.destStop
         self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
-        self.routeOrigLabel.text = currentStopName
+        self.routeOrigLabel.text = stop.currentStop
         
-        if (busCompany == .KMB){
+        if (stop.company == .KMB){
             if let image = UIImage(named: "KmbLogo") {
                 self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
                 self.busCompanyIcon.sizeToFit()
             }
+        }
+        
+        self.eta1view.isHidden = false
+        self.eta2view.isHidden = false
+        self.eta3view.isHidden = false
+        if let etaItem = etaItem, let eta1 = etaItem.eta1{
+            self.eta1label.text = eta1
+            if let eta2 = etaItem.eta2{
+                self.eta2label.text = eta2
+                if let eta3 = etaItem.eta3{
+                    self.eta3label.text = eta3
+                }else{
+                    self.eta3view.isHidden = true
+                }
+            }else{
+                self.eta2view.isHidden = true
+                self.eta3view.isHidden = true
+            }
+        }else{
+            print("sth is nil")
+            self.eta1view.isHidden = true
+            self.eta2view.isHidden = true
+            self.eta3view.isHidden = true
         }
         
         self.routeView.addTarget(self, action: #selector(onSelected), for: .touchUpInside)

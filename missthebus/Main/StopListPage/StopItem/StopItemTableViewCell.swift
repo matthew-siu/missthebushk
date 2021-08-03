@@ -83,7 +83,7 @@ extension StopItemTableViewCell{
     
     private func setIsBookMark(_ bookmark: Bool){
         self.isBookmarked = bookmark
-        let imgName = (self.isBookmarked) ? "bell2" : "bell"
+        let imgName = (self.isBookmarked) ? StopListPage.BookMarkImgName.bookmarked : StopListPage.BookMarkImgName.bookmark
         self.bookmarkBtn.setImage(UIImage(named: imgName)!.withRenderingMode((self.isBookmarked) ? .alwaysOriginal : .alwaysTemplate), for: .normal)
         self.missBusIcon.isHidden = !self.isBookmarked
         

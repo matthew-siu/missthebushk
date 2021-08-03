@@ -12,16 +12,39 @@ import UIKit
 // Defines request, response and corresponding view models
 enum MainPage
 {
-//    enum Something
-//    {
-//        struct Request
-//        {
-//        }
-//        struct Response
-//        {
-//        }
-//        struct ViewModel
-//        {
-//        }
-//    }
+    
+    struct BookmarkItem{
+        let index: Int
+        let stopId: String
+        let routeNum: String
+        let bound: String
+        let serviceType: String
+        let company: BusCompany
+        let destStop: String
+        let currentStop: String
+    }
+    
+    struct ETAItem {
+        let stopId: String
+        let eta1: String?
+        let eta2: String?
+        let eta3: String?
+    }
+    
+    enum DisplayItem
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+        }
+        struct ViewModel{
+            let bookmarkItems: [BookmarkItem]
+        }
+        struct ETAViewModel{
+            var etaList = [ETAItem]()
+            
+        }
+    }
 }

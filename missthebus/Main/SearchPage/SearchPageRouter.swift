@@ -11,7 +11,7 @@ import UIKit
 // MARK: - The main interface to be called by others
 protocol SearchPageRoutingLogic
 {
-    func routeToStopListPage(route: KmbRoute)
+    func routeToStopListPage(route: SearchPage.RouteItem)
 }
 
 // MARK: - The possible elements that can be
@@ -30,11 +30,14 @@ class SearchPageRouter: NSObject, SearchPageRoutingLogic, SearchPageDataPassing
 // MARK: - Routing and datapassing for one nav action
 extension SearchPageRouter {
 
-    func routeToStopListPage(route: KmbRoute){
-        let request = StopListPageBuilder.BuildRequest(route: route, stop: nil)
-        let vc = StopListPageBuilder.createScene(request: request)
-        
-        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    func routeToStopListPage(route: SearchPage.RouteItem){
+        if let routeObj = self.dataStore?.getRoute(routeItem: route){
+            
+            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil)
+            let vc = StopListPageBuilder.createScene(request: request)
+            
+            self.viewController?.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     

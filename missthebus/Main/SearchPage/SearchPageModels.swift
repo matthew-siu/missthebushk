@@ -12,16 +12,26 @@ import UIKit
 // Defines request, response and corresponding view models
 enum SearchPage
 {
-//    enum Something
-//    {
-//        struct Request
-//        {
-//        }
-//        struct Response
-//        {
-//        }
-//        struct ViewModel
-//        {
-//        }
-//    }
+    struct RouteItem{
+        let routeNum: String
+        let bound: String
+        let serviceType: String
+        let company: BusCompany
+        let destStop: String
+        let origStop: String
+    }
+    
+    enum DisplayItem
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+        }
+        struct ViewModel
+        {
+            let routeList: [RouteItem]
+        }
+    }
 }

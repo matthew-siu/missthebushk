@@ -14,7 +14,7 @@ class StopReminder: Codable{
     var type: ReminderType
     var isActivated = false
     
-    var route: String
+    var routeNum: String
     var bound: String
     var serviceType: String
     var company: BusCompany
@@ -33,11 +33,11 @@ class StopReminder: Codable{
         case OTHER = "OTHER"
     }
     
-    init(name: String, type: ReminderType, route: String, bound: String, serviceType: String, company: BusCompany, stopId: String, time: Date, period: [Int]?){
+    init(name: String, type: ReminderType, routeNum: String, bound: String, serviceType: String, company: BusCompany, stopId: String, time: Date, period: [Int]?){
         self.id = UUID().uuidString
         self.name = name
         self.type = type
-        self.route = route
+        self.routeNum = routeNum
         self.bound = bound
         self.serviceType = serviceType
         self.company = company
@@ -51,7 +51,24 @@ class StopReminder: Codable{
         return (period == nil || period?.count == 0)
     }
     
+    var currentStop: String?{
+        return KmbManager.getStop(stopId: self.stopId)?.name
+    }
+    
+    var destStop: String?{
+        return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)?.destStop
+    }
+    
+    var stop: KmbStop?{
+        return KmbManager.getStop(stopId: self.stopId)
+        
+    }
+    
+    var route: KmbRoute?{
+        return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
+    }
+    
     func printDetails(){
-        print("\(self.name) | [\(self.route)-\(self.bound)-\(self.serviceType)] | \(self.type.rawValue) | \(self.time) | \(String(describing: self.period))")
+        print("\(self.name) | [\(self.routeNum)-\(self.bound)-\(self.serviceType)] | \(self.type.rawValue) | \(self.time) | \(String(describing: self.period))")
     }
 }
