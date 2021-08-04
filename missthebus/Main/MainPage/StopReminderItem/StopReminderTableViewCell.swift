@@ -34,6 +34,18 @@ class StopReminderTableViewCell: UITableViewCell {
     @IBOutlet weak var eta3label: UILabel!
     @IBOutlet weak var eta3unit: UILabel!
     
+    struct ETAView{
+        let view: UIStackView
+        let label: UILabel
+        let unit: UILabel
+    }
+    var etaViewList: [ETAView]{
+        return [
+            ETAView(view: self.eta1view, label: self.eta1label, unit: self.eta1unit),
+            ETAView(view: self.eta2view, label: self.eta2label, unit: self.eta2unit),
+            ETAView(view: self.eta3view, label: self.eta3label, unit: self.eta3unit)
+        ]
+    }
 
     var index = -1
     var delegate: StopReminderCellDelegate?
@@ -52,14 +64,25 @@ class StopReminderTableViewCell: UITableViewCell {
     
     func initUI(){
         self.initSoftUI(self.routeView)
+        self.eta1unit.text = "stop_mins".localized()
+        self.eta2unit.text = "stop_mins".localized()
+        self.eta3unit.text = "stop_mins".localized()
+        
+        self.routeNumLabel.useTextStyle(.title1)
+        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+        
+        self.routeView.addTarget(self, action: #selector(onSelected), for: .touchUpInside)
+        
+        self.eta1view.isHidden = true
+        self.eta2view.isHidden = true
+        self.eta3view.isHidden = true
     }
     
     func setInfo(stop: MainPage.BookmarkItem, etaItem: MainPage.ETAItem?){
+        // General View
         self.index = stop.index
         self.routeNumLabel.text = String(stop.routeNum)
-        self.routeNumLabel.useTextStyle(.title1)
         self.routeDestLabel.text = stop.destStop
-        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         self.routeOrigLabel.text = stop.currentStop
         
         if (stop.company == .KMB){
@@ -69,30 +92,15 @@ class StopReminderTableViewCell: UITableViewCell {
             }
         }
         
-        self.eta1view.isHidden = false
-        self.eta2view.isHidden = false
-        self.eta3view.isHidden = false
-        if let etaItem = etaItem, let eta1 = etaItem.eta1{
-            self.eta1label.text = eta1
-            if let eta2 = etaItem.eta2{
-                self.eta2label.text = eta2
-                if let eta3 = etaItem.eta3{
-                    self.eta3label.text = eta3
-                }else{
-                    self.eta3view.isHidden = true
+        // ETA View
+        if let etaItem = etaItem {
+            for (index, eta) in etaItem.etaList.enumerated(){
+                if let eta = eta{
+                    self.etaViewList[index].view.isHidden = false
+                    self.etaViewList[index].label.text = eta
                 }
-            }else{
-                self.eta2view.isHidden = true
-                self.eta3view.isHidden = true
             }
-        }else{
-            print("sth is nil")
-            self.eta1view.isHidden = true
-            self.eta2view.isHidden = true
-            self.eta3view.isHidden = true
         }
-        
-        self.routeView.addTarget(self, action: #selector(onSelected), for: .touchUpInside)
     }
     
     @objc func onSelected(){

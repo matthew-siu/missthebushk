@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 // MARK: - Display logic, receive view model from presenter and present
 protocol SearchPageDisplayLogic: class
@@ -25,6 +26,7 @@ class SearchPageViewController: BaseViewController, SearchPageDisplayLogic
     
     @IBOutlet weak var searchTextfield: SoftUITextfield!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var adsBannerView: GADBannerView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
     
     private var routeList = [SearchPage.RouteItem]()
@@ -53,6 +55,7 @@ extension SearchPageViewController {
         self.hideKeyboardWhenTappedAround()
         
         self.initUI()
+        self.initBanner(self.adsBannerView)
     }
     
     override func viewDidAppear(_ animated: Bool) {

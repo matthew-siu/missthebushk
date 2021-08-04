@@ -17,10 +17,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCf-7E-tW9">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="120"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3QW-mT-SsB">
-                                <rect key="frame" x="37.5" y="0.0" width="5" height="120"/>
+                                <rect key="frame" x="27.5" y="0.0" width="5" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWI-Z2-KSf">
                                         <rect key="frame" x="0.0" y="0.0" width="5" height="60"/>
@@ -39,7 +39,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIl-jl-3h1">
-                                <rect key="frame" x="30" y="50" width="20" height="20"/>
+                                <rect key="frame" x="20" y="50" width="20" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnQ-SX-3SK">
                                         <rect key="frame" x="4.5" y="0.0" width="11.5" height="20.5"/>
@@ -68,13 +68,14 @@
                             <constraint firstItem="3QW-mT-SsB" firstAttribute="top" secondItem="pCf-7E-tW9" secondAttribute="top" id="YfM-fR-YYV"/>
                             <constraint firstItem="KIl-jl-3h1" firstAttribute="centerX" secondItem="pCf-7E-tW9" secondAttribute="centerX" id="fBC-we-kMa"/>
                             <constraint firstItem="3QW-mT-SsB" firstAttribute="centerX" secondItem="pCf-7E-tW9" secondAttribute="centerX" id="hSJ-Nc-bTR"/>
+                            <constraint firstAttribute="width" constant="60" id="kfG-uN-3Ks"/>
                         </constraints>
                     </view>
                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbm-mN-4K3" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                        <rect key="frame" x="80" y="10" width="314" height="100"/>
+                        <rect key="frame" x="60" y="10" width="334" height="100"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="FXx-Kt-O1e">
-                                <rect key="frame" x="42" y="45" width="230" height="60"/>
+                                <rect key="frame" x="52" y="45" width="230" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="230" id="2V4-gt-TkH"/>
@@ -98,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYS-y5-Nla">
-                                <rect key="frame" x="40" y="20.5" width="224" height="19.5"/>
+                                <rect key="frame" x="40" y="20.5" width="244" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -122,7 +123,7 @@
                                     <constraint firstAttribute="width" constant="40" id="YAZ-dd-KSe"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="20" minY="10" maxX="0.0" maxY="10"/>
-                                <state key="normal" image="bell"/>
+                                <state key="normal" image="pin"/>
                             </button>
                         </subviews>
                         <constraints>
@@ -142,7 +143,6 @@
                     <constraint firstItem="5w1-DC-Y3R" firstAttribute="top" secondItem="yPv-4U-TpL" secondAttribute="top" constant="10" id="lLZ-oL-ZtP"/>
                     <constraint firstAttribute="trailing" secondItem="wbm-mN-4K3" secondAttribute="trailing" constant="20" id="lmG-6k-J3K"/>
                     <constraint firstItem="pCf-7E-tW9" firstAttribute="top" secondItem="yPv-4U-TpL" secondAttribute="top" id="rh1-RR-bT6"/>
-                    <constraint firstItem="wbm-mN-4K3" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" constant="80" id="vb9-uw-im5"/>
                     <constraint firstItem="tYS-y5-Nla" firstAttribute="top" secondItem="V8b-kN-xlL" secondAttribute="top" constant="10" id="wBU-Az-boK"/>
                     <constraint firstItem="V8b-kN-xlL" firstAttribute="leading" secondItem="tYS-y5-Nla" secondAttribute="trailing" id="y7U-zm-xiR"/>
                     <constraint firstItem="pCf-7E-tW9" firstAttribute="leading" secondItem="yPv-4U-TpL" secondAttribute="leading" id="zhY-Rk-Pzc"/>
@@ -164,6 +164,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bell" width="64" height="64"/>
+        <image name="pin" width="64" height="64"/>
     </resources>
 </document>

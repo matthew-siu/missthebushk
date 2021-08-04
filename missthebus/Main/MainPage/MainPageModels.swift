@@ -29,6 +29,10 @@ enum MainPage
         let eta1: String?
         let eta2: String?
         let eta3: String?
+        
+        var etaList: [String?] {
+            return [self.eta1, self.eta2, self.eta3]
+        }
     }
     
     enum DisplayItem

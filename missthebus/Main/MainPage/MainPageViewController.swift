@@ -24,11 +24,13 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     var interactor: MainPageBusinessLogic?
     var router: (NSObjectProtocol & MainPageRoutingLogic & MainPageDataPassing)?
     
-    @IBOutlet weak var mainMsg1: UILabel!
-    @IBOutlet weak var mainMsg2: UILabel!
     @IBOutlet weak var searchSoftUIView: SoftUIView! // button behaviour
     @IBOutlet weak var searchImg: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var reminderImg: UIImageView!
+    @IBOutlet weak var reminderLabel: UILabel!
+    @IBOutlet weak var pinImg: UIImageView!
+    @IBOutlet weak var pinLabel: UILabel!
     
     @IBOutlet weak var adsBannerView: GADBannerView!
     
@@ -65,10 +67,20 @@ extension MainPageViewController {
     }
     
     private func initUI(){
-        self.mainMsg1.useTextStyle(.label)
-        self.mainMsg2.useTextStyle(.label_sub)
+        
+        let saveBtn = UIBarButtonItem(title: "setting".localized(), style: .plain, target: self, action: #selector(self.onSetting))
+        saveBtn.tintColor = .systemBlue
+        self.navigationItem.rightBarButtonItem = saveBtn
+        
+        self.reminderImg.tintColor = UIColor.darkGrey
+        self.pinImg.tintColor = UIColor.darkGrey
         
         self.setSearchBtn()
+    }
+    
+    @objc
+    private func onSetting(){
+        
     }
     
     private func setSearchBtn(){

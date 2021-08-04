@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,30 +26,46 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XN3-Jh-eam">
-                                <rect key="frame" x="0.0" y="134" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="134" width="414" height="678"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8p-mc-rXM" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BEE-lj-Ikw"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k6i-fr-Cqe"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Lu8-Ek-oZ6" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" constant="20" id="1bc-pd-odO"/>
                             <constraint firstItem="Lu8-Ek-oZ6" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" constant="20" id="Hhq-Bt-LYB"/>
+                            <constraint firstItem="g8p-mc-rXM" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="JAa-yN-nlx"/>
+                            <constraint firstItem="g8p-mc-rXM" firstAttribute="bottom" secondItem="k6i-fr-Cqe" secondAttribute="bottom" id="Nnw-ph-Iuk"/>
+                            <constraint firstItem="g8p-mc-rXM" firstAttribute="top" secondItem="XN3-Jh-eam" secondAttribute="bottom" id="Qjm-bD-4oN"/>
+                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="g8p-mc-rXM" secondAttribute="trailing" id="S00-eC-men"/>
                             <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="Lu8-Ek-oZ6" secondAttribute="trailing" constant="20" id="S9l-BV-qWW"/>
                             <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="XN3-Jh-eam" secondAttribute="trailing" id="V5f-Uv-1gk"/>
                             <constraint firstItem="XN3-Jh-eam" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="eFc-jm-C8g"/>
-                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="bottom" secondItem="XN3-Jh-eam" secondAttribute="bottom" id="ekQ-Ew-Agx"/>
                             <constraint firstItem="XN3-Jh-eam" firstAttribute="top" secondItem="Lu8-Ek-oZ6" secondAttribute="bottom" constant="20" id="uOJ-PO-8XK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adsBannerView" destination="g8p-mc-rXM" id="rni-4n-UFu"/>
                         <outlet property="searchTextfield" destination="Lu8-Ek-oZ6" id="C70-1S-oq3"/>
                         <outlet property="tableView" destination="XN3-Jh-eam" id="zSp-wq-SBZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8H-AN-xyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-141" y="-117"/>
+            <point key="canvasLocation" x="-142.02898550724638" y="-117.1875"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
