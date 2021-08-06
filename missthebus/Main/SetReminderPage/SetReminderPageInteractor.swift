@@ -29,8 +29,8 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
     var worker: SetReminderPageWorker?
     
     // State
-    var route: KmbRoute
-    var stop: KmbStop
+    var route: KmbRoute?
+    var stop: KmbStop?
     var mode: SetReminderPage.Mode
     var reminder: StopReminder
     
@@ -42,7 +42,7 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
         if let reminder = request.reminder{
             self.reminder = reminder
         }else{
-            self.reminder = StopReminder(name: "", type: .OTHER, routeNum: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: self.stop.stopId, time: Date(), period: nil)
+            self.reminder = StopReminder(time: Date())
         }
     }
     
@@ -69,6 +69,5 @@ extension SetReminderPageInteractor {
             print("update new reminder \(self.reminder.id)")
             StopReminderManager.updateStopReminder(self.reminder)
         }
-        
     }
 }

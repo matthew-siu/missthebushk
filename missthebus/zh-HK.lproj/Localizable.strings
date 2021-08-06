@@ -13,7 +13,7 @@
 "main_no_reminder" = "沒有提醒";
 "main_no_bookmark" = "沒有書籤";
 "main_upcoming_reminder" = "即將到來的提醒";
-"main_bookmark" = "我的書籤";
+"main_bookmark" = "我的車站";
 
 
 
@@ -54,7 +54,7 @@
 "reminder_tag_gathering" = "聚會";
 "reminder_tag_last" = "尾班車";
 "reminder_tag_other" = "其它";
-
+"reminder_add_stop" = "點擊以添加新車站。";
 
 
 

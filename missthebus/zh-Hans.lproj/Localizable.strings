@@ -13,7 +13,7 @@
 "main_no_reminder" = "没有提醒";
 "main_no_bookmark" = "没有书签";
 "main_upcoming_reminder" = "即将到来的提醒";
-"main_bookmark" = "我的书签";
+"main_bookmark" = "我的车站";
 
 
 
@@ -54,7 +54,7 @@
 "reminder_tag_gathering" = "聚会";
 "reminder_tag_last" = "尾班车";
 "reminder_tag_other" = "其它";
-
+"reminder_add_stop" = "点击以添加新车站。";
 
 
 

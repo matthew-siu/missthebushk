@@ -17,6 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XN3-Jh-eam">
+                                <rect key="frame" x="0.0" y="119" width="414" height="693"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lu8-Ek-oZ6" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
                                 <rect key="frame" x="20" y="64" width="374" height="50"/>
                                 <constraints>
@@ -25,10 +29,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XN3-Jh-eam">
-                                <rect key="frame" x="0.0" y="134" width="414" height="678"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8p-mc-rXM" customClass="GADBannerView">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -49,7 +49,7 @@
                             <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="Lu8-Ek-oZ6" secondAttribute="trailing" constant="20" id="S9l-BV-qWW"/>
                             <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="XN3-Jh-eam" secondAttribute="trailing" id="V5f-Uv-1gk"/>
                             <constraint firstItem="XN3-Jh-eam" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="eFc-jm-C8g"/>
-                            <constraint firstItem="XN3-Jh-eam" firstAttribute="top" secondItem="Lu8-Ek-oZ6" secondAttribute="bottom" constant="20" id="uOJ-PO-8XK"/>
+                            <constraint firstItem="XN3-Jh-eam" firstAttribute="top" secondItem="Lu8-Ek-oZ6" secondAttribute="bottom" constant="5" id="uOJ-PO-8XK"/>
                         </constraints>
                     </view>
                     <connections>

@@ -11,7 +11,7 @@ import UIKit
 // MARK: - The main interface to be called by others
 protocol SetReminderPageRoutingLogic
 {
-    
+    func routeToSearchPage()
 }
 
 // MARK: - The possible elements that can be
@@ -29,5 +29,27 @@ class SetReminderPageRouter: NSObject, SetReminderPageRoutingLogic, SetReminderP
 
 // MARK: - Routing and datapassing for one nav action
 extension SetReminderPageRouter {
-
+    
+    func routeToSearchPage() {
+        let request = SearchPageBuilder.BuildRequest(type: .GetRouteStopService)
+        let vc = SearchPageBuilder.createScene(request: request)
+//        vc.modalPresentationStyle = .fullScreen
+        
+//        let transition = CATransition()
+//        transition.duration = 0.5
+//        transition.type = .push
+//        transition.subtype = .fromTop
+//        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+//        self.viewController?.navigationController?.view.layer.add(transition, forKey: kCATransition)
+//        self.viewController?.navigationController?.pushViewController(vc, animated: false)
+        
+        
+        let navController = NavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .fullScreen // iOS.13 may pop up the latest controller.
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        window?.rootViewController?.present(navController, animated: true, completion: { () in
+            NSLog("search")
+        })
+    }
+    
 }

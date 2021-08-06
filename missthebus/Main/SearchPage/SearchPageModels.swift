@@ -12,6 +12,12 @@ import UIKit
 // Defines request, response and corresponding view models
 enum SearchPage
 {
+    enum RequestType{
+        case GetRouteStopService
+        case GetRouteService
+        case NormalNavigation
+    }
+    
     struct RouteItem{
         let routeNum: String
         let bound: String

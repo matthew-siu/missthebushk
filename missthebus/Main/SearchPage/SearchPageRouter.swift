@@ -32,8 +32,11 @@ extension SearchPageRouter {
 
     func routeToStopListPage(route: SearchPage.RouteItem){
         if let routeObj = self.dataStore?.getRoute(routeItem: route){
-            
-            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil)
+            var requestType = StopListPage.RequestType.NormalNavigation
+            if (dataStore?.getType() == .GetRouteStopService){
+                requestType = .GetRouteStopService
+            }
+            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil, type: requestType)
             let vc = StopListPageBuilder.createScene(request: request)
             
             self.viewController?.navigationController?.pushViewController(vc, animated: true)

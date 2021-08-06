@@ -36,12 +36,14 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     var bookmarks: [StopBookmark]?
     var etaTimer: Timer?
     var selectedStopId: String?
+    var type: StopListPage.RequestType
     
     // Init
     init(request: StopListPageBuilder.BuildRequest) {
         print("route: \(request.route.route)")
         self.selectedStopId = request.stop?.stopId
         self.route = request.route
+        self.type = request.type
     }
 }
 
@@ -62,7 +64,7 @@ extension StopListPageInteractor {
         // load all related reminder()
         self.loadAllStopRemindersOfRoute()
         
-        self.presenter?.displayInitialState(route: route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.selectedStopId)
+        self.presenter?.displayInitialState(route: route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.selectedStopId, requestType: self.type)
         
         if let selectedStopId = self.selectedStopId {
             self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)

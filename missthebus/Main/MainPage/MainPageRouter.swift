@@ -13,6 +13,7 @@ protocol MainPageRoutingLogic
 {
     func routeToSearchPage()
     func routeToStopListPage(item: MainPage.BookmarkItem)
+    func routeToCreateReminderPage()
 }
 
 // MARK: - The possible elements that can be
@@ -55,5 +56,12 @@ extension MainPageRouter {
         self.viewController?.navigationController?.view.layer.add(transition, forKey: kCATransition)
         self.viewController?.navigationController?.pushViewController(vc, animated: false)
         
+    }
+    
+    func routeToCreateReminderPage(){
+        
+        let request = SetReminderPageBuilder.BuildRequest(route: nil, stop: nil, mode: .CREATE, reminder: nil)
+        let vc = SetReminderPageBuilder.createScene(request: request)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

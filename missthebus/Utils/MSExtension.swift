@@ -36,7 +36,7 @@ extension UIViewController{
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         height -= (window?.safeAreaInsets.bottom)!
         
-        let toastLabel = UILabel(frame: CGRect(x: width - 80, y: height - 150, width: 250, height: 30))
+        let toastLabel = UILabel(frame: CGRect(x: width - 80, y: height - 100, width: 250, height: 30))
         toastLabel.backgroundColor = .clear
         toastLabel.textColor = UIColor.white
         toastLabel.textAlignment = .center;
@@ -53,8 +53,7 @@ extension UIViewController{
         // resize frame
         let toast = UIView(frame: CGRect(origin: toastLabel.frame.origin, size: CGSize(width: toastLabel.frame.width + 40, height: toastLabel.frame.height + 20)))
         toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-//        toast.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
-        toast.layer.cornerRadius = 15;
+        toast.layer.cornerRadius = 15
         toast.center = toastLabel.center
         toastLabel.center = CGPoint(x: toast.frame.width/2, y: toast.frame.height/2)
         

@@ -77,7 +77,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pL-bn-IPW" userLabel="RouteView">
                                         <rect key="frame" x="0.0" y="150" width="414" height="120"/>
                                         <subviews>
-                                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIa-v5-J0r" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIa-v5-J0r" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="10" width="374" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="286M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDg-Jq-kbI">
@@ -128,10 +128,31 @@
                                                             <constraint firstItem="liw-RB-Gtj" firstAttribute="leading" secondItem="tyv-dR-twa" secondAttribute="leading" id="avi-Ga-Isc"/>
                                                         </constraints>
                                                     </stackView>
+                                                    <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOH-C5-Gim">
+                                                        <rect key="frame" x="20" y="20" width="334" height="60"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Bus Stop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfR-3v-mfC">
+                                                                <rect key="frame" x="0.0" y="0.0" width="334" height="60"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="AfR-3v-mfC" secondAttribute="trailing" id="FyJ-jG-5sc"/>
+                                                            <constraint firstItem="AfR-3v-mfC" firstAttribute="top" secondItem="dOH-C5-Gim" secondAttribute="top" id="Z3E-Xo-oNX"/>
+                                                            <constraint firstItem="AfR-3v-mfC" firstAttribute="leading" secondItem="dOH-C5-Gim" secondAttribute="leading" id="cKx-Y3-Ei5"/>
+                                                            <constraint firstAttribute="bottom" secondItem="AfR-3v-mfC" secondAttribute="bottom" id="z9b-im-Wl1"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="JDg-Jq-kbI" firstAttribute="leading" secondItem="ZIa-v5-J0r" secondAttribute="leading" id="0Nd-rh-8hQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dOH-C5-Gim" secondAttribute="trailing" constant="20" id="7XR-z4-eLD"/>
+                                                    <constraint firstItem="dOH-C5-Gim" firstAttribute="leading" secondItem="ZIa-v5-J0r" secondAttribute="leading" constant="20" id="L7o-Qe-ILL"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dOH-C5-Gim" secondAttribute="bottom" constant="20" id="QTL-WY-nZ4"/>
+                                                    <constraint firstItem="dOH-C5-Gim" firstAttribute="top" secondItem="ZIa-v5-J0r" secondAttribute="top" constant="20" id="iLH-uU-cT6"/>
                                                     <constraint firstItem="JDg-Jq-kbI" firstAttribute="centerY" secondItem="ZIa-v5-J0r" secondAttribute="centerY" id="kK3-qt-9q5"/>
                                                     <constraint firstAttribute="trailing" secondItem="tyv-dR-twa" secondAttribute="trailing" id="pWN-Th-nmQ"/>
                                                     <constraint firstItem="tyv-dR-twa" firstAttribute="centerY" secondItem="JDg-Jq-kbI" secondAttribute="centerY" id="qzB-z3-ot8"/>
@@ -270,7 +291,10 @@
                         <outlet property="routeDestLabel" destination="liw-RB-Gtj" id="2nu-Yd-bc5"/>
                         <outlet property="routeNumLabel" destination="JDg-Jq-kbI" id="Mql-Yo-aNP"/>
                         <outlet property="routeOrigLabel" destination="XcC-HD-lkJ" id="ZtD-HX-VyX"/>
+                        <outlet property="routeStopView" destination="tyv-dR-twa" id="g1J-kr-Lgb"/>
                         <outlet property="routeView" destination="ZIa-v5-J0r" id="N9S-ut-TSW"/>
+                        <outlet property="selectStopLabel" destination="AfR-3v-mfC" id="oZB-bf-UdQ"/>
+                        <outlet property="selectStopView" destination="dOH-C5-Gim" id="Kta-fu-w8g"/>
                         <outlet property="timePicker" destination="iaZ-zc-CaN" id="mhR-Fd-oWR"/>
                         <outlet property="timePickerLabel" destination="kCt-i1-YYB" id="T7m-xu-bL6"/>
                         <outlet property="timePickerView" destination="2zD-h7-Wea" id="n0C-0q-ni2"/>

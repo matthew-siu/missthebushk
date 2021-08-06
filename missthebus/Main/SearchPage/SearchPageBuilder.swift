@@ -40,6 +40,7 @@ class SearchPageBuilder
 */
 extension SearchPageBuilder {
     struct BuildRequest {
-
+        var type: SearchPage.RequestType = .NormalNavigation
+        
     }
 }

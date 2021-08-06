@@ -74,9 +74,10 @@ extension SearchPageViewController {
     }
     
     func addFadedEdgeToTableView() {
-        self.gradientLayer.frame = CGRect(x: 0, y: self.tableView.frame.origin.y, width: tableView.bounds.width, height: 50.0)
+        self.tableView.contentInset = UIEdgeInsets(top: 10,left: 0,bottom: 0,right: 0)
+        self.gradientLayer.frame = CGRect(x: 0, y: self.searchTextfield.frame.height, width: tableView.bounds.width, height: 35.0)
         self.gradientLayer.colors = [UIColor.SoftUI.major.cgColor, UIColor.SoftUI.major.withAlphaComponent(0).cgColor]
-        self.view.layer.addSublayer(self.gradientLayer)
+        self.searchTextfield.layer.addSublayer(self.gradientLayer)
     }
     
     private func setSwitchKeyboard(){

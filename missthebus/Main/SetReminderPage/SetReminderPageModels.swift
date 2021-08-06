@@ -39,12 +39,12 @@ enum SetReminderPage
         struct ViewModel // presenter -> vc
         {
             let mode: Mode
-            var reminderName: String
-            var reminderType: StopReminder.ReminderType
-            let routeNum: String
-            let busCompany: BusCompany
-            let destStopName: String
-            let currentStopName: String
+            var reminderName: String = ""
+            var reminderType: StopReminder.ReminderType = .OTHER
+            var routeNum: String = ""
+            var busCompany: BusCompany = .none
+            var destStopName: String = ""
+            var currentStopName: String = ""
             var time: Date?
             var period: [Int]?
             static let nameSamples: [NameSample] = [

@@ -12,6 +12,10 @@ import UIKit
 // Defines request, response and corresponding view models
 enum StopListPage
 {
+    enum RequestType{
+        case GetRouteStopService
+        case NormalNavigation
+    }
     
     struct ETA {
         var company: BusCompany

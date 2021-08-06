@@ -19,11 +19,13 @@ protocol SearchPageBusinessLogic
 protocol SearchPageDataStore
 {
     func getRoute(routeItem: SearchPage.RouteItem) -> KmbRoute?
+    func getType() -> SearchPage.RequestType
 }
 
 // MARK: - Interactor Body
 class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
 {
+    
     
     // VIP Properties
     var presenter: SearchPagePresentationLogic?
@@ -31,10 +33,11 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
     
     // State
     var routes: [KmbRoute]?
+    var type: SearchPage.RequestType
     
     // Init
     init(request: SearchPageBuilder.BuildRequest) {
-        
+        self.type = request.type
     }
     
     func requestKmbRouteList(){
@@ -57,6 +60,10 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
     // SearchPageDataStore - for router
     func getRoute(routeItem: SearchPage.RouteItem) -> KmbRoute? {
         return self.routes?.first(where: {$0.route == routeItem.routeNum && $0.bound == routeItem.bound && $0.serviceType == routeItem.serviceType})
+    }
+    
+    func getType() -> SearchPage.RequestType {
+        return self.type
     }
 }
 

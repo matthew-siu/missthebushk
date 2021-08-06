@@ -24,9 +24,11 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     var interactor: MainPageBusinessLogic?
     var router: (NSObjectProtocol & MainPageRoutingLogic & MainPageDataPassing)?
     
+    @IBOutlet weak var stackView: UIStackView!
     // reminder label
     @IBOutlet weak var reminderImg: UIImageView!
     @IBOutlet weak var reminderLabel: UILabel!
+    @IBOutlet weak var createReminderSoftUIView: SoftUIView!
     // no reminder view
     @IBOutlet weak var noReminderView: UIView!
     @IBOutlet weak var noReminderImg: UIImageView!
@@ -104,6 +106,7 @@ extension MainPageViewController {
         self.noReminderLabel.textColor = UIColor.MTB.darkGray
         
         self.setSearchBtn()
+        self.setCreateReminderBtn()
         self.addFadedEdgeToTableView()
     }
     
@@ -113,11 +116,18 @@ extension MainPageViewController {
     }
     
     func addFadedEdgeToTableView() {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let topPadding = window?.safeAreaInsets.top ?? 0
-        self.gradientLayer.frame = CGRect(x: 0, y: self.tableView.frame.origin.y + topPadding, width: tableView.bounds.width, height: 50.0)
+        self.tableView.contentInset = UIEdgeInsets(top: 10,left: 0,bottom: 0,right: 0)
+        self.gradientLayer.frame = CGRect(x: 0, y: self.stackView.frame.height + 5, width: tableView.bounds.width, height: 35.0)
         self.gradientLayer.colors = [UIColor.SoftUI.major.cgColor, UIColor.SoftUI.major.withAlphaComponent(0).cgColor]
-        self.view.layer.addSublayer(self.gradientLayer)
+        self.stackView.layer.addSublayer(self.gradientLayer)
+    }
+    
+    private func setCreateReminderBtn(){
+        self.createReminderSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
+        self.createReminderSoftUIView.cornerRadius = 50
+        self.createReminderSoftUIView.shadowOffset = .init(width: 5, height: 5)
+        self.createReminderSoftUIView.shadowOpacity = 0.5
+        self.createReminderSoftUIView.addTarget(self, action: #selector(self.goToCreateReminderPage), for: .touchUpInside)
     }
     
     private func setSearchBtn(){
@@ -126,8 +136,12 @@ extension MainPageViewController {
         self.searchSoftUIView.shadowOffset = .init(width: 5, height: 5)
         self.searchSoftUIView.shadowOpacity = 0.5
         self.searchImg.addShadow()
-        self.searchSoftUIView.addTarget(self, action: #selector(goToSearchPage), for: .touchUpInside)
+        self.searchSoftUIView.addTarget(self, action: #selector(self.goToSearchPage), for: .touchUpInside)
 
+    }
+    
+    @objc private func goToCreateReminderPage(){
+        self.router?.routeToCreateReminderPage()
     }
     
     @objc
@@ -139,7 +153,7 @@ extension MainPageViewController {
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, StopReminderCellDelegate{
     func onSelect(_ index: Int) {
         if (index >= 0){
-            
+            print("onSelect")
             self.router?.routeToStopListPage(item: self.bookmarkItems[index])
         }
     }
@@ -173,6 +187,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (self.bookmarkItems.count != 0){
+            print("did select")
             self.router?.routeToStopListPage(item: self.bookmarkItems[indexPath.row])
         }
     }

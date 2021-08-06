@@ -10,15 +10,15 @@ import Foundation
 class StopReminder: Codable{
     
     var id: String
-    var name: String
-    var type: ReminderType
+    var name: String?
+    var type: ReminderType?
     var isActivated = false
     
-    var routeNum: String
-    var bound: String
-    var serviceType: String
-    var company: BusCompany
-    var stopId: String
+    var routeNum: String?
+    var bound: String?
+    var serviceType: String?
+    var company: BusCompany?
+    var stopId: String?
     
     var time: Date
     var period: [Int]?
@@ -33,17 +33,9 @@ class StopReminder: Codable{
         case OTHER = "OTHER"
     }
     
-    init(name: String, type: ReminderType, routeNum: String, bound: String, serviceType: String, company: BusCompany, stopId: String, time: Date, period: [Int]?){
+    init(time: Date){
         self.id = UUID().uuidString
-        self.name = name
-        self.type = type
-        self.routeNum = routeNum
-        self.bound = bound
-        self.serviceType = serviceType
-        self.company = company
         self.time = time
-        self.stopId = stopId
-        self.period = period
         self.isActivated = true
     }
     
@@ -52,23 +44,35 @@ class StopReminder: Codable{
     }
     
     var currentStop: String?{
-        return KmbManager.getStop(stopId: self.stopId)?.name
+        guard let stopId = self.stopId else{
+            return nil
+        }
+        return KmbManager.getStop(stopId: stopId)?.name
     }
     
     var destStop: String?{
-        return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)?.destStop
+        guard let routeNum = self.routeNum, let bound = self.bound, let serviceType = self.serviceType else{
+            return nil
+        }
+        return KmbManager.getRoute(route: routeNum, bound: bound, serviceType: serviceType)?.destStop
     }
     
     var stop: KmbStop?{
-        return KmbManager.getStop(stopId: self.stopId)
+        guard let stopId = self.stopId else{
+            return nil
+        }
+        return KmbManager.getStop(stopId: stopId)
         
     }
     
     var route: KmbRoute?{
-        return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
+        guard let routeNum = self.routeNum, let bound = self.bound, let serviceType = self.serviceType else{
+            return nil
+        }
+        return KmbManager.getRoute(route: routeNum, bound: bound, serviceType: serviceType)
     }
     
     func printDetails(){
-        print("\(self.name) | [\(self.routeNum)-\(self.bound)-\(self.serviceType)] | \(self.type.rawValue) | \(self.time) | \(String(describing: self.period))")
+//        print("\(self.name) | [\(self.routeNum)-\(self.bound)-\(self.serviceType)] | \(self.type.rawValue) | \(self.time) | \(String(describing: self.period))")
     }
 }

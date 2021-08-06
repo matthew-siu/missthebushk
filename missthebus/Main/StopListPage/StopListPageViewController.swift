@@ -13,7 +13,7 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType?)
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ViewModel)
 }
 
@@ -37,6 +37,8 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     
     let locationManager = CLLocationManager()
     
+    var type: StopListPage.RequestType = .NormalNavigation
+    
     var route: KmbRoute?
     var stopList = [KmbStop]()
     var bookmarks = [StopBookmark]()
@@ -44,6 +46,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var selectedPosition: CLLocationCoordinate2D?
     var selectedIndex = -1
     var selectedStopETAView: StopListPage.DisplayItem.ViewModel?
+    
     
     let minTopMarginConstraint: CGFloat = 110
     var maxTopMarginConstraint: CGFloat {
@@ -130,6 +133,15 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if (self.type == .GetRouteStopService){
+            if let presenter = presentingViewController as? SetReminderPageViewController {
+                presenter.selectedStop = KmbRouteStop(route: "123", stopId: "XSC", bound: "I", serviceType: "1", seq: "3")
+            }else{
+                print("presenter: \(presentingViewController)")
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+        
         self.selectedIndex = (self.selectedIndex != indexPath.row) ? indexPath.row : -1
         if (self.selectedIndex == -1) {
             selectedStopETAView = nil
@@ -139,6 +151,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
             
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
+        
         
         // request stop ETA API
         let stop = self.stopList[indexPath.row]
@@ -283,7 +296,8 @@ extension StopListPageViewController {
         
     }
 
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?){
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType? = .NormalNavigation){
+        self.type = requestType ?? .NormalNavigation
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route

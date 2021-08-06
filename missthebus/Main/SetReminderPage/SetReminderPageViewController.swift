@@ -23,11 +23,16 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     
     // route view
     @IBOutlet weak var routeView: SoftUIView!
+    
+    @IBOutlet weak var routeStopView: UIStackView!
     @IBOutlet weak var routeNumLabel: UILabel!
     @IBOutlet weak var busCompanyIcon: UIImageView!
     @IBOutlet weak var iconLayout: UIView!
     @IBOutlet weak var routeDestLabel: UILabel!
     @IBOutlet weak var routeOrigLabel: UILabel!
+    // select route view
+    @IBOutlet weak var selectStopView: UIView!
+    @IBOutlet weak var selectStopLabel: UILabel!
     
     // name view
     @IBOutlet weak var nameView: SoftUIView!
@@ -50,7 +55,7 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     
     var reminderType: StopReminder.ReminderType = .OTHER
     var daysOfWeekList = [WeekDayPicker]()
-    
+    var selectedStop: KmbRouteStop?
     
     enum CollectionViewCell: String, CollectionViewCellConfiguration {
         case itemCell = "ReminderNameCollectionViewCell"
@@ -70,6 +75,19 @@ extension SetReminderPageViewController {
         self.daysOfWeekList = [self.weekSunBtn, self.weekMonBtn, self.weekTueBtn, self.weekWedBtn, self.weekThuBtn, self.weekFriBtn, self.weekSatBtn]
         self.initUI()
         self.interactor?.displayInitialState()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        if let routeStop = self.selectedStop {
+            print("succeed!!!")
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
     }
     
     override func viewDidLayoutSubviews() {
@@ -97,7 +115,7 @@ extension SetReminderPageViewController {
     
     
     @objc func onSave(){
-        self.saveReminder()
+//        self.saveReminder()
     }
     
     func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel){
@@ -115,20 +133,27 @@ extension SetReminderPageViewController {
         self.initSoftUI(self.timePickerView, inverted: true, type: .staticView)
         self.initSoftUI(self.nameView, type: .staticView)
         
-        
-        self.reminderIcon.image = UIImage(named: self.getIconNameFromNameSampleList(type: viewModel.reminderType))
-        self.reminderIcon.addShadow()
-        self.routeNumLabel.text = String(viewModel.routeNum)
-        self.routeNumLabel.useTextStyle(.header2)
-        self.routeDestLabel.text = viewModel.destStopName
-        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
-        self.routeOrigLabel.text = viewModel.currentStopName
-        
-        if (viewModel.busCompany == .KMB){
-            if let image = UIImage(named: "KmbLogo") {
-                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
-                self.busCompanyIcon.sizeToFit()
+        self.routeStopView.isHidden = (viewModel.mode == .CREATE)
+        self.routeNumLabel.isHidden = (viewModel.mode == .CREATE)
+        self.selectStopView.isHidden = (viewModel.mode == .UPDATE)
+        if (viewModel.mode == .UPDATE){
+            self.reminderIcon.image = UIImage(named: self.getIconNameFromNameSampleList(type: viewModel.reminderType))
+            self.reminderIcon.addShadow()
+            self.routeNumLabel.text = String(viewModel.routeNum)
+            self.routeNumLabel.useTextStyle(.header2)
+            self.routeDestLabel.text = viewModel.destStopName
+            self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+            self.routeOrigLabel.text = viewModel.currentStopName
+            if (viewModel.busCompany == .KMB){
+                if let image = UIImage(named: "KmbLogo") {
+                    self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                    self.busCompanyIcon.sizeToFit()
+                }
             }
+        }else{
+            self.selectStopLabel.text = "reminder_add_stop".localized()
+            self.selectStopLabel.useTextStyle(.label_sub)
+            self.routeView.addTarget(self, action: #selector(self.addNewRouteStop), for: .touchUpInside)
         }
         
         self.timePickerLabel.text = "reminder_time_label".localized()
@@ -136,6 +161,11 @@ extension SetReminderPageViewController {
         self.timePicker.datePickerMode = .time
         self.timePicker.locale = Locale(identifier: "en_GB")
         
+    }
+    
+    @objc private func addNewRouteStop(){
+        print("addNewRouteStop")
+        self.router?.routeToSearchPage()
     }
 }
 

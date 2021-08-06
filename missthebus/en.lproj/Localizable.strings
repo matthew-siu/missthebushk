@@ -13,7 +13,7 @@
 "main_no_reminder" = "No reminders";
 "main_no_bookmark" = "No bookmarks";
 "main_upcoming_reminder" = "Upcoming reminders";
-"main_bookmark" = "My Bookmarks";
+"main_bookmark" = "My Stops";
 
 
 
@@ -54,7 +54,7 @@
 "reminder_tag_gathering" = "Gathering";
 "reminder_tag_last" = "Last bus";
 "reminder_tag_other" = "Other";
-
+"reminder_add_stop" = "Click to add a new stop.";
 
 
 

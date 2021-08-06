@@ -41,5 +41,6 @@ extension StopListPageBuilder {
     struct BuildRequest {
         let route: KmbRoute
         let stop: KmbStop?
+        var type: StopListPage.RequestType = .NormalNavigation
     }
 }

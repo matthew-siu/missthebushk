@@ -51,4 +51,5 @@ enum BusCompany: String, Codable{
     case LWB = "LWB"
     case CTB = "CTB"
     case NWTB = "NWTB"
+    case none = "none"
 }
