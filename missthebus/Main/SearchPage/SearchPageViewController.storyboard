@@ -53,6 +53,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adsBannerHeightConstraint" destination="BEE-lj-Ikw" id="FsL-S8-DUn"/>
                         <outlet property="adsBannerView" destination="g8p-mc-rXM" id="rni-4n-UFu"/>
                         <outlet property="searchTextfield" destination="Lu8-Ek-oZ6" id="C70-1S-oq3"/>
                         <outlet property="tableView" destination="XN3-Jh-eam" id="zSp-wq-SBZ"/>

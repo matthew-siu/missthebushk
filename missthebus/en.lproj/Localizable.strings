@@ -9,8 +9,14 @@
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
 // Main Page
-"main_msg1" = "For any HKers";
-"main_msg1" = "who always miss their bus";
+"main_no_upcoming_reminder" = "No upcoming reminders";
+"main_no_reminder" = "No reminders";
+"main_no_bookmark" = "No bookmarks";
+"main_upcoming_reminder" = "Upcoming reminders";
+"main_bookmark" = "My Bookmarks";
+
+
+
 
 // Search Page
 "search_label" = "Search Bus";
@@ -23,6 +29,8 @@
 
 // Stop Item
 "stop_mins" = "min(s)";
+"stop_bookmark_succeed" = "Bookmarked";
+"stop_unbookmark_succeed" = "Bookmark cancelled";
 
 // Set Reminder
 "create_reminder_title" = "Add Reminder";
@@ -50,11 +58,6 @@
 
 
 
-
-
-
-
-
 // General
 "switch_keyboard" = "Switch keyboard";
 "general_create" = "Add";
@@ -67,10 +70,7 @@
 "general_save" = "Save";
 "general_saved" = "Saved";
 "general_done" = "Done";
-
-
-
-
+"general_setting" = "Setting";
 
 
 

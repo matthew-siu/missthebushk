@@ -26,8 +26,10 @@ class SearchPageViewController: BaseViewController, SearchPageDisplayLogic
     
     @IBOutlet weak var searchTextfield: SoftUITextfield!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var adsBannerView: GADBannerView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
+    
+    @IBOutlet weak var adsBannerView: GADBannerView!
+    @IBOutlet weak var adsBannerHeightConstraint: NSLayoutConstraint!
     
     private var routeList = [SearchPage.RouteItem]()
     private var filteredRouteList = [SearchPage.RouteItem]()
@@ -55,7 +57,7 @@ extension SearchPageViewController {
         self.hideKeyboardWhenTappedAround()
         
         self.initUI()
-        self.initBanner(self.adsBannerView)
+        self.initBanner(self.adsBannerView, heightConstaint: self.adsBannerHeightConstraint)
     }
     
     override func viewDidAppear(_ animated: Bool) {

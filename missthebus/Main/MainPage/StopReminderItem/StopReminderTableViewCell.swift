@@ -82,8 +82,8 @@ class StopReminderTableViewCell: UITableViewCell {
         // General View
         self.index = stop.index
         self.routeNumLabel.text = String(stop.routeNum)
-        self.routeDestLabel.text = stop.destStop
-        self.routeOrigLabel.text = stop.currentStop
+        self.routeDestLabel.text = stop.currentStop
+        self.routeOrigLabel.text = "\("route_to".localized()) \(stop.destStop)"
         
         if (stop.company == .KMB){
             if let image = UIImage(named: "KmbLogo") {

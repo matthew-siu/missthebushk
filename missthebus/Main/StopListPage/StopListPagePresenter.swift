@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol StopListPagePresentationLogic
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String?)
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
     func displayETA(data: [KmbETAResponse.KmbETAData]?)
 }
 
@@ -26,10 +26,10 @@ class StopListPagePresenter: StopListPagePresentationLogic
 
 // MARK: - Presentation receiver
 extension StopListPagePresenter {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String? = nil){
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String? = nil){
         self.route = route
         self.stopList = stopList
-        self.viewController?.displayInitialState(route: route, stopList: stopList, reminders: reminders, selectedStopId: selectedStopId)
+        self.viewController?.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks, selectedStopId: selectedStopId)
     }
     
     func displayETA(data: [KmbETAResponse.KmbETAData]?){

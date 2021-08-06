@@ -13,7 +13,7 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String?)
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ViewModel)
 }
 
@@ -27,17 +27,19 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var adsBannerView: GADBannerView!
     @IBOutlet weak var stopListView: UIView!
     @IBOutlet weak var stopListTabView: UIView!
     @IBOutlet weak var expandViewBtn: UIButton!
     @IBOutlet weak var tableViewTopMarginConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var adsBannerView: GADBannerView!
+    @IBOutlet weak var adsBannerHeightConstraint: NSLayoutConstraint!
+    
     let locationManager = CLLocationManager()
     
     var route: KmbRoute?
     var stopList = [KmbStop]()
-    var reminders = [StopReminder]()
+    var bookmarks = [StopBookmark]()
     var googleMapMarker = [GMSMarker]()
     var selectedPosition: CLLocationCoordinate2D?
     var selectedIndex = -1
@@ -78,7 +80,7 @@ extension StopListPageViewController {
         
         self.initUI()
         
-        self.initBanner(self.adsBannerView)
+        self.initBanner(self.adsBannerView, heightConstaint: self.adsBannerHeightConstraint)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,7 +106,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! StopItemTableViewCell
         let item = self.stopList[indexPath.row]
-        let bookmarked = self.reminders.contains(where: {$0.stopId == item.stopId})
+        let bookmarked = self.bookmarks.contains(where: {$0.stopId == item.stopId})
         let isSelected = (indexPath.row == selectedIndex)
         cell.delegate = self
         cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count, isBookmarked: bookmarked)
@@ -147,22 +149,12 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension StopListPageViewController: StopItemCellDelegate{
-    func setReminder(stop: KmbStop) {
-        if let route = self.route {
-            self.router?.routeToSetReminderPage(mode: .CREATE, route: route, stop: stop)
-        }
-    }
-    
-    
-    // TODO: view all reminder
-    func readReminder() {
-        self.showAlert("Not yet finish", "Next view: All reminder of this stop.") { (_) in }
-    }
-    
-    func updateReminder(stop: KmbStop, reminder: StopReminder) {
-        if let route = self.route {
-            self.router?.routeToSetReminderPage(mode: .UPDATE, route: route, stop: stop)
-        }
+    func setBookmark(stop: KmbStop, isMarked: Bool) {
+        print("bookmark: \(isMarked) on \(stop.name)")
+        
+        self.interactor?.bookmark(stop: stop, isMarked: isMarked)
+        let msg = (isMarked) ? "stop_bookmark_succeed".localized() : "stop_unbookmark_succeed".localized()
+        self.showToast(message: msg)
     }
 }
 
@@ -291,12 +283,12 @@ extension StopListPageViewController {
         
     }
 
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], reminders: [StopReminder], selectedStopId: String?){
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?){
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route
         self.stopList = stopList
-        self.reminders = reminders
+        self.bookmarks = bookmarks
         if let selectedStopId = selectedStopId{
             self.selectedIndex = self.stopList.firstIndex(where: {$0.stopId == selectedStopId}) ?? -1
         }

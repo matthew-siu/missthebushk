@@ -25,6 +25,7 @@ class BaseViewController: UIViewController {
     }
     
     var bannerView: GADBannerView!
+    var bannerHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,9 +94,13 @@ extension BaseViewController{
 
 // Admob
 extension BaseViewController: GADBannerViewDelegate{
-    func initBanner(_ bannerView: GADBannerView? = GADBannerView(adSize: kGADAdSizeBanner)){
+    func initBanner(_ bannerView: GADBannerView? = GADBannerView(adSize: kGADAdSizeBanner), heightConstaint: NSLayoutConstraint){
+        self.bannerHeightConstraint = heightConstaint
         self.bannerView = bannerView
         print("bannerUnitId: \(Configs.Admob.bannerUnitId)")
+        self.bannerHeightConstraint.priority = .defaultLow
+//        self.bannerHeightConstraint.constant = 0
+//        self.bannerView.adSize = GADAdSizeFromCGSize(CGSize(width: self.bannerView.frame.width, height: 0))
         self.bannerView.adUnitID = Configs.Admob.bannerUnitId
         self.bannerView.rootViewController = self
         self.bannerView.delegate = self
@@ -104,6 +109,8 @@ extension BaseViewController: GADBannerViewDelegate{
     
     func addBannerToView(_ bannerView: GADBannerView){
         self.bannerView.translatesAutoresizingMaskIntoConstraints = false
+//        self.bannerHeightConstraint.constant = 50
+//        self.bannerView.adSize = GADAdSizeFromCGSize(CGSize(width: self.bannerView.frame.width, height: 50))
     }
     
     

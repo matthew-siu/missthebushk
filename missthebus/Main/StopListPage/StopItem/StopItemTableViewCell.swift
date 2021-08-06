@@ -9,8 +9,7 @@ import UIKit
 
 
 protocol StopItemCellDelegate: class {
-    func setReminder(stop: KmbStop)
-    func readReminder()
+    func setBookmark(stop: KmbStop, isMarked: Bool)
 }
 
 class StopItemTableViewCell: UITableViewCell {
@@ -71,11 +70,8 @@ extension StopItemTableViewCell{
     @objc func onClickBookmark(){
 //        self.setIsBookMark(!self.isBookmarked)
         if let stop = self.stop {
-            if (!isBookmarked){
-                self.delegate?.setReminder(stop: stop)
-            }else{
-                self.delegate?.readReminder()
-            }
+            self.setIsBookMark(!self.isBookmarked)
+            self.delegate?.setBookmark(stop: stop, isMarked: self.isBookmarked)
             
         }
         

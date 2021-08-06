@@ -33,10 +33,9 @@ extension UIViewController{
     func showToast(message : String) {
         var height = UIScreen.main.bounds.height
         let width = UIScreen.main.bounds.width
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            height -= (window?.safeAreaInsets.bottom)!
-        }
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        height -= (window?.safeAreaInsets.bottom)!
+        
         let toastLabel = UILabel(frame: CGRect(x: width - 80, y: height - 150, width: 250, height: 30))
         toastLabel.backgroundColor = .clear
         toastLabel.textColor = UIColor.white

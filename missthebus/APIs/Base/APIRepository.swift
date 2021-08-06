@@ -33,7 +33,7 @@ class APIRepository<Response: APIResponse>: Repository {
     }
     
     public var headers: [String : String] {
-        var headers: [String: String] = [:]
+        let headers: [String: String] = [:]
         
         return headers
     }

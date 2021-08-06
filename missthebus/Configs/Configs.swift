@@ -34,6 +34,7 @@ extension Configs {
         static let KEY_ROUTESTOPS = "KEY_ROUTESTOPS"
         static let KEY_LAST_UPDATE = "KEY_LAST_UPDATE" // save last update of bus info
         static let KEY_REMINDERS = "KEY_REMINDERS"
+        static let KEY_BOOKMARKS = "KEY_BOOKMARKS"
     }
     
     // admob

@@ -13,9 +13,9 @@ import PromiseKit
 protocol StopListPageBusinessLogic
 {
     func loadAllStopsFromRoute()
-//    func requestOneStopETA(stopId: String, route: String, serviceType: String)
     func startETATimer(stopId: String, route: String, serviceType: String)
     func dismissETATimer()
+    func bookmark(stop: KmbStop, isMarked: Bool)
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -33,7 +33,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     
     // State
     var route: KmbRoute
-    var reminders: [StopReminder]?
+    var bookmarks: [StopBookmark]?
     var etaTimer: Timer?
     var selectedStopId: String?
     
@@ -62,16 +62,11 @@ extension StopListPageInteractor {
         // load all related reminder()
         self.loadAllStopRemindersOfRoute()
         
-        self.presenter?.displayInitialState(route: route, stopList: stopList, reminders: self.reminders ?? [], selectedStopId: self.selectedStopId)
+        self.presenter?.displayInitialState(route: route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.selectedStopId)
         
         if let selectedStopId = self.selectedStopId {
             self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
         }
-    }
-    
-    private func loadAllStopRemindersOfRoute(){
-        self.reminders = StopReminderManager.getRemindersFromRoute(route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType)
-        print("reminders: \(String(describing: self.reminders?.count))")
     }
     
     func startETATimer(stopId: String, route: String, serviceType: String){
@@ -81,8 +76,36 @@ extension StopListPageInteractor {
         self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: query, repeats: true)
     }
     
+    func dismissETATimer(){
+        print("dismiss ETA time")
+        self.etaTimer?.invalidate()
+        self.etaTimer = nil
+    }
+    
+    func bookmark(stop: KmbStop, isMarked: Bool){
+        if (isMarked){
+            let bookmark = StopBookmark(routeNum: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: stop.stopId)
+            StopBookmarkManager.addStopBookmark(bookmark)
+        }else{
+            if let bookmark = StopBookmarkManager.getOneBookmarkFromRoute(stopId: stop.stopId, route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType){
+                StopBookmarkManager.removeStopBookmark(bookmark.id)
+            }
+            
+        }
+        
+    }
+}
+
+// MARK:- Logic
+extension StopListPageInteractor{
+    
+    private func loadAllStopRemindersOfRoute(){
+        self.bookmarks = StopBookmarkManager.getBookmarksFromRoute(route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType)
+        print("reminders: \(String(describing: self.bookmarks?.count))")
+    }
+    
     @objc
-    func requestETA(_ timer: Timer)
+    private func requestETA(_ timer: Timer)
     {
         guard let query = timer.userInfo as? KmbETAQuery else {
             return
@@ -90,7 +113,7 @@ extension StopListPageInteractor {
         self.requestOneStopETA(query: query)
     }
     
-    func requestOneStopETA(query: KmbETAQuery){
+    private func requestOneStopETA(query: KmbETAQuery){
         DispatchQueue.main.async {
             
             KmbManager.requestOneStopETA(query: query)
@@ -105,11 +128,5 @@ extension StopListPageInteractor {
                     print("fail")
                 }
         }
-    }
-    
-    func dismissETATimer(){
-        print("dismiss ETA time")
-        self.etaTimer?.invalidate()
-        self.etaTimer = nil
     }
 }

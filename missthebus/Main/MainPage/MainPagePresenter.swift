@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol MainPagePresentationLogic
 {
-    func displayBookmarks(reminders: [StopReminder])
+    func displayBookmarks(bookmarks: [StopBookmark])
     func updateETAs(query: KmbETAQuery, bound: String, data: [KmbETAResponse.KmbETAData])
 }
 
@@ -21,18 +21,19 @@ class MainPagePresenter: MainPagePresentationLogic
     weak var viewController: MainPageDisplayLogic?
     
     var reminders = [StopReminder]()
+    var bookmarks = [StopBookmark]()
     var etaViewModel = MainPage.DisplayItem.ETAViewModel()
 }
 
 // MARK: - Presentation receiver
 extension MainPagePresenter {
     
-    func displayBookmarks(reminders: [StopReminder]){
-        self.reminders = reminders
-        let bookMarkItems = reminders.enumerated().map{(index, reminder) in
-            return MainPage.BookmarkItem(index: index, stopId: reminder.stopId, routeNum: reminder.routeNum, bound: reminder.bound, serviceType: reminder.serviceType, company: reminder.company, destStop: reminder.destStop ?? "", currentStop: reminder.currentStop ?? "")
+    func displayBookmarks(bookmarks: [StopBookmark]){
+        self.bookmarks = bookmarks
+        let bookMarkItems = bookmarks.enumerated().map{(index, bookmark) in
+            return MainPage.BookmarkItem(index: index, stopId: bookmark.stopId, routeNum: bookmark.routeNum, bound: bookmark.bound, serviceType: bookmark.serviceType, company: bookmark.company, destStop: bookmark.destStop ?? "", currentStop: bookmark.currentStop ?? "")
         }
-        self.viewController?.displayReminders(reminders: bookMarkItems)
+        self.viewController?.displayBookmarks(reminders: bookMarkItems)
     }
     
     func updateETAs(query: KmbETAQuery, bound: String, data: [KmbETAResponse.KmbETAData]){

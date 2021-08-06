@@ -24,8 +24,11 @@ enum Color {
 
 extension UIColor {
     
-    static var darkGrey: UIColor {
-        return #colorLiteral(red: 0.4678121805, green: 0.4678237438, blue: 0.4678175449, alpha: 1)
+    //
+    struct MTB {
+        static var darkGray: UIColor {
+            return #colorLiteral(red: 0.4678121805, green: 0.4678237438, blue: 0.4678175449, alpha: 1)
+        }
     }
     
     struct SoftUI {

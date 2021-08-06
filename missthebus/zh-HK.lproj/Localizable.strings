@@ -9,8 +9,14 @@
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
 // Main Page
-// main_msg1
-// main_msg1
+"main_no_upcoming_reminder" = "沒有即將到來的提醒";
+"main_no_reminder" = "沒有提醒";
+"main_no_bookmark" = "沒有書籤";
+"main_upcoming_reminder" = "即將到來的提醒";
+"main_bookmark" = "我的書籤";
+
+
+
 
 // Search Page
 "search_label" = "搜尋巴士";
@@ -23,6 +29,8 @@
 
 // Stop Item
 "stop_mins" = "分鐘";
+"stop_bookmark_succeed" = "已收藏車站";
+"stop_unbookmark_succeed" = "已取消收藏車站";
 
 // Set Reminder
 "create_reminder_title" = "建立提醒";
@@ -50,11 +58,6 @@
 
 
 
-
-
-
-
-
 // General
 "switch_keyboard" = "切換鍵盤";
 "general_create" = "建立";
@@ -67,10 +70,7 @@
 "general_save" = "儲存";
 "general_saved" = "已儲存";
 "general_done" = "完成";
-
-
-
-
+"general_setting" = "設定";
 
 
 

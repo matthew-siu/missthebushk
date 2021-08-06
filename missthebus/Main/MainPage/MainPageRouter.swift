@@ -33,7 +33,7 @@ extension MainPageRouter {
     
     
     func routeToStopListPage(item: MainPage.BookmarkItem){
-        if let reminder = dataStore?.getStopReminder(stopId: item.stopId), let route = reminder.route, let stop = reminder.stop{
+        if let reminder = dataStore?.getStopBookmark(stopId: item.stopId), let route = reminder.route, let stop = reminder.stop{
             
             let request = StopListPageBuilder.BuildRequest(route: route, stop: stop)
             let vc = StopListPageBuilder.createScene(request: request)

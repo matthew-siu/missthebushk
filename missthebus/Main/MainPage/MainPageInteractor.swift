@@ -13,13 +13,14 @@ import SVProgressHUD
 // MARK: - Requests from view
 protocol MainPageBusinessLogic
 {
-    func loadAllStopRemindersOfRoute()
+    func loadAllStopBookmarksOfRoute()
+    func dismissETATimer()
 }
 
 // MARK: - Datas retain in interactor defines here
 protocol MainPageDataStore
 {
-    func getStopReminder(stopId: String) -> StopReminder?
+    func getStopBookmark(stopId: String) -> StopBookmark?
 }
 
 // MARK: - Interactor Body
@@ -31,6 +32,7 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
     
     // State
     var reminders: [StopReminder]?
+    var bookmarks: [StopBookmark]?
     var etaTimer: Timer?
     
     init(request: MainPageBuilder.BuildRequest) {
@@ -40,43 +42,49 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
 // MARK: - Business
 extension MainPageInteractor {
     
-    func getStopReminder(stopId: String) -> StopReminder?{
-        return self.reminders?.first(where: {$0.stopId == stopId})
+    func getStopBookmark(stopId: String) -> StopBookmark?{
+        return self.bookmarks?.first(where: {$0.stopId == stopId})
     }
     
-    func loadAllStopRemindersOfRoute(){
-        if let reminders = StopReminderManager.getStopReminders(){
-            self.reminders = reminders
-            print("loadAllStopRemindersOfRoute \(reminders.count)")
+    func loadAllStopBookmarksOfRoute(){
+        if let bookmarks = StopBookmarkManager.getStopBookmarks(){
+            self.bookmarks = bookmarks
+            print("loadAllStopRemindersOfRoute \(bookmarks.count)")
             self.startETATimer()
-            self.presenter?.displayBookmarks(reminders: reminders)
+            self.presenter?.displayBookmarks(bookmarks: bookmarks)
         }else{
             print("loadAllStopRemindersOfRoute nil")
         }
     }
+    
+    func dismissETATimer(){
+        print("dismiss ETA time")
+        self.etaTimer?.invalidate()
+        self.etaTimer = nil
+    }
+    
 }
 
 // MARK: - Logic
 extension MainPageInteractor {
-    func startETATimer(){
+    private func startETATimer(){
         self.dismissETATimer()
         
         self.requestETA(nil)
         self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: nil, repeats: true)
     }
-    
     @objc
-    func requestETA(_ timer: Timer?)
+    private func requestETA(_ timer: Timer?)
     {
-        if let reminders = self.reminders{
-            for reminder in reminders{
-                let query = KmbETAQuery(stopId: reminder.stopId, route: reminder.routeNum, serviceType: reminder.serviceType)
-                self.requestOneStopETA(query: query, bound: reminder.bound)
+        if let bookmarks = self.bookmarks{
+            for bookmark in bookmarks{
+                let query = KmbETAQuery(stopId: bookmark.stopId, route: bookmark.routeNum, serviceType: bookmark.serviceType)
+                self.requestOneStopETA(query: query, bound: bookmark.bound)
             }
         }
     }
     
-    func requestOneStopETA(query: KmbETAQuery, bound: String){
+    private func requestOneStopETA(query: KmbETAQuery, bound: String){
         DispatchQueue.main.async {
             
             KmbManager.requestOneStopETA(query: query)
@@ -89,11 +97,5 @@ extension MainPageInteractor {
                     print("fail")
                 }
         }
-    }
-    
-    func dismissETATimer(){
-        print("dismiss ETA time")
-        self.etaTimer?.invalidate()
-        self.etaTimer = nil
     }
 }
