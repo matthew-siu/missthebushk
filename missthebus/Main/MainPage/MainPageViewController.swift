@@ -88,7 +88,7 @@ extension MainPageViewController {
     
     private func initUI(){
         
-        self.title = "Miss The Bus"
+        self.title = "app_name".localized()
         
         let saveBtn = UIBarButtonItem(title: "general_setting".localized(), style: .plain, target: self, action: #selector(self.onSetting))
         saveBtn.tintColor = .systemBlue
@@ -98,7 +98,7 @@ extension MainPageViewController {
         self.pinImg.addShadow()
         self.reminderLabel.text = "main_upcoming_reminder".localized()
         self.pinLabel.text = "main_bookmark".localized()
-        
+        	
         // TODO:- remove: no reminder
         self.noReminderImg.image = UIImage(named: "info")
         self.noReminderImg.setImageColor(color: UIColor.MTB.darkGray)

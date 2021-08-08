@@ -45,7 +45,7 @@ extension SetReminderPageRouter {
         
         
         let navController = NavigationController(rootViewController: vc)
-        navController.modalPresentationStyle = .fullScreen // iOS.13 may pop up the latest controller.
+//        navController.modalPresentationStyle = .formSheet
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         window?.rootViewController?.present(navController, animated: true, completion: { () in
             NSLog("search")
