@@ -41,6 +41,9 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
     }
     
     func requestKmbRouteList(){
+        
+        self.presenter?.displayInitialState(type: self.type)
+        
         DispatchQueue.main.async {
             if let routes = KmbManager.getAllRoutes(){
                 self.routes = routes

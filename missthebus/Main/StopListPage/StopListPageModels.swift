@@ -36,7 +36,7 @@ enum StopListPage
         struct Response {
             let eta: [KmbETAResponse.KmbETAData]
         }
-        struct ViewModel {
+        struct ETAViewModel {
             let etaViews: [ETA]
         }
     }

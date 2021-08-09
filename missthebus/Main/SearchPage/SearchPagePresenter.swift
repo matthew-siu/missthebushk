@@ -11,18 +11,25 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol SearchPagePresentationLogic
 {
+    func displayInitialState(type: SearchPage.RequestType)
     func presentTableView(routes: [KmbRoute])
 }
 
 // MARK: - Presenter main body
 class SearchPagePresenter: SearchPagePresentationLogic
 {
+    
     weak var viewController: SearchPageDisplayLogic?
     
 }
 
 // MARK: - Presentation receiver
 extension SearchPagePresenter {
+    
+    func displayInitialState(type: SearchPage.RequestType) {
+        self.viewController?.displayInitialState(type: type)
+    }
+    
     func presentTableView(routes: [KmbRoute]){
         let routes: [SearchPage.RouteItem] = routes.map{SearchPage.RouteItem(routeNum: $0.route, bound: $0.bound, serviceType: $0.serviceType, company: $0.company, destStop: $0.destStop, origStop: $0.originStop)}
         self.viewController?.presentTableView(viewModel: SearchPage.DisplayItem.ViewModel(routeList: routes))

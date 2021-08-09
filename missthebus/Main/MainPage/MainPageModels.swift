@@ -48,7 +48,6 @@ enum MainPage
         }
         struct ETAViewModel{
             var etaList = [ETAItem]()
-            
         }
     }
 }

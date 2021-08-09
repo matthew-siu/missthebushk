@@ -45,7 +45,7 @@ extension SetReminderPageRouter {
         
         
         let navController = NavigationController(rootViewController: vc)
-//        navController.modalPresentationStyle = .formSheet
+        navController.modalPresentationStyle = .fullScreen
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         window?.rootViewController?.present(navController, animated: true, completion: { () in
             NSLog("search")

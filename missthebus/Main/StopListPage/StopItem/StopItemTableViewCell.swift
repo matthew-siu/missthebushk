@@ -19,6 +19,7 @@ class StopItemTableViewCell: UITableViewCell {
     @IBOutlet weak var stopNameLabel: UILabel!
     @IBOutlet weak var indexLabel: UILabel!
     @IBOutlet weak var bookmarkBtn: UIButton!
+    @IBOutlet weak var bookmarkBtnWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var routePoint: UIView!
     @IBOutlet weak var missBusIcon: UILabel!
@@ -34,7 +35,8 @@ class StopItemTableViewCell: UITableViewCell {
     var delegate: StopItemCellDelegate?
     var stop: KmbStop?
     var isBookmarked = false
-    var etaList: StopListPage.DisplayItem.ViewModel?
+    var etaList: StopListPage.DisplayItem.ETAViewModel?
+    var type: StopListPage.RequestType = .NormalNavigation
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -93,7 +95,9 @@ extension StopItemTableViewCell{
         }
     }
     
+    // NormalNavigation
     func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int, isBookmarked: Bool){
+        self.type = .NormalNavigation
         
         self.etaCollectionView.delegate = self
         self.etaCollectionView.dataSource = self
@@ -127,9 +131,51 @@ extension StopItemTableViewCell{
             self.etaCollectionView.isHidden = true
         }
         
+        if (type == .GetRouteStopService){
+            self.bookmarkBtnWidthConstraint.constant = 0
+            self.bookmarkBtn.isHidden = true
+        }
     }
     
-    func setETA(etaList: StopListPage.DisplayItem.ViewModel?){
+    //GetRouteStopService
+    func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int){
+        self.type = .GetRouteStopService
+        
+        self.etaCollectionView.delegate = self
+        self.etaCollectionView.dataSource = self
+        
+        self.stop = stop
+        self.indexLabel.text = "\(index)."
+        self.indexLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+        
+        self.stopNameLabel.text = "\(self.stop?.name ?? "---")"
+        self.stopNameLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+        self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
+        self.softBgView.cornerRadius = 10
+        self.softBgView.shadowOffset = .init(width: 1, height: 1.5)
+        self.softBgView.shadowOpacity = 1
+        
+        // route indicator
+        self.upperRouteLine.alpha = (index == 1) ? 0 : 1
+        self.lowerRouteLine.alpha = (index == count) ? 0 : 1
+        
+        self.softBgView.isSelected = isSelected
+        
+        if (isSelected){ // expanded view
+            self.stopNameLabel.numberOfLines = 0
+            self.etaCollectionView.reloadData()
+            self.etaCollectionView.isHidden = false
+//            self.etaCollectionView.backgroundColor = UIColor.SoftUI.major
+        }else{ // default view
+            self.stopNameLabel.numberOfLines = 1
+            self.etaCollectionView.isHidden = true
+        }
+        
+        self.bookmarkBtnWidthConstraint.constant = 0
+        self.bookmarkBtn.isHidden = true
+    }
+    
+    func setETA(etaList: StopListPage.DisplayItem.ETAViewModel?){
         self.etaList = etaList
         if let _ = etaList {
             print("etaCollectionView: setETA")

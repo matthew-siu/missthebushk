@@ -150,6 +150,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bookmarkBtn" destination="V8b-kN-xlL" id="T9v-IQ-srp"/>
+                <outlet property="bookmarkBtnWidthConstraint" destination="YAZ-dd-KSe" id="tDw-7p-Zuw"/>
                 <outlet property="etaCollectionView" destination="FXx-Kt-O1e" id="2C3-lX-1I4"/>
                 <outlet property="indexLabel" destination="4G5-Xu-QkF" id="pl5-lg-dbi"/>
                 <outlet property="lowerRouteLine" destination="JhB-Q3-D2n" id="yZx-B5-3kO"/>

@@ -12,6 +12,7 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol SearchPageDisplayLogic: class
 {
+    func displayInitialState(type: SearchPage.RequestType)
     func presentTableView(viewModel: SearchPage.DisplayItem.ViewModel)
 
 }
@@ -191,6 +192,20 @@ extension SearchPageViewController {
 
 // MARK:- View Display logic entry point
 extension SearchPageViewController {
+    
+    func displayInitialState(type: SearchPage.RequestType) {
+        print("displayInitialState")
+        if (type == .GetRouteStopService){
+            
+            let saveBtn = UIBarButtonItem(title: "general_cancel".localized(), style: .plain, target: self, action: #selector(self.onCancel))
+            saveBtn.tintColor = .systemBlue
+            self.navigationItem.leftBarButtonItem = saveBtn
+        }
+    }
+    
+    @objc private func onCancel(){
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func requestKmbRouteList(){
         self.interactor?.requestKmbRouteList()

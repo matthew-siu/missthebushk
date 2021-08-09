@@ -55,7 +55,7 @@ extension StopListPagePresenter {
                     }
                 }
             }
-            let viewModel = StopListPage.DisplayItem.ViewModel(etaViews: etaList)
+            let viewModel = StopListPage.DisplayItem.ETAViewModel(etaViews: etaList)
             self.viewController?.displayETAOnOneStop(etaList: viewModel)
         }
     }
