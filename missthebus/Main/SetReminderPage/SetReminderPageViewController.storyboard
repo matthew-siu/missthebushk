@@ -14,288 +14,302 @@
             <objects>
                 <viewController storyboardIdentifier="SetReminderPageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jqg-Tg-5iv" customClass="SetReminderPageViewController" customModule="missthebus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WN9-36-gAN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ggu-JU-Dr2">
-                                <rect key="frame" x="0.0" y="44" width="414" height="530"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t22-Py-Q73">
+                                <rect key="frame" x="0.0" y="44" width="414" height="1056"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qll-nP-m0T" userLabel="NameView" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m89-Tk-Dsg" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-uH-7xb">
-                                                <rect key="frame" x="0.0" y="90" width="414" height="30"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="10" id="25u-qv-UeC">
-                                                    <size key="itemSize" width="160" height="40"/>
-                                                    <size key="estimatedItemSize" width="160" height="40"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells/>
-                                            </collectionView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdT-Rq-CSa">
-                                                <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qll-nP-m0T" userLabel="NameView" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-mh-FzE" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
-                                                        <rect key="frame" x="40" y="0.0" width="334" height="50"/>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-uH-7xb">
+                                                        <rect key="frame" x="0.0" y="90" width="414" height="30"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="10" id="25u-qv-UeC">
+                                                            <size key="itemSize" width="160" height="40"/>
+                                                            <size key="estimatedItemSize" width="160" height="40"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells/>
+                                                    </collectionView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdT-Rq-CSa">
+                                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-mh-FzE" customClass="SoftUITextfield" customModule="missthebus" customModuleProvider="target">
+                                                                <rect key="frame" x="40" y="0.0" width="334" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="6Sy-6H-ELc"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell2" translatesAutoresizingMaskIntoConstraints="NO" id="otM-tg-8mY">
+                                                                <rect key="frame" x="5" y="15" width="20" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="20" id="BZ1-5R-XA4"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="dAF-OV-MHd"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="6Sy-6H-ELc"/>
+                                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="centerY" secondItem="otM-tg-8mY" secondAttribute="centerY" id="9Xl-Wk-icv"/>
+                                                            <constraint firstAttribute="height" constant="50" id="VUn-gX-AUP"/>
+                                                            <constraint firstItem="fGg-mh-FzE" firstAttribute="leading" secondItem="otM-tg-8mY" secondAttribute="trailing" constant="15" id="WjW-7E-xsv"/>
+                                                            <constraint firstItem="otM-tg-8mY" firstAttribute="leading" secondItem="XdT-Rq-CSa" secondAttribute="leading" constant="5" id="jBX-6K-A8Q"/>
+                                                            <constraint firstItem="otM-tg-8mY" firstAttribute="centerY" secondItem="XdT-Rq-CSa" secondAttribute="centerY" id="jkD-IC-Mmx"/>
+                                                            <constraint firstAttribute="trailing" secondItem="fGg-mh-FzE" secondAttribute="trailing" id="qYi-W9-kDK"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell2" translatesAutoresizingMaskIntoConstraints="NO" id="otM-tg-8mY">
-                                                        <rect key="frame" x="5" y="15" width="20" height="20"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="BZ1-5R-XA4"/>
-                                                            <constraint firstAttribute="height" constant="20" id="dAF-OV-MHd"/>
-                                                        </constraints>
-                                                    </imageView>
+                                                    </view>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="fGg-mh-FzE" firstAttribute="centerY" secondItem="otM-tg-8mY" secondAttribute="centerY" id="9Xl-Wk-icv"/>
-                                                    <constraint firstAttribute="height" constant="50" id="VUn-gX-AUP"/>
-                                                    <constraint firstItem="fGg-mh-FzE" firstAttribute="leading" secondItem="otM-tg-8mY" secondAttribute="trailing" constant="15" id="WjW-7E-xsv"/>
-                                                    <constraint firstItem="otM-tg-8mY" firstAttribute="leading" secondItem="XdT-Rq-CSa" secondAttribute="leading" constant="5" id="jBX-6K-A8Q"/>
-                                                    <constraint firstItem="otM-tg-8mY" firstAttribute="centerY" secondItem="XdT-Rq-CSa" secondAttribute="centerY" id="jkD-IC-Mmx"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fGg-mh-FzE" secondAttribute="trailing" id="qYi-W9-kDK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="XdT-Rq-CSa" secondAttribute="trailing" constant="20" id="5hz-Zk-V43"/>
+                                                    <constraint firstItem="tUb-uH-7xb" firstAttribute="top" secondItem="XdT-Rq-CSa" secondAttribute="bottom" constant="20" id="Ixs-70-6c9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="tUb-uH-7xb" secondAttribute="trailing" id="TYI-hi-Z0g"/>
+                                                    <constraint firstItem="tUb-uH-7xb" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" id="cLM-FN-A1N"/>
+                                                    <constraint firstItem="XdT-Rq-CSa" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="top" constant="20" id="etB-5t-StB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="tUb-uH-7xb" secondAttribute="bottom" constant="20" id="mW1-IX-ciY"/>
+                                                    <constraint firstItem="XdT-Rq-CSa" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="rnV-7j-550"/>
+                                                    <constraint firstAttribute="height" constant="140" id="uoK-9y-gzO"/>
                                                 </constraints>
                                             </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="XdT-Rq-CSa" secondAttribute="trailing" constant="20" id="5hz-Zk-V43"/>
-                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="top" secondItem="XdT-Rq-CSa" secondAttribute="bottom" constant="20" id="Ixs-70-6c9"/>
-                                            <constraint firstAttribute="trailing" secondItem="tUb-uH-7xb" secondAttribute="trailing" id="TYI-hi-Z0g"/>
-                                            <constraint firstItem="tUb-uH-7xb" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" id="cLM-FN-A1N"/>
-                                            <constraint firstItem="XdT-Rq-CSa" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="top" constant="20" id="etB-5t-StB"/>
-                                            <constraint firstAttribute="bottom" secondItem="tUb-uH-7xb" secondAttribute="bottom" constant="20" id="mW1-IX-ciY"/>
-                                            <constraint firstItem="XdT-Rq-CSa" firstAttribute="leading" secondItem="qll-nP-m0T" secondAttribute="leading" constant="20" id="rnV-7j-550"/>
-                                            <constraint firstAttribute="height" constant="140" id="uoK-9y-gzO"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pL-bn-IPW" userLabel="RouteView">
-                                        <rect key="frame" x="0.0" y="150" width="414" height="120"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIa-v5-J0r" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="10" width="374" height="100"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2E-M0-v1L" userLabel="TimeView">
+                                                <rect key="frame" x="0.0" y="140" width="414" height="250"/>
                                                 <subviews>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="286M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDg-Jq-kbI">
-                                                        <rect key="frame" x="0.0" y="34.5" width="90" height="31.5"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="90" id="0IM-om-9T8"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tyv-dR-twa">
-                                                        <rect key="frame" x="110" y="25" width="264" height="50"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsm-B6-WXc" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="10" width="374" height="230"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Snv-jx-bZf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="10"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCt-i1-YYB">
+                                                                <rect key="frame" x="20" y="20" width="334" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zD-h7-Wea" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                                                <rect key="frame" x="20" y="60.5" width="334" height="110"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5RW-lN-wmK">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="10"/>
-                                                                    </imageView>
+                                                                    <stackView opaque="NO" contentMode="scaleAspectFit" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vgB-CH-Wao">
+                                                                        <rect key="frame" x="52" y="5" width="230" height="100"/>
+                                                                        <subviews>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7q-jL-oXh" userLabel="StartTimeView">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                                <subviews>
+                                                                                    <datePicker contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="iaZ-zc-CaN">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                                        <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                                                                            <!--1970-01-01 11:00:00 +0000-->
+                                                                                        </date>
+                                                                                        <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                                                                            <!--2037-12-31 11:00:00 +0000-->
+                                                                                        </date>
+                                                                                    </datePicker>
+                                                                                </subviews>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="iaZ-zc-CaN" firstAttribute="leading" secondItem="c7q-jL-oXh" secondAttribute="leading" id="FcT-tB-7tA"/>
+                                                                                    <constraint firstItem="iaZ-zc-CaN" firstAttribute="top" secondItem="c7q-jL-oXh" secondAttribute="top" id="SrN-5f-eq8"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="iaZ-zc-CaN" secondAttribute="trailing" id="VYS-3A-0pQ"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="iaZ-zc-CaN" secondAttribute="bottom" id="lQD-WV-OjG"/>
+                                                                                    <constraint firstAttribute="width" constant="100" id="zX6-ml-mPt"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ip-LP-4mI">
+                                                                                <rect key="frame" x="110" y="40" width="10" height="20.5"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="10" id="Vdr-Tb-bvf"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UoG-0q-CFF" userLabel="EndTimeView">
+                                                                                <rect key="frame" x="130" y="0.0" width="100" height="100"/>
+                                                                                <subviews>
+                                                                                    <datePicker contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-pw-KcG">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                                        <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                                                                            <!--1970-01-01 11:00:00 +0000-->
+                                                                                        </date>
+                                                                                        <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                                                                            <!--2037-12-31 11:00:00 +0000-->
+                                                                                        </date>
+                                                                                    </datePicker>
+                                                                                </subviews>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="NF7-pw-KcG" firstAttribute="top" secondItem="UoG-0q-CFF" secondAttribute="top" id="O1R-E3-V32"/>
+                                                                                    <constraint firstAttribute="width" constant="100" id="Tim-iH-WHG"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="NF7-pw-KcG" secondAttribute="trailing" id="VOH-Nk-Lb4"/>
+                                                                                    <constraint firstItem="NF7-pw-KcG" firstAttribute="leading" secondItem="UoG-0q-CFF" secondAttribute="leading" id="eH6-pJ-uPa"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="NF7-pw-KcG" secondAttribute="bottom" id="jcn-9v-Kl4"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                 </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="5RW-lN-wmK" secondAttribute="trailing" id="1oH-jM-YdO"/>
-                                                                    <constraint firstAttribute="width" priority="250" constant="100" id="Bsk-Wd-Pyp"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="5RW-lN-wmK" secondAttribute="bottom" id="OqM-6O-X52"/>
-                                                                    <constraint firstItem="5RW-lN-wmK" firstAttribute="top" secondItem="Snv-jx-bZf" secondAttribute="top" id="ZXd-Pg-75K"/>
-                                                                    <constraint firstItem="5RW-lN-wmK" firstAttribute="leading" secondItem="Snv-jx-bZf" secondAttribute="leading" id="pxg-gk-p0V"/>
-                                                                    <constraint firstAttribute="height" constant="10" id="rHT-CU-Iay"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="vgB-CH-Wao" secondAttribute="bottom" constant="5" id="AXD-la-YJP"/>
+                                                                    <constraint firstItem="vgB-CH-Wao" firstAttribute="centerX" secondItem="2zD-h7-Wea" secondAttribute="centerX" id="Ywp-V3-HGA"/>
+                                                                    <constraint firstItem="vgB-CH-Wao" firstAttribute="top" secondItem="2zD-h7-Wea" secondAttribute="top" constant="5" id="nfW-xi-55g"/>
+                                                                    <constraint firstAttribute="height" constant="110" id="xzK-2u-boy"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This could be a long long sentence." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liw-RB-Gtj">
-                                                                <rect key="frame" x="0.0" y="13" width="264" height="19.5"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-2c-CSB">
+                                                                <rect key="frame" x="20" y="190.5" width="334" height="20.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYE-j9-zSG" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="43.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUI-LZ-DVp" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="48.5" y="0.0" width="43.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amd-Cd-DeS" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="97" y="0.0" width="43.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5B-89-gos" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="145.5" y="0.0" width="43" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCf-Ej-rfA" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="193.5" y="0.0" width="43.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-Ca-7lQ" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="242" y="0.0" width="43.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zau-qN-eHx" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
+                                                                        <rect key="frame" x="290.5" y="0.0" width="43.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="9PO-2c-CSB" firstAttribute="top" secondItem="2zD-h7-Wea" secondAttribute="bottom" constant="20" id="HZ6-2g-JvA"/>
+                                                            <constraint firstItem="9PO-2c-CSB" firstAttribute="leading" secondItem="rsm-B6-WXc" secondAttribute="leading" constant="20" id="NpR-E1-fO5"/>
+                                                            <constraint firstItem="kCt-i1-YYB" firstAttribute="top" secondItem="rsm-B6-WXc" secondAttribute="top" constant="20" id="R7Y-rm-raf"/>
+                                                            <constraint firstAttribute="trailing" secondItem="2zD-h7-Wea" secondAttribute="trailing" constant="20" id="RJP-iD-B0N"/>
+                                                            <constraint firstItem="kCt-i1-YYB" firstAttribute="leading" secondItem="rsm-B6-WXc" secondAttribute="leading" constant="20" id="iXI-MK-r9Y"/>
+                                                            <constraint firstAttribute="trailing" secondItem="kCt-i1-YYB" secondAttribute="trailing" constant="20" id="jD5-BK-zyf"/>
+                                                            <constraint firstItem="2zD-h7-Wea" firstAttribute="leading" secondItem="rsm-B6-WXc" secondAttribute="leading" constant="20" id="op3-T0-zbq"/>
+                                                            <constraint firstAttribute="trailing" secondItem="9PO-2c-CSB" secondAttribute="trailing" constant="20" id="xL5-gh-vcB"/>
+                                                            <constraint firstItem="2zD-h7-Wea" firstAttribute="top" secondItem="kCt-i1-YYB" secondAttribute="bottom" constant="20" id="yMm-DB-0e3"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="rsm-B6-WXc" secondAttribute="trailing" constant="20" id="7g6-l5-rdg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rsm-B6-WXc" secondAttribute="bottom" constant="10" id="UyP-Ka-tFl"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="250" id="W12-Xw-7i6"/>
+                                                    <constraint firstItem="rsm-B6-WXc" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="top" constant="10" id="kGw-LE-9ul"/>
+                                                    <constraint firstItem="rsm-B6-WXc" firstAttribute="leading" secondItem="i2E-M0-v1L" secondAttribute="leading" constant="20" id="oCa-XL-5Lt"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcP-Tv-k4B" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="400" width="374" height="60"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ozt-iS-g8d">
+                                                        <rect key="frame" x="106.5" y="20" width="161.5" height="20"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sVZ-Aa-eDE">
+                                                                <rect key="frame" x="0.0" y="2" width="20" height="16"/>
+                                                                <color key="tintColor" systemColor="labelColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="20" id="8co-gT-9Yd"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="aaJ-xS-mMU"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click to add routes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdZ-rD-wAt">
+                                                                <rect key="frame" x="25" y="0.5" width="136.5" height="19.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some reminders" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcC-HD-lkJ">
-                                                                <rect key="frame" x="0.0" y="35.5" width="264" height="14.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="XcC-HD-lkJ" firstAttribute="leading" secondItem="tyv-dR-twa" secondAttribute="leading" id="A9R-b6-fYT"/>
-                                                            <constraint firstAttribute="trailing" secondItem="liw-RB-Gtj" secondAttribute="trailing" id="XLc-Qw-O3m"/>
-                                                            <constraint firstAttribute="trailing" secondItem="XcC-HD-lkJ" secondAttribute="trailing" id="amZ-wA-TKq"/>
-                                                            <constraint firstItem="liw-RB-Gtj" firstAttribute="leading" secondItem="tyv-dR-twa" secondAttribute="leading" id="avi-Ga-Isc"/>
-                                                        </constraints>
-                                                    </stackView>
-                                                    <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOH-C5-Gim">
-                                                        <rect key="frame" x="20" y="20" width="334" height="60"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Bus Stop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfR-3v-mfC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="334" height="60"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="AfR-3v-mfC" secondAttribute="trailing" id="FyJ-jG-5sc"/>
-                                                            <constraint firstItem="AfR-3v-mfC" firstAttribute="top" secondItem="dOH-C5-Gim" secondAttribute="top" id="Z3E-Xo-oNX"/>
-                                                            <constraint firstItem="AfR-3v-mfC" firstAttribute="leading" secondItem="dOH-C5-Gim" secondAttribute="leading" id="cKx-Y3-Ei5"/>
-                                                            <constraint firstAttribute="bottom" secondItem="AfR-3v-mfC" secondAttribute="bottom" id="z9b-im-Wl1"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstItem="JDg-Jq-kbI" firstAttribute="leading" secondItem="ZIa-v5-J0r" secondAttribute="leading" id="0Nd-rh-8hQ"/>
-                                                    <constraint firstAttribute="trailing" secondItem="dOH-C5-Gim" secondAttribute="trailing" constant="20" id="7XR-z4-eLD"/>
-                                                    <constraint firstItem="dOH-C5-Gim" firstAttribute="leading" secondItem="ZIa-v5-J0r" secondAttribute="leading" constant="20" id="L7o-Qe-ILL"/>
-                                                    <constraint firstAttribute="bottom" secondItem="dOH-C5-Gim" secondAttribute="bottom" constant="20" id="QTL-WY-nZ4"/>
-                                                    <constraint firstItem="dOH-C5-Gim" firstAttribute="top" secondItem="ZIa-v5-J0r" secondAttribute="top" constant="20" id="iLH-uU-cT6"/>
-                                                    <constraint firstItem="JDg-Jq-kbI" firstAttribute="centerY" secondItem="ZIa-v5-J0r" secondAttribute="centerY" id="kK3-qt-9q5"/>
-                                                    <constraint firstAttribute="trailing" secondItem="tyv-dR-twa" secondAttribute="trailing" id="pWN-Th-nmQ"/>
-                                                    <constraint firstItem="tyv-dR-twa" firstAttribute="centerY" secondItem="JDg-Jq-kbI" secondAttribute="centerY" id="qzB-z3-ot8"/>
-                                                    <constraint firstItem="tyv-dR-twa" firstAttribute="leading" secondItem="JDg-Jq-kbI" secondAttribute="trailing" constant="20" id="tcp-vI-5Hc"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="ZIa-v5-J0r" firstAttribute="top" secondItem="8pL-bn-IPW" secondAttribute="top" constant="10" id="PUe-XZ-jNS"/>
-                                            <constraint firstItem="ZIa-v5-J0r" firstAttribute="leading" secondItem="8pL-bn-IPW" secondAttribute="leading" constant="20" id="e9B-HH-I29"/>
-                                            <constraint firstAttribute="height" priority="250" constant="120" id="mK1-Gc-oQB"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZIa-v5-J0r" secondAttribute="trailing" constant="20" id="voo-qn-wpg"/>
-                                            <constraint firstAttribute="bottom" secondItem="ZIa-v5-J0r" secondAttribute="bottom" constant="10" id="wfj-4e-yxg"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2E-M0-v1L" userLabel="TimeView">
-                                        <rect key="frame" x="0.0" y="280" width="414" height="250"/>
-                                        <subviews>
-                                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsm-B6-WXc" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="10" width="374" height="230"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCt-i1-YYB">
-                                                        <rect key="frame" x="20" y="20" width="334" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zD-h7-Wea" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="60.5" width="334" height="110"/>
-                                                        <subviews>
-                                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="iaZ-zc-CaN">
-                                                                <rect key="frame" x="40" y="5" width="254" height="100"/>
-                                                            </datePicker>
-                                                        </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="iaZ-zc-CaN" secondAttribute="trailing" constant="40" id="2wP-s1-6Dh"/>
-                                                            <constraint firstItem="iaZ-zc-CaN" firstAttribute="top" secondItem="2zD-h7-Wea" secondAttribute="top" constant="5" id="mTS-N8-HdZ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="iaZ-zc-CaN" secondAttribute="bottom" constant="5" id="wDn-xM-Wrx"/>
-                                                            <constraint firstAttribute="height" constant="110" id="xzK-2u-boy"/>
-                                                            <constraint firstItem="iaZ-zc-CaN" firstAttribute="leading" secondItem="2zD-h7-Wea" secondAttribute="leading" constant="40" id="zR0-73-zHd"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-2c-CSB">
-                                                        <rect key="frame" x="20" y="190.5" width="334" height="20.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYE-j9-zSG" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="43.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUI-LZ-DVp" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="48.5" y="0.0" width="43.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amd-Cd-DeS" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="97" y="0.0" width="43.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5B-89-gos" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="145.5" y="0.0" width="43" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCf-Ej-rfA" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="193.5" y="0.0" width="43.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-Ca-7lQ" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="242" y="0.0" width="43.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zau-qN-eHx" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                <rect key="frame" x="290.5" y="0.0" width="43.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="9PO-2c-CSB" firstAttribute="top" secondItem="2zD-h7-Wea" secondAttribute="bottom" constant="20" id="HZ6-2g-JvA"/>
-                                                    <constraint firstItem="9PO-2c-CSB" firstAttribute="leading" secondItem="rsm-B6-WXc" secondAttribute="leading" constant="20" id="NpR-E1-fO5"/>
-                                                    <constraint firstItem="kCt-i1-YYB" firstAttribute="top" secondItem="rsm-B6-WXc" secondAttribute="top" constant="20" id="R7Y-rm-raf"/>
-                                                    <constraint firstAttribute="trailing" secondItem="2zD-h7-Wea" secondAttribute="trailing" constant="20" id="RJP-iD-B0N"/>
-                                                    <constraint firstItem="kCt-i1-YYB" firstAttribute="leading" secondItem="rsm-B6-WXc" secondAttribute="leading" constant="20" id="iXI-MK-r9Y"/>
-                                                    <constraint firstAttribute="trailing" secondItem="kCt-i1-YYB" secondAttribute="trailing" constant="20" id="jD5-BK-zyf"/>
-                                                    <constraint firstItem="2zD-h7-Wea" firstAttribute="leading" secondItem="rsm-B6-WXc" secondAttribute="leading" constant="20" id="op3-T0-zbq"/>
-                                                    <constraint firstAttribute="trailing" secondItem="9PO-2c-CSB" secondAttribute="trailing" constant="20" id="xL5-gh-vcB"/>
-                                                    <constraint firstItem="2zD-h7-Wea" firstAttribute="top" secondItem="kCt-i1-YYB" secondAttribute="bottom" constant="20" id="yMm-DB-0e3"/>
+                                                    <constraint firstItem="Ozt-iS-g8d" firstAttribute="centerY" secondItem="KcP-Tv-k4B" secondAttribute="centerY" id="5CI-gG-pRY"/>
+                                                    <constraint firstItem="Ozt-iS-g8d" firstAttribute="centerX" secondItem="KcP-Tv-k4B" secondAttribute="centerX" id="7DP-R7-wC0"/>
+                                                    <constraint firstAttribute="height" constant="60" id="A3z-lA-wPf"/>
                                                 </constraints>
                                             </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UMH-IE-Wn6">
+                                                <rect key="frame" x="0.0" y="470" width="414" height="530"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="rsm-B6-WXc" secondAttribute="trailing" constant="20" id="7g6-l5-rdg"/>
-                                            <constraint firstAttribute="bottom" secondItem="rsm-B6-WXc" secondAttribute="bottom" constant="10" id="UyP-Ka-tFl"/>
-                                            <constraint firstAttribute="height" priority="250" constant="250" id="W12-Xw-7i6"/>
-                                            <constraint firstItem="rsm-B6-WXc" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="top" constant="10" id="kGw-LE-9ul"/>
-                                            <constraint firstItem="rsm-B6-WXc" firstAttribute="leading" secondItem="i2E-M0-v1L" secondAttribute="leading" constant="20" id="oCa-XL-5Lt"/>
+                                            <constraint firstItem="i2E-M0-v1L" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="2op-bs-hwC"/>
+                                            <constraint firstAttribute="bottom" secondItem="UMH-IE-Wn6" secondAttribute="bottom" id="93f-vI-vUf"/>
+                                            <constraint firstItem="UMH-IE-Wn6" firstAttribute="top" secondItem="KcP-Tv-k4B" secondAttribute="bottom" constant="10" id="EBv-ft-SP4"/>
+                                            <constraint firstAttribute="height" priority="250" constant="1000" id="JZ1-cB-qZe"/>
+                                            <constraint firstItem="UMH-IE-Wn6" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="JxT-HU-5VE"/>
+                                            <constraint firstItem="KcP-Tv-k4B" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" constant="20" id="MVx-Wx-8mT"/>
+                                            <constraint firstItem="i2E-M0-v1L" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="bottom" id="P1C-dp-7Qo"/>
+                                            <constraint firstAttribute="trailing" secondItem="UMH-IE-Wn6" secondAttribute="trailing" id="dIe-Go-cXF"/>
+                                            <constraint firstAttribute="trailing" secondItem="qll-nP-m0T" secondAttribute="trailing" id="dfW-o3-bl7"/>
+                                            <constraint firstItem="qll-nP-m0T" firstAttribute="top" secondItem="m89-Tk-Dsg" secondAttribute="top" id="etk-9H-SsM"/>
+                                            <constraint firstItem="qll-nP-m0T" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="f27-va-qlv"/>
+                                            <constraint firstAttribute="trailing" secondItem="i2E-M0-v1L" secondAttribute="trailing" id="tTk-Va-o4i"/>
+                                            <constraint firstAttribute="trailing" secondItem="KcP-Tv-k4B" secondAttribute="trailing" constant="20" id="z8c-Mo-zOj"/>
+                                            <constraint firstItem="KcP-Tv-k4B" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="bottom" constant="10" id="zbR-fS-b17"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="qll-nP-m0T" firstAttribute="leading" secondItem="ggu-JU-Dr2" secondAttribute="leading" id="VPF-Oz-OUv"/>
-                                    <constraint firstAttribute="trailing" secondItem="qll-nP-m0T" secondAttribute="trailing" id="ojz-Ad-Jnu"/>
+                                    <constraint firstAttribute="trailing" secondItem="m89-Tk-Dsg" secondAttribute="trailing" id="NcA-iJ-xjb"/>
+                                    <constraint firstAttribute="bottom" secondItem="m89-Tk-Dsg" secondAttribute="bottom" id="UYN-Ba-GU1"/>
+                                    <constraint firstItem="m89-Tk-Dsg" firstAttribute="top" secondItem="t22-Py-Q73" secondAttribute="top" id="g6H-HV-Ngh"/>
+                                    <constraint firstItem="m89-Tk-Dsg" firstAttribute="leading" secondItem="t22-Py-Q73" secondAttribute="leading" id="vlv-hD-Okf"/>
                                 </constraints>
-                            </stackView>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k6i-fr-Cqe"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ggu-JU-Dr2" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" id="55p-Au-wHC"/>
-                            <constraint firstItem="ggu-JU-Dr2" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="8wE-6V-fJ0"/>
-                            <constraint firstItem="k6i-fr-Cqe" firstAttribute="trailing" secondItem="ggu-JU-Dr2" secondAttribute="trailing" id="bcq-im-bEX"/>
+                            <constraint firstAttribute="bottom" secondItem="t22-Py-Q73" secondAttribute="bottom" id="DZG-vW-JcH"/>
+                            <constraint firstItem="m89-Tk-Dsg" firstAttribute="width" secondItem="WN9-36-gAN" secondAttribute="width" id="GAe-p8-fd8"/>
+                            <constraint firstItem="t22-Py-Q73" firstAttribute="trailing" secondItem="k6i-fr-Cqe" secondAttribute="trailing" id="GFJ-mu-ZFC"/>
+                            <constraint firstItem="t22-Py-Q73" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" id="pyS-5Q-SpT"/>
+                            <constraint firstItem="t22-Py-Q73" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="qbK-mb-xzB"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="414" height="1100"/>
                     <connections>
-                        <outlet property="busCompanyIcon" destination="5RW-lN-wmK" id="o02-4S-chZ"/>
-                        <outlet property="iconLayout" destination="Snv-jx-bZf" id="M9P-2a-wGz"/>
+                        <outlet property="addRouteBtn" destination="KcP-Tv-k4B" id="ojj-RZ-F29"/>
+                        <outlet property="addRouteLabel" destination="DdZ-rD-wAt" id="WAt-8j-QfG"/>
+                        <outlet property="contentView" destination="m89-Tk-Dsg" id="edP-bb-9cg"/>
+                        <outlet property="endTimePicker" destination="NF7-pw-KcG" id="IlP-22-tCp"/>
                         <outlet property="nameTextfield" destination="fGg-mh-FzE" id="ebg-uG-vRC"/>
                         <outlet property="nameView" destination="qll-nP-m0T" id="XFD-Su-LWw"/>
                         <outlet property="reminderIcon" destination="otM-tg-8mY" id="49e-AN-cQu"/>
                         <outlet property="reminderNamesCollectionView" destination="tUb-uH-7xb" id="mRQ-Zw-iVB"/>
-                        <outlet property="routeDestLabel" destination="liw-RB-Gtj" id="2nu-Yd-bc5"/>
-                        <outlet property="routeNumLabel" destination="JDg-Jq-kbI" id="Mql-Yo-aNP"/>
-                        <outlet property="routeOrigLabel" destination="XcC-HD-lkJ" id="ZtD-HX-VyX"/>
-                        <outlet property="routeStopView" destination="tyv-dR-twa" id="g1J-kr-Lgb"/>
-                        <outlet property="routeView" destination="ZIa-v5-J0r" id="N9S-ut-TSW"/>
-                        <outlet property="selectStopLabel" destination="AfR-3v-mfC" id="oZB-bf-UdQ"/>
-                        <outlet property="selectStopView" destination="dOH-C5-Gim" id="Kta-fu-w8g"/>
-                        <outlet property="timePicker" destination="iaZ-zc-CaN" id="mhR-Fd-oWR"/>
+                        <outlet property="startTimePicker" destination="iaZ-zc-CaN" id="vaW-Y9-sGW"/>
+                        <outlet property="tableView" destination="UMH-IE-Wn6" id="NbX-Oo-Fmu"/>
                         <outlet property="timePickerLabel" destination="kCt-i1-YYB" id="T7m-xu-bL6"/>
                         <outlet property="timePickerView" destination="2zD-h7-Wea" id="n0C-0q-ni2"/>
                         <outlet property="timeView" destination="rsm-B6-WXc" id="cWy-yP-0bU"/>
@@ -315,6 +329,10 @@
     </scenes>
     <resources>
         <image name="bell2" width="64" height="64"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

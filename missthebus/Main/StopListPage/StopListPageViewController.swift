@@ -46,6 +46,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var selectedPosition: CLLocationCoordinate2D?
     var selectedIndex = -1
     var selectedStopETAView: StopListPage.DisplayItem.ETAViewModel?
+    var getRouteStopResponse: SetReminderPage.GetRouteStopResponse?
     
     
     let minTopMarginConstraint: CGFloat = 110
@@ -115,9 +116,11 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
         if (self.type == .NormalNavigation){
             
             cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count, isBookmarked: bookmarked)
+            cell.selectionStyle = .none
         }else{
             
             cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count)
+            cell.selectionStyle = .default
         }
         
         if let etaViewModel = self.selectedStopETAView{
@@ -125,7 +128,6 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
                 cell.setETA(etaList: self.selectedStopETAView)
             }
         }
-        cell.selectionStyle = .default
         return cell
     }
     
@@ -140,6 +142,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if (self.type == .GetRouteStopService){
+            self.getRouteStopResponse?.stopSeqList.append(indexPath.row)
             return
         }else{
             self.selectedIndex = (self.selectedIndex != indexPath.row) ? indexPath.row : -1
@@ -155,6 +158,13 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
             self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
             
             self.zoomToLocation(stop)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if (self.type == .GetRouteStopService){
+            self.getRouteStopResponse?.stopSeqList.removeAll(where: {$0 == indexPath.row})
+            return
         }
     }
 }
@@ -294,6 +304,7 @@ extension StopListPageViewController {
         self.type = requestType ?? .NormalNavigation
         if (self.type == .GetRouteStopService){
             self.setGetRouteStopServiceState()
+            self.getRouteStopResponse = self.interactor?.getRouteStopResponse()
         }
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
@@ -330,6 +341,9 @@ extension StopListPageViewController {
     }
     
     @objc func onSave(){
-        self.router?.responseGetRouteStopService()
+        if let resp = self.getRouteStopResponse{
+            self.router?.responseGetRouteStopService(resp: resp)
+        }
+        
     }
 }

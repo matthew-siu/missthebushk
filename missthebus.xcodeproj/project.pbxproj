@@ -12,6 +12,10 @@
 		8F09F2AE269693C70083B2CD /* SoftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F2AD269693C70083B2CD /* SoftUIView.swift */; };
 		8F09F2B6269694250083B2CD /* SoftUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F2B5269694250083B2CD /* SoftUIButton.swift */; };
 		8F09F2BC2696967C0083B2CD /* SoftUITextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F2BB2696967C0083B2CD /* SoftUITextfield.swift */; };
+		8F3ABCD926C271520067EF9D /* ReminderRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3ABCD726C271510067EF9D /* ReminderRouteTableViewCell.swift */; };
+		8F3ABCDA26C271520067EF9D /* ReminderRouteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3ABCD826C271510067EF9D /* ReminderRouteTableViewCell.xib */; };
+		8F3ABCE426C271800067EF9D /* ReminderRouteStopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3ABCE226C271800067EF9D /* ReminderRouteStopTableViewCell.swift */; };
+		8F3ABCE526C271800067EF9D /* ReminderRouteStopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3ABCE326C271800067EF9D /* ReminderRouteStopTableViewCell.xib */; };
 		8F5660EF26B13672005AB134 /* ReminderNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5660ED26B13672005AB134 /* ReminderNameCollectionViewCell.swift */; };
 		8F5660F026B13672005AB134 /* ReminderNameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5660EE26B13672005AB134 /* ReminderNameCollectionViewCell.xib */; };
 		8F5660FA26B150AE005AB134 /* StopReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5660F926B150AE005AB134 /* StopReminder.swift */; };
@@ -148,6 +152,10 @@
 		8F09F2AD269693C70083B2CD /* SoftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUIView.swift; sourceTree = "<group>"; };
 		8F09F2B5269694250083B2CD /* SoftUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUIButton.swift; sourceTree = "<group>"; };
 		8F09F2BB2696967C0083B2CD /* SoftUITextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUITextfield.swift; sourceTree = "<group>"; };
+		8F3ABCD726C271510067EF9D /* ReminderRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRouteTableViewCell.swift; sourceTree = "<group>"; };
+		8F3ABCD826C271510067EF9D /* ReminderRouteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderRouteTableViewCell.xib; sourceTree = "<group>"; };
+		8F3ABCE226C271800067EF9D /* ReminderRouteStopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRouteStopTableViewCell.swift; sourceTree = "<group>"; };
+		8F3ABCE326C271800067EF9D /* ReminderRouteStopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderRouteStopTableViewCell.xib; sourceTree = "<group>"; };
 		8F5660ED26B13672005AB134 /* ReminderNameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNameCollectionViewCell.swift; sourceTree = "<group>"; };
 		8F5660EE26B13672005AB134 /* ReminderNameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderNameCollectionViewCell.xib; sourceTree = "<group>"; };
 		8F5660F926B150AE005AB134 /* StopReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopReminder.swift; sourceTree = "<group>"; };
@@ -332,6 +340,24 @@
 			path = APIs;
 			sourceTree = "<group>";
 		};
+		8F3ABCD626C2711F0067EF9D /* ReminderRouteItem */ = {
+			isa = PBXGroup;
+			children = (
+				8F3ABCD726C271510067EF9D /* ReminderRouteTableViewCell.swift */,
+				8F3ABCD826C271510067EF9D /* ReminderRouteTableViewCell.xib */,
+			);
+			path = ReminderRouteItem;
+			sourceTree = "<group>";
+		};
+		8F3ABCE126C271630067EF9D /* ReminderRouteStopItem */ = {
+			isa = PBXGroup;
+			children = (
+				8F3ABCE226C271800067EF9D /* ReminderRouteStopTableViewCell.swift */,
+				8F3ABCE326C271800067EF9D /* ReminderRouteStopTableViewCell.xib */,
+			);
+			path = ReminderRouteStopItem;
+			sourceTree = "<group>";
+		};
 		8F5660F426B13AC1005AB134 /* ReminderName */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +412,8 @@
 		8F695B7926AE996500518622 /* SetReminderPage */ = {
 			isa = PBXGroup;
 			children = (
+				8F3ABCD626C2711F0067EF9D /* ReminderRouteItem */,
+				8F3ABCE126C271630067EF9D /* ReminderRouteStopItem */,
 				8F5660F426B13AC1005AB134 /* ReminderName */,
 				8F695B7A26AE99CA00518622 /* SetReminderPagePresenter.swift */,
 				8F695B7B26AE99CA00518622 /* SetReminderPageWorker.swift */,
@@ -829,6 +857,7 @@
 			files = (
 				8F56613926B3A866005AB134 /* SplashScreenViewController.storyboard in Resources */,
 				8F89B5AD26941201006312EA /* LaunchScreen.storyboard in Resources */,
+				8F3ABCDA26C271520067EF9D /* ReminderRouteTableViewCell.xib in Resources */,
 				8F5660F026B13672005AB134 /* ReminderNameCollectionViewCell.xib in Resources */,
 				8F89B5AA26941201006312EA /* Assets.xcassets in Resources */,
 				8F695B8526AE99CA00518622 /* SetReminderPageViewController.storyboard in Resources */,
@@ -839,6 +868,7 @@
 				8F56618A26B3FA85005AB134 /* StopReminderCollectionViewCell.xib in Resources */,
 				8FB5A0BA26AA7A860013540D /* StopETAItemCollectionViewCell.xib in Resources */,
 				8FFF6CE3269FDE1F0033D2CE /* Localizable.strings in Resources */,
+				8F3ABCE526C271800067EF9D /* ReminderRouteStopTableViewCell.xib in Resources */,
 				8F89B5A8269411FF006312EA /* Main.storyboard in Resources */,
 				8F89B66F269598A7006312EA /* SearchPageViewController.storyboard in Resources */,
 				8F89B5ED2694337A006312EA /* MainPageViewController.storyboard in Resources */,
@@ -1020,6 +1050,7 @@
 				8FFF6C812697F1130033D2CE /* RepositoryProtocol.swift in Sources */,
 				8F09F2B6269694250083B2CD /* SoftUIButton.swift in Sources */,
 				8F695B8226AE99CA00518622 /* SetReminderPagePresenter.swift in Sources */,
+				8F3ABCE426C271800067EF9D /* ReminderRouteStopTableViewCell.swift in Sources */,
 				8F5660FA26B150AE005AB134 /* StopReminder.swift in Sources */,
 				8FB5A09126A820420013540D /* StopItemTableViewCell.swift in Sources */,
 				8FFF6CAB269D815A0033D2CE /* KmbRoute.swift in Sources */,
@@ -1048,6 +1079,7 @@
 				8F56613B26B3A866005AB134 /* SplashScreenViewController.swift in Sources */,
 				8F695B8426AE99CA00518622 /* SetReminderPageRouter.swift in Sources */,
 				8FFF6C762697F0720033D2CE /* NetworkAsyncQueue.swift in Sources */,
+				8F3ABCD926C271520067EF9D /* ReminderRouteTableViewCell.swift in Sources */,
 				8FB5A07526A8027C0013540D /* KmbRouteStop.swift in Sources */,
 				8FFF6C772697F0720033D2CE /* BaseAPIResponse.swift in Sources */,
 				8F89B5EC2694337A006312EA /* MainPageRouter.swift in Sources */,

@@ -11,19 +11,22 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol SetReminderPagePresentationLogic
 {
-    func displayInitialState(mode: SetReminderPage.Mode, route: KmbRoute?, stop: KmbStop?, reminder: StopReminder)
+    func displayInitialState(mode: SetReminderPage.Mode, reminder: StopReminder)
+    
+    func updateRouteAndStop(_ reminder: StopReminder)
 }
 
 // MARK: - Presenter main body
 class SetReminderPagePresenter: SetReminderPagePresentationLogic
 {
+    
     weak var viewController: SetReminderPageDisplayLogic?
     
 }
 
 // MARK: - Presentation receiver
 extension SetReminderPagePresenter {
-    func displayInitialState(mode: SetReminderPage.Mode, route: KmbRoute?, stop: KmbStop?, reminder: StopReminder){
+    func displayInitialState(mode: SetReminderPage.Mode, reminder: StopReminder){
         
         
         if (mode == .UPDATE){
@@ -34,4 +37,10 @@ extension SetReminderPagePresenter {
             self.viewController?.displayCreateState(viewModel: viewModel)
         }
     }
+    
+    func updateRouteAndStop(_ reminder: StopReminder){
+//        self.viewController.
+    }
+    
+    
 }

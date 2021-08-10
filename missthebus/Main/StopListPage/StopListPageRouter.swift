@@ -13,7 +13,7 @@ protocol StopListPageRoutingLogic
 {
     func routeToSetReminderPage(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop)
     
-    func responseGetRouteStopService()
+    func responseGetRouteStopService(resp: SetReminderPage.GetRouteStopResponse)
 }
 
 // MARK: - The possible elements that can be
@@ -37,12 +37,12 @@ extension StopListPageRouter {
         self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func responseGetRouteStopService(){
+    func responseGetRouteStopService(resp: SetReminderPage.GetRouteStopResponse){
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         if let rootVC = window?.rootViewController as? NavigationController {
             for vc in rootVC.viewControllers{
                 if let vc = vc as? SetReminderPageViewController{
-                    vc.selectedStop = KmbRouteStop(route: "123", stopId: "XSC", bound: "I", serviceType: "1", seq: "3")
+                    vc.getRouteStopResponse = resp
                 }
             }
         }

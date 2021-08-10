@@ -16,6 +16,7 @@ protocol StopListPageBusinessLogic
     func startETATimer(stopId: String, route: String, serviceType: String)
     func dismissETATimer()
     func bookmark(stop: KmbStop, isMarked: Bool)
+    func getRouteStopResponse() -> SetReminderPage.GetRouteStopResponse?
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -94,6 +95,12 @@ extension StopListPageInteractor {
             }
             
         }
+    }
+    
+    
+    func getRouteStopResponse() -> SetReminderPage.GetRouteStopResponse?{
+        
+        return SetReminderPage.GetRouteStopResponse(routeNum: route.route, bound: route.bound, serviceType: route.serviceType, stopSeqList: [])
         
     }
 }

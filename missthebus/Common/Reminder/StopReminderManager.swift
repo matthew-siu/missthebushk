@@ -13,10 +13,10 @@ import SQLite3
 class StopReminderManager{
     
     // get reminder of kmb
-    static func getRemindersFromRoute(route: String, bound: String, serviceType: String) -> [StopReminder]?{
-        return self.getStopReminders()?.filter({$0.routeNum == route && $0.bound == bound && $0.serviceType == serviceType})
-        
-    }
+//    static func getRemindersFromRoute(route: String, bound: String, serviceType: String) -> [StopReminder]?{
+//        return self.getStopReminders()?.filter({$0.routeNum == route && $0.bound == bound && $0.serviceType == serviceType})
+//        
+//    }
 }
 
 // basic: CRUD

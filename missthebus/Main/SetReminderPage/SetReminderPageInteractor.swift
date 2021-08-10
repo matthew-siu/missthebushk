@@ -13,6 +13,7 @@ protocol SetReminderPageBusinessLogic
 {
     func displayInitialState()
     func saveReminder(request: SetReminderPage.DisplayItem.Request)
+    func getRouteStopResponse(resp: SetReminderPage.GetRouteStopResponse)
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -24,6 +25,7 @@ protocol SetReminderPageDataStore
 // MARK: - Interactor Body
 class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDataStore
 {
+    
     // VIP Properties
     var presenter: SetReminderPagePresentationLogic?
     var worker: SetReminderPageWorker?
@@ -36,8 +38,6 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
     
     // Init
     init(request: SetReminderPageBuilder.BuildRequest) {
-        self.route = request.route
-        self.stop = request.stop
         self.mode = request.mode
         if let reminder = request.reminder{
             self.reminder = reminder
@@ -52,15 +52,14 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
 // MARK: - Business
 extension SetReminderPageInteractor {
     func displayInitialState(){
-        self.presenter?.displayInitialState(mode: self.mode, route: self.route, stop: self.stop, reminder: self.reminder)
+        self.presenter?.displayInitialState(mode: self.mode, reminder: self.reminder)
     }
     
     func saveReminder(request: SetReminderPage.DisplayItem.Request) {
         self.reminder.name = request.reminderName
         self.reminder.type = request.reminderType
-        self.reminder.time = request.time
+        self.reminder.startTime = request.time
         self.reminder.period = request.period
-        self.reminder.printDetails()
         
         if (self.mode == .CREATE){
             print("add new reminder \(self.reminder.id)")
@@ -69,5 +68,10 @@ extension SetReminderPageInteractor {
             print("update new reminder \(self.reminder.id)")
             StopReminderManager.updateStopReminder(self.reminder)
         }
+    }
+    
+    func getRouteStopResponse(resp: SetReminderPage.GetRouteStopResponse) {
+        self.reminder.routes.append(StopReminder.Route(routeNum: resp.routeNum, bound: resp.bound, serviceType: resp.serviceType, stopIndex: resp.stopSeqList))
+        self.presenter?.updateRouteAndStop(self.reminder)
     }
 }

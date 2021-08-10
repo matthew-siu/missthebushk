@@ -12,10 +12,31 @@ import UIKit
 // Defines request, response and corresponding view models
 enum SetReminderPage
 {
+    struct GetRouteStopResponse
+    {
+        var routeNum: String
+        var bound: String
+        var serviceType: String
+        var stopSeqList: [Int]
+    }
+    
     struct NameSample {
         let img: String // img filename
         let name: String // i18n id
         let type: StopReminder.ReminderType
+    }
+    
+    struct RouteAndStop{
+        let routeNum: String
+        let bound: String
+        let service: String
+        let destStop: String
+        let targetStops: [RouteStop]
+    }
+    
+    struct RouteStop{
+        let seq: String
+        let label: String
     }
     
     enum Mode {
@@ -39,12 +60,7 @@ enum SetReminderPage
         struct ViewModel // presenter -> vc
         {
             let mode: Mode
-            var reminderName: String = ""
             var reminderType: StopReminder.ReminderType = .OTHER
-            var routeNum: String = ""
-            var busCompany: BusCompany = .none
-            var destStopName: String = ""
-            var currentStopName: String = ""
             var time: Date?
             var period: [Int]?
             static let nameSamples: [NameSample] = [
@@ -56,6 +72,9 @@ enum SetReminderPage
                 NameSample(img: "tagLastBus", name: "reminder_tag_last".localized(), type: .LAST_BUS),
                 NameSample(img: "tagOther", name: "reminder_tag_other".localized(), type: .OTHER),
             ]
+        }
+        struct RouteAndStopViewModel{
+            let routes: [RouteAndStop]
         }
     }
 }
