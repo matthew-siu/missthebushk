@@ -14,6 +14,8 @@ class ReminderRouteTableViewCell: UITableViewCell {
     @IBOutlet weak var destNumLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var route: SetReminderPage.RouteAndStop?
+    
     enum TableViewCell: String, TableViewCellConfiguration {
         case itemCell = "ReminderRouteStopTableViewCell"
     }
@@ -35,10 +37,13 @@ class ReminderRouteTableViewCell: UITableViewCell {
         
     }
     
-    func setInfo(){
-        self.routeNumLabel.text = "123"
-        self.destNumLabel.text = "{Dest}"
-        self.tableView.reloadData()
+    func setInfo(_ route: SetReminderPage.RouteAndStop){
+        self.route = route
+        if let route = self.route{
+            self.routeNumLabel.text = "\("route_to".localized()) \(route.routeNum)"
+            self.destNumLabel.text = route.destStop
+            self.tableView.reloadData()
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,11 +56,15 @@ class ReminderRouteTableViewCell: UITableViewCell {
 
 extension ReminderRouteTableViewCell: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.route?.targetStops.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! ReminderRouteStopTableViewCell
+        if let route = self.route{
+            
+            cell.setInfo(stop: route.targetStops[indexPath.row])
+        }
         cell.selectionStyle = .none
         return cell
         

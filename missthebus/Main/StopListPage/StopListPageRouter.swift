@@ -32,7 +32,7 @@ class StopListPageRouter: NSObject, StopListPageRoutingLogic, StopListPageDataPa
 // MARK: - Routing and datapassing for one nav action
 extension StopListPageRouter {
     func routeToSetReminderPage(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop){
-        let request = SetReminderPageBuilder.BuildRequest(route: route, stop: stop, mode: mode, reminder: nil)
+        let request = SetReminderPageBuilder.BuildRequest(mode: mode, reminder: nil)
         let vc = SetReminderPageBuilder.createScene(request: request)
         self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }

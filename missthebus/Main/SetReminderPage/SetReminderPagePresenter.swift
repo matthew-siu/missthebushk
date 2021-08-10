@@ -39,7 +39,17 @@ extension SetReminderPagePresenter {
     }
     
     func updateRouteAndStop(_ reminder: StopReminder){
-//        self.viewController.
+        var routes = [SetReminderPage.RouteAndStop]()
+        for (index, route) in reminder.routes.enumerated(){
+            var routeStops = [SetReminderPage.RouteStop]()
+            for seq in route.stopIndex{
+                let stop = SetReminderPage.RouteStop(seq: seq, label: route.getStop(index)?.name ?? "")
+                routeStops.append(stop)
+            }
+            routes.append(SetReminderPage.RouteAndStop(routeNum: route.routeNum, bound: route.bound, service: route.serviceType, destStop: route.getRoute()?.destStop ?? "", targetStops: routeStops))
+        }
+        let viewModel = SetReminderPage.DisplayItem.RouteAndStopViewModel(routes: routes)
+        self.viewController?.updateRouteAndStop(viewModel: viewModel)
     }
     
     

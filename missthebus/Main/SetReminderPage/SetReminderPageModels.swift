@@ -35,7 +35,7 @@ enum SetReminderPage
     }
     
     struct RouteStop{
-        let seq: String
+        let seq: Int
         let label: String
     }
     

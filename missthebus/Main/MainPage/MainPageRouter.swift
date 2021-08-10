@@ -60,7 +60,7 @@ extension MainPageRouter {
     
     func routeToCreateReminderPage(){
         
-        let request = SetReminderPageBuilder.BuildRequest(route: nil, stop: nil, mode: .CREATE, reminder: nil)
+        let request = SetReminderPageBuilder.BuildRequest(mode: .CREATE, reminder: nil)
         let vc = SetReminderPageBuilder.createScene(request: request)
         self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }

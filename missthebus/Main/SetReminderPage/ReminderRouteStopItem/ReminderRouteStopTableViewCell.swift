@@ -19,8 +19,8 @@ class ReminderRouteStopTableViewCell: UITableViewCell {
         self.stopImg.addShadow()
     }
     
-    func setInfo(){
-        
+    func setInfo(stop: SetReminderPage.RouteStop){
+        self.stopLabel.text = stop.label
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

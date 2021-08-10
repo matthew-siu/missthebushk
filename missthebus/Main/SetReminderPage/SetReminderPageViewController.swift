@@ -12,6 +12,7 @@ import UIKit
 protocol SetReminderPageDisplayLogic: class
 {
     func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel)
+    func updateRouteAndStop(viewModel: SetReminderPage.DisplayItem.RouteAndStopViewModel)
 }
 
 // MARK: - View Controller body
@@ -55,6 +56,7 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     var reminderType: StopReminder.ReminderType = .OTHER
     var daysOfWeekList = [WeekDayPicker]()
     var getRouteStopResponse: SetReminderPage.GetRouteStopResponse?
+    var routes = [SetReminderPage.RouteAndStop]()
     
     enum CollectionViewCell: String, CollectionViewCellConfiguration {
         case itemCell = "ReminderNameCollectionViewCell"
@@ -87,6 +89,7 @@ extension SetReminderPageViewController {
         print("viewWillAppear")
         if let resp = self.getRouteStopResponse {
             print("resp: \(resp.routeNum) | \(resp.stopSeqList)")
+            self.interactor?.getRouteStopResponse(resp: resp)
         }
     }
     
@@ -162,16 +165,22 @@ extension SetReminderPageViewController {
         print("addNewRouteStop")
         self.router?.routeToSearchPage()
     }
+    
+    func updateRouteAndStop(viewModel: SetReminderPage.DisplayItem.RouteAndStopViewModel){
+        print("updateRouteAndStop")
+        self.routes = viewModel.routes
+        self.tableView.reloadData()
+    }
 }
 
 extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return routes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! ReminderRouteTableViewCell
-        cell.setInfo()
+        cell.setInfo(self.routes[indexPath.row])
         cell.selectionStyle = .none
         
         return cell

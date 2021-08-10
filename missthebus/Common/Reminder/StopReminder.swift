@@ -25,6 +25,14 @@ class StopReminder: Codable{
         var bound: String
         var serviceType: String
         var stopIndex: [Int] // stop sequence
+        
+        func getRoute() -> KmbRoute?{
+            return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
+        }
+        
+        func getStop(_ index: Int) -> KmbStop?{
+            return KmbManager.getStopBySeq(route: getRoute(), seq: String(stopIndex[index]))
+        }
     }
     
     enum Status: String, Codable{
@@ -56,4 +64,6 @@ class StopReminder: Codable{
     var neverEnd: Bool{
         return (self.endTime == nil)
     }
+    
+    
 }

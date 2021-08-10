@@ -184,6 +184,14 @@ extension KmbManager{
     static func getStop(stopId: String) -> KmbStop?{
         return getAllStops()?.first(where: { $0.stopId == stopId})
     }
+    
+    static func getStopBySeq(route: KmbRoute?, seq: String) -> KmbStop?{
+        if let route = route, let stopId = getRoute(route: route.route, bound: route.bound, serviceType: route.serviceType)?.stopList.first(where: {$0.seq == seq})?.stopId{
+            return getStop(stopId: stopId)
+        }else{
+            return nil
+        }
+    }
 }
 
 // algorithms
