@@ -44,7 +44,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var bookmarks = [StopBookmark]()
     var googleMapMarker = [GMSMarker]()
     var selectedPosition: CLLocationCoordinate2D?
-    var selectedIndex = -1
+    var selectedETAIndex = -1
     var selectedStopETAView: StopListPage.DisplayItem.ETAViewModel?
     var getRouteStopResponse: SetReminderPage.GetRouteStopResponse?
     
@@ -71,12 +71,14 @@ extension StopListPageViewController {
         self.tableView.allowsSelection = true
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.separatorStyle = .none
+        
         
         self.mapView.delegate = self
         self.locationManager.delegate = self
         if CLLocationManager.locationServicesEnabled() {
             print("location service abled")
-            self.locationManager.requestLocation()
+//            self.locationManager.requestLocation()
         } else {
             print("location service disabled")
             self.locationManager.requestWhenInUseAuthorization()
@@ -111,18 +113,23 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.itemCell.reuseId, for: indexPath) as! StopItemTableViewCell
         let item = self.stopList[indexPath.row]
         let bookmarked = self.bookmarks.contains(where: {$0.stopId == item.stopId})
-        let isSelected = (indexPath.row == selectedIndex)
         cell.delegate = self
+        
+        // update general viewModel
         if (self.type == .NormalNavigation){
+            cell.selectionStyle = .none
+            let isSelected = (indexPath.row == selectedETAIndex)
             
             cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count, isBookmarked: bookmarked)
-            cell.selectionStyle = .none
         }else{
+            cell.selectionStyle = .default
+            let isSelected = self.getRouteStopResponse?.stopSeqList.contains(indexPath.row) ?? false
             
             cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count)
-            cell.selectionStyle = .default
+            
         }
         
+        // update ETA
         if let etaViewModel = self.selectedStopETAView{
             if etaViewModel.etaViews.contains(where: {$0.seq == indexPath.row + 1}) {
                 cell.setETA(etaList: self.selectedStopETAView)
@@ -136,17 +143,26 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (indexPath.row == self.selectedIndex) ? 140 : 80
+        return (indexPath.row == self.selectedETAIndex) ? 140 : 80
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if (self.getRouteStopResponse?.stopSeqList.count ?? 0 >= 2){
+            self.showToast(message: "stop_service_err_at_most_pick".localized())
+            return nil
+        }
+        return indexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if (self.type == .GetRouteStopService){
             self.getRouteStopResponse?.stopSeqList.append(indexPath.row)
+//            self.tableView.reloadData()
             return
         }else{
-            self.selectedIndex = (self.selectedIndex != indexPath.row) ? indexPath.row : -1
-            if (self.selectedIndex == -1) {
+            self.selectedETAIndex = (self.selectedETAIndex != indexPath.row) ? indexPath.row : -1
+            if (self.selectedETAIndex == -1) {
                 selectedStopETAView = nil
             }
             // expand view
@@ -187,7 +203,7 @@ extension StopListPageViewController: CLLocationManagerDelegate{
         }
         print("GoogleMap: didChangeAuthorization")
         
-        manager.requestLocation()
+//        manager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -281,6 +297,7 @@ extension StopListPageViewController {
         self.expandViewBtn.setImage(img, for: .normal)
 //        self.expandViewBtn.tintColor =
         self.expandViewBtn.addTarget(self, action: #selector(expandView), for: .touchUpInside)
+        self.expandViewBtn.addTarget(self, action: #selector(expandView), for: .touchUpOutside)
         
         self.tableViewTopMarginConstraint.constant = self.minTopMarginConstraint
     }
@@ -312,11 +329,11 @@ extension StopListPageViewController {
         self.stopList = stopList
         self.bookmarks = bookmarks
         if let selectedStopId = selectedStopId{
-            self.selectedIndex = self.stopList.firstIndex(where: {$0.stopId == selectedStopId}) ?? -1
+            self.selectedETAIndex = self.stopList.firstIndex(where: {$0.stopId == selectedStopId}) ?? -1
         }
         self.tableView.reloadData {
             if let _ = selectedStopId{
-                self.tableView.scrollToRow(at: IndexPath(row: self.selectedIndex, section: 0), at: .top, animated: true)
+                self.tableView.scrollToRow(at: IndexPath(row: self.selectedETAIndex, section: 0), at: .top, animated: true)
             }
         }
         self.displayGoogleMapView()
@@ -342,7 +359,11 @@ extension StopListPageViewController {
     
     @objc func onSave(){
         if let resp = self.getRouteStopResponse{
-            self.router?.responseGetRouteStopService(resp: resp)
+            if (resp.stopSeqList.count == 0){
+                self.showAlert("general_save".localized(), "stop_service_err_at_least_pick".localized()) { (_) in}
+            }else{
+                self.router?.responseGetRouteStopService(resp: resp)
+            }
         }
         
     }

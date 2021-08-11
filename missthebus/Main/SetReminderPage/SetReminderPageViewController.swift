@@ -23,6 +23,7 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     var router: (NSObjectProtocol & SetReminderPageRoutingLogic & SetReminderPageDataPassing)?
     
     // scroll view
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
     // name view
@@ -51,7 +52,11 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     
     // route and stop table view
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    var viewContentHeight: CGFloat{
+        return self.height - (self.navigationController?.navigationBar.frame.height ?? 0) - (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0) + 1
+//        return self.addRouteBtn.frame.maxY + self.tableView.contentSize.height
+    }
     
     var reminderType: StopReminder.ReminderType = .OTHER
     var daysOfWeekList = [WeekDayPicker]()
@@ -86,21 +91,30 @@ extension SetReminderPageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         if let resp = self.getRouteStopResponse {
             print("resp: \(resp.routeNum) | \(resp.stopSeqList)")
             self.interactor?.getRouteStopResponse(resp: resp)
+            self.getRouteStopResponse = nil
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("viewDidAppear")
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.setNameTextfield()
+        
+    }
+    
+    private func autoExpand(){
+        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if (self.tableView.frame.maxY < self.viewContentHeight){
+                self.scrollView.frame.size = CGSize(width: self.width, height: self.viewContentHeight)
+            }else{
+                self.scrollView.frame.size = CGSize(width: self.width, height: self.tableView.frame.maxY)
+            }
+
+//            print("autoExpand after:  scrollview: \(self.scrollView.contentSize.height) | table real height: \(self.tableView.contentSize.height) | ui height: \(self.tableView.frame.height) | table maxY: \(self.tableView.frame.minY) - \(self.tableView.frame.maxY)")
+        }
     }
 }
 
@@ -122,6 +136,9 @@ extension SetReminderPageViewController {
         self.tableView.backgroundColor = UIColor.SoftUI.major
         self.tableView.separatorStyle = .none
         self.tableView.isScrollEnabled = false
+        self.tableView.rowHeight = 120
+        self.tableView.estimatedRowHeight = 0
+        
     }
     
     
@@ -154,7 +171,7 @@ extension SetReminderPageViewController {
         self.endTimePicker.datePickerMode = .time
         self.endTimePicker.locale = Locale(identifier: "en_GB")
         
-        self.addRouteLabel.text = "reminder_add_stop".localized() + " (0/5)"
+        self.addRouteLabel.text = "reminder_add_stop".localized() + " (\(self.routes.count)/5)"
         self.addRouteLabel.useTextStyle(.label_sub)
         self.addRouteBtn.addTarget(self, action: #selector(addNewRouteStop), for: .touchUpInside)
         
@@ -163,19 +180,26 @@ extension SetReminderPageViewController {
     
     @objc private func addNewRouteStop(){
         print("addNewRouteStop")
-        self.router?.routeToSearchPage()
+        if (self.routes.count >= 5){
+            self.showAlert("general_remind".localized(), "reminder_err_at_most_route".localized()) { (_) in}
+        }else{
+            self.router?.routeToSearchPage()
+        }
+        
     }
     
     func updateRouteAndStop(viewModel: SetReminderPage.DisplayItem.RouteAndStopViewModel){
-        print("updateRouteAndStop")
         self.routes = viewModel.routes
-        self.tableView.reloadData()
+        self.addRouteLabel.text = "reminder_add_stop".localized() + " (\(self.routes.count)/5)"
+        self.tableView.reloadData{
+            self.autoExpand()
+        }
     }
 }
 
 extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return routes.count
+        return self.routes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -184,6 +208,21 @@ extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            self.routes.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
     }
     
     

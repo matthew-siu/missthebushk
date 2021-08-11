@@ -35,13 +35,14 @@ class ReminderRouteTableViewCell: UITableViewCell {
         self.tableView.isScrollEnabled = false
         self.tableView.separatorStyle = .none
         
+        self.destNumLabel.textColor = UIColor.MTB.darkGray
     }
     
     func setInfo(_ route: SetReminderPage.RouteAndStop){
         self.route = route
         if let route = self.route{
-            self.routeNumLabel.text = "\("route_to".localized()) \(route.routeNum)"
-            self.destNumLabel.text = route.destStop
+            self.routeNumLabel.text = route.routeNum
+            self.destNumLabel.text = "\("route_to".localized()) \(route.destStop)"
             self.tableView.reloadData()
         }
     }
@@ -71,7 +72,7 @@ extension ReminderRouteTableViewCell: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 25
     }
     
 }

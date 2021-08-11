@@ -9,6 +9,7 @@
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
 // Main Page
+"app_name" = "Miss The Bus";
 "main_no_upcoming_reminder" = "No upcoming reminders";
 "main_no_reminder" = "No reminders";
 "main_no_bookmark" = "No bookmarks";
@@ -31,6 +32,8 @@
 "stop_mins" = "min(s)";
 "stop_bookmark_succeed" = "Bookmarked";
 "stop_unbookmark_succeed" = "Bookmark cancelled";
+"stop_service_err_at_least_pick" = "Please select at least one stop.";
+"stop_service_err_at_most_pick" = "You can only select at most two stops.";
 
 // Set Reminder
 "create_reminder_title" = "Add Reminder";
@@ -46,6 +49,7 @@
 "reminder_time_label" = "Please choose the notice time and period.";
 "reminder_create_succeed" = "Create succeed.";
 "reminder_update_succeed" = "Update succeed.";
+"reminder_err_at_most_route" = "You can only set at most five routes.";
 
 "reminder_tag_work" = "Work";
 "reminder_tag_school" = "School";
@@ -71,12 +75,8 @@
 "general_saved" = "Saved";
 "general_done" = "Done";
 "general_setting" = "Setting";
-
-
-
-
-
-
+"general_error" = "Error";
+"general_remind" = "Reminder";
 
 
 

@@ -30,8 +30,7 @@ extension SetReminderPagePresenter {
         
         
         if (mode == .UPDATE){
-//            let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: .UPDATE, reminderName: reminder.name, reminderType: reminder.type, routeNum: reminder.routeNum, busCompany: reminder.company, destStopName: route?.destStop, currentStopName: stop?.name, time: reminder.time, period: reminder.period)
-//            self.viewController?.displayCreateState(viewModel: viewModel)
+            
         }else{
             let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: .CREATE)
             self.viewController?.displayCreateState(viewModel: viewModel)
@@ -40,10 +39,10 @@ extension SetReminderPagePresenter {
     
     func updateRouteAndStop(_ reminder: StopReminder){
         var routes = [SetReminderPage.RouteAndStop]()
-        for (index, route) in reminder.routes.enumerated(){
+        for route in reminder.routes{
             var routeStops = [SetReminderPage.RouteStop]()
             for seq in route.stopIndex{
-                let stop = SetReminderPage.RouteStop(seq: seq, label: route.getStop(index)?.name ?? "")
+                let stop = SetReminderPage.RouteStop(seq: seq, label: route.getRoute()?.stopList[seq].stop?.name ?? "")
                 routeStops.append(stop)
             }
             routes.append(SetReminderPage.RouteAndStop(routeNum: route.routeNum, bound: route.bound, service: route.serviceType, destStop: route.getRoute()?.destStop ?? "", targetStops: routeStops))

@@ -12,6 +12,7 @@ import UIKit
 protocol SetReminderPageRoutingLogic
 {
     func routeToSearchPage()
+//    func routeToStopListPage()
 }
 
 // MARK: - The possible elements that can be

@@ -38,11 +38,13 @@ extension StopListPageRouter {
     }
     
     func responseGetRouteStopService(resp: SetReminderPage.GetRouteStopResponse){
+        var sortedResp = resp // ascending order
+        sortedResp.stopSeqList.sort()
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         if let rootVC = window?.rootViewController as? NavigationController {
             for vc in rootVC.viewControllers{
                 if let vc = vc as? SetReminderPageViewController{
-                    vc.getRouteStopResponse = resp
+                    vc.getRouteStopResponse = sortedResp
                 }
             }
         }

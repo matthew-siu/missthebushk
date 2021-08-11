@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="1056"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m89-Tk-Dsg" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1100"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qll-nP-m0T" userLabel="NameView" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
@@ -225,6 +225,8 @@
                                                     <constraint firstAttribute="height" priority="250" constant="250" id="W12-Xw-7i6"/>
                                                     <constraint firstItem="rsm-B6-WXc" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="top" constant="10" id="kGw-LE-9ul"/>
                                                     <constraint firstItem="rsm-B6-WXc" firstAttribute="leading" secondItem="i2E-M0-v1L" secondAttribute="leading" constant="20" id="oCa-XL-5Lt"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rsm-B6-WXc" secondAttribute="bottom" constant="10" id="otC-tW-OWP"/>
+                                                    <constraint firstItem="rsm-B6-WXc" firstAttribute="centerY" secondItem="i2E-M0-v1L" secondAttribute="centerY" id="z52-84-A30"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcP-Tv-k4B" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
@@ -258,28 +260,31 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UMH-IE-Wn6">
-                                                <rect key="frame" x="0.0" y="470" width="414" height="530"/>
+                                                <rect key="frame" x="0.0" y="470" width="414" height="610"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="250" constant="610" id="CEr-ES-jr9"/>
+                                                </constraints>
                                             </tableView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="i2E-M0-v1L" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="2op-bs-hwC"/>
-                                            <constraint firstAttribute="bottom" secondItem="UMH-IE-Wn6" secondAttribute="bottom" id="93f-vI-vUf"/>
-                                            <constraint firstItem="UMH-IE-Wn6" firstAttribute="top" secondItem="KcP-Tv-k4B" secondAttribute="bottom" constant="10" id="EBv-ft-SP4"/>
-                                            <constraint firstAttribute="height" priority="250" constant="1000" id="JZ1-cB-qZe"/>
-                                            <constraint firstItem="UMH-IE-Wn6" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="JxT-HU-5VE"/>
-                                            <constraint firstItem="KcP-Tv-k4B" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" constant="20" id="MVx-Wx-8mT"/>
-                                            <constraint firstItem="i2E-M0-v1L" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="bottom" id="P1C-dp-7Qo"/>
-                                            <constraint firstAttribute="trailing" secondItem="UMH-IE-Wn6" secondAttribute="trailing" id="dIe-Go-cXF"/>
-                                            <constraint firstAttribute="trailing" secondItem="qll-nP-m0T" secondAttribute="trailing" id="dfW-o3-bl7"/>
-                                            <constraint firstItem="qll-nP-m0T" firstAttribute="top" secondItem="m89-Tk-Dsg" secondAttribute="top" id="etk-9H-SsM"/>
-                                            <constraint firstItem="qll-nP-m0T" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="f27-va-qlv"/>
-                                            <constraint firstAttribute="trailing" secondItem="i2E-M0-v1L" secondAttribute="trailing" id="tTk-Va-o4i"/>
-                                            <constraint firstAttribute="trailing" secondItem="KcP-Tv-k4B" secondAttribute="trailing" constant="20" id="z8c-Mo-zOj"/>
-                                            <constraint firstItem="KcP-Tv-k4B" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="bottom" constant="10" id="zbR-fS-b17"/>
+                                            <constraint firstItem="i2E-M0-v1L" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="10q-uX-Urg"/>
+                                            <constraint firstAttribute="trailing" secondItem="KcP-Tv-k4B" secondAttribute="trailing" constant="20" id="1SP-aB-cyR"/>
+                                            <constraint firstAttribute="trailing" secondItem="UMH-IE-Wn6" secondAttribute="trailing" id="3bP-Kz-8g5"/>
+                                            <constraint firstItem="UMH-IE-Wn6" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="9hm-Vr-TcA"/>
+                                            <constraint firstItem="UMH-IE-Wn6" firstAttribute="top" secondItem="KcP-Tv-k4B" secondAttribute="bottom" constant="10" id="B91-el-ysB"/>
+                                            <constraint firstAttribute="trailing" secondItem="qll-nP-m0T" secondAttribute="trailing" id="WDQ-QD-S26"/>
+                                            <constraint firstItem="qll-nP-m0T" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" id="WcV-eA-Tt6"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UMH-IE-Wn6" secondAttribute="bottom" constant="20" id="ZDC-BJ-krH"/>
+                                            <constraint firstAttribute="trailing" secondItem="i2E-M0-v1L" secondAttribute="trailing" id="d3K-2I-Vii"/>
+                                            <constraint firstItem="KcP-Tv-k4B" firstAttribute="leading" secondItem="m89-Tk-Dsg" secondAttribute="leading" constant="20" id="kzk-IZ-0Bu"/>
+                                            <constraint firstItem="KcP-Tv-k4B" firstAttribute="top" secondItem="i2E-M0-v1L" secondAttribute="bottom" constant="10" id="osx-Xc-lt4"/>
+                                            <constraint firstItem="qll-nP-m0T" firstAttribute="top" secondItem="m89-Tk-Dsg" secondAttribute="top" id="wE1-ya-z6e"/>
+                                            <constraint firstItem="i2E-M0-v1L" firstAttribute="top" secondItem="qll-nP-m0T" secondAttribute="bottom" id="zBE-zI-7sb"/>
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="m89-Tk-Dsg" secondAttribute="trailing" id="NcA-iJ-xjb"/>
                                     <constraint firstAttribute="bottom" secondItem="m89-Tk-Dsg" secondAttribute="bottom" id="UYN-Ba-GU1"/>
@@ -294,6 +299,7 @@
                             <constraint firstAttribute="bottom" secondItem="t22-Py-Q73" secondAttribute="bottom" id="DZG-vW-JcH"/>
                             <constraint firstItem="m89-Tk-Dsg" firstAttribute="width" secondItem="WN9-36-gAN" secondAttribute="width" id="GAe-p8-fd8"/>
                             <constraint firstItem="t22-Py-Q73" firstAttribute="trailing" secondItem="k6i-fr-Cqe" secondAttribute="trailing" id="GFJ-mu-ZFC"/>
+                            <constraint firstItem="m89-Tk-Dsg" firstAttribute="height" secondItem="WN9-36-gAN" secondAttribute="height" priority="250" id="L9a-kd-gdy"/>
                             <constraint firstItem="t22-Py-Q73" firstAttribute="top" secondItem="k6i-fr-Cqe" secondAttribute="top" id="pyS-5Q-SpT"/>
                             <constraint firstItem="t22-Py-Q73" firstAttribute="leading" secondItem="k6i-fr-Cqe" secondAttribute="leading" id="qbK-mb-xzB"/>
                         </constraints>
@@ -308,8 +314,10 @@
                         <outlet property="nameView" destination="qll-nP-m0T" id="XFD-Su-LWw"/>
                         <outlet property="reminderIcon" destination="otM-tg-8mY" id="49e-AN-cQu"/>
                         <outlet property="reminderNamesCollectionView" destination="tUb-uH-7xb" id="mRQ-Zw-iVB"/>
+                        <outlet property="scrollView" destination="t22-Py-Q73" id="7cb-au-sql"/>
                         <outlet property="startTimePicker" destination="iaZ-zc-CaN" id="vaW-Y9-sGW"/>
                         <outlet property="tableView" destination="UMH-IE-Wn6" id="NbX-Oo-Fmu"/>
+                        <outlet property="tableViewHeightConstraint" destination="CEr-ES-jr9" id="50n-Xv-B6X"/>
                         <outlet property="timePickerLabel" destination="kCt-i1-YYB" id="T7m-xu-bL6"/>
                         <outlet property="timePickerView" destination="2zD-h7-Wea" id="n0C-0q-ni2"/>
                         <outlet property="timeView" destination="rsm-B6-WXc" id="cWy-yP-0bU"/>

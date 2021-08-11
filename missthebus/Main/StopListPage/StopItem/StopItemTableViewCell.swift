@@ -47,8 +47,15 @@ class StopItemTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+        
+        if (type == .GetRouteStopService){
+            contentView.backgroundColor = UIColor.SoftUI.major
+            self.softBgView.isSelected = isSelected
+            self.missBusIcon.isHidden = !isSelected
+            self.selectedBackgroundView?.isHidden = true
+        }
+        
     }
 
 }
@@ -58,6 +65,7 @@ extension StopItemTableViewCell{
     
     func initUI(){
         self.missBusIcon.text = "👋🏻"
+        self.missBusIcon.isHidden = true
         self.bookmarkBtn.tintColor = #colorLiteral(red: 0.4678121805, green: 0.4678237438, blue: 0.4678175449, alpha: 1)
         
         self.layer.shadowRadius = self.frame.width / 2 // already type in storyboard.
@@ -65,6 +73,13 @@ extension StopItemTableViewCell{
         self.addShadow(self.missBusIcon)
         self.addShadow(self.bookmarkBtn, opacity: 0.5)
         
+        self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
+        self.softBgView.cornerRadius = 10
+        self.softBgView.shadowOffset = .init(width: 1, height: 1.5)
+        self.softBgView.shadowOpacity = 1
+        
+        self.etaCollectionView.delegate = self
+        self.etaCollectionView.dataSource = self
         
         self.bookmarkBtn.addTarget(self, action: #selector(onClickBookmark), for: .touchUpInside)
     }
@@ -99,19 +114,12 @@ extension StopItemTableViewCell{
     func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int, isBookmarked: Bool){
         self.type = .NormalNavigation
         
-        self.etaCollectionView.delegate = self
-        self.etaCollectionView.dataSource = self
-        
         self.stop = stop
         self.indexLabel.text = "\(index)."
         self.indexLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         
         self.stopNameLabel.text = "\(self.stop?.name ?? "---")"
         self.stopNameLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
-        self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
-        self.softBgView.cornerRadius = 10
-        self.softBgView.shadowOffset = .init(width: 1, height: 1.5)
-        self.softBgView.shadowOpacity = 1
         
         // route indicator
         self.upperRouteLine.alpha = (index == 1) ? 0 : 1
@@ -121,19 +129,10 @@ extension StopItemTableViewCell{
         
         self.setIsBookMark(isBookmarked)
         
+        self.stopNameLabel.numberOfLines = isSelected ? 0 : 1
+        self.etaCollectionView.isHidden = !isSelected
         if (isSelected){ // expanded view
-            self.stopNameLabel.numberOfLines = 0
             self.etaCollectionView.reloadData()
-            self.etaCollectionView.isHidden = false
-//            self.etaCollectionView.backgroundColor = UIColor.SoftUI.major
-        }else{ // default view
-            self.stopNameLabel.numberOfLines = 1
-            self.etaCollectionView.isHidden = true
-        }
-        
-        if (type == .GetRouteStopService){
-            self.bookmarkBtnWidthConstraint.constant = 0
-            self.bookmarkBtn.isHidden = true
         }
     }
     
@@ -141,35 +140,21 @@ extension StopItemTableViewCell{
     func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int){
         self.type = .GetRouteStopService
         
-        self.etaCollectionView.delegate = self
-        self.etaCollectionView.dataSource = self
-        
         self.stop = stop
         self.indexLabel.text = "\(index)."
         self.indexLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
         
         self.stopNameLabel.text = "\(self.stop?.name ?? "---")"
         self.stopNameLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
-        self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
-        self.softBgView.cornerRadius = 10
-        self.softBgView.shadowOffset = .init(width: 1, height: 1.5)
-        self.softBgView.shadowOpacity = 1
         
         // route indicator
         self.upperRouteLine.alpha = (index == 1) ? 0 : 1
         self.lowerRouteLine.alpha = (index == count) ? 0 : 1
         
         self.softBgView.isSelected = isSelected
-        
-        if (isSelected){ // expanded view
-            self.stopNameLabel.numberOfLines = 0
-            self.etaCollectionView.reloadData()
-            self.etaCollectionView.isHidden = false
-//            self.etaCollectionView.backgroundColor = UIColor.SoftUI.major
-        }else{ // default view
-            self.stopNameLabel.numberOfLines = 1
-            self.etaCollectionView.isHidden = true
-        }
+        self.missBusIcon.isHidden = !isSelected
+        self.stopNameLabel.numberOfLines = 1
+        self.etaCollectionView.isHidden = true
         
         self.bookmarkBtnWidthConstraint.constant = 0
         self.bookmarkBtn.isHidden = true

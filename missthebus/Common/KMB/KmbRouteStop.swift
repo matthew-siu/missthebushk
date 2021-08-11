@@ -33,4 +33,8 @@ class KmbRouteStop: Codable{
     var sequence: Int{
         return Int(self.seq) ?? -1
     }
+    
+    var stop: KmbStop?{
+        return KmbManager.getStop(stopId: self.stopId)
+    }
 }
