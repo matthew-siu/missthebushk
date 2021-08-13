@@ -93,7 +93,7 @@
                                                                 <rect key="frame" x="20" y="60.5" width="334" height="110"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleAspectFit" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vgB-CH-Wao">
-                                                                        <rect key="frame" x="52" y="5" width="230" height="100"/>
+                                                                        <rect key="frame" x="117" y="5" width="100" height="100"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7q-jL-oXh" userLabel="StartTimeView">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -114,36 +114,6 @@
                                                                                     <constraint firstAttribute="trailing" secondItem="iaZ-zc-CaN" secondAttribute="trailing" id="VYS-3A-0pQ"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="iaZ-zc-CaN" secondAttribute="bottom" id="lQD-WV-OjG"/>
                                                                                     <constraint firstAttribute="width" constant="100" id="zX6-ml-mPt"/>
-                                                                                </constraints>
-                                                                            </view>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ip-LP-4mI">
-                                                                                <rect key="frame" x="110" y="40" width="10" height="20.5"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="width" constant="10" id="Vdr-Tb-bvf"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UoG-0q-CFF" userLabel="EndTimeView">
-                                                                                <rect key="frame" x="130" y="0.0" width="100" height="100"/>
-                                                                                <subviews>
-                                                                                    <datePicker contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-pw-KcG">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                                                        <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
-                                                                                            <!--1970-01-01 11:00:00 +0000-->
-                                                                                        </date>
-                                                                                        <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                                                                                            <!--2037-12-31 11:00:00 +0000-->
-                                                                                        </date>
-                                                                                    </datePicker>
-                                                                                </subviews>
-                                                                                <constraints>
-                                                                                    <constraint firstItem="NF7-pw-KcG" firstAttribute="top" secondItem="UoG-0q-CFF" secondAttribute="top" id="O1R-E3-V32"/>
-                                                                                    <constraint firstAttribute="width" constant="100" id="Tim-iH-WHG"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="NF7-pw-KcG" secondAttribute="trailing" id="VOH-Nk-Lb4"/>
-                                                                                    <constraint firstItem="NF7-pw-KcG" firstAttribute="leading" secondItem="UoG-0q-CFF" secondAttribute="leading" id="eH6-pJ-uPa"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="NF7-pw-KcG" secondAttribute="bottom" id="jcn-9v-Kl4"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
@@ -309,7 +279,6 @@
                         <outlet property="addRouteBtn" destination="KcP-Tv-k4B" id="ojj-RZ-F29"/>
                         <outlet property="addRouteLabel" destination="DdZ-rD-wAt" id="WAt-8j-QfG"/>
                         <outlet property="contentView" destination="m89-Tk-Dsg" id="edP-bb-9cg"/>
-                        <outlet property="endTimePicker" destination="NF7-pw-KcG" id="IlP-22-tCp"/>
                         <outlet property="nameTextfield" destination="fGg-mh-FzE" id="ebg-uG-vRC"/>
                         <outlet property="nameView" destination="qll-nP-m0T" id="XFD-Su-LWw"/>
                         <outlet property="reminderIcon" destination="otM-tg-8mY" id="49e-AN-cQu"/>

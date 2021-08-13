@@ -45,6 +45,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var googleMapMarker = [GMSMarker]()
     var selectedPosition: CLLocationCoordinate2D?
     var selectedETAIndex = -1
+    var selectedStopSeqList = [Int]()
     var selectedStopETAView: StopListPage.DisplayItem.ETAViewModel?
     var getRouteStopResponse: SetReminderPage.GetRouteStopResponse?
     
@@ -322,6 +323,7 @@ extension StopListPageViewController {
         if (self.type == .GetRouteStopService){
             self.setGetRouteStopServiceState()
             self.getRouteStopResponse = self.interactor?.getRouteStopResponse()
+            self.tableView.reloadData()
         }
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"

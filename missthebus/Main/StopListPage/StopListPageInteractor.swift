@@ -38,6 +38,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     var etaTimer: Timer?
     var selectedStopId: String?
     var type: StopListPage.RequestType
+    var selectedStopSeqList: [Int]
     
     // Init
     init(request: StopListPageBuilder.BuildRequest) {
@@ -45,6 +46,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
         self.selectedStopId = request.stop?.stopId
         self.route = request.route
         self.type = request.type
+        self.selectedStopSeqList = request.stops
     }
 }
 
@@ -65,7 +67,7 @@ extension StopListPageInteractor {
         // load all related reminder()
         self.loadAllStopRemindersOfRoute()
         
-        self.presenter?.displayInitialState(route: route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.selectedStopId, requestType: self.type)
+        self.presenter?.displayInitialState(route: route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.selectedStopId, requestType: self.type, selectedStopSeqList: self.selectedStopSeqList)
         
         if let selectedStopId = self.selectedStopId {
             self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
@@ -100,7 +102,7 @@ extension StopListPageInteractor {
     
     func getRouteStopResponse() -> SetReminderPage.GetRouteStopResponse?{
         
-        return SetReminderPage.GetRouteStopResponse(routeNum: route.route, bound: route.bound, serviceType: route.serviceType, stopSeqList: [])
+        return SetReminderPage.GetRouteStopResponse(routeNum: route.route, bound: route.bound, serviceType: route.serviceType, stopSeqList: self.selectedStopSeqList)
         
     }
 }

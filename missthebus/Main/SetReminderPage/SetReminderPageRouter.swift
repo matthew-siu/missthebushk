@@ -12,7 +12,7 @@ import UIKit
 protocol SetReminderPageRoutingLogic
 {
     func routeToSearchPage()
-//    func routeToStopListPage()
+    func routeToStopListPage(index: Int)
 }
 
 // MARK: - The possible elements that can be
@@ -24,6 +24,7 @@ protocol SetReminderPageDataPassing
 // MARK: - Main router body
 class SetReminderPageRouter: NSObject, SetReminderPageRoutingLogic, SetReminderPageDataPassing
 {
+    
     weak var viewController: SetReminderPageViewController?
     var dataStore: SetReminderPageDataStore?
 }
@@ -34,16 +35,6 @@ extension SetReminderPageRouter {
     func routeToSearchPage() {
         let request = SearchPageBuilder.BuildRequest(type: .GetRouteStopService)
         let vc = SearchPageBuilder.createScene(request: request)
-//        vc.modalPresentationStyle = .fullScreen
-        
-//        let transition = CATransition()
-//        transition.duration = 0.5
-//        transition.type = .push
-//        transition.subtype = .fromTop
-//        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-//        self.viewController?.navigationController?.view.layer.add(transition, forKey: kCATransition)
-//        self.viewController?.navigationController?.pushViewController(vc, animated: false)
-        
         
         let navController = NavigationController(rootViewController: vc)
         navController.modalPresentationStyle = .fullScreen
@@ -51,6 +42,23 @@ extension SetReminderPageRouter {
         window?.rootViewController?.present(navController, animated: true, completion: { () in
             NSLog("search")
         })
+    }
+    
+    
+    func routeToStopListPage(index: Int) {
+        if let route = self.dataStore?.getRouteStopsRequestQuery(index: index), let routeObj = KmbManager.getRoute(route: route.routeNum, bound: route.bound, serviceType: route.serviceType){
+            
+            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil, type: .GetRouteStopService, stops: route.stopIndex)
+            let vc = StopListPageBuilder.createScene(request: request)
+            
+            let navController = NavigationController(rootViewController: vc)
+            navController.modalPresentationStyle = .fullScreen
+            let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            window?.rootViewController?.present(navController, animated: true, completion: { () in
+                NSLog("search")
+            })
+        }
+        
     }
     
 }

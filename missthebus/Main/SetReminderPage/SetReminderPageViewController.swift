@@ -36,7 +36,6 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     @IBOutlet weak var timeView: SoftUIView!
     @IBOutlet weak var timePickerView: SoftUIView!
     @IBOutlet weak var startTimePicker: UIDatePicker!
-    @IBOutlet weak var endTimePicker: UIDatePicker!
     @IBOutlet weak var weekSunBtn: WeekDayPicker! // 0
     @IBOutlet weak var weekMonBtn: WeekDayPicker! // 1
     @IBOutlet weak var weekTueBtn: WeekDayPicker!
@@ -83,7 +82,6 @@ extension SetReminderPageViewController {
         self.tableView.dataSource = self
         
         self.reminderNamesCollectionView.register(CollectionViewCell.itemCell.nib, forCellWithReuseIdentifier: CollectionViewCell.itemCell.reuseId)
-        self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         self.daysOfWeekList = [self.weekSunBtn, self.weekMonBtn, self.weekTueBtn, self.weekWedBtn, self.weekThuBtn, self.weekFriBtn, self.weekSatBtn]
         self.initUI()
         self.interactor?.displayInitialState()
@@ -134,10 +132,10 @@ extension SetReminderPageViewController {
         self.reminderNamesCollectionView.backgroundColor = UIColor.SoftUI.major
         self.reminderNamesCollectionView.clipsToBounds = false
         self.tableView.backgroundColor = UIColor.SoftUI.major
+        self.tableView.allowsSelection = true
         self.tableView.separatorStyle = .none
         self.tableView.isScrollEnabled = false
-        self.tableView.rowHeight = 120
-        self.tableView.estimatedRowHeight = 0
+        self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         
     }
     
@@ -168,15 +166,16 @@ extension SetReminderPageViewController {
         self.timePickerLabel.useTextStyle(.label_sub)
         self.startTimePicker.datePickerMode = .time
         self.startTimePicker.locale = Locale(identifier: "en_GB")
-        self.endTimePicker.datePickerMode = .time
-        self.endTimePicker.locale = Locale(identifier: "en_GB")
+//        self.startTimePicker.addTarget(self, action: #selector(self.onDateValueChanged), for: .valueChanged)
         
         self.addRouteLabel.text = "reminder_add_stop".localized() + " (\(self.routes.count)/5)"
         self.addRouteLabel.useTextStyle(.label_sub)
         self.addRouteBtn.addTarget(self, action: #selector(addNewRouteStop), for: .touchUpInside)
-        
-        
     }
+    
+//    @objc private func onDateValueChanged(){
+//
+//    }
     
     @objc private func addNewRouteStop(){
         print("addNewRouteStop")
@@ -222,7 +221,7 @@ extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        self.router?.routeToStopListPage(index: indexPath.row)
     }
     
     

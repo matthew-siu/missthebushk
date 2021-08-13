@@ -150,7 +150,7 @@ extension StopItemTableViewCell{
         // route indicator
         self.upperRouteLine.alpha = (index == 1) ? 0 : 1
         self.lowerRouteLine.alpha = (index == count) ? 0 : 1
-        
+
         self.softBgView.isSelected = isSelected
         self.missBusIcon.isHidden = !isSelected
         self.stopNameLabel.numberOfLines = 1

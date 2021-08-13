@@ -19,7 +19,7 @@ protocol SetReminderPageBusinessLogic
 // MARK: - Datas retain in interactor defines here
 protocol SetReminderPageDataStore
 {
-    
+    func getRouteStopsRequestQuery(index: Int) -> StopReminder.Route
 }
 
 // MARK: - Interactor Body
@@ -73,5 +73,9 @@ extension SetReminderPageInteractor {
     func getRouteStopResponse(resp: SetReminderPage.GetRouteStopResponse) {
         self.reminder.routes.append(StopReminder.Route(routeNum: resp.routeNum, bound: resp.bound, serviceType: resp.serviceType, stopIndex: resp.stopSeqList))
         self.presenter?.updateRouteAndStop(self.reminder)
+    }
+    
+    func getRouteStopsRequestQuery(index: Int) -> StopReminder.Route{
+        return self.reminder.routes[index]
     }
 }

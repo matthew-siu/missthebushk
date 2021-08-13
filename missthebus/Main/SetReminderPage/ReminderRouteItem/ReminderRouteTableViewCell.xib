@@ -23,9 +23,13 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOR-fu-6H1" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
                                 <rect key="frame" x="20" y="10" width="280" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VpI-lG-27J">
+                                <rect key="frame" x="10" y="15" width="300" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vl1-ES-zFN">
-                                        <rect key="frame" x="10" y="37" width="60" height="26.5"/>
+                                        <rect key="frame" x="15" y="32" width="60" height="26.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="KF8-XC-DXt"/>
                                         </constraints>
@@ -33,35 +37,38 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="33" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lqY-f3-L6h">
-                                        <rect key="frame" x="70" y="15" width="200" height="48"/>
+                                    <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="33" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lqY-f3-L6h">
+                                        <rect key="frame" x="75" y="10" width="215" height="53"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGn-Sc-O1w">
-                                        <rect key="frame" x="70" y="68" width="210" height="17"/>
+                                        <rect key="frame" x="75" y="68" width="225" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="IGn-Sc-O1w" firstAttribute="leading" secondItem="vl1-ES-zFN" secondAttribute="trailing" id="LQP-BA-Qgf"/>
-                                    <constraint firstItem="lqY-f3-L6h" firstAttribute="leading" secondItem="IGn-Sc-O1w" secondAttribute="leading" id="QaN-dS-N1U"/>
-                                    <constraint firstItem="vl1-ES-zFN" firstAttribute="leading" secondItem="oOR-fu-6H1" secondAttribute="leading" constant="10" id="Tl2-wI-1V9"/>
-                                    <constraint firstAttribute="bottom" secondItem="IGn-Sc-O1w" secondAttribute="bottom" constant="15" id="VBb-bH-eA0"/>
-                                    <constraint firstItem="vl1-ES-zFN" firstAttribute="centerY" secondItem="oOR-fu-6H1" secondAttribute="centerY" id="en3-xR-wEU"/>
-                                    <constraint firstAttribute="trailing" secondItem="lqY-f3-L6h" secondAttribute="trailing" constant="10" id="hth-0P-S1D"/>
-                                    <constraint firstAttribute="trailing" secondItem="IGn-Sc-O1w" secondAttribute="trailing" id="imY-Ws-HTo"/>
-                                    <constraint firstItem="lqY-f3-L6h" firstAttribute="top" secondItem="oOR-fu-6H1" secondAttribute="top" constant="15" id="tA0-06-UQb"/>
-                                    <constraint firstItem="IGn-Sc-O1w" firstAttribute="top" secondItem="lqY-f3-L6h" secondAttribute="bottom" constant="5" id="yCY-Ca-JZ4"/>
+                                    <constraint firstItem="lqY-f3-L6h" firstAttribute="top" secondItem="VpI-lG-27J" secondAttribute="top" constant="10" id="L04-wp-9lj"/>
+                                    <constraint firstItem="IGn-Sc-O1w" firstAttribute="leading" secondItem="vl1-ES-zFN" secondAttribute="trailing" id="LcH-lL-eIV"/>
+                                    <constraint firstItem="IGn-Sc-O1w" firstAttribute="top" secondItem="lqY-f3-L6h" secondAttribute="bottom" constant="5" id="Ogg-DR-rkE"/>
+                                    <constraint firstItem="vl1-ES-zFN" firstAttribute="centerY" secondItem="VpI-lG-27J" secondAttribute="centerY" id="TWV-M8-yBl"/>
+                                    <constraint firstItem="vl1-ES-zFN" firstAttribute="leading" secondItem="VpI-lG-27J" secondAttribute="leading" constant="15" id="TzK-Zn-gnB"/>
+                                    <constraint firstItem="lqY-f3-L6h" firstAttribute="leading" secondItem="IGn-Sc-O1w" secondAttribute="leading" id="e5G-u0-jtC"/>
+                                    <constraint firstAttribute="trailing" secondItem="lqY-f3-L6h" secondAttribute="trailing" constant="10" id="hKI-vO-LzK"/>
+                                    <constraint firstAttribute="bottom" secondItem="IGn-Sc-O1w" secondAttribute="bottom" constant="5" id="mdQ-vf-zPd"/>
+                                    <constraint firstAttribute="trailing" secondItem="IGn-Sc-O1w" secondAttribute="trailing" id="v8F-Ua-Waw"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="oOR-fu-6H1" firstAttribute="leading" secondItem="UY5-v2-wCB" secondAttribute="leading" constant="20" id="0rG-vt-eeB"/>
+                            <constraint firstAttribute="bottom" secondItem="VpI-lG-27J" secondAttribute="bottom" constant="15" id="9QP-m6-dZR"/>
                             <constraint firstAttribute="bottom" secondItem="oOR-fu-6H1" secondAttribute="bottom" constant="10" id="Ih2-e0-Fz9"/>
+                            <constraint firstItem="VpI-lG-27J" firstAttribute="top" secondItem="UY5-v2-wCB" secondAttribute="top" constant="15" id="dLH-Pq-yWR"/>
                             <constraint firstAttribute="trailing" secondItem="oOR-fu-6H1" secondAttribute="trailing" constant="20" id="evU-eP-wlj"/>
+                            <constraint firstAttribute="trailing" secondItem="VpI-lG-27J" secondAttribute="trailing" constant="10" id="nmw-b9-XYr"/>
+                            <constraint firstItem="VpI-lG-27J" firstAttribute="leading" secondItem="UY5-v2-wCB" secondAttribute="leading" constant="10" id="ssN-rz-CHi"/>
                             <constraint firstItem="oOR-fu-6H1" firstAttribute="top" secondItem="UY5-v2-wCB" secondAttribute="top" constant="10" id="tum-V8-zWI"/>
                         </constraints>
                     </view>

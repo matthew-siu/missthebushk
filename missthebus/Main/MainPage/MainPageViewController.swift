@@ -75,7 +75,6 @@ extension MainPageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         self.interactor?.loadAllStopBookmarksOfRoute()
         
     }
@@ -157,7 +156,6 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
             self.router?.routeToStopListPage(item: self.bookmarkItems[index])
         }
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.bookmarkItems.count == 0) ? 1 : self.bookmarkItems.count

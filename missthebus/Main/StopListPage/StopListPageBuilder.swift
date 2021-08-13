@@ -42,5 +42,6 @@ extension StopListPageBuilder {
         let route: KmbRoute
         let stop: KmbStop?
         var type: StopListPage.RequestType = .NormalNavigation
+        var stops: [Int] = [] // stop sequence list
     }
 }
