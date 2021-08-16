@@ -18,6 +18,22 @@ enum SearchPage
         case NormalNavigation
     }
     
+    
+    
+    enum ServiceRequest{
+        struct Normal{
+            let type = RequestType.NormalNavigation
+        }
+        
+        struct GetRouteStop{
+            let type = RequestType.GetRouteStopService
+        }
+        
+        struct GetRoute{
+            let type = RequestType.GetRouteService
+        }
+    }
+    
     struct RouteItem{
         let routeNum: String
         let bound: String

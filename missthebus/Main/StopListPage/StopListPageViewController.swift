@@ -13,7 +13,9 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType?)
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark])
+    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
+    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ETAViewModel)
 }
 
@@ -47,7 +49,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var selectedETAIndex = -1
     var selectedStopSeqList = [Int]()
     var selectedStopETAView: StopListPage.DisplayItem.ETAViewModel?
-    var getRouteStopResponse: SetReminderPage.GetRouteStopResponse?
+    var getRouteStopResponse: StopListPage.Service.Response.GetRouteStops?
     
     
     let minTopMarginConstraint: CGFloat = 110
@@ -122,19 +124,19 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
             let isSelected = (indexPath.row == selectedETAIndex)
             
             cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count, isBookmarked: bookmarked)
+            
+            // update ETA
+            if let etaViewModel = self.selectedStopETAView{
+                if etaViewModel.etaViews.contains(where: {$0.seq == indexPath.row + 1}) {
+                    cell.setETA(etaList: self.selectedStopETAView)
+                }
+            }
         }else{
             cell.selectionStyle = .default
-            let isSelected = self.getRouteStopResponse?.stopSeqList.contains(indexPath.row) ?? false
-            
+            let isSelected = self.getRouteStopResponse?.stops.contains(indexPath.row) ?? false
             cell.setInfo(index: indexPath.row + 1, stop: item, isSelected: isSelected, count: self.stopList.count)
+
             
-        }
-        
-        // update ETA
-        if let etaViewModel = self.selectedStopETAView{
-            if etaViewModel.etaViews.contains(where: {$0.seq == indexPath.row + 1}) {
-                cell.setETA(etaList: self.selectedStopETAView)
-            }
         }
         return cell
     }
@@ -148,18 +150,22 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if (self.getRouteStopResponse?.stopSeqList.count ?? 0 >= 2){
+        if (self.getRouteStopResponse?.stops.count ?? 0 >= 2){
             self.showToast(message: "stop_service_err_at_most_pick".localized())
             return nil
         }
         return indexPath
     }
     
+    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        return indexPath
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if (self.type == .GetRouteStopService){
-            self.getRouteStopResponse?.stopSeqList.append(indexPath.row)
-//            self.tableView.reloadData()
+            if (!(self.getRouteStopResponse?.stops.contains(indexPath.row) ?? false)){
+                self.getRouteStopResponse?.stops.append(indexPath.row)
+            }
             return
         }else{
             self.selectedETAIndex = (self.selectedETAIndex != indexPath.row) ? indexPath.row : -1
@@ -179,8 +185,9 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        print("didDeselectRowAt \(indexPath.row)")
         if (self.type == .GetRouteStopService){
-            self.getRouteStopResponse?.stopSeqList.removeAll(where: {$0 == indexPath.row})
+            self.getRouteStopResponse?.stops.removeAll(where: {$0 == indexPath.row})
             return
         }
     }
@@ -317,19 +324,10 @@ extension StopListPageViewController {
         }
         
     }
-
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType? = .NormalNavigation){
-        self.type = requestType ?? .NormalNavigation
-        if (self.type == .GetRouteStopService){
-            self.setGetRouteStopServiceState()
-            self.getRouteStopResponse = self.interactor?.getRouteStopResponse()
-            self.tableView.reloadData()
-        }
-        
-        self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
-        self.route = route
-        self.stopList = stopList
-        self.bookmarks = bookmarks
+    
+    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?){
+        self.type = .NormalNavigation
+        self.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks)
         if let selectedStopId = selectedStopId{
             self.selectedETAIndex = self.stopList.firstIndex(where: {$0.stopId == selectedStopId}) ?? -1
         }
@@ -338,6 +336,28 @@ extension StopListPageViewController {
                 self.tableView.scrollToRow(at: IndexPath(row: self.selectedETAIndex, section: 0), at: .top, animated: true)
             }
         }
+    }
+    
+    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]){
+        self.type = .GetRouteStopService
+        self.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks)
+        self.setGetRouteStopServiceState()
+        self.getRouteStopResponse = self.interactor?.getRouteStopResponse()
+        
+        self.tableView.reloadData {
+            for index in selectedStopSeq{
+                self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .middle)
+            }
+            
+        }
+    }
+
+    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark]){
+        
+        self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
+        self.route = route
+        self.stopList = stopList
+        self.bookmarks = bookmarks
         self.displayGoogleMapView()
     }
     
@@ -347,7 +367,6 @@ extension StopListPageViewController {
     }
     
     func setGetRouteStopServiceState(){
-        print("setGetRouteStopServiceState")
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = true
         self.tableView.allowsSelectionDuringEditing = true
@@ -361,7 +380,7 @@ extension StopListPageViewController {
     
     @objc func onSave(){
         if let resp = self.getRouteStopResponse{
-            if (resp.stopSeqList.count == 0){
+            if (resp.stops.count == 0){
                 self.showAlert("general_save".localized(), "stop_service_err_at_least_pick".localized()) { (_) in}
             }else{
                 self.router?.responseGetRouteStopService(resp: resp)

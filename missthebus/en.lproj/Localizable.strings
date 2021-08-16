@@ -50,6 +50,7 @@
 "reminder_create_succeed" = "Create succeed.";
 "reminder_update_succeed" = "Update succeed.";
 "reminder_err_at_most_route" = "You can only set at most five routes.";
+"reminder_err_at_least_route" = "You have to set at lease one routes.";
 
 "reminder_tag_work" = "Work";
 "reminder_tag_school" = "School";
@@ -77,7 +78,6 @@
 "general_setting" = "Setting";
 "general_error" = "Error";
 "general_remind" = "Reminder";
-
 
 
 

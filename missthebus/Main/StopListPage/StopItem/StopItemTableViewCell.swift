@@ -50,12 +50,9 @@ class StopItemTableViewCell: UITableViewCell {
         // Configure the view for the selected state
         
         if (type == .GetRouteStopService){
-            contentView.backgroundColor = UIColor.SoftUI.major
             self.softBgView.isSelected = isSelected
             self.missBusIcon.isHidden = !isSelected
-            self.selectedBackgroundView?.isHidden = true
         }
-        
     }
 
 }
@@ -82,6 +79,9 @@ extension StopItemTableViewCell{
         self.etaCollectionView.dataSource = self
         
         self.bookmarkBtn.addTarget(self, action: #selector(onClickBookmark), for: .touchUpInside)
+        
+        self.contentView.backgroundColor = UIColor.SoftUI.major
+        self.selectedBackgroundView?.isHidden = true
     }
     
     @objc func onClickBookmark(){
@@ -151,8 +151,8 @@ extension StopItemTableViewCell{
         self.upperRouteLine.alpha = (index == 1) ? 0 : 1
         self.lowerRouteLine.alpha = (index == count) ? 0 : 1
 
-        self.softBgView.isSelected = isSelected
-        self.missBusIcon.isHidden = !isSelected
+//        self.softBgView.isSelected = isSelected
+//        self.missBusIcon.isHidden = !isSelected
         self.stopNameLabel.numberOfLines = 1
         self.etaCollectionView.isHidden = true
         

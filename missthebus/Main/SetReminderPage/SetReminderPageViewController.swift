@@ -59,7 +59,7 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
     
     var reminderType: StopReminder.ReminderType = .OTHER
     var daysOfWeekList = [WeekDayPicker]()
-    var getRouteStopResponse: SetReminderPage.GetRouteStopResponse?
+    var getRouteStopResponse: StopListPage.Service.Response.GetRouteStops?
     var routes = [SetReminderPage.RouteAndStop]()
     
     enum CollectionViewCell: String, CollectionViewCellConfiguration {
@@ -90,7 +90,7 @@ extension SetReminderPageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let resp = self.getRouteStopResponse {
-            print("resp: \(resp.routeNum) | \(resp.stopSeqList)")
+            print("resp: \(resp.route.route) | \(resp.stops)")
             self.interactor?.getRouteStopResponse(resp: resp)
             self.getRouteStopResponse = nil
         }
@@ -141,7 +141,7 @@ extension SetReminderPageViewController {
     
     
     @objc func onSave(){
-//        self.saveReminder()
+        self.saveReminder()
     }
     
     func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel){
@@ -170,7 +170,7 @@ extension SetReminderPageViewController {
         
         self.addRouteLabel.text = "reminder_add_stop".localized() + " (\(self.routes.count)/5)"
         self.addRouteLabel.useTextStyle(.label_sub)
-        self.addRouteBtn.addTarget(self, action: #selector(addNewRouteStop), for: .touchUpInside)
+        self.addRouteBtn.addTarget(self, action: #selector(self.addNewRouteStop), for: .touchUpInside)
     }
     
 //    @objc private func onDateValueChanged(){
@@ -216,6 +216,7 @@ extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             self.routes.remove(at: indexPath.row)
+            self.interactor?.removeRouteStop(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -251,7 +252,9 @@ extension SetReminderPageViewController: UICollectionViewDelegate, UICollectionV
         if let type = type{
             self.reminderType = (self.reminderType == type.type) ? .OTHER : type.type
             self.reminderNamesCollectionView.reloadData()
-            self.nameTextfield.text = type.name
+            if (self.nameTextfield.text?.count == 0 || SetReminderPage.DisplayItem.ViewModel.nameSamples.contains(where: {$0.name.lowercased() == self.nameTextfield.text?.lowercased()})){
+                self.nameTextfield.text = type.name
+            }
             self.reminderIcon.image = UIImage(named: type.img)
         }
     }
@@ -287,6 +290,10 @@ extension SetReminderPageViewController{
     }
     
     private func saveReminder(){
+        if (self.routes.count == 0){
+            self.showAlert("general_remind".localized(), "reminder_err_at_least_route".localized()) { (_) in}
+            return
+        }
         
         var period = [Int]()
         for (index, day) in self.daysOfWeekList.enumerated() {
@@ -303,7 +310,7 @@ extension SetReminderPageViewController{
         
         
         self.showAlert("general_saved".localized(), "reminder_create_succeed".localized()) { (_) in
-            self.navigationController?.popViewController(animated: true)
+//            self.navigationController?.popViewController(animated: true)
         }
     }
     

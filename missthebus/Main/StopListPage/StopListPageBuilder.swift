@@ -39,9 +39,11 @@ class StopListPageBuilder
 */
 extension StopListPageBuilder {
     struct BuildRequest {
-        let route: KmbRoute
-        let stop: KmbStop?
-        var type: StopListPage.RequestType = .NormalNavigation
-        var stops: [Int] = [] // stop sequence list
+//        let route: KmbRoute
+//        let stop: KmbStop?
+//        var type: StopListPage.RequestType = .NormalNavigation
+//        var stops: [Int] = [] // stop sequence list
+        var normalRequest: StopListPage.Service.Request.Normal?
+        var getRouteStopsRequest: StopListPage.Service.Request.GetRouteStops?
     }
 }

@@ -33,7 +33,7 @@ class SetReminderPageRouter: NSObject, SetReminderPageRoutingLogic, SetReminderP
 extension SetReminderPageRouter {
     
     func routeToSearchPage() {
-        let request = SearchPageBuilder.BuildRequest(type: .GetRouteStopService)
+        let request = SearchPageBuilder.BuildRequest(getRouteStopRequest: SearchPage.ServiceRequest.GetRouteStop())
         let vc = SearchPageBuilder.createScene(request: request)
         
         let navController = NavigationController(rootViewController: vc)
@@ -46,9 +46,10 @@ extension SetReminderPageRouter {
     
     
     func routeToStopListPage(index: Int) {
-        if let route = self.dataStore?.getRouteStopsRequestQuery(index: index), let routeObj = KmbManager.getRoute(route: route.routeNum, bound: route.bound, serviceType: route.serviceType){
+        if let reminderRoute = self.dataStore?.getRouteStopsRequestQuery(index: index), let route = reminderRoute.getRoute(){
             
-            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil, type: .GetRouteStopService, stops: route.stopIndex)
+//            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil, type: .GetRouteStopService, stops: route.stopIndex)
+            let request = StopListPageBuilder.BuildRequest(getRouteStopsRequest: StopListPage.Service.Request.GetRouteStops(route: route, stops: reminderRoute.stopIndex))
             let vc = StopListPageBuilder.createScene(request: request)
             
             let navController = NavigationController(rootViewController: vc)

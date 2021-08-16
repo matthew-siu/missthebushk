@@ -50,6 +50,7 @@
 "reminder_create_succeed" = "建立成功";
 "reminder_update_succeed" = "更新成功";
 "reminder_err_at_most_route" = "您最多只能設置 5 條路線";
+"reminder_err_at_least_route" = "您最少要設置 1 條路線";
 
 "reminder_tag_work" = "上班";
 "reminder_tag_school" = "上學";
@@ -77,7 +78,6 @@
 "general_setting" = "設定";
 "general_error" = "錯誤";
 "general_remind" = "提醒";
-
 
 
 

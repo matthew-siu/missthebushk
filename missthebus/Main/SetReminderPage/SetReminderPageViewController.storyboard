@@ -33,7 +33,7 @@
                                                             <size key="estimatedItemSize" width="160" height="40"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                                            <inset key="sectionInset" minX="20" minY="0.0" maxX="50" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells/>
                                                     </collectionView>
@@ -127,47 +127,47 @@
                                                                     <constraint firstAttribute="height" constant="110" id="xzK-2u-boy"/>
                                                                 </constraints>
                                                             </view>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-2c-CSB">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-2c-CSB">
                                                                 <rect key="frame" x="20" y="190.5" width="334" height="20.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYE-j9-zSG" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="43.5" height="20.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="47.5" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUI-LZ-DVp" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="48.5" y="0.0" width="43.5" height="20.5"/>
+                                                                        <rect key="frame" x="47.5" y="0.0" width="48" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amd-Cd-DeS" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="97" y="0.0" width="43.5" height="20.5"/>
+                                                                        <rect key="frame" x="95.5" y="0.0" width="47.5" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5B-89-gos" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="145.5" y="0.0" width="43" height="20.5"/>
+                                                                        <rect key="frame" x="143" y="0.0" width="48" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCf-Ej-rfA" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="193.5" y="0.0" width="43.5" height="20.5"/>
+                                                                        <rect key="frame" x="191" y="0.0" width="47.5" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-Ca-7lQ" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="242" y="0.0" width="43.5" height="20.5"/>
+                                                                        <rect key="frame" x="238.5" y="0.0" width="48" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zau-qN-eHx" customClass="WeekDayPicker" customModule="missthebus" customModuleProvider="target">
-                                                                        <rect key="frame" x="290.5" y="0.0" width="43.5" height="20.5"/>
+                                                                        <rect key="frame" x="286.5" y="0.0" width="47.5" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>

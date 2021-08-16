@@ -12,13 +12,6 @@ import UIKit
 // Defines request, response and corresponding view models
 enum SetReminderPage
 {
-    struct GetRouteStopResponse
-    {
-        var routeNum: String
-        var bound: String
-        var serviceType: String
-        var stopSeqList: [Int]
-    }
     
     struct NameSample {
         let img: String // img filename
@@ -54,8 +47,6 @@ enum SetReminderPage
         }
         struct Response // interactor -> presenter
         {
-//            let route: KmbRoute
-//            let stop: KmbStop
         }
         struct ViewModel // presenter -> vc
         {

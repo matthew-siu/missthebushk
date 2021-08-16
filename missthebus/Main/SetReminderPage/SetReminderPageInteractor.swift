@@ -13,7 +13,8 @@ protocol SetReminderPageBusinessLogic
 {
     func displayInitialState()
     func saveReminder(request: SetReminderPage.DisplayItem.Request)
-    func getRouteStopResponse(resp: SetReminderPage.GetRouteStopResponse)
+    func getRouteStopResponse(resp: StopListPage.Service.Response.GetRouteStops)
+    func removeRouteStop(at index: Int)
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -61,18 +62,30 @@ extension SetReminderPageInteractor {
         self.reminder.startTime = request.time
         self.reminder.period = request.period
         
+        print("save reminder: \(self.reminder.name) | routes: \(self.reminder.routes.count)")
+        
         if (self.mode == .CREATE){
             print("add new reminder \(self.reminder.id)")
-            StopReminderManager.addStopReminder(self.reminder)
+//            StopReminderManager.addStopReminder(self.reminder)
         }else{
             print("update new reminder \(self.reminder.id)")
-            StopReminderManager.updateStopReminder(self.reminder)
+//            StopReminderManager.updateStopReminder(self.reminder)
         }
     }
     
-    func getRouteStopResponse(resp: SetReminderPage.GetRouteStopResponse) {
-        self.reminder.routes.append(StopReminder.Route(routeNum: resp.routeNum, bound: resp.bound, serviceType: resp.serviceType, stopIndex: resp.stopSeqList))
+    func getRouteStopResponse(resp: StopListPage.Service.Response.GetRouteStops) {
+        if let route = (self.reminder.routes.first(where: {$0.routeNum == resp.route.route && $0.bound == resp.route.bound && $0.serviceType == resp.route.serviceType})){
+            print("getRouteStopResponse: update value")
+            route.stopIndex = resp.stops
+        }else{
+            self.reminder.routes.append(StopReminder.Route(route: RouteMetadata(resp.route.route, resp.route.bound, resp.route.serviceType), stopIndex: resp.stops))
+        }
+        
         self.presenter?.updateRouteAndStop(self.reminder)
+    }
+    
+    func removeRouteStop(at index: Int){
+        self.reminder.routes.remove(at: index)
     }
     
     func getRouteStopsRequestQuery(index: Int) -> StopReminder.Route{

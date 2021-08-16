@@ -11,13 +11,19 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol StopListPagePresentationLogic
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType?, selectedStopSeqList: [Int])
+//    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType?, selectedStopSeqList: [Int])
+    
+    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
+    
+    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
+    
     func displayETA(data: [KmbETAResponse.KmbETAData]?)
 }
 
 // MARK: - Presenter main body
 class StopListPagePresenter: StopListPagePresentationLogic
 {
+    
     weak var viewController: StopListPageDisplayLogic?
     
     var route: KmbRoute?
@@ -26,10 +32,18 @@ class StopListPagePresenter: StopListPagePresentationLogic
 
 // MARK: - Presentation receiver
 extension StopListPagePresenter {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String? = nil, requestType: StopListPage.RequestType? = .NormalNavigation, selectedStopSeqList: [Int]){
+    
+    
+    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?) {
         self.route = route
         self.stopList = stopList
-        self.viewController?.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks, selectedStopId: selectedStopId, requestType: requestType)
+        self.viewController?.displayInitialNormalState(route: route, stopList: stopList, bookmarks: bookmarks, selectedStopId: selectedStopId)
+    }
+    
+    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]) {
+        self.route = route
+        self.stopList = stopList
+        self.viewController?.displayInitialGetRouteStopState(route: route, stopList: stopList, bookmarks: bookmarks, selectedStopSeq: selectedStopSeq)
     }
     
     func displayETA(data: [KmbETAResponse.KmbETAData]?){

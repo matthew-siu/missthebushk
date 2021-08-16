@@ -12,6 +12,36 @@ import UIKit
 // Defines request, response and corresponding view models
 enum StopListPage
 {
+    
+    enum Service{
+        enum Request{
+            struct Normal{
+                let type = RequestType.NormalNavigation
+                let route: KmbRoute
+                let stop: KmbStop? // selected stop
+    //            let selectedSeq: [Int]
+            }
+            
+            struct GetRouteStops{
+                let type = RequestType.GetRouteStopService
+                let route: KmbRoute
+                let stops: [Int] // selected stop
+            }
+        }
+        
+        enum Response{
+            struct Normal{
+                let route: KmbRoute
+                var stop: KmbStop?
+            }
+            
+            struct GetRouteStops{
+                let route: KmbRoute
+                var stops: [Int] // selected stop
+            }
+        }
+    }
+    
     enum RequestType{
         case GetRouteStopService
         case NormalNavigation

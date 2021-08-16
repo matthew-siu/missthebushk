@@ -33,11 +33,17 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
     
     // State
     var routes: [KmbRoute]?
-    var type: SearchPage.RequestType
+    var type: SearchPage.RequestType = .NormalNavigation
     
     // Init
     init(request: SearchPageBuilder.BuildRequest) {
-        self.type = request.type
+        if let request = request.normalRequest {
+            self.type = request.type
+        }else if let request = request.getRouteStopRequest {
+            self.type = request.type
+        }else if let request = request.getRouteRequest {
+            self.type = request.type
+        }
     }
     
     func requestKmbRouteList(){

@@ -31,12 +31,13 @@ class SearchPageRouter: NSObject, SearchPageRoutingLogic, SearchPageDataPassing
 extension SearchPageRouter {
 
     func routeToStopListPage(route: SearchPage.RouteItem){
-        if let routeObj = self.dataStore?.getRoute(routeItem: route){
-            var requestType = StopListPage.RequestType.NormalNavigation
-            if (dataStore?.getType() == .GetRouteStopService){
-                requestType = .GetRouteStopService
+        if let routeObj = self.dataStore?.getRoute(routeItem: route), let type = self.dataStore?.getType(){
+            var request = StopListPageBuilder.BuildRequest()
+            if (type == .NormalNavigation){
+                request = StopListPageBuilder.BuildRequest(normalRequest: StopListPage.Service.Request.Normal(route: routeObj, stop: nil))
+            }else if (type == .GetRouteStopService){
+                request = StopListPageBuilder.BuildRequest( getRouteStopsRequest: StopListPage.Service.Request.GetRouteStops(route: routeObj, stops: []))
             }
-            let request = StopListPageBuilder.BuildRequest(route: routeObj, stop: nil, type: requestType)
             let vc = StopListPageBuilder.createScene(request: request)
             
             self.viewController?.navigationController?.pushViewController(vc, animated: true)

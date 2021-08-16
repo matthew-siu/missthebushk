@@ -16,13 +16,14 @@ protocol StopListPageBusinessLogic
     func startETATimer(stopId: String, route: String, serviceType: String)
     func dismissETATimer()
     func bookmark(stop: KmbStop, isMarked: Bool)
-    func getRouteStopResponse() -> SetReminderPage.GetRouteStopResponse?
+    func getRouteStopResponse() -> StopListPage.Service.Response.GetRouteStops?
+    
 }
 
 // MARK: - Datas retain in interactor defines here
 protocol StopListPageDataStore
 {
-    
+    func getType() -> StopListPage.RequestType
 }
 
 // MARK: - Interactor Body
@@ -33,20 +34,30 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     var worker: StopListPageWorker?
     
     // State
+    var type: StopListPage.RequestType = .NormalNavigation
+    
     var route: KmbRoute
     var bookmarks: [StopBookmark]?
     var etaTimer: Timer?
-    var selectedStopId: String?
-    var type: StopListPage.RequestType
-    var selectedStopSeqList: [Int]
+    
+//    var selectedStopId: String?
+//    var selectedStopSeqList: [Int]
+    var normalResp: StopListPage.Service.Response.Normal?
+    var getRouteStopsResp: StopListPage.Service.Response.GetRouteStops?
     
     // Init
     init(request: StopListPageBuilder.BuildRequest) {
-        print("route: \(request.route.route)")
-        self.selectedStopId = request.stop?.stopId
-        self.route = request.route
-        self.type = request.type
-        self.selectedStopSeqList = request.stops
+        if let request = request.normalRequest{
+            self.type = request.type
+            self.normalResp = StopListPage.Service.Response.Normal(route: request.route, stop: request.stop)
+            self.route = request.route
+        }else if let request = request.getRouteStopsRequest{
+            self.type = request.type
+            self.getRouteStopsResp = StopListPage.Service.Response.GetRouteStops(route: request.route, stops: request.stops)
+            self.route = request.route
+        }else{
+            self.route = request.normalRequest!.route
+        }
     }
 }
 
@@ -57,7 +68,7 @@ extension StopListPageInteractor {
         // load all stops
         var stopList = [KmbStop]()
         guard let allStopList = KmbManager.getAllStops() else {return}
-        for stop in route.stopList{
+        for stop in self.route.stopList{
             if let targetStop = allStopList.first(where: {$0.stopId == stop.stopId}){
                 stopList.append(targetStop)
             }
@@ -65,12 +76,16 @@ extension StopListPageInteractor {
         print("stopList: \(stopList.count)")
         
         // load all related reminder()
-        self.loadAllStopRemindersOfRoute()
+        self.loadAllBookmarksOfRoute()
         
-        self.presenter?.displayInitialState(route: route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.selectedStopId, requestType: self.type, selectedStopSeqList: self.selectedStopSeqList)
-        
-        if let selectedStopId = self.selectedStopId {
-            self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
+        if (self.type == .NormalNavigation){
+            
+            self.presenter?.displayInitialNormalState(route: self.route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.normalResp?.stop?.stopId)
+            if let selectedStopId = self.normalResp?.stop?.stopId {
+                self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
+            }
+        }else if (self.type == .GetRouteStopService){
+            self.presenter?.displayInitialGetRouteStopState(route: self.route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopSeq: self.getRouteStopsResp?.stops ?? [])
         }
     }
     
@@ -100,17 +115,23 @@ extension StopListPageInteractor {
     }
     
     
-    func getRouteStopResponse() -> SetReminderPage.GetRouteStopResponse?{
+    func getRouteStopResponse() -> StopListPage.Service.Response.GetRouteStops?{
+        if (self.type == .GetRouteStopService){
+            return StopListPage.Service.Response.GetRouteStops(route: self.route, stops: self.getRouteStopsResp?.stops ?? [])
+        }
+        return nil
         
-        return SetReminderPage.GetRouteStopResponse(routeNum: route.route, bound: route.bound, serviceType: route.serviceType, stopSeqList: self.selectedStopSeqList)
-        
+    }
+    
+    func getType() -> StopListPage.RequestType{
+        return self.type
     }
 }
 
 // MARK:- Logic
 extension StopListPageInteractor{
     
-    private func loadAllStopRemindersOfRoute(){
+    private func loadAllBookmarksOfRoute(){
         self.bookmarks = StopBookmarkManager.getBookmarksFromRoute(route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType)
         print("reminders: \(String(describing: self.bookmarks?.count))")
     }

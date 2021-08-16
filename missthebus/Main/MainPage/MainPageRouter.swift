@@ -36,7 +36,7 @@ extension MainPageRouter {
     func routeToStopListPage(item: MainPage.BookmarkItem){
         if let reminder = dataStore?.getStopBookmark(stopId: item.stopId), let route = reminder.route, let stop = reminder.stop{
             
-            let request = StopListPageBuilder.BuildRequest(route: route, stop: stop)
+            let request = StopListPageBuilder.BuildRequest(normalRequest: StopListPage.Service.Request.Normal(route: route, stop: stop))
             let vc = StopListPageBuilder.createScene(request: request)
 
             self.viewController?.navigationController?.pushViewController(vc, animated: true)
@@ -44,7 +44,7 @@ extension MainPageRouter {
     }
     
     func routeToSearchPage() {
-        let request = SearchPageBuilder.BuildRequest()
+        let request = SearchPageBuilder.BuildRequest(normalRequest: SearchPage.ServiceRequest.Normal())
         let vc = SearchPageBuilder.createScene(request: request)
 //        vc.modalPresentationStyle = .fullScreen
         

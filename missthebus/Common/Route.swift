@@ -46,6 +46,18 @@ class Route: Codable{
 }
 
 
+class RouteMetadata: Codable{
+    let routeNum: String
+    let bound: String
+    let serviceType: String
+    init(_ routeNum: String, _ bound: String, _ serviceType: String){
+        self.routeNum = routeNum
+        self.bound = bound
+        self.serviceType = serviceType
+    }
+}
+
+
 enum BusCompany: String, Codable{
     case KMB = "KMB"
     case LWB = "LWB"
