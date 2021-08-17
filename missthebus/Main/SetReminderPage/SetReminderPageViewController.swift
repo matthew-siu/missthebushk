@@ -80,6 +80,8 @@ extension SetReminderPageViewController {
         self.reminderNamesCollectionView.dataSource = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.dragInteractionEnabled = true
+        self.tableView.dragDelegate = self
         
         self.reminderNamesCollectionView.register(CollectionViewCell.itemCell.nib, forCellWithReuseIdentifier: CollectionViewCell.itemCell.reuseId)
         self.daysOfWeekList = [self.weekSunBtn, self.weekMonBtn, self.weekTueBtn, self.weekWedBtn, self.weekThuBtn, self.weekFriBtn, self.weekSatBtn]
@@ -196,7 +198,8 @@ extension SetReminderPageViewController {
     }
 }
 
-extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSource {
+extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.routes.count
     }
@@ -213,6 +216,7 @@ extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSou
         return 120
     }
     
+    // on delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             self.routes.remove(at: indexPath.row)
@@ -225,6 +229,17 @@ extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSou
         self.router?.routeToStopListPage(index: indexPath.row)
     }
     
+    // on drag & drop
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = self.routes[indexPath.row]
+        return [ dragItem ]
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let mover = self.routes.remove(at: sourceIndexPath.row)
+        self.routes.insert(mover, at: destinationIndexPath.row)
+    }
     
 }
 

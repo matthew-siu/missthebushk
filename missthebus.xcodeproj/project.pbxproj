@@ -78,6 +78,7 @@
 		8F89B671269598A7006312EA /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B669269598A6006312EA /* SearchPageViewController.swift */; };
 		8F89B672269598A7006312EA /* SearchPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B66A269598A6006312EA /* SearchPageBuilder.swift */; };
 		8F89B673269598A7006312EA /* SearchPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B66B269598A6006312EA /* SearchPageInteractor.swift */; };
+		8F93D10D26CBB7C50007601C /* MainPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */; };
 		8FB5A05526A6B38F0013540D /* StopListPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A04D26A6B38F0013540D /* StopListPagePresenter.swift */; };
 		8FB5A05626A6B38F0013540D /* StopListPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A04E26A6B38F0013540D /* StopListPageWorker.swift */; };
 		8FB5A05726A6B38F0013540D /* StopListPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A04F26A6B38F0013540D /* StopListPageRouter.swift */; };
@@ -223,6 +224,7 @@
 		8F89B669269598A6006312EA /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
 		8F89B66A269598A6006312EA /* SearchPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBuilder.swift; sourceTree = "<group>"; };
 		8F89B66B269598A6006312EA /* SearchPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageInteractor.swift; sourceTree = "<group>"; };
+		8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageHeaderView.swift; sourceTree = "<group>"; };
 		8FB5A04D26A6B38F0013540D /* StopListPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPagePresenter.swift; sourceTree = "<group>"; };
 		8FB5A04E26A6B38F0013540D /* StopListPageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageWorker.swift; sourceTree = "<group>"; };
 		8FB5A04F26A6B38F0013540D /* StopListPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageRouter.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 		8F89B5E12694333D006312EA /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				8F93D10B26CBB7940007601C /* TableViewHeaderView */,
 				8F56617A26B3F970005AB134 /* StopReminderItem */,
 				8F56618626B3FA4C005AB134 /* StopReminderETAItem */,
 				8F89B5E22694337A006312EA /* MainPagePresenter.swift */,
@@ -621,6 +624,14 @@
 				8FB5A05426A6B38F0013540D /* StopListPageInteractor.swift */,
 			);
 			path = StopListPage;
+			sourceTree = "<group>";
+		};
+		8F93D10B26CBB7940007601C /* TableViewHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */,
+			);
+			path = TableViewHeaderView;
 			sourceTree = "<group>";
 		};
 		8FB5A07C26A80F160013540D /* KMB */ = {
@@ -1119,6 +1130,7 @@
 				8F89B64A2694504C006312EA /* UIColorExtension.swift in Sources */,
 				8F89B5A1269411FF006312EA /* AppDelegate.swift in Sources */,
 				8F56613D26B3A866005AB134 /* SplashScreenInteractor.swift in Sources */,
+				8F93D10D26CBB7C50007601C /* MainPageHeaderView.swift in Sources */,
 				8FFF6CEF269FE2920033D2CE /* LanguageConfigs.swift in Sources */,
 				8F09F2AE269693C70083B2CD /* SoftUIView.swift in Sources */,
 				8F89B62626943C00006312EA /* ColorHelper.swift in Sources */,

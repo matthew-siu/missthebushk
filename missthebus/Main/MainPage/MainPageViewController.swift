@@ -24,19 +24,6 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     var interactor: MainPageBusinessLogic?
     var router: (NSObjectProtocol & MainPageRoutingLogic & MainPageDataPassing)?
     
-    @IBOutlet weak var stackView: UIStackView!
-    // reminder label
-    @IBOutlet weak var reminderImg: UIImageView!
-    @IBOutlet weak var reminderLabel: UILabel!
-    @IBOutlet weak var createReminderSoftUIView: SoftUIView!
-    // no reminder view
-    @IBOutlet weak var noReminderView: UIView!
-    @IBOutlet weak var noReminderImg: UIImageView!
-    @IBOutlet weak var noReminderLabel: UILabel!
-    @IBOutlet weak var upcomingReminderView: UIView!
-    // bookmark label
-    @IBOutlet weak var pinImg: UIImageView!
-    @IBOutlet weak var pinLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
@@ -93,16 +80,9 @@ extension MainPageViewController {
         saveBtn.tintColor = .systemBlue
         self.navigationItem.rightBarButtonItem = saveBtn
         
-        self.reminderImg.addShadow()
-        self.pinImg.addShadow()
-        self.reminderLabel.text = "main_upcoming_reminder".localized()
-        self.pinLabel.text = "main_bookmark".localized()
-        	
         // TODO:- remove: no reminder
-        self.noReminderImg.image = UIImage(named: "info")
-        self.noReminderImg.setImageColor(color: UIColor.MTB.darkGray)
-        self.noReminderLabel.text = "main_no_upcoming_reminder".localized()
-        self.noReminderLabel.textColor = UIColor.MTB.darkGray
+//        self.noReminderImg.image = UIImage(named: "info")
+//        self.noReminderImg.setImageColor(color: UIColor.MTB.darkGray)
         
         self.setSearchBtn()
         self.setCreateReminderBtn()
@@ -116,17 +96,17 @@ extension MainPageViewController {
     
     func addFadedEdgeToTableView() {
         self.tableView.contentInset = UIEdgeInsets(top: 10,left: 0,bottom: 0,right: 0)
-        self.gradientLayer.frame = CGRect(x: 0, y: self.stackView.frame.height + 5, width: tableView.bounds.width, height: 35.0)
+        self.gradientLayer.frame = CGRect(x: 0, y: self.tableView.frame.height, width: tableView.bounds.width, height: 35.0)
         self.gradientLayer.colors = [UIColor.SoftUI.major.cgColor, UIColor.SoftUI.major.withAlphaComponent(0).cgColor]
-        self.stackView.layer.addSublayer(self.gradientLayer)
+        self.tableView.layer.addSublayer(self.gradientLayer)
     }
     
     private func setCreateReminderBtn(){
-        self.createReminderSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
-        self.createReminderSoftUIView.cornerRadius = 50
-        self.createReminderSoftUIView.shadowOffset = .init(width: 5, height: 5)
-        self.createReminderSoftUIView.shadowOpacity = 0.5
-        self.createReminderSoftUIView.addTarget(self, action: #selector(self.goToCreateReminderPage), for: .touchUpInside)
+//        self.createReminderSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
+//        self.createReminderSoftUIView.cornerRadius = 50
+//        self.createReminderSoftUIView.shadowOffset = .init(width: 5, height: 5)
+//        self.createReminderSoftUIView.shadowOpacity = 0.5
+//        self.createReminderSoftUIView.addTarget(self, action: #selector(self.goToCreateReminderPage), for: .touchUpInside)
     }
     
     private func setSearchBtn(){
@@ -152,9 +132,22 @@ extension MainPageViewController {
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, StopReminderCellDelegate{
     func onSelect(_ index: Int) {
         if (index >= 0){
-            print("onSelect")
             self.router?.routeToStopListPage(item: self.bookmarkItems[index])
         }
+    }
+    
+    // header View
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = MainPageHeaderView(frame: .init(x: 0, y: 0, width: self.width, height: 40))
+        headerView.setContent(imgName: "pin", title: "main_bookmark".localized())
+        
+        return headerView
+    }
+    
+    
+    // header height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

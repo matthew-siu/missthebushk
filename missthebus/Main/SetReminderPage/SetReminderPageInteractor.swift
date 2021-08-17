@@ -62,8 +62,6 @@ extension SetReminderPageInteractor {
         self.reminder.startTime = request.time
         self.reminder.period = request.period
         
-        print("save reminder: \(self.reminder.name) | routes: \(self.reminder.routes.count)")
-        
         if (self.mode == .CREATE){
             print("add new reminder \(self.reminder.id)")
 //            StopReminderManager.addStopReminder(self.reminder)
