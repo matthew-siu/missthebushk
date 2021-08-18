@@ -82,5 +82,63 @@ class StopReminder: Codable{
         return (self.endTime == nil)
     }
     
+    var displayPeriod: String{
+        var periodStr = ""
+        if (self.period?.count == 7){
+            periodStr = "reminder_period_everyday".localized()
+        }else if let period = self.period?.map({StopReminder.daysOfWeek[$0]}) {
+            periodStr = period.joined(separator: " ")
+        }
+        return periodStr
+    }
     
+    var displayTime: String{
+        return Utils.convertTime(time: self.startTime, toPattern: "HH:mm")
+    }
+    
+    static func getTagViewModel(_ type: ReminderType) -> NameSample?{
+        return nameSamples.first(where: {$0.type == type})
+    }
+    
+    func printDetails(){
+        var msg = "\(self.name ?? "") | \(self.type?.rawValue ?? "") | \(self.id)\n"
+        msg += " time: \(self.startTime) | \(self.period ?? []) | neverEnd = \(self.neverEnd)\n Routes: \(self.routes.count)"
+        for (index, route) in self.routes.enumerated(){
+            msg += "\n \(index): \(route.routeNum) seq\(route.stopIndex) (total: \(route.stopIndex.count))"
+        }
+        print(msg)
+    }
+    
+    
+    
+}
+
+// for view model
+extension StopReminder{
+    
+    struct NameSample: Codable {
+        let img: String // img filename
+        let name: String // i18n id
+        let type: ReminderType
+    }
+    
+    static let nameSamples: [NameSample] = [
+        NameSample(img: "tagGoToWork", name: "reminder_tag_work".localized(), type: .WORK),
+        NameSample(img: "tagBackHome", name: "reminder_tag_off_work".localized(), type: .BACK_HOME),
+        NameSample(img: "tagSchool", name: "reminder_tag_school".localized(), type: .SCHOOL),
+        NameSample(img: "tagGathering", name: "reminder_tag_gathering".localized(), type: .GATHERING),
+        NameSample(img: "tagDating", name: "reminder_tag_dating".localized(), type: .DATING),
+        NameSample(img: "tagLastBus", name: "reminder_tag_last".localized(), type: .LAST_BUS),
+        NameSample(img: "tagOther", name: "reminder_tag_other".localized(), type: .OTHER),
+    ]
+    
+    static let daysOfWeek: [String] = [
+        "day_sun".localized(),
+        "day_mon".localized(),
+        "day_tue".localized(),
+        "day_wed".localized(),
+        "day_thu".localized(),
+        "day_fri".localized(),
+        "day_sat".localized()
+    ]
 }

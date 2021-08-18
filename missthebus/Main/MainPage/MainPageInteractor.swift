@@ -13,8 +13,10 @@ import SVProgressHUD
 // MARK: - Requests from view
 protocol MainPageBusinessLogic
 {
-    func loadAllStopBookmarksOfRoute()
+    func loadFirstTab()
+    func loadAllBookmarksOfRoute()
     func dismissETATimer()
+    func changeToTab(at index: Int)
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -26,6 +28,7 @@ protocol MainPageDataStore
 // MARK: - Interactor Body
 class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
 {
+    
     // VIP Properties
     var presenter: MainPagePresentationLogic?
     var worker: MainPageWorker?
@@ -42,18 +45,32 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
 // MARK: - Business
 extension MainPageInteractor {
     
-    func getStopBookmark(stopId: String) -> StopBookmark?{
-        return self.bookmarks?.first(where: {$0.stopId == stopId})
+    func loadFirstTab() {
+        /* TODO:
+            1. If have upcoming reminder, -> upcoming
+            2. Else, -> bookmarks
+         */
+        self.loadAllBookmarksOfRoute()
     }
     
-    func loadAllStopBookmarksOfRoute(){
+    func loadAllBookmarksOfRoute(){
         if let bookmarks = StopBookmarkManager.getStopBookmarks(){
             self.bookmarks = bookmarks
-            print("loadAllStopRemindersOfRoute \(bookmarks.count)")
+            print("loadAllBookmarksOfRoute \(bookmarks.count)")
             self.startETATimer()
             self.presenter?.displayBookmarks(bookmarks: bookmarks)
         }else{
-            print("loadAllStopRemindersOfRoute nil")
+            self.presenter?.displayBookmarks(bookmarks: [])
+        }
+    }
+    
+    func loadAllRemindersOfRoute(){
+        if let reminders = StopReminderManager.getStopReminders(){
+            self.reminders = reminders
+            print("loadAllRemindersOfRoute \(reminders.count)")
+            self.presenter?.displayReminders(reminders: reminders)
+        }else{
+            self.presenter?.displayReminders(reminders: [])
         }
     }
     
@@ -61,6 +78,24 @@ extension MainPageInteractor {
         print("dismiss ETA time")
         self.etaTimer?.invalidate()
         self.etaTimer = nil
+    }
+    
+    func changeToTab(at index: Int){
+        if (index == MainPage.Tab.Bookmarks.rawValue){
+            self.dismissETATimer()
+            self.loadAllBookmarksOfRoute()
+        }else if (index == MainPage.Tab.Reminders.rawValue){
+            self.dismissETATimer()
+            self.loadAllRemindersOfRoute()
+        }else if (index == MainPage.Tab.Upcoming.rawValue){
+            self.dismissETATimer()
+            
+        }
+    }
+    
+    // MARK: - MainPageDataStore
+    func getStopBookmark(stopId: String) -> StopBookmark?{
+        return self.bookmarks?.first(where: {$0.stopId == stopId})
     }
     
 }

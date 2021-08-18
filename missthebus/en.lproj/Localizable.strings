@@ -15,7 +15,7 @@
 "main_no_bookmark" = "No bookmarks";
 "main_upcoming_reminder" = "Upcoming reminders";
 "main_bookmark" = "My Stops";
-
+"main_reminders" = "My Reminders";
 
 
 
@@ -60,7 +60,7 @@
 "reminder_tag_last" = "Last bus";
 "reminder_tag_other" = "Other";
 "reminder_add_stop" = "Click to add a new stop.";
-
+"reminder_period_everyday" = "Everyday";
 
 
 // General

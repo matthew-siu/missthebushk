@@ -11,7 +11,6 @@ import UIKit
 // MARK: - The main interface to be called by others
 protocol StopListPageRoutingLogic
 {
-    func routeToSetReminderPage(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop)
     
     func responseGetRouteStopService(resp: StopListPage.Service.Response.GetRouteStops)
 }
@@ -31,11 +30,6 @@ class StopListPageRouter: NSObject, StopListPageRoutingLogic, StopListPageDataPa
 
 // MARK: - Routing and datapassing for one nav action
 extension StopListPageRouter {
-    func routeToSetReminderPage(mode: SetReminderPage.Mode, route: KmbRoute, stop: KmbStop){
-        let request = SetReminderPageBuilder.BuildRequest(mode: mode, reminder: nil)
-        let vc = SetReminderPageBuilder.createScene(request: request)
-        self.viewController?.navigationController?.pushViewController(vc, animated: true)
-    }
     
     func responseGetRouteStopService(resp: StopListPage.Service.Response.GetRouteStops){
         var sortedResp = resp // ascending order

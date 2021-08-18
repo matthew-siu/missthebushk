@@ -325,7 +325,7 @@ extension SetReminderPageViewController{
         
         
         self.showAlert("general_saved".localized(), "reminder_create_succeed".localized()) { (_) in
-//            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

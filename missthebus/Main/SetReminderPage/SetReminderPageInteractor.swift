@@ -64,16 +64,16 @@ extension SetReminderPageInteractor {
         
         if (self.mode == .CREATE){
             print("add new reminder \(self.reminder.id)")
-//            StopReminderManager.addStopReminder(self.reminder)
+            self.reminder.printDetails()
+            StopReminderManager.addStopReminder(self.reminder)
         }else{
-            print("update new reminder \(self.reminder.id)")
-//            StopReminderManager.updateStopReminder(self.reminder)
+            print("update reminder \(self.reminder.id)")
+            StopReminderManager.updateStopReminder(self.reminder)
         }
     }
     
     func getRouteStopResponse(resp: StopListPage.Service.Response.GetRouteStops) {
         if let route = (self.reminder.routes.first(where: {$0.routeNum == resp.route.route && $0.bound == resp.route.bound && $0.serviceType == resp.route.serviceType})){
-            print("getRouteStopResponse: update value")
             route.stopIndex = resp.stops
         }else{
             self.reminder.routes.append(StopReminder.Route(route: RouteMetadata(resp.route.route, resp.route.bound, resp.route.serviceType), stopIndex: resp.stops))

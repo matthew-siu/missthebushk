@@ -46,7 +46,8 @@ class Route: Codable{
 }
 
 
-class RouteMetadata: Codable{
+class RouteMetadata: Codable, Equatable{
+    
     let routeNum: String
     let bound: String
     let serviceType: String
@@ -54,6 +55,10 @@ class RouteMetadata: Codable{
         self.routeNum = routeNum
         self.bound = bound
         self.serviceType = serviceType
+    }
+    
+    static func == (lhs: RouteMetadata, rhs: RouteMetadata) -> Bool {
+        return (lhs.routeNum == rhs.routeNum && lhs.bound == rhs.bound && lhs.serviceType == rhs.serviceType)
     }
 }
 

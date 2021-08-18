@@ -11,7 +11,7 @@ protocol StopReminderCellDelegate: class {
     func onSelect(_ index: Int)
 }
 
-class StopReminderTableViewCell: UITableViewCell {
+class StopBookmarkTableViewCell: UITableViewCell {
     
     // route view
     @IBOutlet weak var routeView: SoftUIView!
@@ -110,7 +110,7 @@ class StopReminderTableViewCell: UITableViewCell {
     
 }
 
-extension StopReminderTableViewCell{
+extension StopBookmarkTableViewCell{
     
     func initSoftUI(_ obj: SoftUIView, inverted: Bool? = false, type: SoftUIViewType? = .pushButton){
         obj.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)

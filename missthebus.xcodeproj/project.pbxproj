@@ -29,10 +29,8 @@
 		8F56613C26B3A866005AB134 /* SplashScreenBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56613426B3A866005AB134 /* SplashScreenBuilder.swift */; };
 		8F56613D26B3A866005AB134 /* SplashScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56613526B3A866005AB134 /* SplashScreenInteractor.swift */; };
 		8F56614F26B3AF4D005AB134 /* MainPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56614E26B3AF4D005AB134 /* MainPageBuilder.swift */; };
-		8F56618026B3F9E7005AB134 /* StopReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56617E26B3F9E7005AB134 /* StopReminderTableViewCell.swift */; };
-		8F56618126B3F9E7005AB134 /* StopReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F56617F26B3F9E7005AB134 /* StopReminderTableViewCell.xib */; };
-		8F56618926B3FA85005AB134 /* StopReminderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56618726B3FA85005AB134 /* StopReminderCollectionViewCell.swift */; };
-		8F56618A26B3FA85005AB134 /* StopReminderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F56618826B3FA85005AB134 /* StopReminderCollectionViewCell.xib */; };
+		8F56618026B3F9E7005AB134 /* StopBookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56617E26B3F9E7005AB134 /* StopBookmarkTableViewCell.swift */; };
+		8F56618126B3F9E7005AB134 /* StopBookmarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F56617F26B3F9E7005AB134 /* StopBookmarkTableViewCell.xib */; };
 		8F695B8226AE99CA00518622 /* SetReminderPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F695B7A26AE99CA00518622 /* SetReminderPagePresenter.swift */; };
 		8F695B8326AE99CA00518622 /* SetReminderPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F695B7B26AE99CA00518622 /* SetReminderPageWorker.swift */; };
 		8F695B8426AE99CA00518622 /* SetReminderPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F695B7C26AE99CA00518622 /* SetReminderPageRouter.swift */; };
@@ -79,6 +77,10 @@
 		8F89B672269598A7006312EA /* SearchPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B66A269598A6006312EA /* SearchPageBuilder.swift */; };
 		8F89B673269598A7006312EA /* SearchPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B66B269598A6006312EA /* SearchPageInteractor.swift */; };
 		8F93D10D26CBB7C50007601C /* MainPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */; };
+		8F93D12926CCC1040007601C /* SimpleStopReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93D12726CCC1040007601C /* SimpleStopReminderTableViewCell.swift */; };
+		8F93D12A26CCC1040007601C /* SimpleStopReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F93D12826CCC1040007601C /* SimpleStopReminderTableViewCell.xib */; };
+		8F93D13E26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F93D13C26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.swift */; };
+		8F93D13F26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F93D13D26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib */; };
 		8FB5A05526A6B38F0013540D /* StopListPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A04D26A6B38F0013540D /* StopListPagePresenter.swift */; };
 		8FB5A05626A6B38F0013540D /* StopListPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A04E26A6B38F0013540D /* StopListPageWorker.swift */; };
 		8FB5A05726A6B38F0013540D /* StopListPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A04F26A6B38F0013540D /* StopListPageRouter.swift */; };
@@ -170,10 +172,8 @@
 		8F56613426B3A866005AB134 /* SplashScreenBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenBuilder.swift; sourceTree = "<group>"; };
 		8F56613526B3A866005AB134 /* SplashScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenInteractor.swift; sourceTree = "<group>"; };
 		8F56614E26B3AF4D005AB134 /* MainPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageBuilder.swift; sourceTree = "<group>"; };
-		8F56617E26B3F9E7005AB134 /* StopReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopReminderTableViewCell.swift; sourceTree = "<group>"; };
-		8F56617F26B3F9E7005AB134 /* StopReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopReminderTableViewCell.xib; sourceTree = "<group>"; };
-		8F56618726B3FA85005AB134 /* StopReminderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopReminderCollectionViewCell.swift; sourceTree = "<group>"; };
-		8F56618826B3FA85005AB134 /* StopReminderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopReminderCollectionViewCell.xib; sourceTree = "<group>"; };
+		8F56617E26B3F9E7005AB134 /* StopBookmarkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopBookmarkTableViewCell.swift; sourceTree = "<group>"; };
+		8F56617F26B3F9E7005AB134 /* StopBookmarkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopBookmarkTableViewCell.xib; sourceTree = "<group>"; };
 		8F695B7A26AE99CA00518622 /* SetReminderPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetReminderPagePresenter.swift; sourceTree = "<group>"; };
 		8F695B7B26AE99CA00518622 /* SetReminderPageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetReminderPageWorker.swift; sourceTree = "<group>"; };
 		8F695B7C26AE99CA00518622 /* SetReminderPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetReminderPageRouter.swift; sourceTree = "<group>"; };
@@ -225,6 +225,10 @@
 		8F89B66A269598A6006312EA /* SearchPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBuilder.swift; sourceTree = "<group>"; };
 		8F89B66B269598A6006312EA /* SearchPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageInteractor.swift; sourceTree = "<group>"; };
 		8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageHeaderView.swift; sourceTree = "<group>"; };
+		8F93D12726CCC1040007601C /* SimpleStopReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStopReminderTableViewCell.swift; sourceTree = "<group>"; };
+		8F93D12826CCC1040007601C /* SimpleStopReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleStopReminderTableViewCell.xib; sourceTree = "<group>"; };
+		8F93D13C26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStopReminderRouteCollectionViewCell.swift; sourceTree = "<group>"; };
+		8F93D13D26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleStopReminderRouteCollectionViewCell.xib; sourceTree = "<group>"; };
 		8FB5A04D26A6B38F0013540D /* StopListPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPagePresenter.swift; sourceTree = "<group>"; };
 		8FB5A04E26A6B38F0013540D /* StopListPageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageWorker.swift; sourceTree = "<group>"; };
 		8FB5A04F26A6B38F0013540D /* StopListPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageRouter.swift; sourceTree = "<group>"; };
@@ -393,22 +397,13 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
-		8F56617A26B3F970005AB134 /* StopReminderItem */ = {
+		8F56617A26B3F970005AB134 /* StopBookmarkItem */ = {
 			isa = PBXGroup;
 			children = (
-				8F56617E26B3F9E7005AB134 /* StopReminderTableViewCell.swift */,
-				8F56617F26B3F9E7005AB134 /* StopReminderTableViewCell.xib */,
+				8F56617E26B3F9E7005AB134 /* StopBookmarkTableViewCell.swift */,
+				8F56617F26B3F9E7005AB134 /* StopBookmarkTableViewCell.xib */,
 			);
-			path = StopReminderItem;
-			sourceTree = "<group>";
-		};
-		8F56618626B3FA4C005AB134 /* StopReminderETAItem */ = {
-			isa = PBXGroup;
-			children = (
-				8F56618726B3FA85005AB134 /* StopReminderCollectionViewCell.swift */,
-				8F56618826B3FA85005AB134 /* StopReminderCollectionViewCell.xib */,
-			);
-			path = StopReminderETAItem;
+			path = StopBookmarkItem;
 			sourceTree = "<group>";
 		};
 		8F695B7926AE996500518622 /* SetReminderPage */ = {
@@ -503,9 +498,9 @@
 		8F89B5E12694333D006312EA /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				8F93D12326CCC0C60007601C /* SimpleStopReminderItem */,
 				8F93D10B26CBB7940007601C /* TableViewHeaderView */,
-				8F56617A26B3F970005AB134 /* StopReminderItem */,
-				8F56618626B3FA4C005AB134 /* StopReminderETAItem */,
+				8F56617A26B3F970005AB134 /* StopBookmarkItem */,
 				8F89B5E22694337A006312EA /* MainPagePresenter.swift */,
 				8F89B5E32694337A006312EA /* MainPageWorker.swift */,
 				8F89B5E42694337A006312EA /* MainPageRouter.swift */,
@@ -632,6 +627,25 @@
 				8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */,
 			);
 			path = TableViewHeaderView;
+			sourceTree = "<group>";
+		};
+		8F93D12326CCC0C60007601C /* SimpleStopReminderItem */ = {
+			isa = PBXGroup;
+			children = (
+				8F93D13126CD04C60007601C /* SimpleStopReminderRouteItem */,
+				8F93D12726CCC1040007601C /* SimpleStopReminderTableViewCell.swift */,
+				8F93D12826CCC1040007601C /* SimpleStopReminderTableViewCell.xib */,
+			);
+			path = SimpleStopReminderItem;
+			sourceTree = "<group>";
+		};
+		8F93D13126CD04C60007601C /* SimpleStopReminderRouteItem */ = {
+			isa = PBXGroup;
+			children = (
+				8F93D13C26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.swift */,
+				8F93D13D26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib */,
+			);
+			path = SimpleStopReminderRouteItem;
 			sourceTree = "<group>";
 		};
 		8FB5A07C26A80F160013540D /* KMB */ = {
@@ -868,6 +882,7 @@
 			files = (
 				8F56613926B3A866005AB134 /* SplashScreenViewController.storyboard in Resources */,
 				8F89B5AD26941201006312EA /* LaunchScreen.storyboard in Resources */,
+				8F93D13F26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib in Resources */,
 				8F3ABCDA26C271520067EF9D /* ReminderRouteTableViewCell.xib in Resources */,
 				8F5660F026B13672005AB134 /* ReminderNameCollectionViewCell.xib in Resources */,
 				8F89B5AA26941201006312EA /* Assets.xcassets in Resources */,
@@ -875,8 +890,7 @@
 				8FB5A05826A6B38F0013540D /* StopListPageViewController.storyboard in Resources */,
 				8FFF6CB6269D89640033D2CE /* RouteItemTableViewCell.xib in Resources */,
 				8FC67B4926BB989600BEE56D /* NoItemTableViewCell.xib in Resources */,
-				8F56618126B3F9E7005AB134 /* StopReminderTableViewCell.xib in Resources */,
-				8F56618A26B3FA85005AB134 /* StopReminderCollectionViewCell.xib in Resources */,
+				8F56618126B3F9E7005AB134 /* StopBookmarkTableViewCell.xib in Resources */,
 				8FB5A0BA26AA7A860013540D /* StopETAItemCollectionViewCell.xib in Resources */,
 				8FFF6CE3269FDE1F0033D2CE /* Localizable.strings in Resources */,
 				8F3ABCE526C271800067EF9D /* ReminderRouteStopTableViewCell.xib in Resources */,
@@ -884,6 +898,7 @@
 				8F89B66F269598A7006312EA /* SearchPageViewController.storyboard in Resources */,
 				8F89B5ED2694337A006312EA /* MainPageViewController.storyboard in Resources */,
 				8FB5A08C26A81E180013540D /* StopItemTableViewCell.xib in Resources */,
+				8F93D12A26CCC1040007601C /* SimpleStopReminderTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,7 +1060,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F56618926B3FA85005AB134 /* StopReminderCollectionViewCell.swift in Sources */,
 				8F56613C26B3A866005AB134 /* SplashScreenBuilder.swift in Sources */,
 				8FFF6C722697F0720033D2CE /* APIManager.swift in Sources */,
 				8F56613626B3A866005AB134 /* SplashScreenPresenter.swift in Sources */,
@@ -1054,6 +1068,7 @@
 				8F89B60026943466006312EA /* Configs.swift in Sources */,
 				8FB5A05A26A6B38F0013540D /* StopListPageViewController.swift in Sources */,
 				8F89B63F26944E5B006312EA /* MSExtension.swift in Sources */,
+				8F93D13E26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.swift in Sources */,
 				8FC67B5926BBD07800BEE56D /* StopBookmark.swift in Sources */,
 				8F695B8826AE99CA00518622 /* SetReminderPageBuilder.swift in Sources */,
 				8F56613726B3A866005AB134 /* SplashScreenWorker.swift in Sources */,
@@ -1104,7 +1119,7 @@
 				8F89B670269598A7006312EA /* SearchPageModels.swift in Sources */,
 				8FFF6CA0269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift in Sources */,
 				8FB5A05626A6B38F0013540D /* StopListPageWorker.swift in Sources */,
-				8F56618026B3F9E7005AB134 /* StopReminderTableViewCell.swift in Sources */,
+				8F56618026B3F9E7005AB134 /* StopBookmarkTableViewCell.swift in Sources */,
 				8F89B671269598A7006312EA /* SearchPageViewController.swift in Sources */,
 				8F89B673269598A7006312EA /* SearchPageInteractor.swift in Sources */,
 				8FFF6C802697F1130033D2CE /* ResponseProtocol.swift in Sources */,
@@ -1123,6 +1138,7 @@
 				8FFF6CBB269D93950033D2CE /* TableViewCellHelper.swift in Sources */,
 				8F695B8926AE99CA00518622 /* SetReminderPageInteractor.swift in Sources */,
 				8F89B61C26943BDB006312EA /* UIStoryboardExtension.swift in Sources */,
+				8F93D12926CCC1040007601C /* SimpleStopReminderTableViewCell.swift in Sources */,
 				8FC67B5E26BBD23200BEE56D /* StopBookmarkManager.swift in Sources */,
 				8F89B61E26943BDB006312EA /* StringExtension.swift in Sources */,
 				8FB5A09926A909BF0013540D /* Utils.swift in Sources */,
@@ -1275,7 +1291,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				INFOPLIST_FILE = missthebus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1400,7 +1416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				INFOPLIST_FILE = missthebus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
