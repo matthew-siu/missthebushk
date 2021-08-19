@@ -14,6 +14,7 @@ protocol MainPageRoutingLogic
     func routeToSearchPage()
     func routeToStopListPage(item: MainPage.BookmarkItem)
     func routeToCreateReminderPage()
+    func routeToUpdateReminderPage(index: Int)
 }
 
 // MARK: - The possible elements that can be
@@ -34,7 +35,7 @@ extension MainPageRouter {
     
     
     func routeToStopListPage(item: MainPage.BookmarkItem){
-        if let reminder = dataStore?.getStopBookmark(stopId: item.stopId), let route = reminder.route, let stop = reminder.stop{
+        if let reminder = dataStore?.getStopBookmark(route: item.routeMetadata, stopId: item.stopId), let route = reminder.route, let stop = reminder.stop{
             
             let request = StopListPageBuilder.BuildRequest(normalRequest: StopListPage.Service.Request.Normal(route: route, stop: stop))
             let vc = StopListPageBuilder.createScene(request: request)
@@ -59,8 +60,13 @@ extension MainPageRouter {
     }
     
     func routeToCreateReminderPage(){
-        
         let request = SetReminderPageBuilder.BuildRequest(mode: .CREATE, reminder: nil)
+        let vc = SetReminderPageBuilder.createScene(request: request)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToUpdateReminderPage(index: Int){
+        let request = SetReminderPageBuilder.BuildRequest(mode: .UPDATE, reminder: self.dataStore?.getStopReminder(index: index))
         let vc = SetReminderPageBuilder.createScene(request: request)
         self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }

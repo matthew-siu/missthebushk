@@ -47,10 +47,12 @@ enum TextStyle {
     case subhead1
     case title1
     case title2
+    case title2_bold
     case label
     case label_en
     case label_sub
     case label_sub_bold
+    case label_sub_mini
     
     fileprivate var style: Style {
         switch self {
@@ -58,11 +60,13 @@ enum TextStyle {
         case .header2:      return (30, .avenirNext(.regular))
         case .title1:       return (24, .avenirNext(.regular))
         case .title2:       return (20, .avenirNext(.regular))
+        case .title2_bold:  return (20, .avenirNext(.medium))
         case .subhead1:     return (17, .avenirNext(.bold))
-        case .label:       return (16, .avenirNext(.regular))
-        case .label_en:       return (20, .avenirNext(.regular))
-        case .label_sub:       return (14, .avenirNext(.regular))
-        case .label_sub_bold:       return (14, .avenirNext(.bold))
+        case .label:        return (16, .avenirNext(.regular))
+        case .label_en:     return (20, .avenirNext(.regular))
+        case .label_sub:    return (14, .avenirNext(.regular))
+        case .label_sub_bold:   return (14, .avenirNext(.bold))
+        case .label_sub_mini:   return (12, .avenirNext(.regular))
         }
     }
     

@@ -13,8 +13,10 @@ protocol SetReminderPageBusinessLogic
 {
     func displayInitialState()
     func saveReminder(request: SetReminderPage.DisplayItem.Request)
+    func displayRouteAndStopList()
     func getRouteStopResponse(resp: StopListPage.Service.Response.GetRouteStops)
     func removeRouteStop(at index: Int)
+    func rearrangeReminder(at pos1: Int, to pos2: Int)
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -82,9 +84,23 @@ extension SetReminderPageInteractor {
         self.presenter?.updateRouteAndStop(self.reminder)
     }
     
+    func displayRouteAndStopList(){
+        self.presenter?.updateRouteAndStop(self.reminder)
+    }
+    
     func removeRouteStop(at index: Int){
         self.reminder.routes.remove(at: index)
     }
+    
+    func rearrangeReminder(at pos1: Int, to pos2: Int) {
+        let mover = self.reminder.routes.remove(at: pos1)
+        self.reminder.routes.insert(mover, at: pos2)
+    }
+    
+}
+
+// MARK: - DataStore
+extension SetReminderPageInteractor{
     
     func getRouteStopsRequestQuery(index: Int) -> StopReminder.Route{
         return self.reminder.routes[index]

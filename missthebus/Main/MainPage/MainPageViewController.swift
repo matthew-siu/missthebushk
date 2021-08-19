@@ -30,11 +30,10 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     @IBOutlet weak var upcomingTabBarItem: UITabBarItem!
     @IBOutlet weak var bookmarksTabBarItem: UITabBarItem!
     @IBOutlet weak var remindersTabBarItem: UITabBarItem!
+    @IBOutlet weak var searchTabBarItem: UITabBarItem!
     
     @IBOutlet weak var tableView: UITableView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
-    @IBOutlet weak var searchSoftUIView: SoftUIView! // button behaviour
-    @IBOutlet weak var searchImg: UIImageView!
     
     
     @IBOutlet weak var adsBannerView: GADBannerView!
@@ -61,22 +60,34 @@ extension MainPageViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.separatorStyle = .none
+        self.tableView.dragInteractionEnabled = true
+        self.tableView.dragDelegate = self
         self.tableView.allowsSelection = true
+        self.tableView.separatorStyle = .none
         self.tableView.register(TableViewCell.bookMarkItemCell.nib, forCellReuseIdentifier: TableViewCell.bookMarkItemCell.reuseId)
         self.tableView.register(TableViewCell.reminderItemCell.nib, forCellReuseIdentifier: TableViewCell.reminderItemCell.reuseId)
         self.tableView.register(TableViewCell.noItemCell.nib, forCellReuseIdentifier: TableViewCell.noItemCell.reuseId)
+        
         self.tabBar.delegate = self
+        
         self.initUI()
         self.initBanner(self.adsBannerView, heightConstaint: self.adsBannerHeightConstraint)
         
-        self.interactor?.loadFirstTab()
+        self.currentTab = self.interactor?.loadFirstTab() ?? .Bookmarks
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        switch self.currentTab{
+            case .Bookmarks: self.interactor?.loadAllBookmarksOfRoute()
+            case .Reminders: self.interactor?.loadAllRemindersOfRoute()
+            case .Upcoming: return
+            case .Search: return
+        }
+        
         
     }
     
@@ -102,10 +113,10 @@ extension MainPageViewController {
         self.upcomingTabBarItem.title = MainPage.DisplayItem.TabBarItems.upcoming
         self.bookmarksTabBarItem.title = MainPage.DisplayItem.TabBarItems.bookmarks
         self.remindersTabBarItem.title = MainPage.DisplayItem.TabBarItems.reminders
+        self.searchTabBarItem.title = MainPage.DisplayItem.TabBarItems.search
         
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         
-        self.setSearchBtn()
 //        self.addFadedEdgeToTableView()
     }
     
@@ -116,9 +127,9 @@ extension MainPageViewController {
     
     @objc private func onClickCreate(){
         if (self.currentTab == .Bookmarks){
-            self.goToSearchPage()
+            self.router?.routeToSearchPage()
         }else if (self.currentTab == .Reminders){
-            self.goToCreateReminderPage()
+            self.router?.routeToCreateReminderPage()
         }
     }
     
@@ -128,34 +139,24 @@ extension MainPageViewController {
         self.tableView.layer.addSublayer(self.gradientLayer)
     }
     
-    private func setSearchBtn(){
-        self.searchSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
-        self.searchSoftUIView.cornerRadius = 50
-        self.searchSoftUIView.shadowOffset = .init(width: 5, height: 5)
-        self.searchSoftUIView.shadowOpacity = 1
-        self.searchSoftUIView.addTarget(self, action: #selector(self.goToSearchPage), for: .touchUpInside)
-        self.searchImg.addShadow()
-
-    }
-    
-    @objc private func goToCreateReminderPage(){
-        self.router?.routeToCreateReminderPage()
-    }
-    
-    @objc
-    private func goToSearchPage(){
-        self.router?.routeToSearchPage()
-    }
 }
 
-extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, StopReminderCellDelegate{
-    func onSelect(_ index: Int) {
+extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, StopBookmarkCellDelegate, StopReminderCellDelegate{
+    // StopReminderCellDelegate
+    func onSelectStopBookmarkCell(_ index: Int) {
         if (index >= 0){
+            print("on select #\(index)")
             self.router?.routeToStopListPage(item: self.bookmarkItems[index])
         }
     }
     
-    // header View
+    func onSelectStopReminderCell(_ index: Int){
+        if (index >= 0){
+            self.router?.routeToUpdateReminderPage(index: index)
+        }
+    }
+    
+    // header view
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = MainPageHeaderView(frame: .init(x: 0, y: 0, width: self.width, height: 40))
         headerView.setContent(imgName: self.basicViewModel.headerImgName, title: self.basicViewModel.headerLabel)
@@ -163,12 +164,12 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
         return headerView
     }
     
-    
     // header height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
     
+    // number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.currentTab == .Bookmarks){
             
@@ -181,6 +182,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
         return 0
     }
     
+    // table view cell body
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (self.currentTab == .Bookmarks){
             
@@ -188,7 +190,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
                 let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.bookMarkItemCell.reuseId, for: indexPath) as! StopBookmarkTableViewCell
                 let bookmarkItem = self.bookmarkItems[indexPath.row]
                 let etaItem = self.bookmarkETAViewModel.etaList.first(where: {$0.stopId == bookmarkItem.stopId && $0.route == bookmarkItem.routeMetadata})
-                cell.setInfo(stop: bookmarkItem, etaItem: etaItem)
+                cell.setInfo(index: indexPath.row, stop: bookmarkItem, etaItem: etaItem)
                 cell.delegate = self
                 cell.backgroundColor = .none
                 cell.selectionStyle = .none
@@ -198,7 +200,8 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
             if (self.reminderItems.count > 0){
                 let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.reminderItemCell.reuseId, for: indexPath) as! SimpleStopReminderTableViewCell
                 let reminderItem = self.reminderItems[indexPath.row]
-                cell.setInfo(viewModel: reminderItem)
+                cell.setInfo(index: indexPath.row, viewModel: reminderItem)
+                cell.delegate = self
                 cell.backgroundColor = .none
                 cell.selectionStyle = .none
                 return cell
@@ -214,25 +217,61 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, St
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (self.currentTab == .Bookmarks){
-            if (self.bookmarkItems.count > 0){
-                self.router?.routeToStopListPage(item: self.bookmarkItems[indexPath.row])
+    // on delete
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            if (self.currentTab == .Bookmarks){
+                self.bookmarkItems.remove(at: indexPath.row)
+                self.interactor?.removeBookmark(at: indexPath.row)
+            }else if (self.currentTab == .Reminders){
+                self.reminderItems.remove(at: indexPath.row)
+                self.interactor?.removeReminder(at: indexPath.row)
             }
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        
+    }
+    
+    // on drag
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        if (self.currentTab == .Bookmarks){
+            dragItem.localObject = self.bookmarkItems[indexPath.row]
+        }else if (self.currentTab == .Reminders){
+            dragItem.localObject = self.reminderItems[indexPath.row]
+        }
+        return [ dragItem ]
+    }
+    
+    // on drop
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        if (sourceIndexPath.row != destinationIndexPath.row){
+            if (self.currentTab == .Bookmarks){
+                let mover = self.bookmarkItems.remove(at: sourceIndexPath.row)
+                self.bookmarkItems.insert(mover, at: destinationIndexPath.row)
+                self.interactor?.rearrangeBookmark(at: sourceIndexPath.row, to: destinationIndexPath.row)
+            }else if (self.currentTab == .Reminders){
+                let mover = self.reminderItems.remove(at: sourceIndexPath.row)
+                self.reminderItems.insert(mover, at: destinationIndexPath.row)
+                self.interactor?.rearrangeReminder(at: sourceIndexPath.row, to: destinationIndexPath.row)
+            }
+            self.tableView.reloadData()
+        }
     }
     
 }
 
+
+// MARK: - On TabBarItem Click
 extension MainPageViewController: UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if (item == self.bookmarksTabBarItem){
             self.interactor?.changeToTab(at: MainPage.Tab.Bookmarks.rawValue)
-        }else if ( item == self.remindersTabBarItem){
+        }else if (item == self.remindersTabBarItem){
             self.interactor?.changeToTab(at: MainPage.Tab.Reminders.rawValue)
-        }else if ( item == self.upcomingTabBarItem){
+        }else if (item == self.upcomingTabBarItem){
             self.interactor?.changeToTab(at: MainPage.Tab.Upcoming.rawValue)
+        }else if (item == self.searchTabBarItem){
+            self.router?.routeToSearchPage()
         }
     }
 }

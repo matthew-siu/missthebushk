@@ -12,6 +12,7 @@ import UIKit
 protocol SetReminderPageDisplayLogic: class
 {
     func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel)
+    func displayUpdateState(viewModel: SetReminderPage.DisplayItem.ViewModel)
     func updateRouteAndStop(viewModel: SetReminderPage.DisplayItem.RouteAndStopViewModel)
 }
 
@@ -57,6 +58,7 @@ class SetReminderPageViewController: BaseViewController, SetReminderPageDisplayL
 //        return self.addRouteBtn.frame.maxY + self.tableView.contentSize.height
     }
     
+    var mode: SetReminderPage.Mode = .CREATE
     var reminderType: StopReminder.ReminderType = .OTHER
     var daysOfWeekList = [WeekDayPicker]()
     var getRouteStopResponse: StopListPage.Service.Response.GetRouteStops?
@@ -82,6 +84,9 @@ extension SetReminderPageViewController {
         self.tableView.dataSource = self
         self.tableView.dragInteractionEnabled = true
         self.tableView.dragDelegate = self
+        self.tableView.allowsSelection = true
+        self.tableView.separatorStyle = .none
+        self.tableView.isScrollEnabled = false
         
         self.reminderNamesCollectionView.register(CollectionViewCell.itemCell.nib, forCellWithReuseIdentifier: CollectionViewCell.itemCell.reuseId)
         self.daysOfWeekList = [self.weekSunBtn, self.weekMonBtn, self.weekTueBtn, self.weekWedBtn, self.weekThuBtn, self.weekFriBtn, self.weekSatBtn]
@@ -112,8 +117,9 @@ extension SetReminderPageViewController {
             }else{
                 self.scrollView.frame.size = CGSize(width: self.width, height: self.tableView.frame.maxY)
             }
+            
+//            print("autoExpand after:  scrollview: \(self.scrollView.frame.height) / \(self.scrollView.contentSize.height) | table real height: \(self.tableView.contentSize.height) | ui height: \(self.tableView.frame.height) | table maxY: \(self.tableView.frame.minY) - \(self.tableView.frame.maxY)")
 
-//            print("autoExpand after:  scrollview: \(self.scrollView.contentSize.height) | table real height: \(self.tableView.contentSize.height) | ui height: \(self.tableView.frame.height) | table maxY: \(self.tableView.frame.minY) - \(self.tableView.frame.maxY)")
         }
     }
 }
@@ -134,11 +140,23 @@ extension SetReminderPageViewController {
         self.reminderNamesCollectionView.backgroundColor = UIColor.SoftUI.major
         self.reminderNamesCollectionView.clipsToBounds = false
         self.tableView.backgroundColor = UIColor.SoftUI.major
-        self.tableView.allowsSelection = true
-        self.tableView.separatorStyle = .none
-        self.tableView.isScrollEnabled = false
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         
+        
+        // init soft UI
+        self.initSoftUI(self.timeView, type: .staticView)
+        self.initSoftUI(self.timePickerView, inverted: true, type: .staticView)
+        self.initSoftUI(self.nameView, type: .staticView)
+        self.initSoftUI(self.addRouteBtn)
+        
+        
+        self.timePickerLabel.text = "reminder_time_label".localized()
+        self.timePickerLabel.useTextStyle(.label_sub)
+        self.startTimePicker.datePickerMode = .time
+        self.startTimePicker.locale = Locale(identifier: "en_GB")
+        
+        self.addRouteLabel.useTextStyle(.label_sub)
+        self.addRouteBtn.addTarget(self, action: #selector(self.addNewRouteStop), for: .touchUpInside)
     }
     
     
@@ -147,32 +165,43 @@ extension SetReminderPageViewController {
     }
     
     func displayCreateState(viewModel: SetReminderPage.DisplayItem.ViewModel){
-        
+        self.mode = .CREATE
         // nav bar
-        self.title = (viewModel.mode == .CREATE) ? "create_reminder_title".localized() : "update_reminder_title".localized()
+        self.title = "create_reminder_title".localized()
         
-        let saveBtn = UIBarButtonItem(title: (viewModel.mode == .CREATE) ? "general_create".localized() : "general_update".localized(), style: .plain, target: self, action: #selector(self.onSave))
+        let saveBtn = UIBarButtonItem(title: "general_create".localized(), style: .plain, target: self, action: #selector(self.onSave))
         saveBtn.tintColor = .systemBlue
         self.navigationItem.rightBarButtonItem = saveBtn
-        
-        // init soft UI
-        self.initSoftUI(self.timeView, type: .staticView)
-        self.initSoftUI(self.timePickerView, inverted: true, type: .staticView)
-        self.initSoftUI(self.nameView, type: .staticView)
-        self.initSoftUI(self.addRouteBtn)
         
         self.reminderIcon.image = UIImage(named: self.getIconNameFromNameSampleList(type: viewModel.reminderType))
         self.reminderIcon.addShadow()
         
-        self.timePickerLabel.text = "reminder_time_label".localized()
-        self.timePickerLabel.useTextStyle(.label_sub)
-        self.startTimePicker.datePickerMode = .time
-        self.startTimePicker.locale = Locale(identifier: "en_GB")
-//        self.startTimePicker.addTarget(self, action: #selector(self.onDateValueChanged), for: .valueChanged)
-        
         self.addRouteLabel.text = "reminder_add_stop".localized() + " (\(self.routes.count)/5)"
-        self.addRouteLabel.useTextStyle(.label_sub)
-        self.addRouteBtn.addTarget(self, action: #selector(self.addNewRouteStop), for: .touchUpInside)
+        
+        
+        self.tableViewHeightConstraint.constant = 50
+    }
+    
+    func displayUpdateState(viewModel: SetReminderPage.DisplayItem.ViewModel){
+        self.mode = .UPDATE
+        // nav bar
+        self.reminderType = viewModel.reminderType
+        self.title = "update_reminder_title".localized()
+        
+        let saveBtn = UIBarButtonItem(title: "general_save".localized(), style: .plain, target: self, action: #selector(self.onSave))
+        saveBtn.tintColor = .systemBlue
+        self.navigationItem.rightBarButtonItem = saveBtn
+        
+        self.reminderIcon.image = UIImage(named: self.getIconNameFromNameSampleList(type: viewModel.reminderType))
+        self.reminderIcon.addShadow()
+        self.nameTextfield.text = viewModel.name
+        self.startTimePicker.date = viewModel.time ?? Date()
+        if let period = viewModel.period{
+            for day in period{
+                self.daysOfWeekList[day].select()
+            }
+        }
+        self.addRouteLabel.text = "reminder_add_stop".localized() + " (\(self.routes.count)/5)"
     }
     
 //    @objc private func onDateValueChanged(){
@@ -239,6 +268,7 @@ extension SetReminderPageViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let mover = self.routes.remove(at: sourceIndexPath.row)
         self.routes.insert(mover, at: destinationIndexPath.row)
+        self.interactor?.rearrangeReminder(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
 }
@@ -288,7 +318,7 @@ extension SetReminderPageViewController: UITextFieldDelegate{
 extension SetReminderPageViewController{
     
     private func getIconNameFromNameSampleList(type: StopReminder.ReminderType) -> String{
-        let imgName = SetReminderPage.DisplayItem.ViewModel.nameSamples.first(where: {$0.type == self.reminderType})?.img
+        let imgName = SetReminderPage.DisplayItem.ViewModel.nameSamples.first(where: {$0.type == type})?.img
         return imgName ?? "tagOther"
     }
     
@@ -323,8 +353,8 @@ extension SetReminderPageViewController{
         let data = SetReminderPage.DisplayItem.Request(reminderName: name, reminderType: self.reminderType, time: self.startTimePicker.date, period: period)
         self.interactor?.saveReminder(request: data)
         
-        
-        self.showAlert("general_saved".localized(), "reminder_create_succeed".localized()) { (_) in
+        let msg = (self.mode == .CREATE) ? "reminder_create_succeed".localized() : "reminder_update_succeed".localized()
+        self.showAlert("general_saved".localized(), msg) { (_) in
             self.navigationController?.popViewController(animated: true)
         }
     }

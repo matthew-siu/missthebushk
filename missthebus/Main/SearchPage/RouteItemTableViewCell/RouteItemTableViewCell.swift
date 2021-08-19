@@ -35,14 +35,25 @@ class RouteItemTableViewCell: UITableViewCell {
 extension RouteItemTableViewCell{
     
     func initUI(){
+        self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
+        self.softBgView.cornerRadius = 10
+        self.softBgView.shadowOffset = .init(width: 2, height: 2)
+        self.softBgView.shadowOpacity = 1
+        
+        self.routeNumLabel.useTextStyle(.title1)
+        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
     }
     
     func setInfo(route: SearchPage.RouteItem){
         self.route = route
         self.routeNumLabel.text = route.routeNum
-        self.routeNumLabel.useTextStyle(.title1)
-        self.routeDestLabel.text = "\(route.destStop)"
-        self.routeDestLabel.useTextStyle((currentLanguage != .english) ? .label_en : .label)
+        
+        let attribute1 = [ NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 12)! ]
+        let attribute2 = [ NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: (currentLanguage != .english) ? 20 : 16)! ]
+        let str1 = NSMutableAttributedString(string: "route_to".localized(), attributes: attribute1)
+        let str2 = NSMutableAttributedString(string: " \(route.destStop)", attributes: attribute2)
+        str1.append(str2)
+        self.routeDestLabel.attributedText = str1
         self.routeOrigLabel.text = "route_from".localized() + " \(route.origStop)"
         
         if (route.company == .KMB){
@@ -51,11 +62,6 @@ extension RouteItemTableViewCell{
                 self.busCompanyIcon.sizeToFit()
             }
         }
-        
-        self.softBgView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
-        self.softBgView.cornerRadius = 10
-        self.softBgView.shadowOffset = .init(width: 2, height: 2)
-        self.softBgView.shadowOpacity = 1
     }
 }
 

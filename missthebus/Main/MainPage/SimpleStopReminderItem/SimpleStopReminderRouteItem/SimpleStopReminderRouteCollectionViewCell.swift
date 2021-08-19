@@ -23,11 +23,13 @@ class SimpleStopReminderRouteCollectionViewCell: UICollectionViewCell {
 
     func initUI(){
         self.softUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
-        self.softUIView.cornerRadius = 10
+        self.softUIView.cornerRadius = 5
         self.softUIView.shadowOffset = .init(width: 2, height: 2)
         self.softUIView.shadowOpacity = 1
         self.softUIView.type = .staticView
         self.softUIView.isSelected = true
+        
+        self.routeNumLabel.useTextStyle(.label_sub)
     }
     
     func setInfo(viewModel: MainPage.ReminderItem.ReminderRouteItem){

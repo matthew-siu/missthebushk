@@ -24,15 +24,19 @@
                                     <constraint firstAttribute="height" constant="60" id="SwQ-a7-aUI"/>
                                 </constraints>
                                 <items>
-                                    <tabBarItem title="Upcoming Plan" image="bell" id="r2t-oj-POz">
+                                    <tabBarItem title="Recent" image="recent" id="r2t-oj-POz">
                                         <inset key="imageInsets" minX="10" minY="20" maxX="10" maxY="25"/>
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
                                     </tabBarItem>
-                                    <tabBarItem title="My Stops" image="pin" id="hBf-vP-aUr">
+                                    <tabBarItem title="My Stops" image="busStop" id="hBf-vP-aUr">
                                         <inset key="imageInsets" minX="10" minY="20" maxX="10" maxY="25"/>
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
                                     </tabBarItem>
-                                    <tabBarItem title="Reminders" image="bookmark" id="LKu-07-oxi">
+                                    <tabBarItem title="Reminders" image="bell" id="LKu-07-oxi">
+                                        <inset key="imageInsets" minX="10" minY="20" maxX="10" maxY="25"/>
+                                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="Search" image="search" id="lU3-IV-brz">
                                         <inset key="imageInsets" minX="10" minY="20" maxX="10" maxY="25"/>
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
                                     </tabBarItem>
@@ -49,37 +53,16 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="708"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpS-2k-KqN" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                                <rect key="frame" x="177" y="682" width="60" height="60"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="U07-ho-cWu">
-                                        <rect key="frame" x="20" y="20" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="18T-4b-gp7"/>
-                                            <constraint firstAttribute="height" constant="20" id="jXZ-8d-jY8"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="U07-ho-cWu" firstAttribute="centerX" secondItem="PpS-2k-KqN" secondAttribute="centerX" id="Prl-aj-qBL"/>
-                                    <constraint firstAttribute="width" constant="60" id="VoX-oB-meA"/>
-                                    <constraint firstItem="U07-ho-cWu" firstAttribute="centerY" secondItem="PpS-2k-KqN" secondAttribute="centerY" id="X0D-VG-a6G"/>
-                                    <constraint firstAttribute="height" constant="60" id="cMd-5s-7l3"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8NM-xe-nCi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PpS-2k-KqN" firstAttribute="centerX" secondItem="9nn-Sv-MU6" secondAttribute="centerX" id="1yR-Zc-rCQ"/>
                             <constraint firstItem="FMh-Ln-C4l" firstAttribute="leading" secondItem="8NM-xe-nCi" secondAttribute="leading" id="EeW-cN-Ghn"/>
                             <constraint firstItem="7ol-nf-3vR" firstAttribute="top" secondItem="8NM-xe-nCi" secondAttribute="top" id="NYt-3F-bGm"/>
                             <constraint firstItem="eyF-fC-uR1" firstAttribute="trailing" secondItem="8NM-xe-nCi" secondAttribute="trailing" id="asg-Pu-kNg"/>
                             <constraint firstItem="7ol-nf-3vR" firstAttribute="leading" secondItem="8NM-xe-nCi" secondAttribute="leading" id="d7Y-gb-jIc"/>
                             <constraint firstItem="FMh-Ln-C4l" firstAttribute="top" secondItem="7ol-nf-3vR" secondAttribute="bottom" id="dOB-IE-1cZ"/>
                             <constraint firstItem="eyF-fC-uR1" firstAttribute="leading" secondItem="8NM-xe-nCi" secondAttribute="leading" id="gPM-Ne-GXM"/>
-                            <constraint firstItem="FMh-Ln-C4l" firstAttribute="top" secondItem="PpS-2k-KqN" secondAttribute="bottom" constant="10" id="gRk-em-b0p"/>
                             <constraint firstItem="FMh-Ln-C4l" firstAttribute="trailing" secondItem="8NM-xe-nCi" secondAttribute="trailing" id="h0g-m2-n3m"/>
                             <constraint firstItem="eyF-fC-uR1" firstAttribute="bottom" secondItem="8NM-xe-nCi" secondAttribute="bottom" id="jFl-eZ-TDN"/>
                             <constraint firstItem="eyF-fC-uR1" firstAttribute="top" secondItem="FMh-Ln-C4l" secondAttribute="bottom" id="qq9-eG-HvR"/>
@@ -91,8 +74,7 @@
                         <outlet property="adsBannerView" destination="FMh-Ln-C4l" id="gpb-Fd-pYH"/>
                         <outlet property="bookmarksTabBarItem" destination="hBf-vP-aUr" id="3XU-Ge-Rry"/>
                         <outlet property="remindersTabBarItem" destination="LKu-07-oxi" id="YJv-uz-Jvy"/>
-                        <outlet property="searchImg" destination="U07-ho-cWu" id="CuH-f3-bbV"/>
-                        <outlet property="searchSoftUIView" destination="PpS-2k-KqN" id="Hkh-ma-S9q"/>
+                        <outlet property="searchTabBarItem" destination="lU3-IV-brz" id="RG8-nz-Oj9"/>
                         <outlet property="tabBar" destination="eyF-fC-uR1" id="gwc-SO-aP5"/>
                         <outlet property="tableView" destination="7ol-nf-3vR" id="3KC-El-F19"/>
                         <outlet property="upcomingTabBarItem" destination="r2t-oj-POz" id="S3P-kG-vFb"/>
@@ -105,8 +87,8 @@
     </scenes>
     <resources>
         <image name="bell" width="64" height="64"/>
-        <image name="bookmark" width="64" height="64"/>
-        <image name="pin" width="64" height="64"/>
+        <image name="busStop" width="64" height="64"/>
+        <image name="recent" width="64" height="64"/>
         <image name="search" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

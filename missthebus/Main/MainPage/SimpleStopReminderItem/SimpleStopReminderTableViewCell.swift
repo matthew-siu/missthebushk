@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol StopReminderCellDelegate: class {
+    func onSelectStopReminderCell(_ index: Int)
+}
+
 class SimpleStopReminderTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var softUIView: SoftUIView!
     @IBOutlet weak var reminderImg: UIImageView!
     @IBOutlet weak var reminderName: UILabel!
@@ -17,6 +22,8 @@ class SimpleStopReminderTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var viewModel: MainPage.ReminderItem?
+    var index = -1
+    var delegate: StopReminderCellDelegate?
     
     enum CollectionViewCell: String, CollectionViewCellConfiguration {
         case itemCell = "SimpleStopReminderRouteCollectionViewCell"
@@ -33,22 +40,35 @@ class SimpleStopReminderTableViewCell: UITableViewCell {
     }
     
     func initUI(){
+        self.bgView.backgroundColor = UIColor.SoftUI.major
+
         self.softUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
         self.softUIView.cornerRadius = 10
         self.softUIView.shadowOffset = .init(width: 2, height: 2)
-        self.softUIView.shadowOpacity = 0.5
+        self.softUIView.shadowOpacity = 1
+        
+        self.reminderName.useTextStyle(.label)
+        self.reminderPeriodLabel.useTextStyle(.label_sub_mini)
+        self.reminderTimeLabel.useTextStyle(.title2_bold)
         
         self.collectionView.backgroundColor = UIColor.SoftUI.major
+        
+        self.softUIView.addTarget(self, action: #selector(onSelected), for: .touchUpInside)
+        let onClicker = UITapGestureRecognizer(target: self, action: #selector(onSelected))
+        self.collectionView.addGestureRecognizer(onClicker)
     }
     
-    func setInfo(viewModel: MainPage.ReminderItem){
+    func setInfo(index: Int, viewModel: MainPage.ReminderItem){
+        self.index = index
         self.viewModel = viewModel
         if let tagViewModel = StopReminder.getTagViewModel(viewModel.type){
             self.reminderImg.image = UIImage(named: tagViewModel.img)
+            self.reminderImg.addShadow()
         }
         self.reminderName.text = viewModel.name
         self.reminderPeriodLabel.text = viewModel.period
         self.reminderTimeLabel.text = viewModel.startTime
+        self.collectionView.reloadData()
         
     }
 
@@ -56,6 +76,11 @@ class SimpleStopReminderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @objc func onSelected(){
+        print("onSelected")
+        self.delegate?.onSelectStopReminderCell(self.index)
     }
     
 }
@@ -67,6 +92,9 @@ extension SimpleStopReminderTableViewCell: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.itemCell.reuseId, for: indexPath) as! SimpleStopReminderRouteCollectionViewCell
+        if let item = self.viewModel?.routes[indexPath.row]{
+            cell.setInfo(viewModel: item)
+        }
         
         return cell
     }

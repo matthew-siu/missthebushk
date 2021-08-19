@@ -52,6 +52,7 @@ enum SetReminderPage
         {
             let mode: Mode
             var reminderType: StopReminder.ReminderType = .OTHER
+            var name: String = ""
             var time: Date?
             var period: [Int]?
             static let nameSamples: [NameSample] = [

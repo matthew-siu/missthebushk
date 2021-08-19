@@ -29,11 +29,16 @@ extension SetReminderPagePresenter {
     func displayInitialState(mode: SetReminderPage.Mode, reminder: StopReminder){
         
         
-        if (mode == .UPDATE){
-            
-        }else{
+        if (mode == .CREATE){
             let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: .CREATE)
             self.viewController?.displayCreateState(viewModel: viewModel)
+        }else{
+            reminder.printDetails()
+            let viewModel = SetReminderPage.DisplayItem.ViewModel(mode: .UPDATE, reminderType: reminder.type ?? .OTHER, name: reminder.name ?? "", time: reminder.startTime, period: reminder.period)
+            // initial state
+            self.viewController?.displayUpdateState(viewModel: viewModel)
+            // route and stop list
+            self.updateRouteAndStop(reminder)
         }
     }
     

@@ -13,10 +13,10 @@
 "main_no_upcoming_reminder" = "No upcoming reminders";
 "main_no_reminder" = "No reminders";
 "main_no_bookmark" = "No bookmarks";
-"main_upcoming_reminder" = "Upcoming reminders";
+"main_upcoming_reminder" = "Upcoming";
 "main_bookmark" = "My Stops";
 "main_reminders" = "My Reminders";
-
+"main_search" = "Search";
 
 
 // Search Page
@@ -61,6 +61,7 @@
 "reminder_tag_other" = "Other";
 "reminder_add_stop" = "Click to add a new stop.";
 "reminder_period_everyday" = "Everyday";
+"reminder_period_once" = "Once Only";
 
 
 // General
@@ -78,7 +79,6 @@
 "general_setting" = "Setting";
 "general_error" = "Error";
 "general_remind" = "Reminder";
-
 
 
 

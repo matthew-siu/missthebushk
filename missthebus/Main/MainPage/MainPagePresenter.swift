@@ -31,8 +31,8 @@ extension MainPagePresenter {
     
     func displayBookmarks(bookmarks: [StopBookmark]){
         self.bookmarks = bookmarks
-        let bookMarkItems = bookmarks.enumerated().map{(index, bookmark) in
-            return MainPage.BookmarkItem(index: index, stopId: bookmark.stopId, routeNum: bookmark.routeNum, bound: bookmark.bound, serviceType: bookmark.serviceType, company: bookmark.company, destStop: bookmark.destStop ?? "", currentStop: bookmark.currentStop ?? "")
+        let bookMarkItems = bookmarks.map{(bookmark) in
+            return MainPage.BookmarkItem(stopId: bookmark.stopId, routeNum: bookmark.routeNum, bound: bookmark.bound, serviceType: bookmark.serviceType, company: bookmark.company, destStop: bookmark.destStop ?? "", currentStop: bookmark.currentStop ?? "")
         }
         let viewModel = MainPage.DisplayItem.Bookmarks.ViewModel(bookmarkItems: bookMarkItems)
         self.viewController?.displayBookmarks(viewModel: viewModel)
@@ -40,13 +40,7 @@ extension MainPagePresenter {
     
     func displayReminders(reminders: [StopReminder]){
         var reminderItems = [MainPage.ReminderItem]()
-        for reminder in reminders{
-//            var periodStr = ""
-//            if (reminder.period?.count == 7){
-//                periodStr = "reminder_period_everyday".localized()
-//            }else if let period = reminder.period?.map({String($0)}) {
-//                periodStr = period.joined(separator: " ")
-//            }
+        for (reminder) in reminders{
             var routes = [MainPage.ReminderItem.ReminderRouteItem]()
             for route in reminder.routes{
                 routes.append(MainPage.ReminderItem.ReminderRouteItem(company: route.getRoute()?.company ?? .none, routeNum: route.routeNum))

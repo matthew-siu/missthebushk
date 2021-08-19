@@ -40,5 +40,8 @@ class StopBookmark: Codable{
     var route: KmbRoute?{
         return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
     }
+    var routeMetadata: RouteMetadata{
+        return RouteMetadata(self.routeNum, self.bound, self.serviceType)
+    }
     
 }

@@ -69,4 +69,12 @@ extension StopReminderManager {
         self.removeStopReminder(reminder.id)
         self.addStopReminder(reminder)
     }
+    
+    static func rearrangeStopReminder(at pos1: Int, to pos2: Int){
+        if var reminders = self.getStopReminders(){
+            let mover = reminders.remove(at: pos1)
+            reminders.insert(mover, at: pos2)
+            self.saveStopReminders(reminders)
+        }
+    }
 }

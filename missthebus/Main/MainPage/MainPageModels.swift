@@ -17,10 +17,10 @@ enum MainPage
         case Upcoming = 0
         case Bookmarks = 1
         case Reminders = 2
+        case Search = 3
     }
     
     struct BookmarkItem{
-        let index: Int
         let stopId: String
         let routeNum: String
         let bound: String
@@ -74,6 +74,17 @@ enum MainPage
             static let upcoming = "main_upcoming_reminder".localized()
             static let bookmarks = "main_bookmark".localized()
             static let reminders = "main_reminders".localized()
+            static let search = "main_search".localized()
+        }
+        
+        enum UpcomingReminders{
+            struct ViewModel{
+                let title = BasicViewModel(headerImgName: "recent", headerLabel: "main_upcoming_reminder".localized())
+                var reminderItems: [ReminderItem] = []
+            }
+            struct ETAViewModel{
+                var etaList = [ETAItem]()
+            }
         }
         
         enum Bookmarks{
@@ -88,18 +99,8 @@ enum MainPage
         
         enum Reminders{
             struct ViewModel{
-                let title = BasicViewModel(headerImgName: "bookmark", headerLabel: "main_reminders".localized(), noItemLabel: "main_no_reminder".localized())
+                let title = BasicViewModel(headerImgName: "bell", headerLabel: "main_reminders".localized(), noItemLabel: "main_no_reminder".localized())
                 var reminderItems: [ReminderItem] = []
-            }
-        }
-        
-        enum UpcomingReminders{
-            struct ViewModel{
-                let title = BasicViewModel(headerImgName: "bell", headerLabel: "main_upcoming_reminder".localized())
-                var reminderItems: [ReminderItem] = []
-            }
-            struct ETAViewModel{
-                var etaList = [ETAItem]()
             }
         }
     }

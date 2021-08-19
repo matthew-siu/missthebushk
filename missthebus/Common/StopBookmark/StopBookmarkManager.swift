@@ -67,4 +67,12 @@ extension StopBookmarkManager{
         self.removeStopBookmark(bookmark.id)
         self.addStopBookmark(bookmark)
     }
+    
+    static func rearrangeStopBookmark(at pos1: Int, to pos2: Int){
+        if var bookmarks = self.getStopBookmarks(){
+            let mover = bookmarks.remove(at: pos1)
+            bookmarks.insert(mover, at: pos2)
+            self.saveStopBookmarks(bookmarks)
+        }
+    }
 }

@@ -176,6 +176,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bgView" destination="H2p-sc-9uM" id="Czt-kq-YjP"/>
                 <outlet property="busCompanyIcon" destination="5Vq-kb-clu" id="mxk-Ed-DAw"/>
                 <outlet property="eta1label" destination="OrE-OI-VcK" id="REE-mu-l6u"/>
                 <outlet property="eta1unit" destination="bEU-2L-sxr" id="U1b-eR-DnR"/>

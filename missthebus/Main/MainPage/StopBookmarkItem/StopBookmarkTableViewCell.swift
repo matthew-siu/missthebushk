@@ -7,12 +7,13 @@
 
 import UIKit
 
-protocol StopReminderCellDelegate: class {
-    func onSelect(_ index: Int)
+protocol StopBookmarkCellDelegate: class {
+    func onSelectStopBookmarkCell(_ index: Int)
 }
 
 class StopBookmarkTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var bgView: UIView!
     // route view
     @IBOutlet weak var routeView: SoftUIView!
     @IBOutlet weak var routeNumLabel: UILabel!
@@ -48,7 +49,7 @@ class StopBookmarkTableViewCell: UITableViewCell {
     }
 
     var index = -1
-    var delegate: StopReminderCellDelegate?
+    var delegate: StopBookmarkCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,6 +64,7 @@ class StopBookmarkTableViewCell: UITableViewCell {
     }
     
     func initUI(){
+        self.bgView.backgroundColor = UIColor.SoftUI.major
         self.initSoftUI(self.routeView)
         self.eta1unit.text = "stop_mins".localized()
         self.eta2unit.text = "stop_mins".localized()
@@ -78,9 +80,9 @@ class StopBookmarkTableViewCell: UITableViewCell {
         self.eta3view.isHidden = true
     }
     
-    func setInfo(stop: MainPage.BookmarkItem, etaItem: MainPage.ETAItem?){
+    func setInfo(index: Int, stop: MainPage.BookmarkItem, etaItem: MainPage.ETAItem?){
         // General View
-        self.index = stop.index
+        self.index = index
         self.routeNumLabel.text = String(stop.routeNum)
         self.routeDestLabel.text = stop.currentStop
         self.routeOrigLabel.text = "\("route_to".localized()) \(stop.destStop)"
@@ -105,7 +107,7 @@ class StopBookmarkTableViewCell: UITableViewCell {
     
     @objc func onSelected(){
         print("onSelected")
-        self.delegate?.onSelect(self.index)
+        self.delegate?.onSelectStopBookmarkCell(self.index)
     }
     
 }

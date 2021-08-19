@@ -86,6 +86,8 @@ class StopReminder: Codable{
         var periodStr = ""
         if (self.period?.count == 7){
             periodStr = "reminder_period_everyday".localized()
+        }else if (self.period?.count == 0){
+            periodStr = "reminder_period_once".localized()
         }else if let period = self.period?.map({StopReminder.daysOfWeek[$0]}) {
             periodStr = period.joined(separator: " ")
         }

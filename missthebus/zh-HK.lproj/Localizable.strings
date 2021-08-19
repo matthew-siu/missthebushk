@@ -13,10 +13,10 @@
 "main_no_upcoming_reminder" = "沒有即將到來的提醒";
 "main_no_reminder" = "沒有提醒";
 "main_no_bookmark" = "沒有書籤";
-"main_upcoming_reminder" = "即將的提醒";
+"main_upcoming_reminder" = "即將";
 "main_bookmark" = "我的車站";
 "main_reminders" = "我的提醒";
-
+"main_search" = "搜索";
 
 
 // Search Page
@@ -61,6 +61,7 @@
 "reminder_tag_other" = "其它";
 "reminder_add_stop" = "點擊以添加新車站。";
 "reminder_period_everyday" = "每天";
+"reminder_period_once" = "僅一次";
 
 
 // General
@@ -78,7 +79,6 @@
 "general_setting" = "設定";
 "general_error" = "錯誤";
 "general_remind" = "提醒";
-
 
 
 
