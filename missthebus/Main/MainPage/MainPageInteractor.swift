@@ -16,6 +16,7 @@ protocol MainPageBusinessLogic
     func loadFirstTab() -> MainPage.Tab
     func loadAllBookmarksOfRoute()
     func loadAllRemindersOfRoute()
+    func loadOneUpcomingReminder()
     func dismissETATimer()
     func changeToTab(at index: Int)
     func removeBookmark(at index: Int)
@@ -57,7 +58,7 @@ extension MainPageInteractor {
             1. If have upcoming reminder, -> upcoming
             2. Else, -> bookmarks
          */
-        return .Reminders
+        return .Bookmarks
     }
     
     func loadAllBookmarksOfRoute(){
@@ -81,6 +82,10 @@ extension MainPageInteractor {
         }
     }
     
+    func loadOneUpcomingReminder(){
+        self.presenter?.displayUpcoming(reminder: nil)
+    }
+    
     func dismissETATimer(){
         print("dismiss ETA time")
         self.etaTimer?.invalidate()
@@ -96,7 +101,7 @@ extension MainPageInteractor {
             self.loadAllRemindersOfRoute()
         }else if (index == MainPage.Tab.Upcoming.rawValue){
             self.dismissETATimer()
-            
+            self.loadOneUpcomingReminder()
         }
     }
     

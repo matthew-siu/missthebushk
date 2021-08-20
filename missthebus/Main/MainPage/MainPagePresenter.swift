@@ -13,6 +13,7 @@ protocol MainPagePresentationLogic
 {
     func displayBookmarks(bookmarks: [StopBookmark])
     func displayReminders(reminders: [StopReminder])
+    func displayUpcoming(reminder: StopReminder?)
     func updateETAs(query: KmbETAQuery, bound: String, data: [KmbETAResponse.KmbETAData])
 }
 
@@ -50,6 +51,21 @@ extension MainPagePresenter {
         }
         let viewModel = MainPage.DisplayItem.Reminders.ViewModel(reminderItems: reminderItems)
         self.viewController?.displayReminders(viewModel: viewModel)
+    }
+    
+    func displayUpcoming(reminder: StopReminder?){
+        if let reminder = reminder{
+            var routes = [MainPage.UpcomingReminderItem.ReminderRouteItem]()
+            for route in reminder.routes{
+                routes.append(MainPage.UpcomingReminderItem.ReminderRouteItem(company: route.getRoute()?.company ?? .none, routeNum: route.routeNum))
+            }
+            let reminderItem = MainPage.UpcomingReminderItem(id: reminder.id, name: reminder.name ?? "", period: reminder.displayPeriod, startTime: reminder.startTime, type: reminder.type ?? .OTHER, routes: [])
+            let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: reminderItem)
+            self.viewController?.displayUpcoming(viewModel: viewModel)
+        }else{
+            let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: nil)
+            self.viewController?.displayUpcoming(viewModel: viewModel)
+        }
     }
     
     func updateETAs(query: KmbETAQuery, bound: String, data: [KmbETAResponse.KmbETAData]){

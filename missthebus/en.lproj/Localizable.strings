@@ -18,6 +18,16 @@
 "main_reminders" = "My Reminders";
 "main_search" = "Search";
 
+// Setting Page
+"setting_section_general" = "General";
+"setting_section_about" = "About";
+"setting_languages" = "Languages";
+"setting_clear_memory" = "Clear Memory Cache";
+"setting_clear_memory_confirm" = "Are you sure to clear all memory cache?";
+"setting_about_us" = "About Us";
+"setting_about_version" = "Version";
+"setting_languges_title" = "Choose Language";
+
 
 // Search Page
 "search_label" = "Search Bus";
@@ -78,18 +88,8 @@
 "general_done" = "Done";
 "general_setting" = "Setting";
 "general_error" = "Error";
-"general_remind" = "Reminder";
-
-
-
-
-
-
-
-
-
-
-
+"general_remind" = "Remind";
+"general_attention" = "Attention";
 
 
 

@@ -28,13 +28,13 @@
                                         <rect key="frame" x="10" y="10" width="354" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pc-VjW">
-                                                <rect key="frame" x="40" y="3" width="88.5" height="24"/>
+                                                <rect key="frame" x="40" y="3" width="103.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Sun Mon Tue Wed Thu Fri" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyE-wL-lCV">
-                                                <rect key="frame" x="143.5" y="8" width="145.5" height="14.5"/>
+                                                <rect key="frame" x="148.5" y="8" width="145.5" height="14.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="rrf-Bf-5uZ"/>
                                                 </constraints>
@@ -64,13 +64,13 @@
                                             <constraint firstItem="YgP-pc-VjW" firstAttribute="centerY" secondItem="JLn-K3-WnB" secondAttribute="centerY" id="4FB-jF-BGm"/>
                                             <constraint firstAttribute="trailing" secondItem="XbT-Mb-oNe" secondAttribute="trailing" id="FDT-ZZ-QNf"/>
                                             <constraint firstAttribute="height" constant="30" id="LSu-Ml-ol4"/>
-                                            <constraint firstItem="XbT-Mb-oNe" firstAttribute="leading" secondItem="JyE-wL-lCV" secondAttribute="trailing" constant="10" id="Wt9-p1-8Ug"/>
+                                            <constraint firstItem="XbT-Mb-oNe" firstAttribute="leading" secondItem="JyE-wL-lCV" secondAttribute="trailing" constant="5" id="Wt9-p1-8Ug"/>
                                             <constraint firstItem="L84-5Q-dBh" firstAttribute="leading" secondItem="JLn-K3-WnB" secondAttribute="leading" constant="10" id="Xoc-hr-zYg"/>
                                             <constraint firstItem="JyE-wL-lCV" firstAttribute="centerY" secondItem="XbT-Mb-oNe" secondAttribute="centerY" id="ZLi-cu-XNH"/>
                                             <constraint firstItem="XbT-Mb-oNe" firstAttribute="centerY" secondItem="JLn-K3-WnB" secondAttribute="centerY" id="eeE-l5-KtL"/>
                                             <constraint firstItem="L84-5Q-dBh" firstAttribute="centerY" secondItem="JLn-K3-WnB" secondAttribute="centerY" id="g9v-dH-tCr"/>
                                             <constraint firstItem="YgP-pc-VjW" firstAttribute="leading" secondItem="L84-5Q-dBh" secondAttribute="trailing" constant="10" id="llD-iQ-EFz"/>
-                                            <constraint firstItem="JyE-wL-lCV" firstAttribute="leading" secondItem="YgP-pc-VjW" secondAttribute="trailing" constant="15" id="ng9-5h-edX"/>
+                                            <constraint firstItem="JyE-wL-lCV" firstAttribute="leading" secondItem="YgP-pc-VjW" secondAttribute="trailing" constant="5" id="ng9-5h-edX"/>
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XRC-yg-xwQ">

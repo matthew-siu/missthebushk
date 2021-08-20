@@ -18,6 +18,16 @@
 "main_reminders" = "我的提醒";
 "main_search" = "搜索";
 
+// Setting Page
+"setting_section_general" = "一般";
+"setting_section_about" = "关于";
+"setting_languages" = "语言";
+"setting_clear_memory" = "清除记忆缓存";
+"setting_clear_memory_confirm" = "确定要清除所有记忆缓存吗？";
+"setting_about_us" = "关于我们";
+"setting_about_version" = "版本";
+"setting_languges_title" = "选择语言";
+
 
 // Search Page
 "search_label" = "搜索巴士";
@@ -79,17 +89,7 @@
 "general_setting" = "设定";
 "general_error" = "错误";
 "general_remind" = "提醒";
-
-
-
-
-
-
-
-
-
-
-
+"general_attention" = "注意";
 
 
 

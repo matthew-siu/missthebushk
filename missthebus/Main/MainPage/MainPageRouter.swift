@@ -12,6 +12,7 @@ import UIKit
 protocol MainPageRoutingLogic
 {
     func routeToSearchPage()
+    func routeToSettingPage()
     func routeToStopListPage(item: MainPage.BookmarkItem)
     func routeToCreateReminderPage()
     func routeToUpdateReminderPage(index: Int)
@@ -57,6 +58,12 @@ extension MainPageRouter {
         self.viewController?.navigationController?.view.layer.add(transition, forKey: kCATransition)
         self.viewController?.navigationController?.pushViewController(vc, animated: false)
         
+    }
+    
+    func routeToSettingPage(){
+        let request = SettingPageBuilder.BuildRequest()
+        let vc = SettingPageBuilder.createScene(request: request)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func routeToCreateReminderPage(){

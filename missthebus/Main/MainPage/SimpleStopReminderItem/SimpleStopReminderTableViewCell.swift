@@ -67,6 +67,7 @@ class SimpleStopReminderTableViewCell: UITableViewCell {
         }
         self.reminderName.text = viewModel.name
         self.reminderPeriodLabel.text = viewModel.period
+        self.reminderPeriodLabel.sizeToFit()
         self.reminderTimeLabel.text = viewModel.startTime
         self.collectionView.reloadData()
         

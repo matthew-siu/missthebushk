@@ -46,7 +46,20 @@ enum MainPage
             let company: BusCompany
             let routeNum: String
         }
+    }
+    
+    struct UpcomingReminderItem{
+        let id: String
+        let name: String
+        let period: String
+        let startTime: Date
+        let type: StopReminder.ReminderType
+        let routes: [ReminderRouteItem]
         
+        struct ReminderRouteItem{
+            let company: BusCompany
+            let routeNum: String
+        }
     }
     
     struct ETAItem {
@@ -71,20 +84,10 @@ enum MainPage
     enum DisplayItem
     {
         struct TabBarItems{
-            static let upcoming = "main_upcoming_reminder".localized()
-            static let bookmarks = "main_bookmark".localized()
-            static let reminders = "main_reminders".localized()
-            static let search = "main_search".localized()
-        }
-        
-        enum UpcomingReminders{
-            struct ViewModel{
-                let title = BasicViewModel(headerImgName: "recent", headerLabel: "main_upcoming_reminder".localized())
-                var reminderItems: [ReminderItem] = []
-            }
-            struct ETAViewModel{
-                var etaList = [ETAItem]()
-            }
+            static let upcoming = "main_upcoming_reminder"
+            static let bookmarks = "main_bookmark"
+            static let reminders = "main_reminders"
+            static let search = "main_search"
         }
         
         enum Bookmarks{
@@ -101,6 +104,16 @@ enum MainPage
             struct ViewModel{
                 let title = BasicViewModel(headerImgName: "bell", headerLabel: "main_reminders".localized(), noItemLabel: "main_no_reminder".localized())
                 var reminderItems: [ReminderItem] = []
+            }
+        }
+        
+        enum UpcomingReminders{
+            struct ViewModel{
+                let title = BasicViewModel(headerImgName: "recent", headerLabel: "main_upcoming_reminder".localized(), noItemLabel: "main_no_upcoming_reminder".localized())
+                var upcomingReminder: UpcomingReminderItem?
+            }
+            struct ETAViewModel{
+                var etaList = [ETAItem]()
             }
         }
     }

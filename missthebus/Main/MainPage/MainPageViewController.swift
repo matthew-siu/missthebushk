@@ -47,10 +47,13 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     var bookmarkETAViewModel = MainPage.DisplayItem.Bookmarks.ETAViewModel()
     // my reminders vireModel
     var reminderItems = [MainPage.ReminderItem]()
+    // my upcoming reminders vireModel
+    var upcomingReminderItem: MainPage.UpcomingReminderItem?
     
     enum TableViewCell: String, TableViewCellConfiguration {
         case bookMarkItemCell = "StopBookmarkTableViewCell"
         case reminderItemCell = "SimpleStopReminderTableViewCell"
+        case upcomingItemCell = "UpcomingStopReminderTableViewCell"
         case noItemCell = "NoItemTableViewCell"
     }
 }
@@ -69,6 +72,7 @@ extension MainPageViewController {
         self.tableView.separatorStyle = .none
         self.tableView.register(TableViewCell.bookMarkItemCell.nib, forCellReuseIdentifier: TableViewCell.bookMarkItemCell.reuseId)
         self.tableView.register(TableViewCell.reminderItemCell.nib, forCellReuseIdentifier: TableViewCell.reminderItemCell.reuseId)
+        self.tableView.register(TableViewCell.upcomingItemCell.nib, forCellReuseIdentifier: TableViewCell.upcomingItemCell.reuseId)
         self.tableView.register(TableViewCell.noItemCell.nib, forCellReuseIdentifier: TableViewCell.noItemCell.reuseId)
         
         self.tabBar.delegate = self
@@ -82,9 +86,18 @@ extension MainPageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switch self.currentTab{
-            case .Bookmarks: self.interactor?.loadAllBookmarksOfRoute()
-            case .Reminders: self.interactor?.loadAllRemindersOfRoute()
-            case .Upcoming: return
+            case .Bookmarks:
+                self.interactor?.loadAllBookmarksOfRoute()
+                self.tabBar.selectedItem = self.bookmarksTabBarItem
+                return
+            case .Reminders:
+                self.interactor?.loadAllRemindersOfRoute()
+                self.tabBar.selectedItem = self.remindersTabBarItem
+                return
+            case .Upcoming:
+                self.interactor?.loadOneUpcomingReminder()
+                self.tabBar.selectedItem = self.upcomingTabBarItem
+                return
             case .Search: return
         }
         
@@ -110,10 +123,10 @@ extension MainPageViewController {
         self.navigationItem.rightBarButtonItem = createBtn
         
         self.tabBar.barTintColor = UIColor.SoftUI.major
-        self.upcomingTabBarItem.title = MainPage.DisplayItem.TabBarItems.upcoming
-        self.bookmarksTabBarItem.title = MainPage.DisplayItem.TabBarItems.bookmarks
-        self.remindersTabBarItem.title = MainPage.DisplayItem.TabBarItems.reminders
-        self.searchTabBarItem.title = MainPage.DisplayItem.TabBarItems.search
+        self.upcomingTabBarItem.title = MainPage.DisplayItem.TabBarItems.upcoming.localized()
+        self.bookmarksTabBarItem.title = MainPage.DisplayItem.TabBarItems.bookmarks.localized()
+        self.remindersTabBarItem.title = MainPage.DisplayItem.TabBarItems.reminders.localized()
+        self.searchTabBarItem.title = MainPage.DisplayItem.TabBarItems.search.localized()
         
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         
@@ -122,7 +135,7 @@ extension MainPageViewController {
     
     @objc
     private func onClickSetting(){
-        
+        self.router?.routeToSettingPage()
     }
     
     @objc private func onClickCreate(){
@@ -202,6 +215,13 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
                 let reminderItem = self.reminderItems[indexPath.row]
                 cell.setInfo(index: indexPath.row, viewModel: reminderItem)
                 cell.delegate = self
+                cell.backgroundColor = .none
+                cell.selectionStyle = .none
+                return cell
+            }
+        }else if (self.currentTab == .Upcoming){
+            if let _ = self.upcomingReminderItem{
+                let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.upcomingItemCell.reuseId, for: indexPath) as! SimpleStopReminderTableViewCell
                 cell.backgroundColor = .none
                 cell.selectionStyle = .none
                 return cell
@@ -297,6 +317,10 @@ extension MainPageViewController {
     
     func displayUpcoming(viewModel: MainPage.DisplayItem.UpcomingReminders.ViewModel){
         self.currentTab = .Upcoming
+        
+        self.upcomingReminderItem = viewModel.upcomingReminder
+        self.basicViewModel = viewModel.title
+        self.tableView.reloadData()
     }
     
     func updateETAs(etaList: MainPage.DisplayItem.Bookmarks.ETAViewModel){
