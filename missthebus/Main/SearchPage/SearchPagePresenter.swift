@@ -12,7 +12,7 @@ import UIKit
 protocol SearchPagePresentationLogic
 {
     func displayInitialState(type: SearchPage.RequestType)
-    func presentTableView(routes: [KmbRoute])
+    func presentTableView(routes: [Route])
 }
 
 // MARK: - Presenter main body
@@ -30,7 +30,7 @@ extension SearchPagePresenter {
         self.viewController?.displayInitialState(type: type)
     }
     
-    func presentTableView(routes: [KmbRoute]){
+    func presentTableView(routes: [Route]){
         let routes: [SearchPage.RouteItem] = routes.map{SearchPage.RouteItem(routeNum: $0.route, bound: $0.bound, serviceType: $0.serviceType, company: $0.company, destStop: $0.destStop, origStop: $0.originStop)}
         self.viewController?.presentTableView(viewModel: SearchPage.DisplayItem.ViewModel(routeList: routes))
         

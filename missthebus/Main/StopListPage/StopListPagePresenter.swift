@@ -13,9 +13,9 @@ protocol StopListPagePresentationLogic
 {
 //    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?, requestType: StopListPage.RequestType?, selectedStopSeqList: [Int])
     
-    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
+    func displayInitialNormalState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
     
-    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
+    func displayInitialGetRouteStopState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
     
     func displayETA(data: [KmbETAResponse.KmbETAData]?)
 }
@@ -26,7 +26,7 @@ class StopListPagePresenter: StopListPagePresentationLogic
     
     weak var viewController: StopListPageDisplayLogic?
     
-    var route: KmbRoute?
+    var route: Route?
     var stopList: [KmbStop]?
 }
 
@@ -34,13 +34,13 @@ class StopListPagePresenter: StopListPagePresentationLogic
 extension StopListPagePresenter {
     
     
-    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?) {
+    func displayInitialNormalState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?) {
         self.route = route
         self.stopList = stopList
         self.viewController?.displayInitialNormalState(route: route, stopList: stopList, bookmarks: bookmarks, selectedStopId: selectedStopId)
     }
     
-    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]) {
+    func displayInitialGetRouteStopState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]) {
         self.route = route
         self.stopList = stopList
         self.viewController?.displayInitialGetRouteStopState(route: route, stopList: stopList, bookmarks: bookmarks, selectedStopSeq: selectedStopSeq)

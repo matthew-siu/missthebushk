@@ -30,6 +30,9 @@ extension API {
     public static func send<R: Repository>(repository: R, usingQueue queue: OperationQueue? = nil, completion: ((APIResult<R.ResponseType>) -> Void)?) {
         let apiOperation = APIOperation(repo: repository) { (requestResult) in
 
+//            print("repository api: \(R.ResponseType.self) \(repository.urlPath)")
+//            print("repository: \(requestResult.description)")
+            
             // 0. SSL Error
             if self.isSSLError(error: requestResult.error) {
                 completion?(APIResult.failure(APIError.sslError))
@@ -68,13 +71,17 @@ extension API {
                 switch statusCode {
                 // Success case
                 case 200...299:
+//                    print("resp: statusCode \(statusCode)")
                     if let jsonData = requestResult.data, let decoded = try? API.decoder.decode(R.ResponseType.self, from: jsonData) {
+//                        print("resp: decoded")
                         completion?(.success(decoded, requestResult.response?.allHeaderFields))
                     }
                     else if repository.allowNil {
+//                        print("resp: allowNil")
                         completion?(.success(nil, requestResult.response?.allHeaderFields))
                     }
                     else {
+//                        print("resp: unexpectedResponse")
                         completion?(APIResult.failure(.unexpectedResponse))
                     }
                 // Unexpected case

@@ -94,7 +94,7 @@ class KmbManager{
     
     // Storage: Routes
     
-    static func saveAllRoutes(_ routes: [KmbRoute]){
+    static func saveAllRoutes(_ routes: [Route]){
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(routes)
@@ -104,11 +104,11 @@ class KmbManager{
         }
     }
     
-    static func getAllRoutes() -> [KmbRoute]?{
+    static func getAllRoutes() -> [Route]?{
         if let data = Storage.getObject(Configs.Storage.KEY_ROUTES){
             do {
                 let decoder = JSONDecoder()
-                let routes = try decoder.decode([KmbRoute].self, from: data)
+                let routes = try decoder.decode([Route].self, from: data)
                 return routes
 
             } catch {
@@ -177,7 +177,7 @@ class KmbManager{
 // search method
 
 extension KmbManager{
-    static func getRoute(route: String, bound: String, serviceType: String) -> KmbRoute?{
+    static func getRoute(route: String, bound: String, serviceType: String) -> Route?{
         return getAllRoutes()?.first(where: {$0.route == route && $0.bound == bound && $0.serviceType == serviceType})
     }
     
@@ -185,7 +185,7 @@ extension KmbManager{
         return getAllStops()?.first(where: { $0.stopId == stopId})
     }
     
-    static func getStopBySeq(route: KmbRoute?, seq: String) -> KmbStop?{
+    static func getStopBySeq(route: Route?, seq: String) -> KmbStop?{
         if let route = route, let stopId = getRoute(route: route.route, bound: route.bound, serviceType: route.serviceType)?.stopList.first(where: {$0.seq == seq})?.stopId{
             return getStop(stopId: stopId)
         }else{

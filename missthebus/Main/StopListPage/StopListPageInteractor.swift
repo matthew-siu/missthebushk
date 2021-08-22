@@ -36,7 +36,7 @@ class StopListPageInteractor: StopListPageBusinessLogic, StopListPageDataStore
     // State
     var type: StopListPage.RequestType = .NormalNavigation
     
-    var route: KmbRoute
+    var route: Route
     var bookmarks: [StopBookmark]?
     var etaTimer: Timer?
     

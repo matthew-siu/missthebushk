@@ -18,7 +18,7 @@ protocol SearchPageBusinessLogic
 // MARK: - Datas retain in interactor defines here
 protocol SearchPageDataStore
 {
-    func getRoute(routeItem: SearchPage.RouteItem) -> KmbRoute?
+    func getRoute(routeItem: SearchPage.RouteItem) -> Route?
     func getType() -> SearchPage.RequestType
 }
 
@@ -32,7 +32,7 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
     var worker: SearchPageWorker?
     
     // State
-    var routes: [KmbRoute]?
+    var routes: [Route]?
     var type: SearchPage.RequestType = .NormalNavigation
     
     // Init
@@ -57,7 +57,7 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
             }else{
                 SearchPageWorker.getAllRoutes { (response, error) in
                     if let resp = response?.data{
-                        let routes = resp.map{KmbRoute(data: $0)}
+                        let routes = resp.map{Route(data: $0)}
                         self.routes = routes
                         self.presenter?.presentTableView(routes: routes)
                     }
@@ -67,7 +67,7 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
     }
     
     // SearchPageDataStore - for router
-    func getRoute(routeItem: SearchPage.RouteItem) -> KmbRoute? {
+    func getRoute(routeItem: SearchPage.RouteItem) -> Route? {
         return self.routes?.first(where: {$0.route == routeItem.routeNum && $0.bound == routeItem.bound && $0.serviceType == routeItem.serviceType})
     }
     

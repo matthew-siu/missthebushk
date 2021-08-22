@@ -22,7 +22,7 @@ protocol SetReminderPageBusinessLogic
 // MARK: - Datas retain in interactor defines here
 protocol SetReminderPageDataStore
 {
-    func getRouteStopsRequestQuery(index: Int) -> StopReminder.Route
+    func getRouteStopsRequestQuery(index: Int) -> StopReminder.StopReminderRoute
 }
 
 // MARK: - Interactor Body
@@ -34,7 +34,7 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
     var worker: SetReminderPageWorker?
     
     // State
-    var route: KmbRoute?
+    var route: Route?
     var stop: KmbStop?
     var mode: SetReminderPage.Mode
     var reminder: StopReminder
@@ -78,7 +78,7 @@ extension SetReminderPageInteractor {
         if let route = (self.reminder.routes.first(where: {$0.routeNum == resp.route.route && $0.bound == resp.route.bound && $0.serviceType == resp.route.serviceType})){
             route.stopIndex = resp.stops
         }else{
-            self.reminder.routes.append(StopReminder.Route(route: RouteMetadata(resp.route.route, resp.route.bound, resp.route.serviceType), stopIndex: resp.stops))
+            self.reminder.routes.append(StopReminder.StopReminderRoute(route: RouteMetadata(resp.route.route, resp.route.bound, resp.route.serviceType), stopIndex: resp.stops))
         }
         
         self.presenter?.updateRouteAndStop(self.reminder)
@@ -102,7 +102,7 @@ extension SetReminderPageInteractor {
 // MARK: - DataStore
 extension SetReminderPageInteractor{
     
-    func getRouteStopsRequestQuery(index: Int) -> StopReminder.Route{
+    func getRouteStopsRequestQuery(index: Int) -> StopReminder.StopReminderRoute{
         return self.reminder.routes[index]
     }
 }

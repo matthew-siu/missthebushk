@@ -18,9 +18,9 @@ class StopReminder: Codable{
     var endTime: Date?
     var period: [Int]?
     
-    var routes = [Route]()
+    var routes = [StopReminderRoute]()
     
-    class Route: Codable{
+    class StopReminderRoute: Codable{
         var routeNum: String
         var bound: String
         var serviceType: String
@@ -33,7 +33,7 @@ class StopReminder: Codable{
             self.stopIndex = stopIndex
         }
         
-        func getRoute() -> KmbRoute?{
+        func getRoute() -> Route?{
             return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
         }
         

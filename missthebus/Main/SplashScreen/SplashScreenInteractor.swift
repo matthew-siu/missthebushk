@@ -42,34 +42,51 @@ extension SplashScreenInteractor {
     
     func requestAllKmbStaticInfo() -> Promise<Bool>{
         return Promise { promise in
-            if (!self.needUpdate()) {
-                promise.fulfill(false)
-                return
-            }
+//            if (!self.needUpdate()) {
+//                promise.fulfill(false)
+//                return
+////                DispatchQueue.main.async {
+////                    self.readNlbRoutes()
+////                        .done{_ in promise.fulfill(true)}
+////                        .catch{err in promise.reject(err)}
+////                }
+//            }
             DispatchQueue.main.async {
-                KmbManager.requestAllRoutes()
+                NlbManager.requestAllRoutes()
                     .done{data in self.saveRoutes(data)}
-                    .then{_ in KmbManager.requestAllStops()}
-                    .done{data in self.saveStops(data)}
-                    .then{_ in KmbManager.requestAllRouteStops()}
-                    .done{data in
-                        self.insertRouteStopsIntoRoutes(data)
-                        self.saveLastUpdate()
-                        promise.fulfill(true)
-                    }
                     .catch{err in
                         print("error: \(err.localizedDescription)")
                         promise.reject(err)
                     }
+//                KmbManager.requestAllRoutes()
+//                    .done{data in self.saveRoutes(data)}
+//                    .then{_ in KmbManager.requestAllStops()}
+//                    .done{data in self.saveStops(data)}
+//                    .then{_ in KmbManager.requestAllRouteStops()}
+//                    .done{data in
+//                        self.insertRouteStopsIntoRoutes(data)
+//                        self.saveLastUpdate()
+//                        promise.fulfill(true)
+//                    }
+//                    .catch{err in
+//                        print("error: \(err.localizedDescription)")
+//                        promise.reject(err)
+//                    }
             }
         }
     }
     
-    
     func saveRoutes(_ response: KmbRouteResponse?){
         if let resp = response?.data{
-            let routes = resp.map{ KmbRoute(data: $0)}
+            let routes = resp.map{ Route(data: $0)}
             KmbManager.saveAllRoutes(routes)
+        }
+    }
+    
+    func saveRoutes(_ response: NlbRouteResponse?){
+        if let resp = response?.routes{
+            let _ = resp.map{ Route(data: $0)}
+//            KmbManager.saveAllRoutes(routes)
         }
     }
     
@@ -117,4 +134,21 @@ extension SplashScreenInteractor {
         Storage.save(Configs.Storage.KEY_LAST_UPDATE, now)
     }
     
+}
+
+extension SplashScreenInteractor{
+    func readNlbRoutes() -> Promise<Bool>{
+        return Promise{ promise in
+            DispatchQueue.main.async {
+                NlbManager.requestAllRoutes()
+                    .done{data in
+                        promise.fulfill(true)
+                    }
+                    .catch{err in
+                        print("error: \(err.localizedDescription)")
+                        promise.reject(err)
+                    }
+            }
+        }
+    }
 }

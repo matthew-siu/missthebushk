@@ -13,9 +13,9 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark])
-    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
-    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
+    func displayInitialState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark])
+    func displayInitialNormalState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
+    func displayInitialGetRouteStopState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ETAViewModel)
 }
 
@@ -41,7 +41,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     
     var type: StopListPage.RequestType = .NormalNavigation
     
-    var route: KmbRoute?
+    var route: Route?
     var stopList = [KmbStop]()
     var bookmarks = [StopBookmark]()
     var googleMapMarker = [GMSMarker]()
@@ -325,7 +325,7 @@ extension StopListPageViewController {
         
     }
     
-    func displayInitialNormalState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?){
+    func displayInitialNormalState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?){
         self.type = .NormalNavigation
         self.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks)
         if let selectedStopId = selectedStopId{
@@ -338,7 +338,7 @@ extension StopListPageViewController {
         }
     }
     
-    func displayInitialGetRouteStopState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]){
+    func displayInitialGetRouteStopState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]){
         self.type = .GetRouteStopService
         self.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks)
         self.setGetRouteStopServiceState()
@@ -352,7 +352,7 @@ extension StopListPageViewController {
         }
     }
 
-    func displayInitialState(route: KmbRoute, stopList: [KmbStop], bookmarks: [StopBookmark]){
+    func displayInitialState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark]){
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route

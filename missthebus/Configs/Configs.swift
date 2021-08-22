@@ -2,7 +2,7 @@
 //  Configs.swift
 //  autotoll-build-release
 //
-//  Created by Ding Lo on 17/2/2021.
+//  Created by Ding 	Lo on 17/2/2021.
 //
 
 import Foundation
@@ -20,9 +20,13 @@ extension Configs {
         static var kmbURL: String {
             return "https://data.etabus.gov.hk/v1/transport/kmb"
         }
-        // CITY BUS
-        static var ctbURL: String {
+        // City + New World BUS
+        static var ctbnwfbURL: String {
             return "https://rt.data.gov.hk/v1/transport/citybus-nwfb"
+        }
+        // NLB
+        static var nlbURL: String{
+            return "https://rt.data.gov.hk/v1/transport"
         }
     }
     

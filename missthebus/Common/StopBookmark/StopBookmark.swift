@@ -37,7 +37,7 @@ class StopBookmark: Codable{
     var stop: KmbStop?{
         return KmbManager.getStop(stopId: self.stopId)
     }
-    var route: KmbRoute?{
+    var route: Route?{
         return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
     }
     var routeMetadata: RouteMetadata{

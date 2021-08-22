@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4392F3A126D18E3200A0E6D7 /* nlb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4392F3A026D18E3200A0E6D7 /* nlb_routes.json */; };
+		4392F3A726D1902A00A0E6D7 /* NlbRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3A626D1902900A0E6D7 /* NlbRoutes.swift */; };
+		4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */; };
+		4392F3B426D1939000A0E6D7 /* NlbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3B326D1939000A0E6D7 /* NlbManager.swift */; };
+		4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */; };
+		4392F3C526D237EA00A0E6D7 /* CtbNwfbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3C426D237EA00A0E6D7 /* CtbNwfbRouteStopAPIRepository.swift */; };
+		4392F3CA26D2399000A0E6D7 /* CtbNwfbStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3C926D2399000A0E6D7 /* CtbNwfbStopAPIRepository.swift */; };
+		4392F3CF26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3CE26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift */; };
+		4392F3D626D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3D526D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift */; };
+		4392F3DE26D243CD00A0E6D7 /* NlbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3DD26D243CD00A0E6D7 /* NlbETAAPIRepository.swift */; };
 		574B3EB72772DA813A9CBE11 /* Pods_missthebusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */; };
 		5F77A262C9001D1B1FA1275F /* Pods_missthebus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8093F8CC47B9CB9151224AF /* Pods_missthebus.framework */; };
 		8F09F2AE269693C70083B2CD /* SoftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F2AD269693C70083B2CD /* SoftUIView.swift */; };
@@ -143,8 +153,7 @@
 		8FFF6C9026983BCA0033D2CE /* KmbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C8F26983BCA0033D2CE /* KmbRouteAPIRepository.swift */; };
 		8FFF6C9B269D4D8A0033D2CE /* KmbStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C9A269D4D8A0033D2CE /* KmbStopAPIRepository.swift */; };
 		8FFF6CA0269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C9F269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift */; };
-		8FFF6CA6269D73030033D2CE /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CA5269D73030033D2CE /* Route.swift */; };
-		8FFF6CAB269D815A0033D2CE /* KmbRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CAA269D815A0033D2CE /* KmbRoute.swift */; };
+		8FFF6CAB269D815A0033D2CE /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CAA269D815A0033D2CE /* Route.swift */; };
 		8FFF6CB1269D88FE0033D2CE /* RouteItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CB0269D88FE0033D2CE /* RouteItemTableViewCell.swift */; };
 		8FFF6CB6269D89640033D2CE /* RouteItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF6CB5269D89640033D2CE /* RouteItemTableViewCell.xib */; };
 		8FFF6CBB269D93950033D2CE /* TableViewCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CBA269D93950033D2CE /* TableViewCellHelper.swift */; };
@@ -176,6 +185,16 @@
 		1D927B0F1285E2E8EB506B2C /* Pods-missthebusTests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.prod.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.prod.xcconfig"; sourceTree = "<group>"; };
 		1FAC3DFD914DADF3CB93CD2E /* Pods-missthebus-missthebusUITests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.dev.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.dev.xcconfig"; sourceTree = "<group>"; };
 		24D63641BCA0F1273102A670 /* Pods_missthebus_missthebusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebus_missthebusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4392F3A026D18E3200A0E6D7 /* nlb_routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nlb_routes.json; sourceTree = "<group>"; };
+		4392F3A626D1902900A0E6D7 /* NlbRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbRoutes.swift; sourceTree = "<group>"; };
+		4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbRouteAPIRepository.swift; sourceTree = "<group>"; };
+		4392F3B326D1939000A0E6D7 /* NlbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbManager.swift; sourceTree = "<group>"; };
+		4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbRouteAPIRepository.swift; sourceTree = "<group>"; };
+		4392F3C426D237EA00A0E6D7 /* CtbNwfbRouteStopAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbRouteStopAPIRepository.swift; sourceTree = "<group>"; };
+		4392F3C926D2399000A0E6D7 /* CtbNwfbStopAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbStopAPIRepository.swift; sourceTree = "<group>"; };
+		4392F3CE26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbETAAPIRepository.swift; sourceTree = "<group>"; };
+		4392F3D526D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbRouteStopAPIRepository.swift; sourceTree = "<group>"; };
+		4392F3DD26D243CD00A0E6D7 /* NlbETAAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbETAAPIRepository.swift; sourceTree = "<group>"; };
 		4E13968637DFE3136EC8B868 /* Pods-missthebusTests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.dev.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.dev.xcconfig"; sourceTree = "<group>"; };
 		5571D37DBB5802259EE4B549 /* Pods-missthebus.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus.dev.xcconfig"; path = "Target Support Files/Pods-missthebus/Pods-missthebus.dev.xcconfig"; sourceTree = "<group>"; };
 		62881CEB96DBB62B92F1D681 /* Pods-missthebus-missthebusUITests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.prod.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.prod.xcconfig"; sourceTree = "<group>"; };
@@ -319,8 +338,7 @@
 		8FFF6C8F26983BCA0033D2CE /* KmbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbRouteAPIRepository.swift; sourceTree = "<group>"; };
 		8FFF6C9A269D4D8A0033D2CE /* KmbStopAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbStopAPIRepository.swift; sourceTree = "<group>"; };
 		8FFF6C9F269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbRouteStopAPIRepository.swift; sourceTree = "<group>"; };
-		8FFF6CA5269D73030033D2CE /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		8FFF6CAA269D815A0033D2CE /* KmbRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbRoute.swift; sourceTree = "<group>"; };
+		8FFF6CAA269D815A0033D2CE /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		8FFF6CB0269D88FE0033D2CE /* RouteItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteItemTableViewCell.swift; sourceTree = "<group>"; };
 		8FFF6CB5269D89640033D2CE /* RouteItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteItemTableViewCell.xib; sourceTree = "<group>"; };
 		8FFF6CBA269D93950033D2CE /* TableViewCellHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellHelper.swift; sourceTree = "<group>"; };
@@ -377,6 +395,69 @@
 				181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4392F39F26D18E0500A0E6D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4392F3A026D18E3200A0E6D7 /* nlb_routes.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4392F3A526D18FC000A0E6D7 /* NLB */ = {
+			isa = PBXGroup;
+			children = (
+				4392F3A626D1902900A0E6D7 /* NlbRoutes.swift */,
+				4392F3B326D1939000A0E6D7 /* NlbManager.swift */,
+			);
+			path = NLB;
+			sourceTree = "<group>";
+		};
+		4392F3AB26D191D100A0E6D7 /* KMB */ = {
+			isa = PBXGroup;
+			children = (
+				8FFF6C8F26983BCA0033D2CE /* KmbRouteAPIRepository.swift */,
+				8FFF6C9A269D4D8A0033D2CE /* KmbStopAPIRepository.swift */,
+				8FFF6C9F269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift */,
+				8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */,
+			);
+			path = KMB;
+			sourceTree = "<group>";
+		};
+		4392F3AC26D191DB00A0E6D7 /* NLB */ = {
+			isa = PBXGroup;
+			children = (
+				4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */,
+				4392F3D526D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift */,
+				4392F3DD26D243CD00A0E6D7 /* NlbETAAPIRepository.swift */,
+			);
+			path = NLB;
+			sourceTree = "<group>";
+		};
+		4392F3BB26D21B4400A0E6D7 /* CTB&NWFB */ = {
+			isa = PBXGroup;
+			children = (
+				4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */,
+				4392F3C426D237EA00A0E6D7 /* CtbNwfbRouteStopAPIRepository.swift */,
+				4392F3C926D2399000A0E6D7 /* CtbNwfbStopAPIRepository.swift */,
+				4392F3CE26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift */,
+			);
+			path = "CTB&NWFB";
+			sourceTree = "<group>";
+		};
+		4392F3D326D23DC200A0E6D7 /* CTB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CTB;
+			sourceTree = "<group>";
+		};
+		4392F3D426D23DD500A0E6D7 /* NWFB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NWFB;
 			sourceTree = "<group>";
 		};
 		8F09F2AC2696935D0083B2CD /* SoftUI */ = {
@@ -608,6 +689,7 @@
 		8F89B5FA2694341D006312EA /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				4392F39F26D18E0500A0E6D7 /* Resources */,
 				8F89B62326943C00006312EA /* UIConfigs */,
 				8F89B5FD26943466006312EA /* Configs.swift */,
 				8F89B5FC26943466006312EA /* ColorConfigs.swift */,
@@ -764,7 +846,7 @@
 		8FB5A07C26A80F160013540D /* KMB */ = {
 			isa = PBXGroup;
 			children = (
-				8FFF6CAA269D815A0033D2CE /* KmbRoute.swift */,
+				8FFF6CAA269D815A0033D2CE /* Route.swift */,
 				8FB5A06326A6B9F80013540D /* KmbStop.swift */,
 				8FB5A07426A8027C0013540D /* KmbRouteStop.swift */,
 				8FB5A07D26A80F3E0013540D /* KmbManager.swift */,
@@ -834,10 +916,9 @@
 		8FFF6C8E26982E430033D2CE /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				8FFF6C8F26983BCA0033D2CE /* KmbRouteAPIRepository.swift */,
-				8FFF6C9A269D4D8A0033D2CE /* KmbStopAPIRepository.swift */,
-				8FFF6C9F269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift */,
-				8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */,
+				4392F3BB26D21B4400A0E6D7 /* CTB&NWFB */,
+				4392F3AC26D191DB00A0E6D7 /* NLB */,
+				4392F3AB26D191D100A0E6D7 /* KMB */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -845,10 +926,12 @@
 		8FFF6CA4269D6F6E0033D2CE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				8FFF6CA5269D73030033D2CE /* Route.swift */,
+				4392F3D426D23DD500A0E6D7 /* NWFB */,
+				4392F3D326D23DC200A0E6D7 /* CTB */,
 				8FC67B5726BBD03B00BEE56D /* StopBookmark */,
 				8F5660F826B1506E005AB134 /* Reminder */,
 				8FB5A07C26A80F160013540D /* KMB */,
+				4392F3A526D18FC000A0E6D7 /* NLB */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1013,6 +1096,7 @@
 				8F89B5A8269411FF006312EA /* Main.storyboard in Resources */,
 				8F89B66F269598A7006312EA /* SearchPageViewController.storyboard in Resources */,
 				8F89B5ED2694337A006312EA /* MainPageViewController.storyboard in Resources */,
+				4392F3A126D18E3200A0E6D7 /* nlb_routes.json in Resources */,
 				8F803F8526CF542300E03EF1 /* SettingPageViewController.storyboard in Resources */,
 				8FB5A08C26A81E180013540D /* StopItemTableViewCell.xib in Resources */,
 				8F93D12A26CCC1040007601C /* SimpleStopReminderTableViewCell.xib in Resources */,
@@ -1178,6 +1262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F56613C26B3A866005AB134 /* SplashScreenBuilder.swift in Sources */,
+				4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */,
 				8FFF6C722697F0720033D2CE /* APIManager.swift in Sources */,
 				8F803F8726CF542300E03EF1 /* SettingPageViewController.swift in Sources */,
 				8F56613626B3A866005AB134 /* SplashScreenPresenter.swift in Sources */,
@@ -1202,14 +1287,13 @@
 				8F3ABCE426C271800067EF9D /* ReminderRouteStopTableViewCell.swift in Sources */,
 				8F5660FA26B150AE005AB134 /* StopReminder.swift in Sources */,
 				8FB5A09126A820420013540D /* StopItemTableViewCell.swift in Sources */,
-				8FFF6CAB269D815A0033D2CE /* KmbRoute.swift in Sources */,
+				8FFF6CAB269D815A0033D2CE /* Route.swift in Sources */,
 				8FFF6CB1269D88FE0033D2CE /* RouteItemTableViewCell.swift in Sources */,
 				8F89B61F26943BDB006312EA /* UIImageExtension.swift in Sources */,
 				8F9905BE26CFA69900D6541C /* LanguagePageWorker.swift in Sources */,
 				8F56613A26B3A866005AB134 /* SplashScreenModels.swift in Sources */,
 				8F89B62726943C00006312EA /* FontHelper.swift in Sources */,
 				8FB5A05C26A6B38F0013540D /* StopListPageInteractor.swift in Sources */,
-				8FFF6CA6269D73030033D2CE /* Route.swift in Sources */,
 				8F89B5EB2694337A006312EA /* MainPageWorker.swift in Sources */,
 				8F9905AE26CFA67700D6541C /* AboutUsPageViewController.swift in Sources */,
 				8F89B66D269598A7006312EA /* SearchPageWorker.swift in Sources */,
@@ -1233,10 +1317,14 @@
 				8FFF6C762697F0720033D2CE /* NetworkAsyncQueue.swift in Sources */,
 				8F3ABCD926C271520067EF9D /* ReminderRouteTableViewCell.swift in Sources */,
 				8F9905C326CFA69900D6541C /* LanguagePageBuilder.swift in Sources */,
+				4392F3DE26D243CD00A0E6D7 /* NlbETAAPIRepository.swift in Sources */,
+				4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */,
 				8FB5A07526A8027C0013540D /* KmbRouteStop.swift in Sources */,
 				8FFF6C772697F0720033D2CE /* BaseAPIResponse.swift in Sources */,
 				8F89B5EC2694337A006312EA /* MainPageRouter.swift in Sources */,
+				4392F3D626D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift in Sources */,
 				8F56614F26B3AF4D005AB134 /* MainPageBuilder.swift in Sources */,
+				4392F3C526D237EA00A0E6D7 /* CtbNwfbRouteStopAPIRepository.swift in Sources */,
 				8F99058A26CF619700D6541C /* BaseTableViewController.swift in Sources */,
 				8F695B8626AE99CA00518622 /* SetReminderPageModels.swift in Sources */,
 				8F89B672269598A7006312EA /* SearchPageBuilder.swift in Sources */,
@@ -1246,6 +1334,8 @@
 				8F89B5FE26943466006312EA /* FontConfigs.swift in Sources */,
 				8F803F8626CF542300E03EF1 /* SettingPageModels.swift in Sources */,
 				8F89B670269598A7006312EA /* SearchPageModels.swift in Sources */,
+				4392F3A726D1902A00A0E6D7 /* NlbRoutes.swift in Sources */,
+				4392F3CA26D2399000A0E6D7 /* CtbNwfbStopAPIRepository.swift in Sources */,
 				8FFF6CA0269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift in Sources */,
 				8FB5A05626A6B38F0013540D /* StopListPageWorker.swift in Sources */,
 				8F9905D126CFB46800D6541C /* UpcomingStopReminderTableViewCell.swift in Sources */,
@@ -1257,6 +1347,7 @@
 				8F09F2BC2696967C0083B2CD /* SoftUITextfield.swift in Sources */,
 				8F89B5F12694337A006312EA /* MainPageInteractor.swift in Sources */,
 				8FB5A07E26A80F3E0013540D /* KmbManager.swift in Sources */,
+				4392F3CF26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift in Sources */,
 				8F89B61B26943BDB006312EA /* ArrayExtension.swift in Sources */,
 				8F89B5A5269411FF006312EA /* BaseViewController.swift in Sources */,
 				8FFF6C752697F0720033D2CE /* APIResult.swift in Sources */,
@@ -1283,6 +1374,7 @@
 				8FC67B4826BB989600BEE56D /* NoItemTableViewCell.swift in Sources */,
 				8F89B64A2694504C006312EA /* UIColorExtension.swift in Sources */,
 				8F89B5A1269411FF006312EA /* AppDelegate.swift in Sources */,
+				4392F3B426D1939000A0E6D7 /* NlbManager.swift in Sources */,
 				8F56613D26B3A866005AB134 /* SplashScreenInteractor.swift in Sources */,
 				8F93D10D26CBB7C50007601C /* MainPageHeaderView.swift in Sources */,
 				8FFF6CEF269FE2920033D2CE /* LanguageConfigs.swift in Sources */,

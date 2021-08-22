@@ -28,7 +28,6 @@ class KmbRouteAPIRepository: APIRepository<KmbRouteResponse> {
     
     override var headers: HTTPHeaders {
         let headers = super.headers
-        
         return headers
     }
     
