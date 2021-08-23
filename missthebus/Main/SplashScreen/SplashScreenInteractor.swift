@@ -29,7 +29,7 @@ class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
     var worker: SplashScreenWorker?
     
     // State
-    
+    var routes = [Route]()
     
     // Init
     init(request: SplashScreenBuilder.BuildRequest) {
@@ -52,13 +52,26 @@ extension SplashScreenInteractor {
 ////                }
 //            }
             DispatchQueue.main.async {
-                NlbManager.requestAllRoutes()
+                NSLog("Get all routes")
+                KmbManager.requestAllKmbRoutes()
                     .done{data in self.saveRoutes(data)}
-                    .catch{err in
+                    .then{_ in KmbManager.requestAllCtbRoutes()}
+                    .done{data in self.saveRoutes(data)}
+                    .then{_ in KmbManager.requestAllNwfbRoutes()}
+                    .done{data in self.saveRoutes(data)}
+                    .then{_ in NlbManager.requestAllRoutes()}
+                    .done{data in self.saveRoutes(data)}
+                    .done{_ in
+                        NSLog("Total routes = \(self.routes.count)")
+                        for route in self.routes{
+                            route.printSelf()
+                        }
+                        promise.fulfill(true)
+                    }.catch{err in
                         print("error: \(err.localizedDescription)")
                         promise.reject(err)
                     }
-//                KmbManager.requestAllRoutes()
+//                KmbManager.requestKmbAllRoutes()
 //                    .done{data in self.saveRoutes(data)}
 //                    .then{_ in KmbManager.requestAllStops()}
 //                    .done{data in self.saveStops(data)}
@@ -76,23 +89,44 @@ extension SplashScreenInteractor {
         }
     }
     
-    func saveRoutes(_ response: KmbRouteResponse?){
-        if let resp = response?.data{
-            let routes = resp.map{ Route(data: $0)}
-            KmbManager.saveAllRoutes(routes)
+    func saveRoutes(_ response: APIResponse?){
+        if let response = response as? KmbRouteResponse{
+            if let resp = response.data{
+                let routes = resp.map{ Route(data: $0)}
+                NSLog("KMB routes = \(routes.count)")
+                self.routes += routes
+            }
+        }else if let response = response as? CtbNwfbRouteResponse{
+            if let resp = response.data{
+                let routes = resp.map{ Route(data: $0)}
+                NSLog("CTB / NWFB routes = \(routes.count)")
+                self.routes += routes
+            }
+        }else if let response = response as? NlbRouteResponse{
+            if let resp = response.routes{
+                let routes = resp.map{ Route(data: $0)}
+                NSLog("NLB routes = \(routes.count)")
+                self.routes += routes
+            }
         }
+        
     }
     
-    func saveRoutes(_ response: NlbRouteResponse?){
-        if let resp = response?.routes{
-            let _ = resp.map{ Route(data: $0)}
+//    func saveRoutes(_ response: KmbRouteResponse?){
+//        if let resp = response?.data{
+//            let routes = resp.map{ Route(data: $0)}
 //            KmbManager.saveAllRoutes(routes)
-        }
-    }
+//        }
+//    }
+//
+//    func saveRoutes(_ response: NlbRouteResponse?){
+//        if let resp = response?.routes{
+//            let _ = resp.map{ Route(data: $0)}
+////            KmbManager.saveAllRoutes(routes)
+//        }
+//    }
     
     func saveStops(_ response: KmbStopResponse?){
-        
-        
         if let resp = response?.data{
             let stops = resp.map{ KmbStop(data: $0)}
             KmbManager.saveAllStops(stops)

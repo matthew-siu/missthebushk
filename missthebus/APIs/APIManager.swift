@@ -86,6 +86,28 @@ class KMBAPI {
     }
 }
 
+// MARK: - API extension - CTB + NWFB
+class CTBNWFBAPI {
+    public static func send<R: Repository>(repository: R, usingQueue queue: OperationQueue? = nil) -> Promise<SuccessResponse<R.ResponseType?>> {
+        
+        let repo: Promise<(R.ResponseType?, ResponseHeaders?)> = API.send(repository: repository, usingQueue: queue)
+        print("-----\nAPI: \(repository.urlPath)")
+        print("body: \(String(describing: repository.body))")
+        
+        // header treatment
+        let processedRepo = repo.then { (body, headers) -> Guarantee<SuccessResponse<R.ResponseType?>> in
+            let responseObject = SuccessResponse<R.ResponseType?>.init(header: headers, body: body)
+            print("API raw resp: \(String(describing: body).prefix(1000)) ...")
+            
+            return Guarantee<SuccessResponse<R.ResponseType?>> { seal in
+                seal(responseObject)
+            }
+        }
+        
+        return processedRepo
+    }
+}
+
 // MARK: - API extension - NLB
 class NLBAPI {
     public static func send<R: Repository>(repository: R, usingQueue queue: OperationQueue? = nil) -> Promise<SuccessResponse<R.ResponseType?>> {

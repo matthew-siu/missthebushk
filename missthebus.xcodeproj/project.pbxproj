@@ -446,20 +446,6 @@
 			path = "CTB&NWFB";
 			sourceTree = "<group>";
 		};
-		4392F3D326D23DC200A0E6D7 /* CTB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CTB;
-			sourceTree = "<group>";
-		};
-		4392F3D426D23DD500A0E6D7 /* NWFB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NWFB;
-			sourceTree = "<group>";
-		};
 		8F09F2AC2696935D0083B2CD /* SoftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,8 +912,6 @@
 		8FFF6CA4269D6F6E0033D2CE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				4392F3D426D23DD500A0E6D7 /* NWFB */,
-				4392F3D326D23DC200A0E6D7 /* CTB */,
 				8FC67B5726BBD03B00BEE56D /* StopBookmark */,
 				8F5660F826B1506E005AB134 /* Reminder */,
 				8FB5A07C26A80F160013540D /* KMB */,

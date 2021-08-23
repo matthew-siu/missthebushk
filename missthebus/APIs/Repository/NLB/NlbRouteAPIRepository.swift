@@ -44,7 +44,7 @@ struct NlbRouteRequest: APIRequest {
 
 
 struct NlbRouteResponse: APIResponse {
-    let routes: [NlbRouteData]
+    let routes: [NlbRouteData]?
     
     struct NlbRouteData: APIResponse {
         let routeId: String?

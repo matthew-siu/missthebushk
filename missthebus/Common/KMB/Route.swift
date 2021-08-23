@@ -42,7 +42,7 @@ class Route: Codable {
     init(data: CtbNwfbRouteResponse.CtbNwfbRouteData){
         switch (data.co){
             case "CTB" : self.company = .CTB
-            case "NWFB" : self.company = .CTB
+            case "NWFB" : self.company = .NWFB
             default: self.company = .none
         }
         self.route = data.route ?? ""
@@ -57,8 +57,6 @@ class Route: Codable {
         self.bound = ""
         // NLB
         self.routeId = ""
-        
-        self.printSelf()
     }
     
     init(data: NlbRouteResponse.NlbRouteData){
@@ -89,8 +87,6 @@ class Route: Codable {
         // KMB
         self.serviceType = ""
         self.bound = ""
-        
-        self.printSelf()
     }
     
     var originStop: String {
@@ -126,7 +122,7 @@ class Route: Codable {
 enum BusCompany: String, Codable{
     case KMB = "KMB"
     case CTB = "CTB"
-    case NWTB = "NWTB"
+    case NWFB = "NWFB"
     case NLB = "NLB"
 //    case LWB = "LWB"
     case none = "none"

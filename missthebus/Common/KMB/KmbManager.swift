@@ -15,7 +15,7 @@ class KmbManager{
      * APIs Call
      ******************************** */
     
-    static func requestAllRoutes() -> Promise<KmbRouteResponse?> {
+    static func requestAllKmbRoutes() -> Promise<KmbRouteResponse?> {
         
         let repo = KmbRouteAPIRepository()
         return Promise{ promise in
@@ -32,6 +32,43 @@ class KmbManager{
             }
         }
     }
+    
+    static func requestAllCtbRoutes() -> Promise<CtbNwfbRouteResponse?> {
+        
+        let repo = CtbNwfbRouteAPIRepository(company: .CTB)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in
+                    if let ref = response.body  {
+                        promise.fulfill(ref)
+                    } else {
+                        promise.fulfill(nil)
+                    }
+                }
+                .catch { (error) in
+                    promise.reject(error)
+            }
+        }
+    }
+    
+    static func requestAllNwfbRoutes() -> Promise<CtbNwfbRouteResponse?> {
+        
+        let repo = CtbNwfbRouteAPIRepository(company: .NWFB)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in
+                    if let ref = response.body  {
+                        promise.fulfill(ref)
+                    } else {
+                        promise.fulfill(nil)
+                    }
+                }
+                .catch { (error) in
+                    promise.reject(error)
+            }
+        }
+    }
+    
     
     static func requestAllStops() -> Promise<KmbStopResponse?> {
         
