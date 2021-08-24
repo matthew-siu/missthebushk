@@ -61,6 +61,7 @@ extension SplashScreenInteractor {
                     .done{data in self.deserializeRoutes(data)}
                     .then{_ in NlbManager.requestAllRoutes()}
                     .done{data in self.deserializeRoutes(data)}
+                    .then{_ in KmbManager.requestAllKmbStops()}
                     .done{_ in
                         NSLog("Total routes = \(self.routes.count)")
                         self.saveRoutes()

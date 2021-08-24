@@ -20,16 +20,8 @@ class KmbManager{
         let repo = KmbRouteAPIRepository()
         return Promise{ promise in
             KMBAPI.send(repository: repo)
-                .done { (response) in
-                    if let ref = response.body  {
-                        promise.fulfill(ref)
-                    } else {
-                        promise.fulfill(nil)
-                    }
-                }
-                .catch { (error) in
-                    promise.reject(error)
-            }
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
         }
     }
     
@@ -38,16 +30,8 @@ class KmbManager{
         let repo = CtbNwfbRouteAPIRepository(company: .CTB)
         return Promise{ promise in
             KMBAPI.send(repository: repo)
-                .done { (response) in
-                    if let ref = response.body  {
-                        promise.fulfill(ref)
-                    } else {
-                        promise.fulfill(nil)
-                    }
-                }
-                .catch { (error) in
-                    promise.reject(error)
-            }
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
         }
     }
     
@@ -56,35 +40,19 @@ class KmbManager{
         let repo = CtbNwfbRouteAPIRepository(company: .NWFB)
         return Promise{ promise in
             KMBAPI.send(repository: repo)
-                .done { (response) in
-                    if let ref = response.body  {
-                        promise.fulfill(ref)
-                    } else {
-                        promise.fulfill(nil)
-                    }
-                }
-                .catch { (error) in
-                    promise.reject(error)
-            }
+                .done { (response) in promise.fulfill(response.body ?? nil)}
+                .catch { (error) in promise.reject(error) }
         }
     }
     
     
-    static func requestAllStops() -> Promise<KmbStopResponse?> {
+    static func requestAllKmbStops() -> Promise<KmbStopResponse?> {
         
         let repo = KmbStopAPIRepository()
         return Promise{ promise in
             KMBAPI.send(repository: repo)
-                .done { (response) in
-                    if let ref = response.body  {
-                        promise.fulfill(ref)
-                    } else {
-                        promise.fulfill(nil)
-                    }
-                }
-                .catch { (error) in
-                    promise.reject(error)
-            }
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
         }
     }
     
