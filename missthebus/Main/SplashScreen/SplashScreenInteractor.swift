@@ -54,18 +54,17 @@ extension SplashScreenInteractor {
             DispatchQueue.main.async {
                 NSLog("Get all routes")
                 KmbManager.requestAllKmbRoutes()
-                    .done{data in self.saveRoutes(data)}
+                    .done{data in self.deserializeRoutes(data)}
                     .then{_ in KmbManager.requestAllCtbRoutes()}
-                    .done{data in self.saveRoutes(data)}
+                    .done{data in self.deserializeRoutes(data)}
                     .then{_ in KmbManager.requestAllNwfbRoutes()}
-                    .done{data in self.saveRoutes(data)}
+                    .done{data in self.deserializeRoutes(data)}
                     .then{_ in NlbManager.requestAllRoutes()}
-                    .done{data in self.saveRoutes(data)}
+                    .done{data in self.deserializeRoutes(data)}
                     .done{_ in
                         NSLog("Total routes = \(self.routes.count)")
-                        for route in self.routes{
-                            route.printSelf()
-                        }
+                        self.saveRoutes()
+                        self.saveLastUpdate()
                         promise.fulfill(true)
                     }.catch{err in
                         print("error: \(err.localizedDescription)")
@@ -89,7 +88,7 @@ extension SplashScreenInteractor {
         }
     }
     
-    func saveRoutes(_ response: APIResponse?){
+    func deserializeRoutes(_ response: APIResponse?){
         if let response = response as? KmbRouteResponse{
             if let resp = response.data{
                 let routes = resp.map{ Route(data: $0)}
@@ -109,7 +108,10 @@ extension SplashScreenInteractor {
                 self.routes += routes
             }
         }
-        
+    }
+    
+    func saveRoutes(){
+        KmbManager.saveAllRoutes(self.routes)
     }
     
 //    func saveRoutes(_ response: KmbRouteResponse?){

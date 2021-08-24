@@ -61,10 +61,21 @@ extension RouteItemTableViewCell{
                 self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
                 self.busCompanyIcon.sizeToFit()
             }
+        }else if (route.company == .CTB){
+            if let image = UIImage(named: "CityBus") {
+                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                self.busCompanyIcon.sizeToFit()
+            }
+        }else if (route.company == .NWFB){
+            if let image = UIImage(named: "NewWorldFirstBus") {
+                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                self.busCompanyIcon.sizeToFit()
+            }
+        }else if (route.company == .NLB){
+            if let image = UIImage(named: "NewLantaoBus") {
+                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                self.busCompanyIcon.sizeToFit()
+            }
         }
     }
 }
-
-
-
-

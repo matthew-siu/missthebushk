@@ -61,9 +61,9 @@ extension SplashScreenViewController {
     }
     
     func gotoMainPage(_ delay: Bool){
-//        let sec: Double = delay ? 1 : 0
-//        DispatchQueue.main.asyncAfter(deadline: .now() + sec) {
-//            self.router?.routeToMainPage()
-//        }
+        let sec: Double = delay ? 1 : 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + sec) {
+            self.router?.routeToMainPage()
+        }
     }
 }

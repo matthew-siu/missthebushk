@@ -92,6 +92,21 @@ class StopBookmarkTableViewCell: UITableViewCell {
                 self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
                 self.busCompanyIcon.sizeToFit()
             }
+        }else if (stop.company == .CTB){
+            if let image = UIImage(named: "KmbLogo") {
+                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                self.busCompanyIcon.sizeToFit()
+            }
+        }else if (stop.company == .NWFB){
+            if let image = UIImage(named: "NewWorldFirstBus") {
+                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                self.busCompanyIcon.sizeToFit()
+            }
+        }else if (stop.company == .NLB){
+            if let image = UIImage(named: "NewLantaoBus") {
+                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
+                self.busCompanyIcon.sizeToFit()
+            }
         }
         
         // ETA View

@@ -85,8 +85,8 @@
                                                     </fragment>
                                                     <fragment content="lines">
                                                         <attributes>
-                                                            <font key="NSFont" size="20" name=".SFNS-Regular"/>
-                                                            <font key="NSOriginalFont" size="20" name=".SFNS-Regular"/>
+                                                            <font key="NSFont" metaFont="system" size="20"/>
+                                                            <font key="NSOriginalFont" metaFont="system" size="20"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
