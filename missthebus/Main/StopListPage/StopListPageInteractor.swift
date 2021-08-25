@@ -15,7 +15,7 @@ protocol StopListPageBusinessLogic
     func loadAllStopsFromRoute()
     func startETATimer(stopId: String, route: String, serviceType: String)
     func dismissETATimer()
-    func bookmark(stop: KmbStop, isMarked: Bool)
+    func bookmark(stop: Stop, isMarked: Bool)
     func getRouteStopResponse() -> StopListPage.Service.Response.GetRouteStops?
     
 }
@@ -66,7 +66,7 @@ extension StopListPageInteractor {
     
     func loadAllStopsFromRoute(){
         // load all stops
-        var stopList = [KmbStop]()
+        var stopList = [Stop]()
         guard let allStopList = KmbManager.getAllStops() else {return}
         for stop in self.route.stopList{
             if let targetStop = allStopList.first(where: {$0.stopId == stop.stopId}){
@@ -102,7 +102,7 @@ extension StopListPageInteractor {
         self.etaTimer = nil
     }
     
-    func bookmark(stop: KmbStop, isMarked: Bool){
+    func bookmark(stop: Stop, isMarked: Bool){
         if (isMarked){
             let bookmark = StopBookmark(routeNum: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: stop.stopId)
             StopBookmarkManager.addStopBookmark(bookmark)

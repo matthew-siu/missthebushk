@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol StopItemCellDelegate: class {
-    func setBookmark(stop: KmbStop, isMarked: Bool)
+    func setBookmark(stop: Stop, isMarked: Bool)
 }
 
 class StopItemTableViewCell: UITableViewCell {
@@ -33,7 +33,7 @@ class StopItemTableViewCell: UITableViewCell {
     }
     
     var delegate: StopItemCellDelegate?
-    var stop: KmbStop?
+    var stop: Stop?
     var isBookmarked = false
     var etaList: StopListPage.DisplayItem.ETAViewModel?
     var type: StopListPage.RequestType = .NormalNavigation
@@ -111,7 +111,7 @@ extension StopItemTableViewCell{
     }
     
     // NormalNavigation
-    func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int, isBookmarked: Bool){
+    func setInfo(index: Int, stop: Stop, isSelected: Bool, count: Int, isBookmarked: Bool){
         self.type = .NormalNavigation
         
         self.stop = stop
@@ -137,7 +137,7 @@ extension StopItemTableViewCell{
     }
     
     //GetRouteStopService
-    func setInfo(index: Int, stop: KmbStop, isSelected: Bool, count: Int){
+    func setInfo(index: Int, stop: Stop, isSelected: Bool, count: Int){
         self.type = .GetRouteStopService
         
         self.stop = stop

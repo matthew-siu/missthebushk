@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KmbStop: Codable{
+class Stop: Codable{
     
     var stopId: String
     var nameEn: String
@@ -23,6 +23,24 @@ class KmbStop: Codable{
         self.nameSc = data.name_sc ?? ""
         self.lat = data.lat ?? ""
         self.long = data.long ?? ""
+    }
+    
+    init(data: CtbNwfbStopResponse.CtbNwfbStopData){
+        self.stopId = data.stop ?? ""
+        self.nameEn = data.name_en ?? ""
+        self.nameTc = data.name_tc ?? ""
+        self.nameSc = data.name_sc ?? ""
+        self.lat = data.lat ?? ""
+        self.long = data.long ?? ""
+    }
+    
+    init(data: NlbRouteStopResponse.NlbRouteStopData){
+        self.stopId = data.stopId ?? ""
+        self.nameEn = data.stopName_e ?? ""
+        self.nameTc = data.stopName_c ?? ""
+        self.nameSc = data.stopName_s ?? ""
+        self.lat = data.latitude ?? ""
+        self.long = data.longitude ?? ""
     }
     
     var name: String{

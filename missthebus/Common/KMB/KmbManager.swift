@@ -15,6 +15,8 @@ class KmbManager{
      * APIs Call
      ******************************** */
     
+    // 1. Get Routes API
+    
     static func requestAllKmbRoutes() -> Promise<KmbRouteResponse?> {
         
         let repo = KmbRouteAPIRepository()
@@ -45,6 +47,7 @@ class KmbManager{
         }
     }
     
+    // 2. Get Stops API
     
     static func requestAllKmbStops() -> Promise<KmbStopResponse?> {
         
@@ -56,39 +59,106 @@ class KmbManager{
         }
     }
     
-    static func requestAllRouteStops() -> Promise<KmbRouteStopResponse?> {
+    static func requestCtbNwfbStop(stopId: String) -> Promise<CtbNwfbStopResponse?>{
+        let repo = CtbNwfbStopAPIRepository(stopId: stopId)
+        return Promise { promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
+        }
+    }
+    
+    // 3. Get Route Stops API
+    
+    static func requestAllKmbRouteStops() -> Promise<KmbRouteStopResponse?> {
         
         let repo = KmbRouteStopAPIRepository()
         return Promise{ promise in
             KMBAPI.send(repository: repo)
-                .done { (response) in
-                    if let ref = response.body  {
-                        promise.fulfill(ref)
-                    } else {
-                        promise.fulfill(nil)
-                    }
-                }
-                .catch { (error) in
-                    promise.reject(error)
-            }
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
         }
     }
+    
+    static func requestAllCtbNwfbRouteStops(busCompany: BusCompany, routeNum: String, bound: String) -> Promise<CtbNwfbRouteStopResponse?> {
+        // use promise.all to call inbound and outbound
+        let repo = CtbNwfbRouteStopAPIRepository(
+            company: (busCompany == .CTB) ? .CTB : .NWFB,
+            routeNum: routeNum,
+            bound: (bound == "I") ? .Inbound : .Outbound)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
+        }
+//        return Promise{ promise in
+//            let repo1 = CtbNwfbRouteStopAPIRepository(company: company, routeNum: routeNum, bound: .Inbound)
+//            let repo2 = CtbNwfbRouteStopAPIRepository(company: company, routeNum: routeNum, bound: .Outbound)
+//
+//            var boundRequestList = [Promise<SuccessResponse<CtbNwfbRouteStopResponse?>>]()
+//            boundRequestList.append(KMBAPI.send(repository: repo1))
+//            boundRequestList.append(KMBAPI.send(repository: repo2))
+//            when(fulfilled: boundRequestList)
+//                .done{responses in
+//                    var res = [CtbNwfbRouteStopResponse?]()
+//                    for response in responses {
+//                        res.append(response.body ?? nil)
+//                    }
+//                    promise.fulfill(res)
+//                }
+//                .catch{ (error) in promise.reject(error) }
+//        }
+    }
+    
+    static func requestAllNlbRouteStops(routeId: String) -> Promise<NlbRouteStopResponse?> {
+        
+        let repo = NlbRouteStopAPIRepository(routeId: routeId)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
+        }
+    }
+    
+    // 4. Get Stop ETA
     
     static func requestOneStopETA(query: KmbETAQuery) -> Promise<KmbETAResponse?> {
         
         let repo = KmbETAAPIRepository(query: query)
         return Promise{ promise in
             KMBAPI.send(repository: repo)
-                .done { (response) in
-                    if let ref = response.body  {
-                        promise.fulfill(ref)
-                    } else {
-                        promise.fulfill(nil)
-                    }
-                }
-                .catch { (error) in
-                    promise.reject(error)
-            }
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
+        }
+    }
+    
+    static func requestOneCtbStopETA(stopId: String, routeNum: String) -> Promise<CtbNwfbETAResponse?> {
+        
+        let repo = CtbNwfbETAAPIRepository(company: .CTB, stopId: stopId, routeNum: routeNum)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
+        }
+    }
+    
+    static func requestOneNwfbStopETA(stopId: String, routeNum: String) -> Promise<CtbNwfbETAResponse?> {
+        
+        let repo = CtbNwfbETAAPIRepository(company: .NWFB, stopId: stopId, routeNum: routeNum)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
+        }
+    }
+    
+    static func requestOneNlbStopETA(routeId: String, stopId: String) -> Promise<NlbETAResponse?> {
+        
+        let repo = NlbETAAPIRepository(routeId: routeId, stopId: stopId)
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil) }
+                .catch { (error) in promise.reject(error) }
         }
     }
     
@@ -126,7 +196,7 @@ class KmbManager{
     
     // Storage: Stops
     
-    static func saveAllStops(_ stops: [KmbStop]){
+    static func saveAllStops(_ stops: [Stop]){
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(stops)
@@ -136,11 +206,11 @@ class KmbManager{
         }
     }
     
-    static func getAllStops() -> [KmbStop]?{
+    static func getAllStops() -> [Stop]?{
         if let data = Storage.getObject(Configs.Storage.KEY_STOPS){
             do {
                 let decoder = JSONDecoder()
-                let stops = try decoder.decode([KmbStop].self, from: data)
+                let stops = try decoder.decode([Stop].self, from: data)
                 return stops
 
             } catch {
@@ -153,7 +223,7 @@ class KmbManager{
     
     // Storage: RouteStop
     
-    static func saveAllRouteStops(_ stops: [KmbRouteStop]){
+    static func saveAllRouteStops(_ stops: [RouteStop]){
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(stops)
@@ -163,11 +233,11 @@ class KmbManager{
         }
     }
     
-    static func getAllRouteStops() -> [KmbRouteStop]?{
+    static func getAllRouteStops() -> [RouteStop]?{
         if let data = Storage.getObject(Configs.Storage.KEY_ROUTESTOPS){
             do {
                 let decoder = JSONDecoder()
-                let stops = try decoder.decode([KmbRouteStop].self, from: data)
+                let stops = try decoder.decode([RouteStop].self, from: data)
                 return stops
 
             } catch {
@@ -186,11 +256,11 @@ extension KmbManager{
         return getAllRoutes()?.first(where: {$0.route == route && $0.bound == bound && $0.serviceType == serviceType})
     }
     
-    static func getStop(stopId: String) -> KmbStop?{
+    static func getStop(stopId: String) -> Stop?{
         return getAllStops()?.first(where: { $0.stopId == stopId})
     }
     
-    static func getStopBySeq(route: Route?, seq: String) -> KmbStop?{
+    static func getStopBySeq(route: Route?, seq: String) -> Stop?{
         if let route = route, let stopId = getRoute(route: route.route, bound: route.bound, serviceType: route.serviceType)?.stopList.first(where: {$0.seq == seq})?.stopId{
             return getStop(stopId: stopId)
         }else{

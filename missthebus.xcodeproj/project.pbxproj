@@ -126,8 +126,8 @@
 		8FB5A05A26A6B38F0013540D /* StopListPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A05226A6B38F0013540D /* StopListPageViewController.swift */; };
 		8FB5A05B26A6B38F0013540D /* StopListPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A05326A6B38F0013540D /* StopListPageBuilder.swift */; };
 		8FB5A05C26A6B38F0013540D /* StopListPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A05426A6B38F0013540D /* StopListPageInteractor.swift */; };
-		8FB5A06426A6B9F80013540D /* KmbStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A06326A6B9F80013540D /* KmbStop.swift */; };
-		8FB5A07526A8027C0013540D /* KmbRouteStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07426A8027C0013540D /* KmbRouteStop.swift */; };
+		8FB5A06426A6B9F80013540D /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A06326A6B9F80013540D /* Stop.swift */; };
+		8FB5A07526A8027C0013540D /* RouteStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07426A8027C0013540D /* RouteStop.swift */; };
 		8FB5A07E26A80F3E0013540D /* KmbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07D26A80F3E0013540D /* KmbManager.swift */; };
 		8FB5A08626A8193F0013540D /* KmbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */; };
 		8FB5A08C26A81E180013540D /* StopItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FB5A08B26A81E180013540D /* StopItemTableViewCell.xib */; };
@@ -310,8 +310,8 @@
 		8FB5A05226A6B38F0013540D /* StopListPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageViewController.swift; sourceTree = "<group>"; };
 		8FB5A05326A6B38F0013540D /* StopListPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageBuilder.swift; sourceTree = "<group>"; };
 		8FB5A05426A6B38F0013540D /* StopListPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageInteractor.swift; sourceTree = "<group>"; };
-		8FB5A06326A6B9F80013540D /* KmbStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbStop.swift; sourceTree = "<group>"; };
-		8FB5A07426A8027C0013540D /* KmbRouteStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbRouteStop.swift; sourceTree = "<group>"; };
+		8FB5A06326A6B9F80013540D /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
+		8FB5A07426A8027C0013540D /* RouteStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStop.swift; sourceTree = "<group>"; };
 		8FB5A07D26A80F3E0013540D /* KmbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbManager.swift; sourceTree = "<group>"; };
 		8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbETAAPIRepository.swift; sourceTree = "<group>"; };
 		8FB5A08B26A81E180013540D /* StopItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -833,8 +833,8 @@
 			isa = PBXGroup;
 			children = (
 				8FFF6CAA269D815A0033D2CE /* Route.swift */,
-				8FB5A06326A6B9F80013540D /* KmbStop.swift */,
-				8FB5A07426A8027C0013540D /* KmbRouteStop.swift */,
+				8FB5A06326A6B9F80013540D /* Stop.swift */,
+				8FB5A07426A8027C0013540D /* RouteStop.swift */,
 				8FB5A07D26A80F3E0013540D /* KmbManager.swift */,
 			);
 			path = KMB;
@@ -1303,7 +1303,7 @@
 				8F9905C326CFA69900D6541C /* LanguagePageBuilder.swift in Sources */,
 				4392F3DE26D243CD00A0E6D7 /* NlbETAAPIRepository.swift in Sources */,
 				4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */,
-				8FB5A07526A8027C0013540D /* KmbRouteStop.swift in Sources */,
+				8FB5A07526A8027C0013540D /* RouteStop.swift in Sources */,
 				8FFF6C772697F0720033D2CE /* BaseAPIResponse.swift in Sources */,
 				8F89B5EC2694337A006312EA /* MainPageRouter.swift in Sources */,
 				4392F3D626D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift in Sources */,
@@ -1339,7 +1339,7 @@
 				8FB5A05526A6B38F0013540D /* StopListPagePresenter.swift in Sources */,
 				8F9905AB26CFA67700D6541C /* AboutUsPageRouter.swift in Sources */,
 				8FB5A08626A8193F0013540D /* KmbETAAPIRepository.swift in Sources */,
-				8FB5A06426A6B9F80013540D /* KmbStop.swift in Sources */,
+				8FB5A06426A6B9F80013540D /* Stop.swift in Sources */,
 				8F89B66C269598A7006312EA /* SearchPagePresenter.swift in Sources */,
 				8F695B8326AE99CA00518622 /* SetReminderPageWorker.swift in Sources */,
 				8FFF6CBB269D93950033D2CE /* TableViewCellHelper.swift in Sources */,

@@ -17,7 +17,7 @@ class Route: Codable {
     var destEn: String
     var destTc: String
     var destSc: String
-    var stopList: [KmbRouteStop] = []
+    var stopList: [RouteStop] = []
     
     var routeId: String
     
@@ -39,7 +39,7 @@ class Route: Codable {
         self.routeId = ""
     }
     
-    init(data: CtbNwfbRouteResponse.CtbNwfbRouteData){
+    init(data: CtbNwfbRouteResponse.CtbNwfbRouteData, bound: String){
         switch (data.co){
             case "CTB" : self.company = .CTB
             case "NWFB" : self.company = .NWFB
@@ -52,9 +52,9 @@ class Route: Codable {
         self.destEn = data.dest_en ?? ""
         self.destTc = data.dest_tc ?? ""
         self.destSc = data.dest_sc ?? ""
+        self.bound = bound
         // KMB data
         self.serviceType = ""
-        self.bound = ""
         // NLB
         self.routeId = ""
     }
@@ -105,7 +105,7 @@ class Route: Codable {
         }
     }
     
-    func appendStopList(_ stop: KmbRouteStop){
+    func appendStopList(_ stop: RouteStop){
         stopList.append(stop)
     }
 

@@ -37,11 +37,11 @@ class StopReminder: Codable{
             return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
         }
         
-        func getStop(at index: Int) -> KmbRouteStop?{
+        func getStop(at index: Int) -> RouteStop?{
             return self.getRoute()?.stopList[self.stopIndex[index]]
         }
         
-        func getStops() -> [KmbRouteStop?]{
+        func getStops() -> [RouteStop?]{
             return self.stopIndex.enumerated().map { (i, seq) in
                 return self.getRoute()?.stopList[seq]
             }

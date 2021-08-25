@@ -13,9 +13,9 @@ import GoogleMobileAds
 // MARK: - Display logic, receive view model from presenter and present
 protocol StopListPageDisplayLogic: class
 {
-    func displayInitialState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark])
-    func displayInitialNormalState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?)
-    func displayInitialGetRouteStopState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
+    func displayInitialState(route: Route, stopList: [Stop], bookmarks: [StopBookmark])
+    func displayInitialNormalState(route: Route, stopList: [Stop], bookmarks: [StopBookmark], selectedStopId: String?)
+    func displayInitialGetRouteStopState(route: Route, stopList: [Stop], bookmarks: [StopBookmark], selectedStopSeq: [Int])
     func displayETAOnOneStop(etaList: StopListPage.DisplayItem.ETAViewModel)
 }
 
@@ -42,7 +42,7 @@ class StopListPageViewController: BaseViewController, StopListPageDisplayLogic
     var type: StopListPage.RequestType = .NormalNavigation
     
     var route: Route?
-    var stopList = [KmbStop]()
+    var stopList = [Stop]()
     var bookmarks = [StopBookmark]()
     var googleMapMarker = [GMSMarker]()
     var selectedPosition: CLLocationCoordinate2D?
@@ -194,7 +194,7 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension StopListPageViewController: StopItemCellDelegate{
-    func setBookmark(stop: KmbStop, isMarked: Bool) {
+    func setBookmark(stop: Stop, isMarked: Bool) {
         print("bookmark: \(isMarked) on \(stop.name)")
         
         self.interactor?.bookmark(stop: stop, isMarked: isMarked)
@@ -261,7 +261,7 @@ extension StopListPageViewController: GMSMapViewDelegate{
         self.mapView.setMinZoom(1, maxZoom: 20) // allow the user zoom in more than level 15 again
     }
     
-    func zoomToLocation(_ stop: KmbStop){
+    func zoomToLocation(_ stop: Stop){
         guard let latitude = stop.latitude, let longitude = stop.longitude else {return}
         let position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let marker = self.googleMapMarker.first(where: {$0.position.longitude == position.longitude && $0.position.latitude == position.latitude})
@@ -325,7 +325,7 @@ extension StopListPageViewController {
         
     }
     
-    func displayInitialNormalState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopId: String?){
+    func displayInitialNormalState(route: Route, stopList: [Stop], bookmarks: [StopBookmark], selectedStopId: String?){
         self.type = .NormalNavigation
         self.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks)
         if let selectedStopId = selectedStopId{
@@ -338,7 +338,7 @@ extension StopListPageViewController {
         }
     }
     
-    func displayInitialGetRouteStopState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark], selectedStopSeq: [Int]){
+    func displayInitialGetRouteStopState(route: Route, stopList: [Stop], bookmarks: [StopBookmark], selectedStopSeq: [Int]){
         self.type = .GetRouteStopService
         self.displayInitialState(route: route, stopList: stopList, bookmarks: bookmarks)
         self.setGetRouteStopServiceState()
@@ -352,7 +352,7 @@ extension StopListPageViewController {
         }
     }
 
-    func displayInitialState(route: Route, stopList: [KmbStop], bookmarks: [StopBookmark]){
+    func displayInitialState(route: Route, stopList: [Stop], bookmarks: [StopBookmark]){
         
         self.title = "\(route.route) \("route_to".localized()) \(route.destStop)"
         self.route = route

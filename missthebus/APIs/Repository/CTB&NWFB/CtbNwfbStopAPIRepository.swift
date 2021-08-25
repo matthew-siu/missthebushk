@@ -50,7 +50,7 @@ struct CtbNwfbStopResponse: APIResponse {
     let type: String?
     let version: String?
     let generated_timestamp: String?
-    let data: [CtbNwfbStopData]?
+    let data: CtbNwfbStopData?
     
     struct CtbNwfbStopData: APIResponse {
         let stop: String?

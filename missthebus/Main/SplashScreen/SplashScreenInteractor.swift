@@ -29,7 +29,17 @@ class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
     var worker: SplashScreenWorker?
     
     // State
-    var routes = [Route]()
+    var allBusInfo = BusInfo()
+    
+    var kmbInfo = BusInfo()
+    var ctbInfo = BusInfo()
+    var nwfbInfo = BusInfo()
+    var nlbInfo = BusInfo()
+    
+    struct BusInfo{
+        var routes = [Route]()
+        var stops = [Stop]()
+    }
     
     // Init
     init(request: SplashScreenBuilder.BuildRequest) {
@@ -45,29 +55,17 @@ extension SplashScreenInteractor {
 //            if (!self.needUpdate()) {
 //                promise.fulfill(false)
 //                return
-////                DispatchQueue.main.async {
-////                    self.readNlbRoutes()
-////                        .done{_ in promise.fulfill(true)}
-////                        .catch{err in promise.reject(err)}
-////                }
 //            }
             DispatchQueue.main.async {
-                NSLog("Get all routes")
-                KmbManager.requestAllKmbRoutes()
-                    .done{data in self.deserializeRoutes(data)}
-                    .then{_ in KmbManager.requestAllCtbRoutes()}
-                    .done{data in self.deserializeRoutes(data)}
-                    .then{_ in KmbManager.requestAllNwfbRoutes()}
-                    .done{data in self.deserializeRoutes(data)}
-                    .then{_ in NlbManager.requestAllRoutes()}
-                    .done{data in self.deserializeRoutes(data)}
-                    .then{_ in KmbManager.requestAllKmbStops()}
+                NSLog("[API] Get all routes")
+                self.initKmb()
+                    .then{_ in self.initCtbNwfb()}
                     .done{_ in
-                        NSLog("Total routes = \(self.routes.count)")
-                        self.saveRoutes()
-                        self.saveLastUpdate()
+//                        self.insertRouteStopsIntoRoutes(data)
+//                        self.saveLastUpdate()
                         promise.fulfill(true)
-                    }.catch{err in
+                    }
+                    .catch{err in
                         print("error: \(err.localizedDescription)")
                         promise.reject(err)
                     }
@@ -93,73 +91,83 @@ extension SplashScreenInteractor {
         if let response = response as? KmbRouteResponse{
             if let resp = response.data{
                 let routes = resp.map{ Route(data: $0)}
-                NSLog("KMB routes = \(routes.count)")
-                self.routes += routes
+                NSLog("[API] KMB routes = \(routes.count)")
+                self.kmbInfo.routes = routes
             }
         }else if let response = response as? CtbNwfbRouteResponse{
             if let resp = response.data{
-                let routes = resp.map{ Route(data: $0)}
-                NSLog("CTB / NWFB routes = \(routes.count)")
-                self.routes += routes
+                var routes = [Route]()
+                for route in resp{
+                    routes.append(Route(data: route, bound: "I"))
+                    routes.append(Route(data: route, bound: "O"))
+                }
+                if (routes.count > 0){
+                    if (routes[0].company == .CTB){
+                        NSLog("[API] CTB routes = \(routes.count)")
+                        self.ctbInfo.routes = routes
+                    }else if (routes[0].company == .NWFB){
+                        NSLog("[API] NWFB routes = \(routes.count)")
+                        self.nwfbInfo.routes = routes
+                    }
+                }
             }
         }else if let response = response as? NlbRouteResponse{
             if let resp = response.routes{
                 let routes = resp.map{ Route(data: $0)}
-                NSLog("NLB routes = \(routes.count)")
-                self.routes += routes
+                NSLog("[API] NLB routes = \(routes.count)")
+                self.nlbInfo.routes = routes
+            }
+        }
+    }
+    
+    func deserializeStops(_ response: APIResponse?){
+        if let response = response as? KmbStopResponse{
+            if let resp = response.data{
+                let stops = resp.map{ Stop(data: $0)}
+                NSLog("[API] KMB stops = \(stops.count)")
+                self.kmbInfo.stops = stops
             }
         }
     }
     
     func saveRoutes(){
-        KmbManager.saveAllRoutes(self.routes)
+        self.allBusInfo.routes = []
+        self.allBusInfo.routes += self.kmbInfo.routes
+        self.allBusInfo.routes += self.ctbInfo.routes
+        self.allBusInfo.routes += self.nwfbInfo.routes
+        self.allBusInfo.routes += self.nlbInfo.routes
+        KmbManager.saveAllRoutes(self.allBusInfo.routes)
     }
-    
-//    func saveRoutes(_ response: KmbRouteResponse?){
-//        if let resp = response?.data{
-//            let routes = resp.map{ Route(data: $0)}
-//            KmbManager.saveAllRoutes(routes)
-//        }
-//    }
-//
-//    func saveRoutes(_ response: NlbRouteResponse?){
-//        if let resp = response?.routes{
-//            let _ = resp.map{ Route(data: $0)}
-////            KmbManager.saveAllRoutes(routes)
-//        }
-//    }
     
     func saveStops(_ response: KmbStopResponse?){
         if let resp = response?.data{
-            let stops = resp.map{ KmbStop(data: $0)}
+            let stops = resp.map{ Stop(data: $0)}
             KmbManager.saveAllStops(stops)
         }
     }
     
     func insertRouteStopsIntoRoutes(_ response: KmbRouteStopResponse?){
         
-        guard let routes = KmbManager.getAllRoutes() else{
-            print("no routes")
-            return
-        }
-        
-        if let resp = response?.data{
-            
-            let routeStops = resp.map {KmbRouteStop(data: $0)}
-            
-            for routeStop in routeStops{
-                routes.first(where: {
-                    $0.route == routeStop.route &&
-                    $0.bound == routeStop.bound &&
-                    $0.serviceType == routeStop.serviceType
-                })?.appendStopList(routeStop)
-            }
-            KmbManager.saveAllRoutes(routes)
-            
-            for i in 0..<5{
-                routes[i].printSelf()
-            }
-        }
+//        guard let routes = KmbManager.getAllRoutes() else{
+//            print("no routes")
+//            return
+//        }
+//
+//        if let resp = response?.data{
+//            let routeStops = resp.map {RouteStop(data: $0)}
+//            for routeStop in routeStops{
+//                routes.first(where: {
+//                    $0.route == routeStop.route &&
+//                    $0.bound == routeStop.bound &&
+//                    $0.serviceType == routeStop.serviceType
+//                })?.appendStopList(routeStop)
+//            }
+//            KmbManager.saveAllRoutes(routes)
+//
+//            for i in 0..<5{
+//                routes[i].printSelf()
+//            }
+//        }
     }
     
     func needUpdate() -> Bool{
@@ -171,6 +179,131 @@ extension SplashScreenInteractor {
         Storage.save(Configs.Storage.KEY_LAST_UPDATE, now)
     }
     
+}
+
+// MARK: KmbAPI
+
+extension SplashScreenInteractor{
+    /* initKmb:
+        1. get all routes
+        2. get all stops
+        3. get all route-stop
+     */
+    func initKmb() -> Promise<Any>{
+        return Promise{ promise in
+            KmbManager.requestAllKmbRoutes()
+                .done { data in self.deserializeRoutes(data) }
+                .then{ _ in KmbManager.requestAllKmbStops() }
+                .done{ data in self.saveStops(data) }
+                .then{ _ in KmbManager.requestAllKmbRouteStops() }
+                .done { _ in
+                    NSLog("[API] init KMB completed")
+                    promise.fulfill(true)
+                }
+                .catch { err in promise.reject(err) }
+        }
+    }
+}
+
+// MARK: CTB + NWFB API
+
+extension SplashScreenInteractor{
+    /* init CTB & NWFB:
+        1. get all routes
+        2. get all route-stop
+        3. get stop by route-stop id
+     */
+    func initCtbNwfb() -> Promise<Any>{
+        return Promise{ promise in
+            KmbManager.requestAllCtbRoutes()
+                .done { data in self.deserializeRoutes(data) }
+                .then{ _ in KmbManager.requestAllNwfbRoutes() }
+                .done { data in self.deserializeRoutes(data) }
+                .then{ _ in self.requestAllRouteStops(company: .CTB) }
+                .then{ _ in self.requestAllRouteStops(company: .NWFB) }
+                .then{ _ in self.requestAllStops(company: .CTB) }
+                .then{ _ in self.requestAllStops(company: .NWFB) }
+                .done { _ in
+                    NSLog("[API] init CTB+NWFB completed")
+                    promise.fulfill(true)
+                }
+                .catch { err in promise.reject(err) }
+        }
+    }
+    
+    // 1. get all directions for each route
+    // 2. get all routes for each directions
+    func requestAllRouteStops(company: BusCompany) -> Promise<Any>{
+        NSLog("[API] requestAllRouteStops: \(company.rawValue)")
+        return Promise { promise in
+            let busInfo = (company == .CTB) ? self.ctbInfo : self.nwfbInfo
+            var routeRequestList = [Promise<CtbNwfbRouteStopResponse?>]()
+            for route in busInfo.routes{
+                routeRequestList.append(KmbManager.requestAllCtbNwfbRouteStops(busCompany: company, routeNum: route.route, bound: route.bound))
+            }
+            when(fulfilled: routeRequestList)
+                .done{routeResponses in
+                    for (index, routeResponse) in routeResponses.enumerated(){
+                        if let routeStopResponse = routeResponse, let data = routeStopResponse.data{
+                            if (data.count == 0){
+                                let route = busInfo.routes[index]
+//                                print("[API] \(index) : route \(route.route) [\(route.bound)] should remove")
+                                if (company == .CTB){
+                                    self.ctbInfo.routes.removeAll(where: {$0.route == route.route && $0.company == route.company && $0.bound == route.bound})
+                                }else if (company == .NWFB){
+                                    self.nwfbInfo.routes.removeAll(where: {$0.route == route.route && $0.company == route.company && $0.bound == route.bound})
+                                }
+                            }else{
+                                for routeStop in data{
+                                    let routeStop = RouteStop(data: routeStop)
+                                    if (company == .CTB){
+                                        self.ctbInfo.routes.first(where: {$0.route == routeStop.route && $0.company == company && $0.bound == routeStop.bound})?.appendStopList(routeStop)
+                                    }else if (company == .NWFB){
+                                        self.nwfbInfo.routes.first(where: {$0.route == routeStop.route && $0.company == company && $0.bound == routeStop.bound})?.appendStopList(routeStop)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    promise.fulfill(true)
+                }
+                .catch{ error in promise.reject(error) }
+        }
+    }
+    
+    func requestAllStops(company: BusCompany) -> Promise<Any>{
+        NSLog("[API] requestAllStops: \(company.rawValue)")
+        return Promise { promise in
+            let busInfo = (company == .CTB) ? self.ctbInfo : self.nwfbInfo
+            var stopRequestList = [Promise<CtbNwfbStopResponse?>]()
+            var stopIdList = [String]()
+            for route in busInfo.routes{
+                for stop in route.stopList{
+                    if !stopIdList.contains(stop.stopId){
+                        stopIdList.append(stop.stopId)
+                    }
+                }
+            }
+            for stopId in stopIdList{
+                stopRequestList.append(KmbManager.requestCtbNwfbStop(stopId: stopId))
+            }
+            when(fulfilled: stopRequestList)
+                .done{stopResponses in
+                    for (stopResponse) in stopResponses{
+                        if let data = stopResponse?.data{
+                            let stop = Stop(data: data)
+                            if (company == .CTB){
+                                self.ctbInfo.stops.append(stop)
+                            }else if (company == .NWFB){
+                                self.nwfbInfo.stops.append(stop)
+                            }
+                        }
+                    }
+                    promise.fulfill(true)
+                }
+                .catch{error in promise.reject(error)}
+        }
+    }
 }
 
 extension SplashScreenInteractor{

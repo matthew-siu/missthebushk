@@ -35,7 +35,7 @@ class SetReminderPageInteractor: SetReminderPageBusinessLogic, SetReminderPageDa
     
     // State
     var route: Route?
-    var stop: KmbStop?
+    var stop: Stop?
     var mode: SetReminderPage.Mode
     var reminder: StopReminder
     

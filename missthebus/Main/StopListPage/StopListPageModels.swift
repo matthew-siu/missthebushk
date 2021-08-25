@@ -18,7 +18,7 @@ enum StopListPage
             struct Normal{
                 let type = RequestType.NormalNavigation
                 let route: Route
-                let stop: KmbStop? // selected stop
+                let stop: Stop? // selected stop
     //            let selectedSeq: [Int]
             }
             
@@ -32,7 +32,7 @@ enum StopListPage
         enum Response{
             struct Normal{
                 let route: Route
-                var stop: KmbStop?
+                var stop: Stop?
             }
             
             struct GetRouteStops{

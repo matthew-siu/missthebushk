@@ -39,7 +39,7 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     @IBOutlet weak var adsBannerView: GADBannerView!
     @IBOutlet weak var adsBannerHeightConstraint: NSLayoutConstraint!
     
-    var stopList = [KmbStop]()
+    var stopList = [Stop]()
     var basicViewModel = MainPage.BasicViewModel(headerImgName: "", headerLabel: "")
     var currentTab: MainPage.Tab = .Bookmarks
     // my bookmarks viewModel
