@@ -48,7 +48,7 @@ struct NlbRouteStopRequest: APIRequest {
 
 
 struct NlbRouteStopResponse: APIResponse {
-    let stops: [NlbRouteStopData]?
+    let routes: [NlbRouteStopData]?
     
     struct NlbRouteStopData: APIResponse {
         let stopId: String?

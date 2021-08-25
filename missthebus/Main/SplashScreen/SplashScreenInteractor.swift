@@ -59,7 +59,8 @@ extension SplashScreenInteractor {
             DispatchQueue.main.async {
                 NSLog("[API] Get all routes")
                 self.initKmb()
-                    .then{_ in self.initCtbNwfb()}
+//                    .then{_ in self.initCtbNwfb()}
+                    .then{_ in self.initNlb()}
                     .done{_ in
 //                        self.insertRouteStopsIntoRoutes(data)
 //                        self.saveLastUpdate()
@@ -139,37 +140,6 @@ extension SplashScreenInteractor {
         KmbManager.saveAllRoutes(self.allBusInfo.routes)
     }
     
-    func saveStops(_ response: KmbStopResponse?){
-        if let resp = response?.data{
-            let stops = resp.map{ Stop(data: $0)}
-            KmbManager.saveAllStops(stops)
-        }
-    }
-    
-    func insertRouteStopsIntoRoutes(_ response: KmbRouteStopResponse?){
-        
-//        guard let routes = KmbManager.getAllRoutes() else{
-//            print("no routes")
-//            return
-//        }
-//
-//        if let resp = response?.data{
-//            let routeStops = resp.map {RouteStop(data: $0)}
-//            for routeStop in routeStops{
-//                routes.first(where: {
-//                    $0.route == routeStop.route &&
-//                    $0.bound == routeStop.bound &&
-//                    $0.serviceType == routeStop.serviceType
-//                })?.appendStopList(routeStop)
-//            }
-//            KmbManager.saveAllRoutes(routes)
-//
-//            for i in 0..<5{
-//                routes[i].printSelf()
-//            }
-//        }
-    }
-    
     func needUpdate() -> Bool{
         return Storage.getString(Configs.Storage.KEY_LAST_UPDATE) != Utils.getCurrentTime(pattern: "yyyy-MM-dd")
     }
@@ -194,13 +164,41 @@ extension SplashScreenInteractor{
             KmbManager.requestAllKmbRoutes()
                 .done { data in self.deserializeRoutes(data) }
                 .then{ _ in KmbManager.requestAllKmbStops() }
-                .done{ data in self.saveStops(data) }
+                .done{ data in self.saveKmbStops(data) }
                 .then{ _ in KmbManager.requestAllKmbRouteStops() }
                 .done { _ in
                     NSLog("[API] init KMB completed")
                     promise.fulfill(true)
                 }
                 .catch { err in promise.reject(err) }
+        }
+    }
+    
+    func saveKmbStops(_ response: KmbStopResponse?){
+        if let resp = response?.data{
+//            let stops = resp.map{ Stop(data: $0)}
+            self.kmbInfo.stops = resp.map{ Stop(data: $0)}
+//            KmbManager.saveAllStops(stops)
+        }
+    }
+    
+    func insertRouteStopsIntoRoutes(_ response: KmbRouteStopResponse?){
+        
+        guard let routes = KmbManager.getAllRoutes() else{
+            print("no routes")
+            return
+        }
+
+        if let resp = response?.data{
+            let routeStops = resp.map {RouteStop(data: $0)}
+            for routeStop in routeStops{
+                routes.first(where: {
+                    $0.route == routeStop.route &&
+                    $0.bound == routeStop.bound &&
+                    $0.serviceType == routeStop.serviceType
+                })?.appendStopList(routeStop)
+            }
+//            KmbManager.saveAllRoutes(routes)
         }
     }
 }
@@ -306,19 +304,60 @@ extension SplashScreenInteractor{
     }
 }
 
+// MARK: NLB API
+
 extension SplashScreenInteractor{
-    func readNlbRoutes() -> Promise<Bool>{
+    /* init CTB & NWFB:
+        1. get all routes
+        2. get all route-stop
+        3. conert to stop list
+     */
+    func initNlb() -> Promise<Any>{
+        NSLog("[API] init NLB")
         return Promise{ promise in
-            DispatchQueue.main.async {
-                NlbManager.requestAllRoutes()
-                    .done{data in
-                        promise.fulfill(true)
-                    }
-                    .catch{err in
-                        print("error: \(err.localizedDescription)")
-                        promise.reject(err)
-                    }
+            KmbManager.requestAllNlbRoutes()
+                .done{data in self.deserializeRoutes(data)}
+                .then{_ in self.requestAllNlbRouteStops() }
+                .done{_ in
+                    NSLog("[API] init NLB completed")
+                    promise.fulfill(true)
+                    
+                }
+                .catch{err in promise.reject(err)}
+        }
+    }
+    
+    func requestAllNlbRouteStops() -> Promise<Bool>{
+        return Promise{ promise in
+            
+            var stopRequestList = [Promise<NlbRouteStopResponse?>]()
+            let routeIdList: [String] = self.nlbInfo.routes.map{$0.routeId}
+            for routeId in routeIdList{
+                stopRequestList.append(KmbManager.requestAllNlbRouteStops(routeId: routeId))
             }
+            when(fulfilled: stopRequestList)
+                .done{data in
+                    print("[API] data = \(data.count)")
+                    for (index, route) in data.enumerated(){
+                        if let route = route, let stops = route.routes{
+                            print("[API] \(index). routeStopData = \(stops.count)")
+                            for (seq, routeStopData) in stops.enumerated(){
+                                let routeStop = RouteStop(data: routeStopData, route: self.nlbInfo.routes[index].route, routeId: self.nlbInfo.routes[index].routeId, seq: seq + 1)
+                                self.nlbInfo.routes[index].appendStopList(routeStop)
+                                if !self.nlbInfo.stops.contains(where: {$0.stopId == routeStop.stopId}){
+                                    self.nlbInfo.stops.append(Stop(data: routeStopData))
+                                }
+                            }
+                        }
+                    }
+                    NSLog("[API] NLB stops = \(self.nlbInfo.stops.count)")
+                    promise.fulfill(true)
+                }
+                .catch{err in
+                    print("error: \(err.localizedDescription)")
+                    promise.reject(err)
+                }
+            
         }
     }
 }

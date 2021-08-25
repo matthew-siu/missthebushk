@@ -13,8 +13,8 @@ class RouteStop: Codable{
     let bound: String // O || I
     let serviceType: String
     let seq: String
+    var routeId: String? = nil
 
-    
     init(data: KmbRouteStopResponse.KmbRouteStopData){
         self.route = data.route ?? ""
         self.stopId = data.stop ?? ""
@@ -28,6 +28,15 @@ class RouteStop: Codable{
         self.stopId = data.route ?? ""
         self.bound = data.dir ?? ""
         self.seq = String(data.seq ?? -1)
+        self.serviceType = ""
+    }
+    
+    init(data: NlbRouteStopResponse.NlbRouteStopData, route: String, routeId: String, seq: Int) {
+        self.route = route
+        self.routeId = routeId
+        self.stopId = data.stopId ?? ""
+        self.bound = ""
+        self.seq = String(seq)
         self.serviceType = ""
     }
     

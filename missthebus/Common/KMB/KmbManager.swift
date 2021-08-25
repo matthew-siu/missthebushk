@@ -47,6 +47,16 @@ class KmbManager{
         }
     }
     
+    static func requestAllNlbRoutes() -> Promise<NlbRouteResponse?> {
+        
+        let repo = NlbRouteAPIRepository()
+        return Promise{ promise in
+            KMBAPI.send(repository: repo)
+                .done { (response) in promise.fulfill(response.body ?? nil)}
+                .catch { (error) in promise.reject(error) }
+        }
+    }
+    
     // 2. Get Stops API
     
     static func requestAllKmbStops() -> Promise<KmbStopResponse?> {
@@ -91,23 +101,6 @@ class KmbManager{
                 .done { (response) in promise.fulfill(response.body ?? nil) }
                 .catch { (error) in promise.reject(error) }
         }
-//        return Promise{ promise in
-//            let repo1 = CtbNwfbRouteStopAPIRepository(company: company, routeNum: routeNum, bound: .Inbound)
-//            let repo2 = CtbNwfbRouteStopAPIRepository(company: company, routeNum: routeNum, bound: .Outbound)
-//
-//            var boundRequestList = [Promise<SuccessResponse<CtbNwfbRouteStopResponse?>>]()
-//            boundRequestList.append(KMBAPI.send(repository: repo1))
-//            boundRequestList.append(KMBAPI.send(repository: repo2))
-//            when(fulfilled: boundRequestList)
-//                .done{responses in
-//                    var res = [CtbNwfbRouteStopResponse?]()
-//                    for response in responses {
-//                        res.append(response.body ?? nil)
-//                    }
-//                    promise.fulfill(res)
-//                }
-//                .catch{ (error) in promise.reject(error) }
-//        }
     }
     
     static func requestAllNlbRouteStops(routeId: String) -> Promise<NlbRouteStopResponse?> {
