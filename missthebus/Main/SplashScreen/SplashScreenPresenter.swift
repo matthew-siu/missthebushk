@@ -11,7 +11,8 @@ import UIKit
 // MARK: - Presentation logic goes here
 protocol SplashScreenPresentationLogic
 {
-
+    func displayLoadingMsg(msg: String)
+    func updateProgressBar(to percentage: Float)
 }
 
 // MARK: - Presenter main body
@@ -23,5 +24,12 @@ class SplashScreenPresenter: SplashScreenPresentationLogic
 
 // MARK: - Presentation receiver
 extension SplashScreenPresenter {
-
+    
+    func updateProgressBar(to percentage: Float){
+        self.viewController?.updateProgressBar(to: percentage)
+    }
+    
+    func displayLoadingMsg(msg: String){
+        self.viewController?.displayLoadingMsg(msg: msg)
+    }
 }

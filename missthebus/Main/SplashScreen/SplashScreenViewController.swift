@@ -7,11 +7,12 @@
 //
 
 import UIKit
-
+                                                                              
 // MARK: - Display logic, receive view model from presenter and present
 protocol SplashScreenDisplayLogic: class
 {
-
+    func displayLoadingMsg(msg: String)
+    func updateProgressBar(to percentage: Float)
 }
 
 // MARK: - View Controller body
@@ -23,6 +24,8 @@ class SplashScreenViewController: BaseViewController, SplashScreenDisplayLogic
     
     @IBOutlet weak var softIconView: SoftUIView!
     @IBOutlet weak var iconImg: UIImageView!
+    @IBOutlet weak var loadingMsgLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
     
 }
 
@@ -40,14 +43,31 @@ extension SplashScreenViewController {
 extension SplashScreenViewController {
     func initUI(){
         self.view.backgroundColor = UIColor.SoftLaunch.major
+//        self.view.backgroundColor = UIColor.SoftUI.major
     
         self.softIconView.setThemeColor(UIColor.SoftLaunch.major, UIColor.SoftLaunch.dark, UIColor.SoftLaunch.light)
         self.softIconView.cornerRadius = 20
-        
+        self.softIconView.type = .staticView
+        self.progressView.progress = 0
+        self.loadingMsgLabel.useTextStyle(.label_sub)
+        self.loadingMsgLabel.textColor = .lightGray
+        self.loadingMsgLabel.text = "loading_default".localized()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            
             self.iconImg.fade(true, 0.5)
         }
+    }
+    
+    func displayLoadingMsg(msg: String){
+        print("[API] displayLoadingMsg: \(msg)")
+        self.loadingMsgLabel.text = msg
+    }
+    
+    func updateProgressBar(to percentage: Float){
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.progressView.setProgress(percentage, animated: true)
+        }
+        self.progressView.setProgress(progressView.progress, animated: true)
     }
     
     func requestAllKmbStaticInfo(){
@@ -63,7 +83,7 @@ extension SplashScreenViewController {
     func gotoMainPage(_ delay: Bool){
         let sec: Double = delay ? 1 : 0
         DispatchQueue.main.asyncAfter(deadline: .now() + sec) {
-//            self.router?.routeToMainPage()
+            self.router?.routeToMainPage()
         }
     }
 }

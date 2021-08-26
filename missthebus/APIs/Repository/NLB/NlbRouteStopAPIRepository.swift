@@ -14,7 +14,7 @@ class NlbRouteStopAPIRepository: APIRepository<NlbRouteStopResponse> {
     var routeId: String = ""
     
     override var path: String {
-        return "nlb/route.php?action=list"
+        return "nlb/stop.php?action=list"
     }
     
     override var baseURL: String {
@@ -22,7 +22,7 @@ class NlbRouteStopAPIRepository: APIRepository<NlbRouteStopResponse> {
     }
     
     override var encoding: ParameterEncoding {
-        return URLEncoding()
+        return JSONEncoding()
     }
     
     override var method: APIMethod {
@@ -30,7 +30,8 @@ class NlbRouteStopAPIRepository: APIRepository<NlbRouteStopResponse> {
     }
     
     override var headers: HTTPHeaders {
-        let headers = super.headers
+        var headers = super.headers
+        headers["Content-Type"] = "application/json"
         
         return headers
     }
@@ -48,7 +49,7 @@ struct NlbRouteStopRequest: APIRequest {
 
 
 struct NlbRouteStopResponse: APIResponse {
-    let routes: [NlbRouteStopData]?
+    let stops: [NlbRouteStopData]?
     
     struct NlbRouteStopData: APIResponse {
         let stopId: String?

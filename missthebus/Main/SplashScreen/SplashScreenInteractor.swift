@@ -41,6 +41,20 @@ class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
         var stops = [Stop]()
     }
     
+    enum Progress: Float {
+        case KmbRoute = 0
+        case KmbStop = 0.1
+        case CtbRoute = 0.2
+        case CtbStop1 = 0.3
+        case CtbStop2 = 0.4
+        case NwfbRoute = 0.5
+        case NwfbStop1 = 0.6
+        case NwfbStop2 = 0.7
+        case NlbRoute = 0.8
+        case NlbStop = 0.9
+        case Complete = 1
+    }
+    
     // Init
     init(request: SplashScreenBuilder.BuildRequest) {
         
@@ -53,37 +67,26 @@ extension SplashScreenInteractor {
     func requestAllKmbStaticInfo() -> Promise<Bool>{
         return Promise { promise in
 //            if (!self.needUpdate()) {
+//                self.updateProgress("loading_check_update".localized(), to: 1)
 //                promise.fulfill(false)
 //                return
 //            }
             DispatchQueue.main.async {
                 NSLog("[API] Get all routes")
                 self.initKmb()
-//                    .then{_ in self.initCtbNwfb()}
+                    .then{_ in self.initCtbNwfb()}
                     .then{_ in self.initNlb()}
                     .done{_ in
-//                        self.insertRouteStopsIntoRoutes(data)
-//                        self.saveLastUpdate()
+                        self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
+                        self.saveRoutes()
+                        self.saveStops()
+                        self.saveLastUpdate()
                         promise.fulfill(true)
                     }
                     .catch{err in
                         print("error: \(err.localizedDescription)")
                         promise.reject(err)
                     }
-//                KmbManager.requestKmbAllRoutes()
-//                    .done{data in self.saveRoutes(data)}
-//                    .then{_ in KmbManager.requestAllStops()}
-//                    .done{data in self.saveStops(data)}
-//                    .then{_ in KmbManager.requestAllRouteStops()}
-//                    .done{data in
-//                        self.insertRouteStopsIntoRoutes(data)
-//                        self.saveLastUpdate()
-//                        promise.fulfill(true)
-//                    }
-//                    .catch{err in
-//                        print("error: \(err.localizedDescription)")
-//                        promise.reject(err)
-//                    }
             }
         }
     }
@@ -140,6 +143,15 @@ extension SplashScreenInteractor {
         KmbManager.saveAllRoutes(self.allBusInfo.routes)
     }
     
+    func saveStops(){
+        self.allBusInfo.stops = []
+        self.allBusInfo.stops += self.kmbInfo.stops
+        self.allBusInfo.stops += self.ctbInfo.stops
+        self.allBusInfo.stops += self.nwfbInfo.stops
+        self.allBusInfo.stops += self.nlbInfo.stops
+        KmbManager.saveAllStops(self.allBusInfo.stops)
+    }
+    
     func needUpdate() -> Bool{
         return Storage.getString(Configs.Storage.KEY_LAST_UPDATE) != Utils.getCurrentTime(pattern: "yyyy-MM-dd")
     }
@@ -161,11 +173,14 @@ extension SplashScreenInteractor{
      */
     func initKmb() -> Promise<Any>{
         return Promise{ promise in
+            self.updateProgress("loading_kmb".localized(), to: Progress.KmbRoute.rawValue)
             KmbManager.requestAllKmbRoutes()
                 .done { data in self.deserializeRoutes(data) }
+                .done { _ in self.updateProgress(to: Progress.KmbStop.rawValue)}
                 .then{ _ in KmbManager.requestAllKmbStops() }
                 .done{ data in self.saveKmbStops(data) }
                 .then{ _ in KmbManager.requestAllKmbRouteStops() }
+                .done{ data in self.saveKmbRouteStops(data) }
                 .done { _ in
                     NSLog("[API] init KMB completed")
                     promise.fulfill(true)
@@ -176,30 +191,29 @@ extension SplashScreenInteractor{
     
     func saveKmbStops(_ response: KmbStopResponse?){
         if let resp = response?.data{
-//            let stops = resp.map{ Stop(data: $0)}
             self.kmbInfo.stops = resp.map{ Stop(data: $0)}
-//            KmbManager.saveAllStops(stops)
         }
     }
     
-    func insertRouteStopsIntoRoutes(_ response: KmbRouteStopResponse?){
+    func saveKmbRouteStops(_ response: KmbRouteStopResponse?){
         
-        guard let routes = KmbManager.getAllRoutes() else{
-            print("no routes")
-            return
-        }
-
         if let resp = response?.data{
             let routeStops = resp.map {RouteStop(data: $0)}
             for routeStop in routeStops{
-                routes.first(where: {
+                self.kmbInfo.routes.first(where: {
                     $0.route == routeStop.route &&
                     $0.bound == routeStop.bound &&
                     $0.serviceType == routeStop.serviceType
                 })?.appendStopList(routeStop)
             }
-//            KmbManager.saveAllRoutes(routes)
         }
+    }
+    
+    func updateProgress(_ msg: String? = nil, to percentage: Float){
+        if let msg = msg {
+            self.presenter?.displayLoadingMsg(msg: msg)
+        }
+        self.presenter?.updateProgressBar(to: percentage)
     }
 }
 
@@ -213,13 +227,19 @@ extension SplashScreenInteractor{
      */
     func initCtbNwfb() -> Promise<Any>{
         return Promise{ promise in
+            self.updateProgress("loading_ctb".localized(), to: Progress.CtbRoute.rawValue)
             KmbManager.requestAllCtbRoutes()
                 .done { data in self.deserializeRoutes(data) }
+                .done { _ in self.updateProgress(to: Progress.CtbStop1.rawValue)}
+                .then{ _ in self.requestAllRouteStops(company: .CTB) }
+                .done { _ in self.updateProgress(to: Progress.CtbStop2.rawValue)}
+                .then{ _ in self.requestAllStops(company: .CTB) }
+                .done{ _ in self.updateProgress("loading_nwfb".localized(), to: Progress.NwfbRoute.rawValue)}
                 .then{ _ in KmbManager.requestAllNwfbRoutes() }
                 .done { data in self.deserializeRoutes(data) }
-                .then{ _ in self.requestAllRouteStops(company: .CTB) }
+                .done { _ in self.updateProgress(to: Progress.NwfbStop1.rawValue)}
                 .then{ _ in self.requestAllRouteStops(company: .NWFB) }
-                .then{ _ in self.requestAllStops(company: .CTB) }
+                .done { _ in self.updateProgress(to: Progress.NwfbStop2.rawValue)}
                 .then{ _ in self.requestAllStops(company: .NWFB) }
                 .done { _ in
                     NSLog("[API] init CTB+NWFB completed")
@@ -315,8 +335,10 @@ extension SplashScreenInteractor{
     func initNlb() -> Promise<Any>{
         NSLog("[API] init NLB")
         return Promise{ promise in
+            self.updateProgress("loading_nlb".localized(), to: Progress.NlbRoute.rawValue)
             KmbManager.requestAllNlbRoutes()
                 .done{data in self.deserializeRoutes(data)}
+                .done { _ in self.updateProgress(to: Progress.NlbStop.rawValue)}
                 .then{_ in self.requestAllNlbRouteStops() }
                 .done{_ in
                     NSLog("[API] init NLB completed")
@@ -337,10 +359,8 @@ extension SplashScreenInteractor{
             }
             when(fulfilled: stopRequestList)
                 .done{data in
-                    print("[API] data = \(data.count)")
                     for (index, route) in data.enumerated(){
-                        if let route = route, let stops = route.routes{
-                            print("[API] \(index). routeStopData = \(stops.count)")
+                        if let route = route, let stops = route.stops{
                             for (seq, routeStopData) in stops.enumerated(){
                                 let routeStop = RouteStop(data: routeStopData, route: self.nlbInfo.routes[index].route, routeId: self.nlbInfo.routes[index].routeId, seq: seq + 1)
                                 self.nlbInfo.routes[index].appendStopList(routeStop)

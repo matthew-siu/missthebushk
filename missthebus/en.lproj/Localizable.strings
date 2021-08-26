@@ -8,6 +8,15 @@
 // Created by Matthew Siu on 23/4/2021
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
+// Splash Screen
+"loading_default" = "Loading ...";
+"loading_kmb" = "Loading KMB information ...";
+"loading_ctb" = "Loading City Bus information ...";
+"loading_nwfb" = "Loading New World First Bus information ...";
+"loading_nlb" = "Loading New Lantao Bus information ...";
+"loading_check_update" = "Checking updates ...";
+"loading_completed" = "Loading completed!";
+
 // Main Page
 "app_name" = "Miss The Bus";
 "main_no_upcoming_reminder" = "No upcoming reminders";
@@ -90,15 +99,6 @@
 "general_error" = "Error";
 "general_remind" = "Remind";
 "general_attention" = "Attention";
-
-
-
-
-
-
-
-
-
 
 
 

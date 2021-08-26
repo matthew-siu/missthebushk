@@ -8,6 +8,15 @@
 // Created by Matthew Siu on 23/4/2021
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
+// Splash Screen
+"loading_default" = "加載中...";
+"loading_kmb" = "正在加載九巴資訊...";
+"loading_ctb" = "正在加載城巴資訊...";
+"loading_nwfb" = "正在加載新巴資訊...";
+"loading_nlb" = "正在加載新大嶼山巴士資訊...";
+"loading_check_update" = "檢查更新...";
+"loading_completed" = "加載完成！";
+
 // Main Page
 "app_name" = "送車尾";
 "main_no_upcoming_reminder" = "沒有即將到來的提醒";
@@ -90,15 +99,6 @@
 "general_error" = "錯誤";
 "general_remind" = "提醒";
 "general_attention" = "注意";
-
-
-
-
-
-
-
-
-
 
 
 

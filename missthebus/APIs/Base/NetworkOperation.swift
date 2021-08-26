@@ -30,7 +30,7 @@ extension API {
     public static func send<R: Repository>(repository: R, usingQueue queue: OperationQueue? = nil, completion: ((APIResult<R.ResponseType>) -> Void)?) {
         let apiOperation = APIOperation(repo: repository) { (requestResult) in
 
-//            print("repository api: \(R.ResponseType.self) \(repository.urlPath)")
+//            print("repository api: \(R.ResponseType.self) | \(repository.urlPath) | \(repository.body)")
 //            print("repository: \(requestResult.description)")
             
             // 0. SSL Error
