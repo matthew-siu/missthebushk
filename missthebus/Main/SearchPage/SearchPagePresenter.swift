@@ -31,7 +31,18 @@ extension SearchPagePresenter {
     }
     
     func presentTableView(routes: [Route]){
-        let routes: [SearchPage.RouteItem] = routes.map{SearchPage.RouteItem(routeNum: $0.route, bound: $0.bound, serviceType: $0.serviceType, company: $0.company, destStop: $0.destStop, origStop: $0.originStop)}
+        var routes: [SearchPage.RouteItem] = routes.map{SearchPage.RouteItem(routeNum: $0.route, bound: $0.bound, serviceType: $0.serviceType, company: $0.company, destStop: $0.destStop, origStop: $0.originStop)}
+        routes = routes.sorted{
+            let num1 = $0.routeNum.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+            let num2 = $1.routeNum.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+            if (num1 < num2){
+                return true
+            }else{
+                let str1 = $0.routeNum.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
+                let str2 = $1.routeNum.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
+                return str1 < str2
+            }
+        }
         self.viewController?.presentTableView(viewModel: SearchPage.DisplayItem.ViewModel(routeList: routes))
         
     }

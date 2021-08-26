@@ -66,3 +66,4 @@ struct NlbRouteStopResponse: APIResponse {
         let someDepartureObserveOnly: Int?
     }
 }
+	
