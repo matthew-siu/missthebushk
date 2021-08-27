@@ -140,6 +140,21 @@ extension SplashScreenInteractor {
         self.allBusInfo.routes += self.ctbInfo.routes
         self.allBusInfo.routes += self.nwfbInfo.routes
         self.allBusInfo.routes += self.nlbInfo.routes
+        
+        // sort routes
+        self.allBusInfo.routes = self.allBusInfo.routes.sorted{
+            let num1 = $0.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
+//            let num1 = $0.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+//            let num2 = $1.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+//            if (num1 < num2){
+//                return true
+//            }else{
+//                let str1 = $0.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
+//                let str2 = $1.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
+//                return str1 < str2
+//            }
+            return $0.route < $1.route
+        }
         KmbManager.saveAllRoutes(self.allBusInfo.routes)
     }
     
