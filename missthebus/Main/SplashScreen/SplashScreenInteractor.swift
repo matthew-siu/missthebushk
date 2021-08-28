@@ -51,7 +51,8 @@ class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
         case NwfbStop1 = 0.6
         case NwfbStop2 = 0.7
         case NlbRoute = 0.8
-        case NlbStop = 0.9
+        case NlbStop = 0.85
+        case Sort = 0.9
         case Complete = 1
     }
     
@@ -66,19 +67,19 @@ extension SplashScreenInteractor {
     
     func requestAllKmbStaticInfo() -> Promise<Bool>{
         return Promise { promise in
-//            if (!self.needUpdate()) {
-//                self.updateProgress("loading_check_update".localized(), to: 1)
-//                promise.fulfill(false)
-//                return
-//            }
+            if (!self.needUpdate()) {
+                self.updateProgress("loading_check_update".localized(), to: 1)
+                promise.fulfill(false)
+                return
+            }
             DispatchQueue.main.async {
                 NSLog("[API] Get all routes")
                 self.initKmb()
                     .then{_ in self.initCtbNwfb()}
                     .then{_ in self.initNlb()}
+                    .then{_ in self.saveRoutes()}
                     .done{_ in
                         self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
-                        self.saveRoutes()
                         self.saveStops()
                         self.saveLastUpdate()
                         promise.fulfill(true)
@@ -134,28 +135,30 @@ extension SplashScreenInteractor {
         }
     }
     
-    func saveRoutes(){
-        self.allBusInfo.routes = []
-        self.allBusInfo.routes += self.kmbInfo.routes
-        self.allBusInfo.routes += self.ctbInfo.routes
-        self.allBusInfo.routes += self.nwfbInfo.routes
-        self.allBusInfo.routes += self.nlbInfo.routes
-        
-        // sort routes
-        self.allBusInfo.routes = self.allBusInfo.routes.sorted{
-            let num1 = $0.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
-//            let num1 = $0.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
-//            let num2 = $1.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
-//            if (num1 < num2){
-//                return true
-//            }else{
-//                let str1 = $0.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
-//                let str2 = $1.route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789."))
-//                return str1 < str2
-//            }
-            return $0.route < $1.route
+    func saveRoutes() -> Promise<Any>{
+        return Promise{promise in
+            
+            self.updateProgress("loading_default".localized(), to: Progress.Sort.rawValue)
+            self.allBusInfo.routes = []
+            self.allBusInfo.routes += self.kmbInfo.routes
+            self.allBusInfo.routes += self.ctbInfo.routes
+            self.allBusInfo.routes += self.nwfbInfo.routes
+            self.allBusInfo.routes += self.nlbInfo.routes
+            
+            // sort routes
+            self.allBusInfo.routes = self.allBusInfo.routes.sorted{
+                if $0.routeNumParser[0] != $1.routeNumParser[0]{
+                    return $0.routeNumParser[0] < $1.routeNumParser[0]
+                }
+                if $0.routeNumParser[1].integer ?? 0 != $1.routeNumParser[1].integer ?? 0{
+                    return $0.routeNumParser[1].integer ?? 0 < $1.routeNumParser[1].integer ?? 0
+                }
+                return $0.routeNumParser[2] < $1.routeNumParser[2]
+            }
+            KmbManager.saveAllRoutes(self.allBusInfo.routes)
+            
+            promise.fulfill(true)
         }
-        KmbManager.saveAllRoutes(self.allBusInfo.routes)
     }
     
     func saveStops(){
@@ -243,6 +246,7 @@ extension SplashScreenInteractor{
     func initCtbNwfb() -> Promise<Any>{
         return Promise{ promise in
             self.updateProgress("loading_ctb".localized(), to: Progress.CtbRoute.rawValue)
+            // part 1: CTB
             KmbManager.requestAllCtbRoutes()
                 .done { data in self.deserializeRoutes(data) }
                 .done { _ in self.updateProgress(to: Progress.CtbStop1.rawValue)}
@@ -250,6 +254,7 @@ extension SplashScreenInteractor{
                 .done { _ in self.updateProgress(to: Progress.CtbStop2.rawValue)}
                 .then{ _ in self.requestAllStops(company: .CTB) }
                 .done{ _ in self.updateProgress("loading_nwfb".localized(), to: Progress.NwfbRoute.rawValue)}
+                // part 2: NWFB
                 .then{ _ in KmbManager.requestAllNwfbRoutes() }
                 .done { data in self.deserializeRoutes(data) }
                 .done { _ in self.updateProgress(to: Progress.NwfbStop1.rawValue)}
@@ -257,6 +262,9 @@ extension SplashScreenInteractor{
                 .done { _ in self.updateProgress(to: Progress.NwfbStop2.rawValue)}
                 .then{ _ in self.requestAllStops(company: .NWFB) }
                 .done { _ in
+                    for route in self.ctbInfo.routes {
+                        print("[API] \(route.route) - stopList: \(route.stopList.map{$0.stopId})")
+                    }
                     NSLog("[API] init CTB+NWFB completed")
                     promise.fulfill(true)
                 }

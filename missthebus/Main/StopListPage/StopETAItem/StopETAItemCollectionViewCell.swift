@@ -25,8 +25,15 @@ extension StopETAItemCollectionViewCell{
         if let viewModel = viewModel{
             self.etaDisplayLabel.text = viewModel.display
             self.minuteLabel.text = "stop_mins".localized()
+            
             if (viewModel.company == .KMB){
-                
+                self.busIcon.image = UIImage(named: "kmbBus")
+            }else if (viewModel.company == .CTB){
+                self.busIcon.image = UIImage(named: "ctbBus")
+            }else if (viewModel.company == .NWFB){
+                self.busIcon.image = UIImage(named: "nwfbBus")
+            }else if (viewModel.company == .NLB){
+                self.busIcon.image = UIImage(named: "nlbBus")
             }
         }
     }

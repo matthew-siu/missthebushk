@@ -433,6 +433,13 @@
 			path = "CTB&NWFB";
 			sourceTree = "<group>";
 		};
+		4392F42426DA9E9500A0E6D7 /* BackgroundService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BackgroundService;
+			sourceTree = "<group>";
+		};
 		8F09F2AC2696935D0083B2CD /* SoftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +616,7 @@
 		8F89B5E0269432E9006312EA /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4392F42426DA9E9500A0E6D7 /* BackgroundService */,
 				8F56614126B3A8CD005AB134 /* SplashScreen */,
 				8F89B5E12694333D006312EA /* MainPage */,
 				8F803F7926CF540200E03EF1 /* SettingPage */,
@@ -1491,7 +1499,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				INFOPLIST_FILE = missthebus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1616,7 +1624,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				INFOPLIST_FILE = missthebus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

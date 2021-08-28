@@ -1,9 +1,9 @@
 //
 //  Extension.swift
-//  Caine18RoadSDK
+//  Available for all projects.
 //
 //  Created by Matthew Siu on 17/7/2019.
-//  Copyright © 2019 DerekIp. All rights reserved.
+//  Copyright © 2019 Matthew Siu. All rights reserved.
 //
 import Foundation
 import UIKit
@@ -84,6 +84,18 @@ extension StringProtocol {
     var integer: Int? {
         return Int(self)
     }
+    func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [Range<Index>] {
+        var result: [Range<Index>] = []
+        var startIndex = self.startIndex
+        while startIndex < endIndex,
+            let range = self[startIndex...].range(of: string, options: options) {
+                result.append(range)
+                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return result
+    }
+    
 }
 
 extension UIImageView{
@@ -471,6 +483,16 @@ extension String {
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
     }
+    
+    
+    func split(usingRegex pattern: String) -> [String] {
+        //### Crashes when you pass invalid `pattern`
+        let regex = try! NSRegularExpression(pattern: pattern)
+        let matches = regex.matches(in: self, range: NSRange(0..<utf16.count))
+        let ranges = [startIndex..<startIndex] + matches.map{Range($0.range, in: self)!} + [endIndex..<endIndex]
+        return (0...matches.count).map {String(self[ranges[$0].upperBound..<ranges[$0+1].lowerBound])}
+    }
+    
 }
 
 // UITableView

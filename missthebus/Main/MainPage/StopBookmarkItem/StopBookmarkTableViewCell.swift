@@ -87,27 +87,18 @@ class StopBookmarkTableViewCell: UITableViewCell {
         self.routeDestLabel.text = stop.currentStop
         self.routeOrigLabel.text = "\("route_to".localized()) \(stop.destStop)"
         
+        var image: UIImage?
         if (stop.company == .KMB){
-            if let image = UIImage(named: "KmbLogo") {
-                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
-                self.busCompanyIcon.sizeToFit()
-            }
+            image = UIImage(named: "KmbLogo")
         }else if (stop.company == .CTB){
-            if let image = UIImage(named: "KmbLogo") {
-                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
-                self.busCompanyIcon.sizeToFit()
-            }
+            image = UIImage(named: "CityBusLogo")
         }else if (stop.company == .NWFB){
-            if let image = UIImage(named: "NewWorldFirstBus") {
-                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
-                self.busCompanyIcon.sizeToFit()
-            }
+            image = UIImage(named: "NewWorldFirstBusLogo")
         }else if (stop.company == .NLB){
-            if let image = UIImage(named: "NewLantaoBus") {
-                self.busCompanyIcon.image = image.resized(toHeight: self.iconLayout.frame.height)
-                self.busCompanyIcon.sizeToFit()
-            }
+            image = UIImage(named: "NewLantaoBusLogo")
         }
+        self.busCompanyIcon.image = image?.resized(toHeight: self.iconLayout.frame.height)
+        self.busCompanyIcon.sizeToFit()
         
         // ETA View
         if let etaItem = etaItem {

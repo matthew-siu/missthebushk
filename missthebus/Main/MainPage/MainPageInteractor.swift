@@ -175,9 +175,9 @@ extension MainPageInteractor {
     private func requestOneStopETA(query: KmbETAQuery, bound: String){
         DispatchQueue.main.async {
             
-            KmbManager.requestOneStopETA(query: query)
+            KmbManager.requestOneKmbStopETA(query: query)
                 .done{response in
-                    if let resp = response?.data{
+                    if let response = response as? KmbETAResponse, let resp = response.data{
                         self.presenter?.updateETAs(query: query, bound: bound, data: resp)
                     }
                 }

@@ -82,7 +82,20 @@ extension StopListPageInteractor {
             
             self.presenter?.displayInitialNormalState(route: self.route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopId: self.normalResp?.stop?.stopId)
             if let selectedStopId = self.normalResp?.stop?.stopId {
-                self.startETATimer(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
+                var query: APIQuery?
+                if (self.normalResp?.route.company == .KMB){
+                    query = KmbETAQuery(stopId: selectedStopId, route: self.route.route, serviceType: self.route.serviceType)
+                }else if (self.normalResp?.route.company == .CTB){
+                    query = CtbNwfbETAQuery(company: .CTB, stopId: selectedStopId, routeNum: self.route.route)
+                }else if (self.normalResp?.route.company == .NWFB){
+                    query = CtbNwfbETAQuery(company: .NWFB, stopId: selectedStopId, routeNum: self.route.route)
+                }else if (self.normalResp?.route.company == .NLB){
+                    query = NlbETAQuery(routeId: self.route.routeId, stopId: selectedStopId)
+                }
+                if let query = query {
+                    self.startETATimer(query: query)
+                }
+                
             }
         }else if (self.type == .GetRouteStopService){
             self.presenter?.displayInitialGetRouteStopState(route: self.route, stopList: stopList, bookmarks: self.bookmarks ?? [], selectedStopSeq: self.getRouteStopsResp?.stops ?? [])
@@ -90,8 +103,23 @@ extension StopListPageInteractor {
     }
     
     func startETATimer(stopId: String, route: String, serviceType: String){
+        var query: APIQuery?
+        if (self.normalResp?.route.company == .KMB){
+            query = KmbETAQuery(stopId: stopId, route: route, serviceType: self.route.serviceType)
+        }else if (self.normalResp?.route.company == .CTB){
+            query = CtbNwfbETAQuery(company: .CTB, stopId: stopId, routeNum: route)
+        }else if (self.normalResp?.route.company == .NWFB){
+            query = CtbNwfbETAQuery(company: .NWFB, stopId: stopId, routeNum: route)
+        }else if (self.normalResp?.route.company == .NLB){
+            query = NlbETAQuery(routeId: route, stopId: stopId)
+        }
+        if let query = query {
+            self.startETATimer(query: query)
+        }
+    }
+    
+    private func startETATimer(query: APIQuery){
         self.dismissETATimer()
-        let query = KmbETAQuery(stopId: stopId, route: route, serviceType: serviceType)
         self.requestOneStopETA(query: query)
         self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: query, repeats: true)
     }
@@ -110,7 +138,6 @@ extension StopListPageInteractor {
             if let bookmark = StopBookmarkManager.getOneBookmarkFromRoute(stopId: stop.stopId, route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType){
                 StopBookmarkManager.removeStopBookmark(bookmark.id)
             }
-            
         }
     }
     
@@ -139,21 +166,23 @@ extension StopListPageInteractor{
     @objc
     private func requestETA(_ timer: Timer)
     {
-        guard let query = timer.userInfo as? KmbETAQuery else {
+        guard let query = timer.userInfo as? APIQuery else {
             return
         }
         self.requestOneStopETA(query: query)
     }
     
-    private func requestOneStopETA(query: KmbETAQuery){
+    private func requestOneStopETA(query: APIQuery){
         DispatchQueue.main.async {
-            
+            print("requestOneStopETA")
             KmbManager.requestOneStopETA(query: query)
                 .done{response in
-                    if let resp = response?.data{
+                    if let response = response as? KmbETAResponse, let resp = response.data{
                         self.presenter?.displayETA(data: resp)
-                    }else{
-                        self.presenter?.displayETA(data: nil)
+                    }else if let response = response as? CtbNwfbETAResponse, let resp = response.data{
+                        self.presenter?.displayETA(data: resp)
+                    }else if let response = response as? NlbETAResponse, let resp = response.estimatedArrivals{
+                        self.presenter?.displayETA(query: query, data: resp)
                     }
                 }
                 .catch{err in

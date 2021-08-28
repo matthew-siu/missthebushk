@@ -18,7 +18,7 @@ class NlbETAAPIRepository: APIRepository<NlbETAResponse> {
     var language: String = ""
     
     override var path: String {
-        return "nlb/route.php?action=estimatedArrivals"
+        return "nlb/stop.php?action=estimatedArrivals"
     }
     
     override var baseURL: String {
@@ -26,7 +26,13 @@ class NlbETAAPIRepository: APIRepository<NlbETAResponse> {
     }
     
     override var encoding: ParameterEncoding {
-        return URLEncoding()
+        if (method == .post){
+            return JSONEncoding()
+        }else if (method == .get){
+            return URLEncoding()
+        }else{
+            return URLEncoding.methodDependent
+        }
     }
     
     override var method: APIMethod {
@@ -34,14 +40,15 @@ class NlbETAAPIRepository: APIRepository<NlbETAResponse> {
     }
     
     override var headers: HTTPHeaders {
-        let headers = super.headers
+        var headers = super.headers
+        headers["Content-Type"] = "application/json"
         
         return headers
     }
     
-    init(routeId: String, stopId: String) {
-        self.routeId = routeId
-        self.stopId = stopId
+    init(query: NlbETAQuery) {
+        self.routeId = query.routeId
+        self.stopId = query.stopId
         switch currentLanguage {
         case .english:
             self.language = "en"
@@ -61,6 +68,10 @@ struct NlbETARequest: APIRequest {
     let language: String
 }
 
+struct NlbETAQuery: APIQuery{
+    let routeId: String
+    let stopId: String
+}
 
 struct NlbETAResponse: APIResponse {
     let message: String?

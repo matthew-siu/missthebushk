@@ -105,6 +105,13 @@ class Route: Codable {
         }
     }
     
+    var routeNumParser: [String]{
+        let num1 = route.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789").inverted)
+        var parser = route.split(usingRegex: num1)
+        parser.insert(num1, at: 1)
+        return parser
+    }
+    
     func appendStopList(_ stop: RouteStop){
         stopList.append(stop)
     }

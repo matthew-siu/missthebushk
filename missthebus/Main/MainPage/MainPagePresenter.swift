@@ -73,7 +73,11 @@ extension MainPagePresenter {
         for eta in data{
             if (eta.co == BusCompany.KMB.rawValue){
                 if (eta.route == query.route && eta.dir == bound && String(eta.service_type ?? -1) == query.serviceType){
-                    etas.append(KmbManager.getETA(raw: eta.eta))
+                    
+                    if let display = KmbManager.getETA(raw: eta.eta){
+                        
+                        etas.append(display)
+                    }
                 }
             }
         }

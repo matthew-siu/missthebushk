@@ -70,4 +70,8 @@ extension Configs {
         
         static let version = (Configs.App.releaseVersionNumber ?? "") + "." + (Configs.App.buildVersionNumber ?? "")
     }
+    
+    enum Regex{
+        static let RouteNum = "([0-9]+|[A-Z]*)" //"[A-Z]*[0-9]+[A-Z]*"
+    }
 }

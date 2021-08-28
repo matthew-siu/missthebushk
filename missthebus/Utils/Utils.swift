@@ -166,11 +166,11 @@ class Utils{
         return formatter.string(from: date)
     }
     
-    static func convert2Date(time: String, pattern: String) -> Date {
+    static func convert2Date(time: String, pattern: String) -> Date? {
         let inFormatter = DateFormatter()
         inFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
         inFormatter.dateFormat = pattern
-        return inFormatter.date(from: time)!
+        return inFormatter.date(from: time)
     }
     
     static func compareTime(_ first: String, _ second: String) -> Bool{

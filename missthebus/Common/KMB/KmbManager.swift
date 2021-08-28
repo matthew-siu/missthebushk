@@ -114,8 +114,24 @@ class KmbManager{
     }
     
     // 4. Get Stop ETA
+    static func requestOneStopETA(query: APIQuery) -> Promise<APIResponse?>{
+        
+        if let query = query as? KmbETAQuery {
+            print("requestOneStopETA: KmbETAQuery")
+            return self.requestOneKmbStopETA(query: query)
+        }else if let query = query as? CtbNwfbETAQuery {
+            print("requestOneStopETA: CtbNwfbETAQuery")
+            return self.requestOneCtbNwfbStopETA(query: query)
+        }else if let query = query as? NlbETAQuery {
+            print("requestOneStopETA: NlbETAQuery")
+            return self.requestOneNlbStopETA(query: query)
+        }else{
+            print("requestOneStopETA: reject")
+            return Promise{promise in promise.fulfill(nil)}
+        }
+    }
     
-    static func requestOneStopETA(query: KmbETAQuery) -> Promise<KmbETAResponse?> {
+    static func requestOneKmbStopETA(query: KmbETAQuery) -> Promise<APIResponse?> {
         
         let repo = KmbETAAPIRepository(query: query)
         return Promise{ promise in
@@ -125,9 +141,9 @@ class KmbManager{
         }
     }
     
-    static func requestOneCtbStopETA(stopId: String, routeNum: String) -> Promise<CtbNwfbETAResponse?> {
+    static func requestOneCtbNwfbStopETA(query: CtbNwfbETAQuery) -> Promise<APIResponse?> {
         
-        let repo = CtbNwfbETAAPIRepository(company: .CTB, stopId: stopId, routeNum: routeNum)
+        let repo = CtbNwfbETAAPIRepository(query: query)
         return Promise{ promise in
             KMBAPI.send(repository: repo)
                 .done { (response) in promise.fulfill(response.body ?? nil) }
@@ -135,19 +151,9 @@ class KmbManager{
         }
     }
     
-    static func requestOneNwfbStopETA(stopId: String, routeNum: String) -> Promise<CtbNwfbETAResponse?> {
+    static func requestOneNlbStopETA(query: NlbETAQuery) -> Promise<APIResponse?> {
         
-        let repo = CtbNwfbETAAPIRepository(company: .NWFB, stopId: stopId, routeNum: routeNum)
-        return Promise{ promise in
-            KMBAPI.send(repository: repo)
-                .done { (response) in promise.fulfill(response.body ?? nil) }
-                .catch { (error) in promise.reject(error) }
-        }
-    }
-    
-    static func requestOneNlbStopETA(routeId: String, stopId: String) -> Promise<NlbETAResponse?> {
-        
-        let repo = NlbETAAPIRepository(routeId: routeId, stopId: stopId)
+        let repo = NlbETAAPIRepository(query: query)
         return Promise{ promise in
             KMBAPI.send(repository: repo)
                 .done { (response) in promise.fulfill(response.body ?? nil) }
@@ -265,16 +271,20 @@ extension KmbManager{
 // algorithms
 
 extension KmbManager{
-    static func getETA(raw: String?) -> String{
-        var display = ""
-        if let etaTime = raw{
-            let etaDate = Utils.convert2Date(time: etaTime, pattern: "yyyy-MM-dd'T'HH:mm:ssZ")
-            let nowDate = Date()
-            let diff = Calendar.current.dateComponents([.minute, .second], from: nowDate, to: etaDate)
-            if let diffMin = diff.minute{
-                display = (diffMin > 0) ? String(diffMin) : "0"
+    static func getETA(raw: String?, format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> String?{
+        var display: String? = nil
+        if let etaTime = raw, etaTime != ""{
+            if let etaDate = Utils.convert2Date(time: etaTime, pattern: format){
+                let nowDate = Date()
+                let diff = Calendar.current.dateComponents([.minute, .second], from: nowDate, to: etaDate)
+                if let diffMin = diff.minute, let diffSec = diff.second{
+                    print("\(nowDate) | \(etaDate) | diff: \(diffMin)mins \(diffSec)sec")
+                    display = (diffMin > 0) ? String(diffMin) : "0"
+                }
             }
+            return display
+        }else{
+            return nil
         }
-        return display
     }
 }

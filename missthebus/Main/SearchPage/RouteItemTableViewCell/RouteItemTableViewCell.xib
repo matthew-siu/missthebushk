@@ -52,7 +52,7 @@
                                                     <constraint firstAttribute="height" constant="10" id="GiC-od-mNP"/>
                                                     <constraint firstItem="scC-Wh-KVo" firstAttribute="top" secondItem="Kcf-Pk-rlp" secondAttribute="top" id="Rgx-iL-Wsg"/>
                                                     <constraint firstAttribute="trailing" secondItem="scC-Wh-KVo" secondAttribute="trailing" id="brA-AZ-rfB"/>
-                                                    <constraint firstAttribute="width" priority="250" constant="100" id="rB5-g7-KSb"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="200" id="rB5-g7-KSb"/>
                                                 </constraints>
                                             </view>
                                             <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZN-U5-dfI">

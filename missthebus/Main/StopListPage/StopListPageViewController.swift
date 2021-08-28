@@ -178,7 +178,12 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
             }
             // request stop ETA API
             let stop = self.stopList[indexPath.row]
-            self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+            if (self.route?.company == .NLB){
+                
+                self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.routeId, serviceType: self.route!.serviceType)
+            }else{
+                self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+            }
             
             self.zoomToLocation(stop)
         }

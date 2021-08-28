@@ -25,7 +25,7 @@ class RouteStop: Codable{
     
     init(data: CtbNwfbRouteStopResponse.CtbNwfbRouteStopData) {
         self.route = data.route ?? ""
-        self.stopId = data.route ?? ""
+        self.stopId = data.stop ?? ""
         self.bound = data.dir ?? ""
         self.seq = String(data.seq ?? -1)
         self.serviceType = ""

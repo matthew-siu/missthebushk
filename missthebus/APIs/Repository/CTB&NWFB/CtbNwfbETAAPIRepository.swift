@@ -41,10 +41,10 @@ class CtbNwfbETAAPIRepository: APIRepository<CtbNwfbETAResponse> {
         return headers
     }
     
-    init(company: Company, stopId: String, routeNum: String) {
-        self.company = company.rawValue
-        self.stopId = stopId
-        self.routeNum = routeNum
+    init(query: CtbNwfbETAQuery) {
+        self.company = (query.company == .CTB) ? Company.CTB.rawValue : Company.NWFB.rawValue
+        self.stopId = query.stopId
+        self.routeNum = query.routeNum
         let request = CtbNwfbETARequest()
         super.init(request: request)
     }
@@ -54,6 +54,12 @@ struct CtbNwfbETARequest: APIRequest {
     
 }
 
+
+struct CtbNwfbETAQuery: APIQuery{
+    let company: BusCompany
+    let stopId: String
+    let routeNum: String
+}
 
 struct CtbNwfbETAResponse: APIResponse {
     let type: String?
@@ -76,5 +82,14 @@ struct CtbNwfbETAResponse: APIResponse {
         let rmk_en: String?
         let rmk_sc: String?
         let data_timestamp: String?
+        
+        var rmk: String? {
+            switch currentLanguage{
+                case .english: return self.rmk_en
+                case .traditionalChinese: return self.rmk_tc
+                case .simplifiedChinese: return self.rmk_sc
+            }
+        }
     }
+    
 }
