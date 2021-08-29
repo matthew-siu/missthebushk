@@ -180,9 +180,9 @@ extension StopListPageViewController: UITableViewDelegate, UITableViewDataSource
             let stop = self.stopList[indexPath.row]
             if (self.route?.company == .NLB){
                 
-                self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.routeId, serviceType: self.route!.serviceType)
+                self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.routeId, serviceType: self.route!.serviceType, routeId: self.route!.routeId)
             }else{
-                self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType)
+                self.interactor?.startETATimer(stopId: stop.stopId, route: self.route!.route, serviceType: self.route!.serviceType, routeId: "")
             }
             
             self.zoomToLocation(stop)

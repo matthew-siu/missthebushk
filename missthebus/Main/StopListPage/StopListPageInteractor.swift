@@ -13,7 +13,7 @@ import PromiseKit
 protocol StopListPageBusinessLogic
 {
     func loadAllStopsFromRoute()
-    func startETATimer(stopId: String, route: String, serviceType: String)
+    func startETATimer(stopId: String, route: String, serviceType: String, routeId: String)
     func dismissETATimer()
     func bookmark(stop: Stop, isMarked: Bool)
     func getRouteStopResponse() -> StopListPage.Service.Response.GetRouteStops?
@@ -90,7 +90,7 @@ extension StopListPageInteractor {
                 }else if (self.normalResp?.route.company == .NWFB){
                     query = CtbNwfbETAQuery(company: .NWFB, stopId: selectedStopId, routeNum: self.route.route)
                 }else if (self.normalResp?.route.company == .NLB){
-                    query = NlbETAQuery(routeId: self.route.routeId, stopId: selectedStopId)
+                    query = NlbETAQuery(routeId: self.route.routeId, routeNum: self.route.route, stopId: selectedStopId)
                 }
                 if let query = query {
                     self.startETATimer(query: query)
@@ -102,7 +102,7 @@ extension StopListPageInteractor {
         }
     }
     
-    func startETATimer(stopId: String, route: String, serviceType: String){
+    func startETATimer(stopId: String, route: String, serviceType: String, routeId: String = ""){
         var query: APIQuery?
         if (self.normalResp?.route.company == .KMB){
             query = KmbETAQuery(stopId: stopId, route: route, serviceType: self.route.serviceType)
@@ -111,7 +111,7 @@ extension StopListPageInteractor {
         }else if (self.normalResp?.route.company == .NWFB){
             query = CtbNwfbETAQuery(company: .NWFB, stopId: stopId, routeNum: route)
         }else if (self.normalResp?.route.company == .NLB){
-            query = NlbETAQuery(routeId: route, stopId: stopId)
+            query = NlbETAQuery(routeId: routeId, routeNum: route, stopId: stopId)
         }
         if let query = query {
             self.startETATimer(query: query)
@@ -132,7 +132,7 @@ extension StopListPageInteractor {
     
     func bookmark(stop: Stop, isMarked: Bool){
         if (isMarked){
-            let bookmark = StopBookmark(routeNum: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: stop.stopId)
+            let bookmark = StopBookmark(routeNum: self.route.route, routeId: self.route.routeId, bound: self.route.bound, serviceType: self.route.serviceType, company: self.route.company, stopId: stop.stopId)
             StopBookmarkManager.addStopBookmark(bookmark)
         }else{
             if let bookmark = StopBookmarkManager.getOneBookmarkFromRoute(stopId: stop.stopId, route: self.route.route, bound: self.route.bound, serviceType: self.route.serviceType){

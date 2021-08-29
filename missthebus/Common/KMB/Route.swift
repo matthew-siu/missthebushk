@@ -46,13 +46,22 @@ class Route: Codable {
             default: self.company = .none
         }
         self.route = data.route ?? ""
-        self.origEn = data.orig_en ?? ""
-        self.origTc = data.orig_tc ?? ""
-        self.origSc = data.orig_sc ?? ""
-        self.destEn = data.dest_en ?? ""
-        self.destTc = data.dest_tc ?? ""
-        self.destSc = data.dest_sc ?? ""
         self.bound = bound
+        if (self.bound == "I"){
+            self.destEn = data.orig_en ?? ""
+            self.destTc = data.orig_tc ?? ""
+            self.destSc = data.orig_sc ?? ""
+            self.origEn = data.dest_en ?? ""
+            self.origTc = data.dest_tc ?? ""
+            self.origSc = data.dest_sc ?? ""
+        }else{
+            self.origEn = data.orig_en ?? ""
+            self.origTc = data.orig_tc ?? ""
+            self.origSc = data.orig_sc ?? ""
+            self.destEn = data.dest_en ?? ""
+            self.destTc = data.dest_tc ?? ""
+            self.destSc = data.dest_sc ?? ""
+        }
         // KMB data
         self.serviceType = ""
         // NLB
@@ -137,10 +146,12 @@ enum BusCompany: String, Codable{
 
 class RouteMetadata: Codable, Equatable{
     
+    let routeId: String
     let routeNum: String
     let bound: String
     let serviceType: String
-    init(_ routeNum: String, _ bound: String, _ serviceType: String){
+    init(_ routeNum: String, _ bound: String, _ serviceType: String, routeId: String = ""){
+        self.routeId = routeId
         self.routeNum = routeNum
         self.bound = bound
         self.serviceType = serviceType

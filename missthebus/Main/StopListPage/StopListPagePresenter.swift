@@ -71,7 +71,7 @@ extension StopListPagePresenter {
         if let data = data, let route = self.route {
             var etaList: [StopListPage.ETA] = []
             print("ETA count: \(data.count)")
-            for (index, eta) in data.enumerated(){
+            for (_, eta) in data.enumerated(){
                 if (eta.co == BusCompany.CTB.rawValue){
                     if (eta.route == route.route && eta.dir == route.bound){
                         if let display = KmbManager.getETA(raw: eta.eta){

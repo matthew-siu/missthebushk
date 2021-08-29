@@ -13,13 +13,15 @@ class StopBookmark: Codable{
     
     var company: BusCompany
     var stopId: String
+    var routeId: String
     var routeNum: String
     var bound: String
     var serviceType: String
     
-    init(routeNum: String, bound: String, serviceType: String, company: BusCompany, stopId: String){
+    init(routeNum: String, routeId: String, bound: String, serviceType: String, company: BusCompany, stopId: String){
         self.id = UUID().uuidString
         self.routeNum = routeNum
+        self.routeId = routeId
         self.bound = bound
         self.serviceType = serviceType
         self.company = company

@@ -70,6 +70,7 @@ struct NlbETARequest: APIRequest {
 
 struct NlbETAQuery: APIQuery{
     let routeId: String
+    let routeNum: String
     let stopId: String
 }
 

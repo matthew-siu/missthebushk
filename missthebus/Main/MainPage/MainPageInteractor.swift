@@ -166,19 +166,34 @@ extension MainPageInteractor {
     @objc
     private func requestETA(_ timer: Timer?)
     {
-        for bookmark in bookmarks{
-            let query = KmbETAQuery(stopId: bookmark.stopId, route: bookmark.routeNum, serviceType: bookmark.serviceType)
-            self.requestOneStopETA(query: query, bound: bookmark.bound)
+        for bookmark in self.bookmarks{
+            var query: APIQuery?
+            if (bookmark.company == .KMB){
+                query = KmbETAQuery(stopId: bookmark.stopId, route: bookmark.routeNum, serviceType: bookmark.serviceType)
+            }else if (bookmark.company == .CTB){
+                query = CtbNwfbETAQuery(company: .CTB, stopId: bookmark.stopId, routeNum: bookmark.routeNum)
+            }else if (bookmark.company == .NWFB){
+                query = CtbNwfbETAQuery(company: .NWFB, stopId: bookmark.stopId, routeNum: bookmark.routeNum)
+            }else if (bookmark.company == .NLB){
+                query = NlbETAQuery(routeId: bookmark.routeId, routeNum: bookmark.routeNum, stopId: bookmark.stopId)
+            }
+            if let query = query{
+                self.requestOneStopETA(query: query, bound: bookmark.bound)
+            }
         }
     }
     
-    private func requestOneStopETA(query: KmbETAQuery, bound: String){
+    private func requestOneStopETA(query: APIQuery, bound: String){
         DispatchQueue.main.async {
             
-            KmbManager.requestOneKmbStopETA(query: query)
+            KmbManager.requestOneStopETA(query: query)
                 .done{response in
                     if let response = response as? KmbETAResponse, let resp = response.data{
-                        self.presenter?.updateETAs(query: query, bound: bound, data: resp)
+                        self.presenter?.updateETAs(query: query as? KmbETAQuery, bound: bound, data: resp)
+                    }else if let response = response as? CtbNwfbETAResponse, let resp = response.data{
+                        self.presenter?.updateETAs(query: query as? CtbNwfbETAQuery, bound: bound, data: resp)
+                    }else if let response = response as? NlbETAResponse, let resp = response.estimatedArrivals{
+                        self.presenter?.updateETAs(query: query as? NlbETAQuery, bound: bound, data: resp)
                     }
                 }
                 .catch{err in

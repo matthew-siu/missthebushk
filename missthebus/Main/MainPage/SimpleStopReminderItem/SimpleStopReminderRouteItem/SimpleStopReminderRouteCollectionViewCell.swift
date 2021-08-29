@@ -33,7 +33,7 @@ class SimpleStopReminderRouteCollectionViewCell: UICollectionViewCell {
     }
     
     func setInfo(viewModel: MainPage.ReminderItem.ReminderRouteItem){
-        if (viewModel.company == .KMB){
+        if (viewModel.company == .KMB){	
             self.routeImg.image = UIImage(named: "kmbBus")
         }else if (viewModel.company == .CTB){
             self.routeImg.image = UIImage(named: "ctbBus")
