@@ -202,7 +202,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
             if (self.bookmarkItems.count > 0){
                 let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.bookMarkItemCell.reuseId, for: indexPath) as! StopBookmarkTableViewCell
                 let bookmarkItem = self.bookmarkItems[indexPath.row]
-                let etaItem = self.bookmarkETAViewModel.etaList.first(where: {$0.stopId == bookmarkItem.stopId && $0.route == bookmarkItem.routeMetadata})
+                let etaItem = self.bookmarkETAViewModel.etaList.first(where: {$0.company == bookmarkItem.company && $0.stopId == bookmarkItem.stopId && $0.route == bookmarkItem.routeMetadata})
                 cell.setInfo(index: indexPath.row, stop: bookmarkItem, etaItem: etaItem)
                 cell.delegate = self
                 cell.backgroundColor = .none

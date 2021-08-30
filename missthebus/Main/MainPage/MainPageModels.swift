@@ -66,6 +66,7 @@ enum MainPage
         
         let route: RouteMetadata
         let stopId: String
+        let company: BusCompany
         let eta1: String?
         let eta2: String?
         let eta3: String?

@@ -84,12 +84,10 @@ extension MainPagePresenter {
         let eta2: String? = (etas.count >= 2) ? etas[1] : nil
         let eta3: String? = (etas.count >= 3) ? etas[2] : nil
         let route = RouteMetadata(query.route, bound, query.serviceType)
-        let etaItem = MainPage.ETAItem(route: route, stopId: query.stopId, eta1: eta1, eta2: eta2, eta3: eta3)
-        if let index = self.etaViewModel.etaList.firstIndex(where: {$0.stopId == query.stopId && $0.route == route}){
+        let etaItem = MainPage.ETAItem(route: route, stopId: query.stopId, company: .KMB, eta1: eta1, eta2: eta2, eta3: eta3)
+        if let index = self.etaViewModel.etaList.firstIndex(where: {$0.stopId == query.stopId && $0.route == route  && $0.company == .KMB}){
             self.etaViewModel.etaList[index] = etaItem
-//            print("ETA \(query.route) [o] \(query.stopId) \(eta1) \(eta2) \(eta3)")
         }else{
-//            print("ETA \(query.route) [+] \(query.stopId) \(eta1) \(eta2) \(eta3)")
             self.etaViewModel.etaList.append(etaItem)
         }
         self.viewController?.updateETAs(etaList: self.etaViewModel)
@@ -97,15 +95,18 @@ extension MainPagePresenter {
     
     func updateETAs(query: CtbNwfbETAQuery?, bound: String, data: [CtbNwfbETAResponse.CtbNwfbETAData]){
         var etas = [String]()
+        var company: BusCompany = .none
         guard let query = query else {return}
         for eta in data{
             if (eta.co == BusCompany.CTB.rawValue){
+                company = .CTB
                 if (eta.route == query.routeNum && eta.dir == bound){
                     if let display = KmbManager.getETA(raw: eta.eta){
                         etas.append(display)
                     }
                 }
             }else if (eta.co == BusCompany.NWFB.rawValue){
+                company = .NWFB
                 if (eta.route == query.routeNum && eta.dir == bound){
                     if let display = KmbManager.getETA(raw: eta.eta){
                         etas.append(display)
@@ -117,12 +118,10 @@ extension MainPagePresenter {
         let eta2: String? = (etas.count >= 2) ? etas[1] : nil
         let eta3: String? = (etas.count >= 3) ? etas[2] : nil
         let route = RouteMetadata(query.routeNum, bound, "")
-        let etaItem = MainPage.ETAItem(route: route, stopId: query.stopId, eta1: eta1, eta2: eta2, eta3: eta3)
-        if let index = self.etaViewModel.etaList.firstIndex(where: {$0.stopId == query.stopId && $0.route == route}){
+        let etaItem = MainPage.ETAItem(route: route, stopId: query.stopId, company: company, eta1: eta1, eta2: eta2, eta3: eta3)
+        if let index = self.etaViewModel.etaList.firstIndex(where: {$0.stopId == query.stopId && $0.route == route && $0.company == company}){
             self.etaViewModel.etaList[index] = etaItem
-//            print("ETA \(query.route) [o] \(query.stopId) \(eta1) \(eta2) \(eta3)")
         }else{
-//            print("ETA \(query.route) [+] \(query.stopId) \(eta1) \(eta2) \(eta3)")
             self.etaViewModel.etaList.append(etaItem)
         }
         self.viewController?.updateETAs(etaList: self.etaViewModel)
@@ -140,12 +139,10 @@ extension MainPagePresenter {
         let eta2: String? = (etas.count >= 2) ? etas[1] : nil
         let eta3: String? = (etas.count >= 3) ? etas[2] : nil
         let route = RouteMetadata(query.routeNum, bound, "", routeId: query.routeId)
-        let etaItem = MainPage.ETAItem(route: route, stopId: query.stopId, eta1: eta1, eta2: eta2, eta3: eta3)
-        if let index = self.etaViewModel.etaList.firstIndex(where: {$0.stopId == query.stopId && $0.route == route}){
+        let etaItem = MainPage.ETAItem(route: route, stopId: query.stopId, company: .NLB, eta1: eta1, eta2: eta2, eta3: eta3)
+        if let index = self.etaViewModel.etaList.firstIndex(where: {$0.stopId == query.stopId && $0.route == route && $0.company == .NLB}){
             self.etaViewModel.etaList[index] = etaItem
-//            print("ETA \(query.route) [o] \(query.stopId) \(eta1) \(eta2) \(eta3)")
         }else{
-//            print("ETA \(query.route) [+] \(query.stopId) \(eta1) \(eta2) \(eta3)")
             self.etaViewModel.etaList.append(etaItem)
         }
         self.viewController?.updateETAs(etaList: self.etaViewModel)
