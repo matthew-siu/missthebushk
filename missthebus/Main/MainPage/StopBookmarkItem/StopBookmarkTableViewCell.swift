@@ -106,8 +106,14 @@ class StopBookmarkTableViewCell: UITableViewCell {
                 if let eta = eta{
                     self.etaViewList[index].view.isHidden = false
                     self.etaViewList[index].label.text = eta
+                }else{
+                    self.etaViewList[index].view.isHidden = true
                 }
             }
+        }else{
+            self.eta1view.isHidden = true
+            self.eta2view.isHidden = true
+            self.eta3view.isHidden = true
         }
     }
     

@@ -80,6 +80,7 @@ extension MainPagePresenter {
                 }
             }
         }
+        if (etas.count == 0){return}
         let eta1: String? = (etas.count >= 1) ? etas[0] : nil
         let eta2: String? = (etas.count >= 2) ? etas[1] : nil
         let eta3: String? = (etas.count >= 3) ? etas[2] : nil
@@ -114,6 +115,7 @@ extension MainPagePresenter {
                 }
             }
         }
+        if (etas.count == 0){return}
         let eta1: String? = (etas.count >= 1) ? etas[0] : nil
         let eta2: String? = (etas.count >= 2) ? etas[1] : nil
         let eta3: String? = (etas.count >= 3) ? etas[2] : nil
@@ -135,6 +137,7 @@ extension MainPagePresenter {
                 etas.append(display)
             }
         }
+        if (etas.count == 0){return}
         let eta1: String? = (etas.count >= 1) ? etas[0] : nil
         let eta2: String? = (etas.count >= 2) ? etas[1] : nil
         let eta3: String? = (etas.count >= 3) ? etas[2] : nil
