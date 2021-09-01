@@ -71,7 +71,7 @@ extension SplashScreenViewController {
     }
     
     func requestAllKmbStaticInfo(){
-        self.interactor?.requestAllKmbStaticInfo()
+        self.interactor?.requestAllBusStaticInfo()
             .done{ instant in
                 self.gotoMainPage(!instant)
             }

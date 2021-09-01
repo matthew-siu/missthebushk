@@ -12,7 +12,7 @@ import PromiseKit
 // MARK: - Requests from view
 protocol SplashScreenBusinessLogic
 {
-    func requestAllKmbStaticInfo() -> Promise<Bool>
+    func requestAllBusStaticInfo() -> Promise<Bool>
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -65,29 +65,57 @@ class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
 // MARK: - Business
 extension SplashScreenInteractor {
     
-    func requestAllKmbStaticInfo() -> Promise<Bool>{
+    func requestAllBusStaticInfo() -> Promise<Bool>{
+        
         return Promise { promise in
             if (!self.needUpdate()) {
                 self.updateProgress("loading_check_update".localized(), to: 1)
                 promise.fulfill(false)
                 return
             }
-            DispatchQueue.main.async {
-                NSLog("[API] Get all routes")
-                self.initKmb()
-                    .then{_ in self.initCtbNwfb()}
-                    .then{_ in self.initNlb()}
-                    .then{_ in self.saveRoutes()}
-                    .done{_ in
-                        self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
-                        self.saveStops()
-                        self.saveLastUpdate()
+            if (KmbManager.getAllRoutes()?.count ?? 0 > 0){
+                
+                DispatchQueue.global(qos: .userInitiated).async {
+                    print("Update all info at background")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        
                         promise.fulfill(true)
-                    }
-                    .catch{err in
-                        print("error: \(err.localizedDescription)")
-                        promise.reject(err)
-                    }
+                        NSLog("[API] Get all routes")
+                        self.initKmb()
+                            .then{_ in self.initCtbNwfb()}
+                            .then{_ in self.initNlb()}
+                            .then{_ in self.saveRoutes()}
+                            .done{_ in
+                                self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
+                                self.saveStops()
+                                self.saveLastUpdate()
+                                promise.fulfill(true)
+                            }
+                            .catch{err in
+                                print("error: \(err.localizedDescription)")
+                                promise.reject(err)
+                            }
+                    })
+                }
+            }else{
+                DispatchQueue.main.async {
+                    NSLog("[API] Get all routes")
+                    self.initKmb()
+                        .then{_ in self.initCtbNwfb()}
+                        .then{_ in self.initNlb()}
+                        .then{_ in self.saveRoutes()}
+                        .done{_ in
+                            self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
+                            self.saveStops()
+                            self.saveLastUpdate()
+                            promise.fulfill(true)
+                        }
+                        .catch{err in
+                            print("error: \(err.localizedDescription)")
+                            promise.reject(err)
+                        }
+                }
             }
         }
     }

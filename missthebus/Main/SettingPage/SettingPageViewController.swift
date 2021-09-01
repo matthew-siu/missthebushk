@@ -100,6 +100,8 @@ extension SettingPageViewController {
         self.aboutUsTitle.text = "setting_about_us".localized()
         self.languageLabel.text = ""
         
+        
+        
     }
     
     private func loadSetting(){
