@@ -58,7 +58,7 @@ extension MainPageInteractor {
             1. If have upcoming reminder, -> upcoming
             2. Else, -> bookmarks
          */
-        return .Bookmarks
+        return .Upcoming
     }
     
     func loadAllBookmarksOfRoute(){
@@ -83,7 +83,14 @@ extension MainPageInteractor {
     }
     
     func loadOneUpcomingReminder(){
-        self.presenter?.displayUpcoming(reminder: nil)
+        if let reminders = StopReminderManager.getStopReminders(){
+            self.reminders = reminders
+            var upcoming: StopReminder? = nil
+            if (self.reminders.count > 0){
+                upcoming = self.reminders[0]
+            }
+            self.presenter?.displayUpcoming(reminder: upcoming)
+        }
     }
     
     func dismissETATimer(){

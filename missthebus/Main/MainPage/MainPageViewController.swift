@@ -55,6 +55,7 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
         case reminderItemCell = "SimpleStopReminderTableViewCell"
         case upcomingItemCell = "UpcomingStopReminderTableViewCell"
         case noItemCell = "NoItemTableViewCell"
+        case upcomingHeader = "UpcomingStopReminderHeaderView"
     }
 }
 
@@ -74,6 +75,7 @@ extension MainPageViewController {
         self.tableView.register(TableViewCell.reminderItemCell.nib, forCellReuseIdentifier: TableViewCell.reminderItemCell.reuseId)
         self.tableView.register(TableViewCell.upcomingItemCell.nib, forCellReuseIdentifier: TableViewCell.upcomingItemCell.reuseId)
         self.tableView.register(TableViewCell.noItemCell.nib, forCellReuseIdentifier: TableViewCell.noItemCell.reuseId)
+        self.tableView.register(TableViewCell.upcomingHeader.nib, forHeaderFooterViewReuseIdentifier: TableViewCell.upcomingHeader.reuseId)
         
         self.tabBar.delegate = self
         
@@ -171,15 +173,20 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     // header view
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = MainPageHeaderView(frame: .init(x: 0, y: 0, width: self.width, height: 40))
-        headerView.setContent(imgName: self.basicViewModel.headerImgName, title: self.basicViewModel.headerLabel)
-        
-        return headerView
+        if (self.currentTab == .Upcoming){
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewCell.upcomingHeader.reuseId) as! UpcomingStopReminderHeaderView
+            headerView.setContent(reminder: self.upcomingReminderItem?.header)
+            return headerView
+        }else{
+            let headerView = MainPageHeaderView(frame: .init(x: 0, y: 0, width: self.width, height: 40))
+            headerView.setContent(imgName: self.basicViewModel.headerImgName, title: self.basicViewModel.headerLabel)
+            return headerView
+        }
     }
     
     // header height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return (self.currentTab == .Upcoming) ? 150: 40
     }
     
     // number of row
@@ -203,7 +210,6 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
                 let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.bookMarkItemCell.reuseId, for: indexPath) as! StopBookmarkTableViewCell
                 let bookmarkItem = self.bookmarkItems[indexPath.row]
                 let etaItem = self.bookmarkETAViewModel.etaList.first(where: {$0.company == bookmarkItem.company && $0.stopId == bookmarkItem.stopId && $0.route == bookmarkItem.routeMetadata})
-                print("\(indexPath.row). \(bookmarkItem.routeNum)(\(bookmarkItem.company)) \((etaItem != nil) ? "has" : "has no") ETA")
                 cell.setInfo(index: indexPath.row, stop: bookmarkItem, etaItem: etaItem)
                 cell.delegate = self
                 cell.backgroundColor = .none
@@ -222,7 +228,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
             }
         }else if (self.currentTab == .Upcoming){
             if let _ = self.upcomingReminderItem{
-                let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.upcomingItemCell.reuseId, for: indexPath) as! SimpleStopReminderTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.upcomingItemCell.reuseId, for: indexPath) as! UpcomingStopReminderTableViewCell
                 cell.backgroundColor = .none
                 cell.selectionStyle = .none
                 return cell

@@ -49,16 +49,29 @@ enum MainPage
     }
     
     struct UpcomingReminderItem{
-        let id: String
-        let name: String
-        let period: String
-        let startTime: Date
-        let type: StopReminder.ReminderType
+        let header: UpcomingHeader
         let routes: [ReminderRouteItem]
+        
+        struct UpcomingHeader{
+            let id: String
+            let name: String
+            let period: String
+            let startTime: Date
+            let type: StopReminder.ReminderType
+        }
         
         struct ReminderRouteItem{
             let company: BusCompany
             let routeNum: String
+            let stops: [ReminderRouteStopItem]
+            
+        }
+        
+        struct ReminderRouteStopItem{
+            let stop: String = "Stop"
+            var eta1: String = "2"
+            var eta2: String = "5"
+            var eta3: String = "9"
         }
     }
     

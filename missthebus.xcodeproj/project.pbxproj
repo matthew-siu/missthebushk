@@ -137,6 +137,8 @@
 		8FC67B4926BB989600BEE56D /* NoItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC67B4726BB989500BEE56D /* NoItemTableViewCell.xib */; };
 		8FC67B5926BBD07800BEE56D /* StopBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67B5826BBD07800BEE56D /* StopBookmark.swift */; };
 		8FC67B5E26BBD23200BEE56D /* StopBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67B5D26BBD23200BEE56D /* StopBookmarkManager.swift */; };
+		8FD1B84426E0C1E10050D53D /* UpcomingStopReminderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD1B84326E0C1E00050D53D /* UpcomingStopReminderHeaderView.xib */; };
+		8FD1B84926E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD1B84826E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift */; };
 		8FFF6C722697F0720033D2CE /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6A2697F0720033D2CE /* APIManager.swift */; };
 		8FFF6C732697F0720033D2CE /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6C2697F0720033D2CE /* NetworkOperation.swift */; };
 		8FFF6C742697F0720033D2CE /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6D2697F0720033D2CE /* APIRepository.swift */; };
@@ -320,6 +322,8 @@
 		8FC67B4726BB989500BEE56D /* NoItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoItemTableViewCell.xib; sourceTree = "<group>"; };
 		8FC67B5826BBD07800BEE56D /* StopBookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopBookmark.swift; sourceTree = "<group>"; };
 		8FC67B5D26BBD23200BEE56D /* StopBookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopBookmarkManager.swift; sourceTree = "<group>"; };
+		8FD1B84326E0C1E00050D53D /* UpcomingStopReminderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingStopReminderHeaderView.xib; sourceTree = "<group>"; };
+		8FD1B84826E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingStopReminderHeaderView.swift; sourceTree = "<group>"; };
 		8FFF6C6A2697F0720033D2CE /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		8FFF6C6C2697F0720033D2CE /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		8FFF6C6D2697F0720033D2CE /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
@@ -431,13 +435,6 @@
 				4392F3CE26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift */,
 			);
 			path = "CTB&NWFB";
-			sourceTree = "<group>";
-		};
-		4392F42426DA9E9500A0E6D7 /* BackgroundService */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BackgroundService;
 			sourceTree = "<group>";
 		};
 		8F09F2AC2696935D0083B2CD /* SoftUI */ = {
@@ -616,7 +613,6 @@
 		8F89B5E0269432E9006312EA /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				4392F42426DA9E9500A0E6D7 /* BackgroundService */,
 				8F56614126B3A8CD005AB134 /* SplashScreen */,
 				8F89B5E12694333D006312EA /* MainPage */,
 				8F803F7926CF540200E03EF1 /* SettingPage */,
@@ -761,6 +757,7 @@
 		8F93D10B26CBB7940007601C /* TableViewHeaderView */ = {
 			isa = PBXGroup;
 			children = (
+				8FD1B84226E0C13F0050D53D /* UpcomingStopReminderHeaderView */,
 				8F93D10C26CBB7C40007601C /* MainPageHeaderView.swift */,
 			);
 			path = TableViewHeaderView;
@@ -869,6 +866,15 @@
 				8FC67B5D26BBD23200BEE56D /* StopBookmarkManager.swift */,
 			);
 			path = StopBookmark;
+			sourceTree = "<group>";
+		};
+		8FD1B84226E0C13F0050D53D /* UpcomingStopReminderHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				8FD1B84826E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift */,
+				8FD1B84326E0C1E00050D53D /* UpcomingStopReminderHeaderView.xib */,
+			);
+			path = UpcomingStopReminderHeaderView;
 			sourceTree = "<group>";
 		};
 		8FFF6C6B2697F0720033D2CE /* Base */ = {
@@ -1058,6 +1064,7 @@
 				8F89B5AD26941201006312EA /* LaunchScreen.storyboard in Resources */,
 				8F93D13F26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib in Resources */,
 				8F3ABCDA26C271520067EF9D /* ReminderRouteTableViewCell.xib in Resources */,
+				8FD1B84426E0C1E10050D53D /* UpcomingStopReminderHeaderView.xib in Resources */,
 				8F5660F026B13672005AB134 /* ReminderNameCollectionViewCell.xib in Resources */,
 				8F9905D226CFB46900D6541C /* UpcomingStopReminderTableViewCell.xib in Resources */,
 				8F89B5AA26941201006312EA /* Assets.xcassets in Resources */,
@@ -1295,6 +1302,7 @@
 				8FFF6C762697F0720033D2CE /* NetworkAsyncQueue.swift in Sources */,
 				8F3ABCD926C271520067EF9D /* ReminderRouteTableViewCell.swift in Sources */,
 				8F9905C326CFA69900D6541C /* LanguagePageBuilder.swift in Sources */,
+				8FD1B84926E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift in Sources */,
 				4392F3DE26D243CD00A0E6D7 /* NlbETAAPIRepository.swift in Sources */,
 				4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */,
 				8FB5A07526A8027C0013540D /* RouteStop.swift in Sources */,

@@ -28,6 +28,7 @@ class SplashScreenInteractor: SplashScreenBusinessLogic, SplashScreenDataStore
     var presenter: SplashScreenPresentationLogic?
     var worker: SplashScreenWorker?
     
+    var isUpdateAtBackground = false
     // State
     var allBusInfo = BusInfo()
     
@@ -73,50 +74,44 @@ extension SplashScreenInteractor {
                 promise.fulfill(false)
                 return
             }
-            if (KmbManager.getAllRoutes()?.count ?? 0 > 0){
-                
+            self.isUpdateAtBackground = (KmbManager.getAllRoutes()?.count ?? 0 > 0) // if has loaded route data already, can update at background.
+            if (self.isUpdateAtBackground){
+                self.isUpdateAtBackground = true
                 DispatchQueue.global(qos: .userInitiated).async {
                     print("Update all info at background")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        
-                        promise.fulfill(true)
-                        NSLog("[API] Get all routes")
-                        self.initKmb()
-                            .then{_ in self.initCtbNwfb()}
-                            .then{_ in self.initNlb()}
-                            .then{_ in self.saveRoutes()}
-                            .done{_ in
-                                self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
-                                self.saveStops()
-                                self.saveLastUpdate()
-                                promise.fulfill(true)
-                            }
-                            .catch{err in
-                                print("error: \(err.localizedDescription)")
-                                promise.reject(err)
-                            }
+                    DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                        self.updateAllBusInfo()
+                            .done{_ in promise.fulfill(true)}
+                            .catch{err in promise.reject(err)}
                     })
                 }
             }else{
                 DispatchQueue.main.async {
-                    NSLog("[API] Get all routes")
-                    self.initKmb()
-                        .then{_ in self.initCtbNwfb()}
-                        .then{_ in self.initNlb()}
-                        .then{_ in self.saveRoutes()}
-                        .done{_ in
-                            self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
-                            self.saveStops()
-                            self.saveLastUpdate()
-                            promise.fulfill(true)
-                        }
-                        .catch{err in
-                            print("error: \(err.localizedDescription)")
-                            promise.reject(err)
-                        }
+                    self.updateAllBusInfo()
+                        .done{_ in promise.fulfill(true)}
+                        .catch{err in promise.reject(err)}
                 }
             }
+        }
+    }
+    
+    func updateAllBusInfo() -> Promise<Bool>{
+        return Promise{ promise in
+            NSLog("[API] Get all routes")
+            self.initKmb()
+                .then{_ in self.initCtbNwfb()}
+                .then{_ in self.initNlb()}
+                .then{_ in self.saveRoutes()}
+                .done{_ in
+                    self.updateProgress("loading_completed".localized(), to: Progress.Complete.rawValue)
+                    self.saveStops()
+                    self.saveLastUpdate()
+                    promise.fulfill(true)
+                }
+                .catch{err in
+                    print("error: \(err.localizedDescription)")
+                    promise.reject(err)
+                }
         }
     }
     
@@ -256,10 +251,12 @@ extension SplashScreenInteractor{
     }
     
     func updateProgress(_ msg: String? = nil, to percentage: Float){
-        if let msg = msg {
-            self.presenter?.displayLoadingMsg(msg: msg)
+        if (!self.isUpdateAtBackground){
+            if let msg = msg {
+                self.presenter?.displayLoadingMsg(msg: msg)
+            }
+            self.presenter?.updateProgressBar(to: percentage)
         }
-        self.presenter?.updateProgressBar(to: percentage)
     }
 }
 

@@ -59,9 +59,12 @@ extension MainPagePresenter {
         if let reminder = reminder{
             var routes = [MainPage.UpcomingReminderItem.ReminderRouteItem]()
             for route in reminder.routes{
-                routes.append(MainPage.UpcomingReminderItem.ReminderRouteItem(company: route.getRoute()?.company ?? .none, routeNum: route.routeNum))
+                for stop in route.stopIndex{
+                    
+                }
+                routes.append(MainPage.UpcomingReminderItem.ReminderRouteItem(company: route.getRoute()?.company ?? .none, routeNum: route.routeNum, stops:[]))
             }
-            let reminderItem = MainPage.UpcomingReminderItem(id: reminder.id, name: reminder.name ?? "", period: reminder.displayPeriod, startTime: reminder.startTime, type: reminder.type ?? .OTHER, routes: [])
+            let reminderItem = MainPage.UpcomingReminderItem(header: MainPage.UpcomingReminderItem.UpcomingHeader(id: reminder.id, name: reminder.name ?? "", period: reminder.displayPeriod, startTime: reminder.startTime, type: reminder.type ?? .OTHER), routes: [])
             let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: reminderItem)
             self.viewController?.displayUpcoming(viewModel: viewModel)
         }else{
