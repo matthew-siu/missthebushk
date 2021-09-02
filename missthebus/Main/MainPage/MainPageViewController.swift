@@ -197,7 +197,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
         }else if (self.currentTab == .Reminders){
             return (self.reminderItems.count == 0) ? 1 : self.reminderItems.count
         }else if (self.currentTab == .Upcoming){
-            return 1
+            return self.upcomingReminderItem?.routes.count ?? 0
         }
         return 0
     }
@@ -229,6 +229,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
         }else if (self.currentTab == .Upcoming){
             if let _ = self.upcomingReminderItem{
                 let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.upcomingItemCell.reuseId, for: indexPath) as! UpcomingStopReminderTableViewCell
+                cell.setInfo(viewModel: self.upcomingReminderItem?.routes[indexPath.row])
                 cell.backgroundColor = .none
                 cell.selectionStyle = .none
                 return cell

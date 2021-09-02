@@ -59,8 +59,8 @@ extension MainPagePresenter {
         if let reminder = reminder{
             var routes = [MainPage.UpcomingReminderItem.ReminderRouteItem]()
             for route in reminder.routes{
+                var stops = [MainPage.UpcomingReminderItem.ReminderRouteItem]()
                 for stop in route.stopIndex{
-                    
                 }
                 routes.append(MainPage.UpcomingReminderItem.ReminderRouteItem(company: route.getRoute()?.company ?? .none, routeNum: route.routeNum, stops:[]))
             }

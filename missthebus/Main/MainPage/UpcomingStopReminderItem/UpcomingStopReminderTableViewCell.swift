@@ -34,16 +34,24 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
         self.bgSoftUIView.type = .staticView
     }
     
-    func setInfo(routes: [MainPage.UpcomingReminderItem.ReminderRouteItem]){
-        
-        self.routeNum.text = route.routeNum
-        if (routes.count > 0){
-            
+    func setInfo(viewModel: MainPage.UpcomingReminderItem.ReminderRouteItem?){
+        if let viewModel = viewModel{
+            self.routeNum.text = viewModel.routeNum
+            if (viewModel.stops.count > 0){
+                let stop = viewModel.stops[0]
+                self.routeStop1Label.text = stop.stop
+                self.routeStop1Eta1Label.text = stop.eta1
+                self.routeStop1Eta2Label.text = stop.eta2
+                self.routeStop1Eta3Label.text = stop.eta3
+            }
+            if (viewModel.stops.count > 1){
+                let stop = viewModel.stops[1]
+                self.routeStop2Label.text = stop.stop
+                self.routeStop2Eta1Label.text = stop.eta1
+                self.routeStop2Eta2Label.text = stop.eta2
+                self.routeStop2Eta3Label.text = stop.eta3
+            }
         }
-        if (routes.count > 1){
-            
-        }
-        self.stop1
         
     }
 
