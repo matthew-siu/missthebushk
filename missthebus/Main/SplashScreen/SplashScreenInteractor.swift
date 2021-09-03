@@ -78,6 +78,7 @@ extension SplashScreenInteractor {
             if (self.isUpdateAtBackground){
                 self.isUpdateAtBackground = true
                 DispatchQueue.global(qos: .userInitiated).async {
+                    promise.fulfill(true)
                     print("Update all info at background")
                     DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                         self.updateAllBusInfo()

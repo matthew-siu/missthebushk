@@ -277,8 +277,8 @@ extension KmbManager{
             if let etaDate = Utils.convert2Date(time: etaTime, pattern: format){
                 let nowDate = Date()
                 let diff = Calendar.current.dateComponents([.minute, .second], from: nowDate, to: etaDate)
-                if let diffMin = diff.minute, let diffSec = diff.second{
-                    print("\(nowDate) | \(etaDate) | diff: \(diffMin)mins \(diffSec)sec")
+                if let diffMin = diff.minute, let _ = diff.second{
+//                    print("\(nowDate) | \(etaDate) | diff: \(diffMin)mins \(diffSec)sec")
                     display = (diffMin > 0) ? String(diffMin) : "0"
                 }
             }

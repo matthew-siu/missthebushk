@@ -108,13 +108,13 @@ extension MainPageViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
         self.interactor?.dismissETATimer()
     }
     
     private func initUI(){
         
         self.title = "app_name".localized()
+        self.view.backgroundColor = UIColor.SoftUI.major
         
         let settingBtn = UIBarButtonItem(title: "general_setting".localized(), style: .plain, target: self, action: #selector(self.onClickSetting))
         settingBtn.tintColor = .systemBlue
@@ -131,6 +131,7 @@ extension MainPageViewController {
         self.searchTabBarItem.title = MainPage.DisplayItem.TabBarItems.search.localized()
         
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        self.tableView.backgroundColor = UIColor.SoftUI.major
         
 //        self.addFadedEdgeToTableView()
     }
@@ -174,8 +175,10 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
     // header view
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if (self.currentTab == .Upcoming){
+            Log.d(.RUNTIME, "display header")
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewCell.upcomingHeader.reuseId) as! UpcomingStopReminderHeaderView
             headerView.setContent(reminder: self.upcomingReminderItem?.header)
+            headerView.contentView.backgroundColor = UIColor.SoftUI.major
             return headerView
         }else{
             let headerView = MainPageHeaderView(frame: .init(x: 0, y: 0, width: self.width, height: 40))
@@ -251,11 +254,12 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
             if (self.currentTab == .Bookmarks){
                 self.bookmarkItems.remove(at: indexPath.row)
                 self.interactor?.removeBookmark(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }else if (self.currentTab == .Reminders){
                 self.reminderItems.remove(at: indexPath.row)
                 self.interactor?.removeReminder(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
@@ -292,12 +296,15 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
 // MARK: - On TabBarItem Click
 extension MainPageViewController: UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if (item == self.bookmarksTabBarItem){
+        Log.d(.RUNTIME, "onTab")
+        if (item == self.bookmarksTabBarItem && self.currentTab != .Bookmarks){
             self.interactor?.changeToTab(at: MainPage.Tab.Bookmarks.rawValue)
-        }else if (item == self.remindersTabBarItem){
+        }else if (item == self.remindersTabBarItem && self.currentTab != .Reminders){
             self.interactor?.changeToTab(at: MainPage.Tab.Reminders.rawValue)
-        }else if (item == self.upcomingTabBarItem){
+        }else if (item == self.upcomingTabBarItem && self.currentTab != .Upcoming){
             self.interactor?.changeToTab(at: MainPage.Tab.Upcoming.rawValue)
+            self.currentTab = .Upcoming
+            self.tableView.reloadData()
         }else if (item == self.searchTabBarItem){
             self.router?.routeToSearchPage()
         }
@@ -310,7 +317,6 @@ extension MainPageViewController {
         self.currentTab = .Bookmarks
         self.bookmarkItems = viewModel.bookmarkItems
         self.basicViewModel = viewModel.title
-        print("# bookmark = \(self.bookmarkItems.count)")
         self.tableView.reloadData()
     }
     
@@ -319,20 +325,21 @@ extension MainPageViewController {
         
         self.reminderItems = viewModel.reminderItems
         self.basicViewModel = viewModel.title
-        print("# reminder = \(self.reminderItems.count)")
         self.tableView.reloadData()
     }
     
     func displayUpcoming(viewModel: MainPage.DisplayItem.UpcomingReminders.ViewModel){
-        self.currentTab = .Upcoming
-        
-        self.upcomingReminderItem = viewModel.upcomingReminder
-        self.basicViewModel = viewModel.title
-        self.tableView.reloadData()
+        Log.d(.RUNTIME, "displayUpcoming")
+        DispatchQueue.main.async{
+            self.currentTab = .Upcoming
+            
+            self.upcomingReminderItem = viewModel.upcomingReminder
+            self.basicViewModel = viewModel.title
+            self.tableView.reloadData()
+        }
     }
     
     func updateETAs(etaList: MainPage.DisplayItem.Bookmarks.ETAViewModel){
-        print("update ETA: \(etaList.etaList.count)")
         self.bookmarkETAViewModel = etaList
         self.tableView.reloadData()
     }

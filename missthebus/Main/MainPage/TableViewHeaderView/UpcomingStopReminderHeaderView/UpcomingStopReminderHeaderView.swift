@@ -21,6 +21,7 @@ class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        self.backgroundColor = UIColor.SoftUI.major
         
         self.reminderNameLabel.text = ""
         self.reminderNameLabel.useTextStyle(.title2)
@@ -33,6 +34,7 @@ class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
         self.countDownSoftUIView.isSelected = true
         
         self.countDownTimer.useTextStyle(.title1)
+        self.updateTime()
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
         self.landSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
@@ -41,13 +43,12 @@ class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
         self.landSoftUIView.shadowOpacity = 1
         self.landSoftUIView.addTarget(self, action: #selector(self.onClickLanded), for: .touchUpInside)
         
-        self.landLabel.text = "已經上車".localized() + "🤤"
+        self.landLabel.text = "已經上車!".localized() + " 🤤"
         self.landLabel.useTextStyle(.label)
     }
     
     func setContent(reminder: MainPage.UpcomingReminderItem.UpcomingHeader?) {
         if let reminder = reminder{
-            self.backgroundColor = UIColor.SoftUI.major
             
             if let tagViewModel = StopReminder.getTagViewModel(reminder.type){
                 self.reminderIcon.image = UIImage(named: tagViewModel.img)

@@ -75,7 +75,7 @@ class KMBAPI {
         // header treatment
         let processedRepo = repo.then { (body, headers) -> Guarantee<SuccessResponse<R.ResponseType?>> in
             let responseObject = SuccessResponse<R.ResponseType?>.init(header: headers, body: body)    
-            print("API raw resp: \(String(describing: body).prefix(1000)) ...")
+//            print("API raw resp: \(String(describing: body).prefix(1000)) ...")
             
             return Guarantee<SuccessResponse<R.ResponseType?>> { seal in
                 seal(responseObject)

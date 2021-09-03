@@ -139,6 +139,7 @@
 		8FC67B5E26BBD23200BEE56D /* StopBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67B5D26BBD23200BEE56D /* StopBookmarkManager.swift */; };
 		8FD1B84426E0C1E10050D53D /* UpcomingStopReminderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD1B84326E0C1E00050D53D /* UpcomingStopReminderHeaderView.xib */; };
 		8FD1B84926E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD1B84826E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift */; };
+		8FD1B85126E1CBB50050D53D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD1B85026E1CBB40050D53D /* Log.swift */; };
 		8FFF6C722697F0720033D2CE /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6A2697F0720033D2CE /* APIManager.swift */; };
 		8FFF6C732697F0720033D2CE /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6C2697F0720033D2CE /* NetworkOperation.swift */; };
 		8FFF6C742697F0720033D2CE /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6D2697F0720033D2CE /* APIRepository.swift */; };
@@ -324,6 +325,7 @@
 		8FC67B5D26BBD23200BEE56D /* StopBookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopBookmarkManager.swift; sourceTree = "<group>"; };
 		8FD1B84326E0C1E00050D53D /* UpcomingStopReminderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingStopReminderHeaderView.xib; sourceTree = "<group>"; };
 		8FD1B84826E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingStopReminderHeaderView.swift; sourceTree = "<group>"; };
+		8FD1B85026E1CBB40050D53D /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		8FFF6C6A2697F0720033D2CE /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		8FFF6C6C2697F0720033D2CE /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		8FFF6C6D2697F0720033D2CE /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
@@ -704,6 +706,7 @@
 		8F89B63C26944E37006312EA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8FD1B85026E1CBB40050D53D /* Log.swift */,
 				8FB5A09826A909BF0013540D /* Utils.swift */,
 				8F89B61326943BDB006312EA /* Extension */,
 				8F89B63E26944E5B006312EA /* MSExtension.swift */,
@@ -1304,6 +1307,7 @@
 				8F9905C326CFA69900D6541C /* LanguagePageBuilder.swift in Sources */,
 				8FD1B84926E0C25D0050D53D /* UpcomingStopReminderHeaderView.swift in Sources */,
 				4392F3DE26D243CD00A0E6D7 /* NlbETAAPIRepository.swift in Sources */,
+				8FD1B85126E1CBB50050D53D /* Log.swift in Sources */,
 				4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */,
 				8FB5A07526A8027C0013540D /* RouteStop.swift in Sources */,
 				8FFF6C772697F0720033D2CE /* BaseAPIResponse.swift in Sources */,

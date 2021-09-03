@@ -63,15 +63,16 @@ enum MainPage
         struct ReminderRouteItem{
             let company: BusCompany
             let routeNum: String
+            let destStop: String
             let stops: [ReminderRouteStopItem]
             
         }
         
         struct ReminderRouteStopItem{
-            let stop: String = "Stop"
-            var eta1: String = "2"
-            var eta2: String = "5"
-            var eta3: String = "9"
+            let stop: String
+            var eta1: String = ""
+            var eta2: String = ""
+            var eta3: String = ""
         }
     }
     

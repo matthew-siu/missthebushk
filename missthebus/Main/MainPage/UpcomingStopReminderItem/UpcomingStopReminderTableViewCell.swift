@@ -13,15 +13,21 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
     @IBOutlet weak var routeNum: UILabel!
     @IBOutlet weak var routeCompanyIcon: UIImageView!
     
+    @IBOutlet weak var routeStop1View: UIView!
+    @IBOutlet weak var routeStop1Icon: UIImageView!
     @IBOutlet weak var routeStop1Label: UILabel!
     @IBOutlet weak var routeStop1Eta1Label: UILabel!
     @IBOutlet weak var routeStop1Eta2Label: UILabel!
     @IBOutlet weak var routeStop1Eta3Label: UILabel!
     
+    @IBOutlet weak var routeStop2View: UIView!
+    @IBOutlet weak var routeStop2Icon: UIImageView!
     @IBOutlet weak var routeStop2Label: UILabel!
     @IBOutlet weak var routeStop2Eta1Label: UILabel!
     @IBOutlet weak var routeStop2Eta2Label: UILabel!
     @IBOutlet weak var routeStop2Eta3Label: UILabel!
+    
+    @IBOutlet weak var destStopLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +38,10 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
         self.bgSoftUIView.shadowOffset = .init(width: 2, height: 2)
         self.bgSoftUIView.shadowOpacity = 1
         self.bgSoftUIView.type = .staticView
+        
+        self.routeNum.useTextStyle(.title1)
+        self.routeStop1Label.useTextStyle(.label)
+        self.destStopLabel.textColor = UIColor.MTB.darkGray
     }
     
     func setInfo(viewModel: MainPage.UpcomingReminderItem.ReminderRouteItem?){
@@ -40,17 +50,26 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
             if (viewModel.stops.count > 0){
                 let stop = viewModel.stops[0]
                 self.routeStop1Label.text = stop.stop
-                self.routeStop1Eta1Label.text = stop.eta1
-                self.routeStop1Eta2Label.text = stop.eta2
-                self.routeStop1Eta3Label.text = stop.eta3
+                self.routeStop1Eta1Label.text = (stop.eta1 != "") ? stop.eta1 : "-"
+                self.routeStop1Eta2Label.text = (stop.eta2 != "") ? stop.eta2 : "-"
+                self.routeStop1Eta3Label.text = (stop.eta3 != "") ? stop.eta3 : "-"
             }
             if (viewModel.stops.count > 1){
                 let stop = viewModel.stops[1]
                 self.routeStop2Label.text = stop.stop
-                self.routeStop2Eta1Label.text = stop.eta1
-                self.routeStop2Eta2Label.text = stop.eta2
-                self.routeStop2Eta3Label.text = stop.eta3
+                self.routeStop2Eta1Label.text = (stop.eta1 != "") ? stop.eta1 : "-"
+                self.routeStop2Eta2Label.text = (stop.eta2 != "") ? stop.eta2 : "-"
+                self.routeStop2Eta3Label.text = (stop.eta3 != "") ? stop.eta3 : "-"
             }
+            self.routeStop2View.isHidden = (viewModel.stops.count <= 1)
+            
+            
+            let attribute1 = [ NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: 12)! ]
+            let attribute2 = [ NSAttributedString.Key.font: UIFont(name: "Avenir Next", size: (currentLanguage != .english) ? 16 : 14)! ]
+            let str1 = NSMutableAttributedString(string: "route_to".localized(), attributes: attribute1)
+            let str2 = NSMutableAttributedString(string: " \(viewModel.destStop)", attributes: attribute2)
+            str1.append(str2)
+            self.destStopLabel.attributedText = str1
         }
         
     }

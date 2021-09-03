@@ -58,7 +58,7 @@ extension MainPageInteractor {
             1. If have upcoming reminder, -> upcoming
             2. Else, -> bookmarks
          */
-        return .Upcoming
+        return .Bookmarks
     }
     
     func loadAllBookmarksOfRoute(){
@@ -83,14 +83,22 @@ extension MainPageInteractor {
     }
     
     func loadOneUpcomingReminder(){
-        if let reminders = StopReminderManager.getStopReminders(){
-            self.reminders = reminders
-            var upcoming: StopReminder? = nil
-            if (self.reminders.count > 0){
-                upcoming = self.reminders[0]
+        Log.d(.RUNTIME, "loadOneUpcomingReminder")
+        self.presenter?.displayUpcoming(reminder: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            
+            if let reminders = StopReminderManager.getStopReminders(){
+                self.reminders = reminders
+                var upcoming: StopReminder? = nil
+                if (self.reminders.count > 0){
+                    upcoming = self.reminders[0]
+                }
+                
+                self.presenter?.displayUpcoming(reminder: upcoming)
             }
-            self.presenter?.displayUpcoming(reminder: upcoming)
-        }
+        })
+        
     }
     
     func dismissETATimer(){
@@ -107,6 +115,7 @@ extension MainPageInteractor {
             self.dismissETATimer()
             self.loadAllRemindersOfRoute()
         }else if (index == MainPage.Tab.Upcoming.rawValue){
+            Log.d(.RUNTIME, "changeToTab: \(index)")
             self.dismissETATimer()
             self.loadOneUpcomingReminder()
         }

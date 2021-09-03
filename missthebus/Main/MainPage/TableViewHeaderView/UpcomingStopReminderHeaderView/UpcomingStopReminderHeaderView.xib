@@ -37,13 +37,13 @@
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Qra-F5-rN3">
-                    <rect key="frame" x="10" y="50" width="394" height="80"/>
+                    <rect key="frame" x="20" y="50" width="374" height="80"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-gC-ch0" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="187" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="177" height="80"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gId-N5-R1l">
-                                    <rect key="frame" x="67.5" y="27" width="52" height="26.5"/>
+                                    <rect key="frame" x="62.5" y="27" width="52" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -56,10 +56,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cn-aM-jzV" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
-                            <rect key="frame" x="207" y="0.0" width="187" height="80"/>
+                            <rect key="frame" x="197" y="0.0" width="177" height="80"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Land!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxH-v5-eCz">
-                                    <rect key="frame" x="64.5" y="25.5" width="58.5" height="29"/>
+                                    <rect key="frame" x="59.5" y="25.5" width="58.5" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -75,10 +75,11 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="wso-iT-c6q"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="2fu-Fc-Z7p" firstAttribute="centerX" secondItem="Axp-pr-W7L" secondAttribute="centerX" id="IAW-b6-9Kt"/>
-                <constraint firstItem="wso-iT-c6q" firstAttribute="trailing" secondItem="Qra-F5-rN3" secondAttribute="trailing" constant="10" id="Jie-cx-tcC"/>
-                <constraint firstItem="Qra-F5-rN3" firstAttribute="leading" secondItem="wso-iT-c6q" secondAttribute="leading" constant="10" id="KX7-ES-sg9"/>
+                <constraint firstItem="wso-iT-c6q" firstAttribute="trailing" secondItem="Qra-F5-rN3" secondAttribute="trailing" constant="20" id="Jie-cx-tcC"/>
+                <constraint firstItem="Qra-F5-rN3" firstAttribute="leading" secondItem="wso-iT-c6q" secondAttribute="leading" constant="20" id="KX7-ES-sg9"/>
                 <constraint firstItem="2fu-Fc-Z7p" firstAttribute="top" secondItem="Axp-pr-W7L" secondAttribute="top" constant="10" id="R68-5Y-Fjq"/>
                 <constraint firstItem="wso-iT-c6q" firstAttribute="bottom" secondItem="Qra-F5-rN3" secondAttribute="bottom" constant="20" id="a7l-qz-Koc"/>
                 <constraint firstItem="Qra-F5-rN3" firstAttribute="top" secondItem="2fu-Fc-Z7p" secondAttribute="bottom" constant="20" id="bHi-IF-Rz8"/>
