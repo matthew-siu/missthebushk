@@ -42,24 +42,32 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-gC-ch0" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="177" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gId-N5-R1l">
-                                    <rect key="frame" x="62.5" y="27" width="52" height="26.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gId-N5-R1l">
+                                    <rect key="frame" x="68.5" y="38" width="40.5" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gC1-27-07e">
+                                    <rect key="frame" x="73.5" y="21" width="30" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="gId-N5-R1l" firstAttribute="centerY" secondItem="RbL-gC-ch0" secondAttribute="centerY" id="KBd-H6-YXp"/>
+                                <constraint firstItem="gId-N5-R1l" firstAttribute="centerY" secondItem="RbL-gC-ch0" secondAttribute="centerY" constant="10" id="KBd-H6-YXp"/>
+                                <constraint firstItem="gId-N5-R1l" firstAttribute="top" secondItem="gC1-27-07e" secondAttribute="bottom" id="ZNc-f2-qKI"/>
+                                <constraint firstItem="gC1-27-07e" firstAttribute="centerX" secondItem="gId-N5-R1l" secondAttribute="centerX" id="qop-HH-bwF"/>
                                 <constraint firstItem="gId-N5-R1l" firstAttribute="centerX" secondItem="RbL-gC-ch0" secondAttribute="centerX" id="vjD-E3-Imy"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cn-aM-jzV" customClass="SoftUIView" customModule="missthebus" customModuleProvider="target">
                             <rect key="frame" x="197" y="0.0" width="177" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Land!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxH-v5-eCz">
-                                    <rect key="frame" x="59.5" y="25.5" width="58.5" height="29"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Land!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxH-v5-eCz">
+                                    <rect key="frame" x="5" y="25.5" width="167" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -67,7 +75,9 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="AxH-v5-eCz" secondAttribute="trailing" constant="5" id="G7p-U5-Jpx"/>
                                 <constraint firstItem="AxH-v5-eCz" firstAttribute="centerX" secondItem="3cn-aM-jzV" secondAttribute="centerX" id="WdU-l7-Ezc"/>
+                                <constraint firstItem="AxH-v5-eCz" firstAttribute="leading" secondItem="3cn-aM-jzV" secondAttribute="leading" constant="5" id="dAV-ei-4FJ"/>
                                 <constraint firstItem="AxH-v5-eCz" firstAttribute="centerY" secondItem="3cn-aM-jzV" secondAttribute="centerY" id="vVn-po-0NF"/>
                             </constraints>
                         </view>
@@ -75,7 +85,6 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="wso-iT-c6q"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="2fu-Fc-Z7p" firstAttribute="centerX" secondItem="Axp-pr-W7L" secondAttribute="centerX" id="IAW-b6-9Kt"/>
                 <constraint firstItem="wso-iT-c6q" firstAttribute="trailing" secondItem="Qra-F5-rN3" secondAttribute="trailing" constant="20" id="Jie-cx-tcC"/>
@@ -93,6 +102,7 @@
                 <outlet property="landSoftUIView" destination="3cn-aM-jzV" id="Brf-Sx-WvS"/>
                 <outlet property="reminderIcon" destination="Tqp-KY-DPU" id="Jdg-D2-SbA"/>
                 <outlet property="reminderNameLabel" destination="qxF-9r-IoA" id="O0a-lh-kXM"/>
+                <outlet property="startTimeLabel" destination="gC1-27-07e" id="MQI-Ed-GoY"/>
             </connections>
             <point key="canvasLocation" x="-91.304347826086968" y="59.598214285714285"/>
         </view>

@@ -12,6 +12,7 @@ import UIKit
 protocol SettingPageBusinessLogic
 {
     func clearMemoryCache()
+    func reloadInfo()
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -41,6 +42,20 @@ extension SettingPageInteractor {
     func clearMemoryCache() {
         Storage.remove(Configs.Storage.KEY_REMINDERS)
         Storage.remove(Configs.Storage.KEY_BOOKMARKS)
-        Storage.remove(Configs.Storage.KEY_LANGUAGE)
+    }
+    
+    func reloadInfo(){
+        Storage.remove(Configs.Storage.KEY_LAST_UPDATE)
+        Storage.remove(Configs.Storage.KEY_ROUTES)
+        Storage.remove(Configs.Storage.KEY_ROUTESTOPS)
+        Storage.remove(Configs.Storage.KEY_STOPS)
+        
+        let request = SplashScreenBuilder.BuildRequest()
+        let vc = SplashScreenBuilder.createScene(request: request)
+        guard let window = UIApplication.shared.windows.first else{
+            return
+        }
+        let navVC = NavigationController(rootViewController: vc)
+        window.rootViewController = navVC
     }
 }

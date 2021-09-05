@@ -26,17 +26,22 @@
 "main_bookmark" = "My Stops";
 "main_reminders" = "My Reminders";
 "main_search" = "Search";
+"main_upcoming_pin_noti" = "Show on Notification";
 
 // Setting Page
 "setting_section_general" = "General";
 "setting_section_about" = "About";
 "setting_languages" = "Languages";
+"setting_languages_confirm" = "Are you sure switch to";
 "setting_clear_memory" = "Clear Memory Cache";
-"setting_clear_memory_confirm" = "Are you sure to clear all memory cache?";
+"setting_clear_memory_confirm" = "This will remove all your bookmarks and reminders. Are you sure to clear all memory cache?";
 "setting_about_us" = "About Us";
 "setting_about_version" = "Version";
 "setting_languges_title" = "Choose Language";
-
+"setting_section_if_outdated" = "If you found the bus info is outdated, you can click the below button to manually update all info.";
+"setting_redownload_info" = "Reload all information";
+"setting_redownload_info_confirm" = "Are you sure to reload all information?";
+"setting_help" = "Help";
 
 // Search Page
 "search_label" = "Search Bus";
@@ -99,11 +104,6 @@
 "general_error" = "Error";
 "general_remind" = "Remind";
 "general_attention" = "Attention";
-
-
-
-
-
 
 
 

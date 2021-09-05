@@ -41,25 +41,39 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
         
         self.routeNum.useTextStyle(.title1)
         self.routeStop1Label.useTextStyle(.label)
+        self.routeStop2Label.useTextStyle(.label)
         self.destStopLabel.textColor = UIColor.MTB.darkGray
+        
+        self.routeStop1Eta1Label.text = "-"
+        self.routeStop1Eta2Label.text = "-"
+        self.routeStop1Eta3Label.text = "-"
+        self.routeStop2Eta1Label.text = "-"
+        self.routeStop2Eta2Label.text = "-"
+        self.routeStop2Eta3Label.text = "-"
     }
     
-    func setInfo(viewModel: MainPage.UpcomingReminderItem.ReminderRouteItem?){
+    func setInfo(viewModel: MainPage.UpcomingReminderItem.ReminderRouteItem?, etaList: [MainPage.ETAItem]){
         if let viewModel = viewModel{
-            self.routeNum.text = viewModel.routeNum
+            self.routeNum.text = viewModel.route.routeNum
             if (viewModel.stops.count > 0){
                 let stop = viewModel.stops[0]
                 self.routeStop1Label.text = stop.stop
-                self.routeStop1Eta1Label.text = (stop.eta1 != "") ? stop.eta1 : "-"
-                self.routeStop1Eta2Label.text = (stop.eta2 != "") ? stop.eta2 : "-"
-                self.routeStop1Eta3Label.text = (stop.eta3 != "") ? stop.eta3 : "-"
+                if let etas = etaList.first(where: {$0.stopId == stop.stopId}){
+//                    print("\(stop.stop) \(etas.eta1) \(etas.eta2) \(etas.eta3)")
+                    self.routeStop1Eta1Label.text = (self.isValidETA(etas.eta1)) ? etas.eta1 : "-"
+                    self.routeStop1Eta2Label.text = (self.isValidETA(etas.eta2)) ? etas.eta2 : "-"
+                    self.routeStop1Eta3Label.text = (self.isValidETA(etas.eta3)) ? etas.eta3 : "-"
+                }
             }
             if (viewModel.stops.count > 1){
                 let stop = viewModel.stops[1]
                 self.routeStop2Label.text = stop.stop
-                self.routeStop2Eta1Label.text = (stop.eta1 != "") ? stop.eta1 : "-"
-                self.routeStop2Eta2Label.text = (stop.eta2 != "") ? stop.eta2 : "-"
-                self.routeStop2Eta3Label.text = (stop.eta3 != "") ? stop.eta3 : "-"
+                if let etas = etaList.first(where: {$0.stopId == stop.stopId}){
+//                    print("\(stop.stop) \(etas.eta1) \(etas.eta2) \(etas.eta3)")
+                    self.routeStop2Eta1Label.text = ((self.isValidETA(etas.eta1))) ? etas.eta1 : "-"
+                    self.routeStop2Eta2Label.text = ((self.isValidETA(etas.eta2))) ? etas.eta2 : "-"
+                    self.routeStop2Eta3Label.text = ((self.isValidETA(etas.eta3))) ? etas.eta3 : "-"
+                }
             }
             self.routeStop2View.isHidden = (viewModel.stops.count <= 1)
             
@@ -72,6 +86,10 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
             self.destStopLabel.attributedText = str1
         }
         
+    }
+    
+    private func isValidETA(_ eta: String?) -> Bool{
+        return !(eta == nil || eta == "")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

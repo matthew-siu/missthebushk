@@ -31,6 +31,7 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     @IBOutlet weak var bookmarksTabBarItem: UITabBarItem!
     @IBOutlet weak var remindersTabBarItem: UITabBarItem!
     @IBOutlet weak var searchTabBarItem: UITabBarItem!
+    var createBtn = UIBarButtonItem()
     
     @IBOutlet weak var tableView: UITableView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
@@ -120,7 +121,7 @@ extension MainPageViewController {
         settingBtn.tintColor = .systemBlue
         self.navigationItem.leftBarButtonItem = settingBtn
         
-        let createBtn = UIBarButtonItem(title: "general_create".localized(), style: .plain, target: self, action: #selector(self.onClickCreate))
+        createBtn = UIBarButtonItem(title: "general_create".localized(), style: .plain, target: self, action: #selector(self.onClickCreate))
         createBtn.tintColor = .systemBlue
         self.navigationItem.rightBarButtonItem = createBtn
         
@@ -174,9 +175,9 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     // header view
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (self.currentTab == .Upcoming){
-            Log.d(.RUNTIME, "display header")
+        if (self.currentTab == .Upcoming && self.upcomingReminderItem != nil){
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewCell.upcomingHeader.reuseId) as! UpcomingStopReminderHeaderView
+            headerView.delegate = self
             headerView.setContent(reminder: self.upcomingReminderItem?.header)
             headerView.contentView.backgroundColor = UIColor.SoftUI.major
             return headerView
@@ -189,7 +190,11 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     // header height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (self.currentTab == .Upcoming) ? 150: 40
+        if (self.currentTab == .Upcoming) {
+            return (self.upcomingReminderItem != nil) ? 150 : 40
+        } else{
+            return 40
+        }
     }
     
     // number of row
@@ -200,7 +205,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
         }else if (self.currentTab == .Reminders){
             return (self.reminderItems.count == 0) ? 1 : self.reminderItems.count
         }else if (self.currentTab == .Upcoming){
-            return self.upcomingReminderItem?.routes.count ?? 0
+            return self.upcomingReminderItem?.routes.count ?? 1
         }
         return 0
     }
@@ -232,7 +237,10 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
         }else if (self.currentTab == .Upcoming){
             if let _ = self.upcomingReminderItem{
                 let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.upcomingItemCell.reuseId, for: indexPath) as! UpcomingStopReminderTableViewCell
-                cell.setInfo(viewModel: self.upcomingReminderItem?.routes[indexPath.row])
+                if let route = self.upcomingReminderItem?.routes[indexPath.row]{
+                    let etaList = self.bookmarkETAViewModel.etaList.filter({$0.company == route.company && $0.route == route.route})
+                    cell.setInfo(viewModel: self.upcomingReminderItem?.routes[indexPath.row], etaList: etaList)
+                }
                 cell.backgroundColor = .none
                 cell.selectionStyle = .none
                 return cell
@@ -292,6 +300,33 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
     
 }
 
+extension MainPageViewController: ShowUpcomingNotiDelegate{
+    func onClickShowUpcomingNoti() {
+        self.createNotification()
+    }
+    
+    
+    func createNotification(){
+        DispatchQueue.main.async {
+            let content = UNMutableNotificationContent()
+            content.title = "app_name".localized()
+            content.subtitle = self.upcomingReminderItem?.header.name ?? ""
+            content.body = "Test Notification"
+            content.sound = UNNotificationSound.default
+            
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
+                print("成功建立通知...")
+            })
+        }
+    }
+    
+}
+
 
 // MARK: - On TabBarItem Click
 extension MainPageViewController: UITabBarDelegate{
@@ -317,24 +352,24 @@ extension MainPageViewController {
         self.currentTab = .Bookmarks
         self.bookmarkItems = viewModel.bookmarkItems
         self.basicViewModel = viewModel.title
+        self.createBtn.isEnabled = true
         self.tableView.reloadData()
     }
     
     func displayReminders(viewModel: MainPage.DisplayItem.Reminders.ViewModel){
         self.currentTab = .Reminders
-        
         self.reminderItems = viewModel.reminderItems
         self.basicViewModel = viewModel.title
+        self.createBtn.isEnabled = true
         self.tableView.reloadData()
     }
     
     func displayUpcoming(viewModel: MainPage.DisplayItem.UpcomingReminders.ViewModel){
-        Log.d(.RUNTIME, "displayUpcoming")
         DispatchQueue.main.async{
             self.currentTab = .Upcoming
-            
             self.upcomingReminderItem = viewModel.upcomingReminder
             self.basicViewModel = viewModel.title
+            self.createBtn.isEnabled = false
             self.tableView.reloadData()
         }
     }

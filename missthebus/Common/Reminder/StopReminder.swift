@@ -21,12 +21,14 @@ class StopReminder: Codable{
     var routes = [StopReminderRoute]()
     
     class StopReminderRoute: Codable{
+        var routeId: String
         var routeNum: String
         var bound: String
         var serviceType: String
         var stopIndex: [Int] // stop sequence
         
         init(route: RouteMetadata, stopIndex: [Int]){
+            self.routeId = route.routeId
             self.routeNum = route.routeNum
             self.bound = route.bound
             self.serviceType = route.serviceType
@@ -74,6 +76,15 @@ class StopReminder: Codable{
         self.status = .ACTIVE
     }
     
+    var isToday: Bool{
+        if let day = Date().dayNumberOfWeek(){
+            if let period = self.period{
+                return period.contains(where: {$0 == day - 1})
+            }
+        }
+        return false
+    }
+    
     var oneTimeOnly: Bool{
         return (self.period == nil || self.period?.count == 0)
     }
@@ -88,7 +99,7 @@ class StopReminder: Codable{
             periodStr = "reminder_period_everyday".localized()
         }else if (self.period?.count == 0){
             periodStr = "reminder_period_once".localized()
-        }else if let period = self.period?.map({StopReminder.daysOfWeek[$0]}) {
+        }else if let period = self.period?.map({StopReminder.daysOfWeek[$0].localized()}) {
             periodStr = period.joined(separator: " ")
         }
         return periodStr
@@ -135,12 +146,12 @@ extension StopReminder{
     ]
     
     static let daysOfWeek: [String] = [
-        "day_sun".localized(),
-        "day_mon".localized(),
-        "day_tue".localized(),
-        "day_wed".localized(),
-        "day_thu".localized(),
-        "day_fri".localized(),
-        "day_sat".localized()
+        "day_sun",
+        "day_mon",
+        "day_tue",
+        "day_wed",
+        "day_thu",
+        "day_fri",
+        "day_sat"
     ]
 }

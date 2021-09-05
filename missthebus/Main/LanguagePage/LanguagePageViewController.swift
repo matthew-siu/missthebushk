@@ -34,14 +34,12 @@ extension LanguagePageViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.row == 0){
-            Storage.save(Configs.Storage.KEY_LANGUAGE, AppLanguage.english.rawValue)
+            self.confirmChange(lang: AppLanguage.english.rawValue)
         }else if (indexPath.row == 1){
-            Storage.save(Configs.Storage.KEY_LANGUAGE, AppLanguage.traditionalChinese.rawValue)
+            self.confirmChange(lang: AppLanguage.traditionalChinese.rawValue)
         }else if (indexPath.row == 2){
-            Storage.save(Configs.Storage.KEY_LANGUAGE, AppLanguage.simplifiedChinese.rawValue)
-            
+            self.confirmChange(lang: AppLanguage.simplifiedChinese.rawValue)
         }
-        self.router?.restartApp()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -51,5 +49,13 @@ extension LanguagePageViewController {
 
 // MARK:- View Display logic entry point
 extension LanguagePageViewController {
-
+    func confirmChange(lang: String){
+        
+        self.showYesNoAlert("general_remind".localized(), "setting_languages_confirm".localized() + " \("setting_languages_confirm".localized()) \(lang)?") { (isConfirm) in
+                if (isConfirm){
+                    Storage.save(Configs.Storage.KEY_LANGUAGE, lang)
+                    self.router?.restartApp()
+                }
+            }
+    }
 }

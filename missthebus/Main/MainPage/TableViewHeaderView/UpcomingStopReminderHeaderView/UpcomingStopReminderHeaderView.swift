@@ -7,16 +7,23 @@
 
 import UIKit
 
+protocol ShowUpcomingNotiDelegate {
+    func onClickShowUpcomingNoti()
+}
+
 class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var reminderIcon: UIImageView!
     @IBOutlet weak var reminderNameLabel: UILabel!
     @IBOutlet weak var countDownSoftUIView: SoftUIView!
+    @IBOutlet var startTimeLabel: UILabel!
     @IBOutlet weak var countDownTimer: UILabel!
     @IBOutlet weak var landSoftUIView: SoftUIView!
     @IBOutlet weak var landLabel: UILabel!
     
     var timer: Timer?
+    var viewModel: MainPage.UpcomingReminderItem.UpcomingHeader?
+    var delegate: ShowUpcomingNotiDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +32,8 @@ class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
         
         self.reminderNameLabel.text = ""
         self.reminderNameLabel.useTextStyle(.title2)
+        self.startTimeLabel.useTextStyle(.label_sub)
+        self.startTimeLabel.textColor = UIColor.MTB.darkGray
         
         self.countDownSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
         self.countDownSoftUIView.cornerRadius = 10
@@ -41,9 +50,9 @@ class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
         self.landSoftUIView.cornerRadius = 10
         self.landSoftUIView.shadowOffset = .init(width: 2, height: 2)
         self.landSoftUIView.shadowOpacity = 1
-        self.landSoftUIView.addTarget(self, action: #selector(self.onClickLanded), for: .touchUpInside)
+        self.landSoftUIView.addTarget(self, action: #selector(self.onClickShowNoti), for: .touchUpInside)
         
-        self.landLabel.text = "已經上車!".localized() + " 🤤"
+        self.landLabel.text = "main_upcoming_pin_noti".localized()
         self.landLabel.useTextStyle(.label)
     }
     
@@ -54,12 +63,19 @@ class UpcomingStopReminderHeaderView: UITableViewHeaderFooterView {
                 self.reminderIcon.image = UIImage(named: tagViewModel.img)
                 self.reminderIcon.addShadow()
             }
+            self.startTimeLabel.text = Utils.convertTime(time: reminder.startTime, toPattern: "HH:mm")
             self.reminderNameLabel.text = reminder.name
         }
     }
     
-    @objc func onClickLanded(){
-        
+    @objc func onClickShowNoti(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound, .badge, .carPlay], completionHandler: { (granted, error) in
+            if granted {
+                self.delegate?.onClickShowUpcomingNoti()
+            } else {
+                print("不允許")
+            }
+        })
     }
     
     @objc func updateTime() {

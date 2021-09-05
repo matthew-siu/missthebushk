@@ -26,17 +26,22 @@
 "main_bookmark" = "我的車站";
 "main_reminders" = "我的提醒";
 "main_search" = "搜索";
+"main_upcoming_pin_noti" = "在通知中顯示";
 
 // Setting Page
 "setting_section_general" = "一般";
 "setting_section_about" = "關於";
 "setting_languages" = "語言";
+"setting_languages_confirm" = "你確定切換成";
 "setting_clear_memory" = "清除記憶緩存";
-"setting_clear_memory_confirm" = "確定要清除所有記憶緩存嗎？";
+"setting_clear_memory_confirm" = "這將刪除您的所有書籤和提醒，確定要清除所有記憶緩存嗎？";
 "setting_about_us" = "關於我們";
 "setting_about_version" = "版本";
 "setting_languges_title" = "選擇語言";
-
+"setting_section_if_outdated" = "如果您發現巴士資訊已過時，您可以點擊下面的按鈕手動更新所有資訊。";
+"setting_redownload_info" = "重新加載所有資訊";
+"setting_redownload_info_confirm" = "您確定要重新加載所有資訊嗎？";
+"setting_help" = "幫助";
 
 // Search Page
 "search_label" = "搜尋巴士";
@@ -99,11 +104,6 @@
 "general_error" = "錯誤";
 "general_remind" = "提醒";
 "general_attention" = "注意";
-
-
-
-
-
 
 
 

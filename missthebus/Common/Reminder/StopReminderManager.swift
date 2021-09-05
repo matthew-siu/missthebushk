@@ -6,22 +6,10 @@
 //
 
 import Foundation
-import SQLite3
-
-// search methods
-
-class StopReminderManager{
-    
-    // get reminder of kmb
-//    static func getRemindersFromRoute(route: String, bound: String, serviceType: String) -> [StopReminder]?{
-//        return self.getStopReminders()?.filter({$0.routeNum == route && $0.bound == bound && $0.serviceType == serviceType})
-//        
-//    }
-}
 
 // basic: CRUD
 
-extension StopReminderManager {
+class StopReminderManager {
     
     static func getStopReminders() -> [StopReminder]?{
         if let data = Storage.getObject(Configs.Storage.KEY_REMINDERS){
@@ -76,5 +64,39 @@ extension StopReminderManager {
             reminders.insert(mover, at: pos2)
             self.saveStopReminders(reminders)
         }
+    }
+    
+    static func getUpcomingStopReminder() -> StopReminder?{
+        var upcomingReminder: StopReminder? = nil
+        let calendar = Calendar.current // or e.g. Calendar(identifier: .persian)
+        let nowDate = Date() // save date, so all components use the same date
+        var maxMinutes = 31
+        if let reminders = self.getStopReminders(){
+            let todayReminders = reminders.filter({$0.isToday})
+            for reminder in todayReminders{
+                var dateComponents = DateComponents()
+                dateComponents.year = calendar.component(.year, from: nowDate)
+                dateComponents.month = calendar.component(.month, from: nowDate)
+                dateComponents.day = calendar.component(.day, from: nowDate)
+                dateComponents.timeZone = TimeZone(abbreviation: TimeZone.current.abbreviation() ?? "")
+                dateComponents.hour = calendar.component(.hour, from: reminder.startTime)
+                dateComponents.minute = calendar.component(.minute, from: reminder.startTime)
+                if let reminderDateTime = calendar.date(from: dateComponents){
+                    let diff = Calendar.current.dateComponents([.minute], from: reminderDateTime, to: nowDate)
+                    if let diffMin = diff.minute{
+                        Log.d(.RUNTIME, "\(reminder.name) diff = \(diffMin)")
+                        if (diffMin >= 0 && diffMin < maxMinutes){
+                            Log.d(.RUNTIME, "Closest reminder is \(reminder.name ?? "")")
+                            maxMinutes = diffMin
+                            upcomingReminder = reminder
+                            if (maxMinutes == 0){
+                                return upcomingReminder
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return upcomingReminder
     }
 }

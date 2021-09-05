@@ -24,6 +24,8 @@ class SettingPageViewController: BaseTableViewController, SettingPageDisplayLogi
     @IBOutlet weak var languageTitle: UILabel!
     @IBOutlet weak var clearMemoryTitle: UILabel!
     @IBOutlet weak var aboutUsTitle: UILabel!
+    @IBOutlet var reloadInfoTitle: UILabel!
+    @IBOutlet var helpTitle: UILabel!
     
     @IBOutlet weak var languageLabel: UILabel!
     
@@ -46,25 +48,29 @@ extension SettingPageViewController {
 extension SettingPageViewController{
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: .init(x: 0, y: 0, width: self.width, height: 40))
+        let headerView = UIView(frame: .init(x: 0, y: 0, width: self.width, height: 55))
         headerView.backgroundColor = UIColor.SoftUI.major
-        let headerLabel = UILabel(frame: .init(x: 12, y: 0, width: 100, height: 30))
+        let headerLabel = UILabel(frame: .init(x: 12, y: 0, width: self.width - 24, height: 40))
         switch section{
             case 0: headerLabel.text = "setting_section_general".localized()
-            case 1: headerLabel.text = "setting_section_about".localized()
+            case 1: do {
+                    headerLabel.numberOfLines = 0
+                    headerLabel.text = "setting_section_if_outdated".localized()
+                }
+            case 2: headerLabel.text = "setting_section_about".localized()
         default:
             headerLabel.text = ""
         }
-        headerLabel.sizeToFit()
         headerLabel.useTextStyle(.label_sub)
+        headerLabel.sizeToFit()
         headerLabel.textColor = UIColor.MTB.darkGray
-        headerLabel.center.y = headerView.center.y + 5
+        headerLabel.center.y = headerView.center.y
         headerView.addSubview(headerLabel)
         return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -73,9 +79,17 @@ extension SettingPageViewController{
             self.router?.routeToLanguagePage()
         }else if (indexPath.section == 0 && indexPath.row == 1){ // clear memory cache
             self.onClickClearMemory()
-        }else if (indexPath.section == 1 && indexPath.row == 0){ // about us
+        }else if (indexPath.section == 1 && indexPath.row == 0){ // reload info
+            self.onClickReload()
+        }else if (indexPath.section == 2 && indexPath.row == 0){ // about us
+            self.router?.routeToAboutUsPage()
+        }else if (indexPath.section == 2 && indexPath.row == 1){ // help
             self.router?.routeToAboutUsPage()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.backgroundColor = UIColor.SoftUI.major
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -95,12 +109,14 @@ extension SettingPageViewController {
         self.clearMemoryTitle.useTextStyle(.label)
         self.aboutUsTitle.useTextStyle(.label)
         self.languageLabel.useTextStyle(.label)
+        self.reloadInfoTitle.useTextStyle(.label)
         self.languageTitle.text = "setting_languages".localized()
         self.clearMemoryTitle.text = "setting_clear_memory".localized()
+        self.reloadInfoTitle.text = "setting_redownload_info".localized()
         self.aboutUsTitle.text = "setting_about_us".localized()
+        self.helpTitle.text = "setting_help".localized()
         self.languageLabel.text = ""
-        
-        
+        self.tableView.backgroundColor = UIColor.SoftUI.major
         
     }
     
@@ -118,6 +134,15 @@ extension SettingPageViewController {
         self.showYesNoAlert("general_remind".localized(), "setting_clear_memory_confirm".localized()) { (isConfirm) in
             if (isConfirm){
                 self.interactor?.clearMemoryCache()
+                self.router?.restartApp()
+            }
+        }
+    }
+    
+    private func onClickReload(){
+        self.showYesNoAlert("general_remind".localized(), "setting_redownload_info_confirm".localized()) { (isConfirm) in
+            if (isConfirm){
+                self.interactor?.reloadInfo()
                 self.router?.restartApp()
             }
         }

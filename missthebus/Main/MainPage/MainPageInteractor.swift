@@ -42,6 +42,7 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
     var worker: MainPageWorker?
     
     // State
+    var upcomingReminder: MainPage.DisplayItem.UpcomingReminders.ViewModel?
     var reminders: [StopReminder] = []
     var bookmarks: [StopBookmark] = []
     var etaTimer: Timer?
@@ -50,6 +51,7 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
         
     }
 }
+
 // MARK: - Business
 extension MainPageInteractor {
     
@@ -58,47 +60,7 @@ extension MainPageInteractor {
             1. If have upcoming reminder, -> upcoming
             2. Else, -> bookmarks
          */
-        return .Bookmarks
-    }
-    
-    func loadAllBookmarksOfRoute(){
-        if let bookmarks = StopBookmarkManager.getStopBookmarks(){
-            self.bookmarks = bookmarks
-            print("loadAllBookmarksOfRoute \(bookmarks.count)")
-            self.startETATimer()
-            self.presenter?.displayBookmarks(bookmarks: bookmarks)
-        }else{
-            self.presenter?.displayBookmarks(bookmarks: [])
-        }
-    }
-    
-    func loadAllRemindersOfRoute(){
-        if let reminders = StopReminderManager.getStopReminders(){
-            self.reminders = reminders
-            print("loadAllRemindersOfRoute \(reminders.count)")
-            self.presenter?.displayReminders(reminders: reminders)
-        }else{
-            self.presenter?.displayReminders(reminders: [])
-        }
-    }
-    
-    func loadOneUpcomingReminder(){
-        Log.d(.RUNTIME, "loadOneUpcomingReminder")
-        self.presenter?.displayUpcoming(reminder: nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            
-            if let reminders = StopReminderManager.getStopReminders(){
-                self.reminders = reminders
-                var upcoming: StopReminder? = nil
-                if (self.reminders.count > 0){
-                    upcoming = self.reminders[0]
-                }
-                
-                self.presenter?.displayUpcoming(reminder: upcoming)
-            }
-        })
-        
+        return .Upcoming
     }
     
     func dismissETATimer(){
@@ -115,17 +77,139 @@ extension MainPageInteractor {
             self.dismissETATimer()
             self.loadAllRemindersOfRoute()
         }else if (index == MainPage.Tab.Upcoming.rawValue){
-            Log.d(.RUNTIME, "changeToTab: \(index)")
             self.dismissETATimer()
             self.loadOneUpcomingReminder()
         }
+    }
+}
+
+// MARK: - Upcoming
+extension MainPageInteractor{
+    
+    func loadOneUpcomingReminder(){
+        Log.d(.RUNTIME, "loadOneUpcomingReminder")
+        self.presenter?.displayUpcoming(viewModel: MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: nil))
+        self.getUpcomingStopReminder()
+            .then{upcoming in self.createUpcomingViewModel(reminder: upcoming)}
+            .done{viewModel in
+                self.upcomingReminder = viewModel
+                self.presenter?.displayUpcoming(viewModel: viewModel)
+                self.startETATimer(tab: .Upcoming)
+            }.catch{_ in }
+    }
+    
+    func createUpcomingViewModel(reminder: StopReminder?) -> Promise<MainPage.DisplayItem.UpcomingReminders.ViewModel>{
+        return Promise {promise in
+            
+            if let reminder = reminder{
+                var routes = [MainPage.UpcomingReminderItem.ReminderRouteItem]()
+                for route in reminder.routes{
+                    Log.d(.RUNTIME, "presenter: appending route \(route.routeNum)")
+                    if let oneRoute = route.getRoute(){
+                        var stops = [MainPage.UpcomingReminderItem.ReminderRouteStopItem]()
+                        for routeStop in route.getStops(){
+                            stops.append(MainPage.UpcomingReminderItem.ReminderRouteStopItem(stop: routeStop?.stop?.name ?? "", stopId: routeStop?.stopId ?? ""))
+                        }
+                        routes.append(MainPage.UpcomingReminderItem.ReminderRouteItem(company: oneRoute.company, route: RouteMetadata(route.routeNum, route.bound, route.serviceType, routeId: route.routeId), destStop: oneRoute.destStop, stops: stops))
+                    }
+                }
+                let reminderItem = MainPage.UpcomingReminderItem(header: MainPage.UpcomingReminderItem.UpcomingHeader(id: reminder.id, name: reminder.name ?? "", period: reminder.displayPeriod, startTime: reminder.startTime, type: reminder.type ?? .OTHER), routes: routes)
+                let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: reminderItem)
+                promise.fulfill(viewModel)
+            }else{
+                let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: nil)
+                promise.fulfill(viewModel)
+            }
+        }
+    }
+    
+    @objc
+    private func requestUpcomingETA(_ timer: Timer?){
+        if let upcoming = self.upcomingReminder?.upcomingReminder?.routes{
+            for route in upcoming{
+                for stop in route.stops {
+                    let query = self.createUpcomingETAQuery(route: route, stop: stop)
+                    if let query = query{
+                        self.requestOneStopETA(query: query, bound: route.route.bound)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func createUpcomingETAQuery(route: MainPage.UpcomingReminderItem.ReminderRouteItem, stop: MainPage.UpcomingReminderItem.ReminderRouteStopItem) -> APIQuery?{
+        var query: APIQuery?
+        if (route.company == .KMB){
+            query = KmbETAQuery(stopId: stop.stopId, route: route.route.routeNum, serviceType: route.route.serviceType)
+        }else if (route.company == .CTB){
+            query = CtbNwfbETAQuery(company: .CTB, stopId: stop.stopId, routeNum: route.route.routeNum)
+        }else if (route.company == .NWFB){
+            query = CtbNwfbETAQuery(company: .NWFB, stopId: stop.stopId, routeNum: route.route.routeNum)
+        }else if (route.company == .NLB){
+            query = NlbETAQuery(routeId: route.route.routeId, routeNum: route.route.routeNum, stopId: stop.stopId)
+        }
+        return query
+    }
+
+    private func getUpcomingStopReminder() -> Promise<StopReminder?>{
+        return Promise { promise in
+            promise.fulfill(StopReminderManager.getUpcomingStopReminder())
+        }
+    }
+    
+}
+
+// MARK: - Bookmark
+extension MainPageInteractor{
+    
+    func loadAllBookmarksOfRoute(){
+        self.presenter?.displayBookmarks(bookmarks: [])
+        self.getStopBookmarks()
+            .done{bookmarks in
+                self.bookmarks = bookmarks
+                self.presenter?.displayBookmarks(bookmarks: bookmarks)
+                self.startETATimer(tab: .Bookmarks)
+            }.catch{_ in}
+    }
+    
+    private func getStopBookmarks() -> Promise<[StopBookmark]>{
+        return Promise { promise in
+            if let bookmarks = StopBookmarkManager.getStopBookmarks(){
+                promise.fulfill(bookmarks)
+            }else{
+                promise.fulfill([])
+            }
+        }
+    }
+    
+    @objc
+    private func requestBookmarkETA(_ timer: Timer?){
+        for bookmark in self.bookmarks{
+            let query = self.createBookmarkETAQuery(bookmark: bookmark)
+            if let query = query{
+                self.requestOneStopETA(query: query, bound: bookmark.bound)
+            }
+        }
+    }
+    
+    private func createBookmarkETAQuery(bookmark: StopBookmark) -> APIQuery?{
+        var query: APIQuery?
+        if (bookmark.company == .KMB){
+            query = KmbETAQuery(stopId: bookmark.stopId, route: bookmark.routeNum, serviceType: bookmark.serviceType)
+        }else if (bookmark.company == .CTB){
+            query = CtbNwfbETAQuery(company: .CTB, stopId: bookmark.stopId, routeNum: bookmark.routeNum)
+        }else if (bookmark.company == .NWFB){
+            query = CtbNwfbETAQuery(company: .NWFB, stopId: bookmark.stopId, routeNum: bookmark.routeNum)
+        }else if (bookmark.company == .NLB){
+            query = NlbETAQuery(routeId: bookmark.routeId, routeNum: bookmark.routeNum, stopId: bookmark.stopId)
+        }
+        return query
     }
     
     func removeBookmark(at index: Int){
         let id = self.bookmarks[index].id
         self.bookmarks.remove(at: index)
         StopBookmarkManager.removeStopBookmark(id)
-        
     }
     
     func rearrangeBookmark(at pos1: Int, to pos2: Int){
@@ -135,13 +219,39 @@ extension MainPageInteractor {
             StopBookmarkManager.rearrangeStopBookmark(at: pos1, to: pos2)
         }
     }
+}
+
+
+// MARK: - Reminder
+extension MainPageInteractor{
+    
+    func loadAllRemindersOfRoute(){
+        print("loadAllRemindersOfRoute")
+        self.presenter?.displayReminders(reminders: [])
+        self.getStopReminders()
+            .done{reminders in
+                self.reminders = reminders
+                self.presenter?.displayReminders(reminders: reminders)
+            }.catch{_ in}
+    }
+    
+    private func getStopReminders() -> Promise<[StopReminder]>{
+        return Promise {promise in
+            if let reminders = StopReminderManager.getStopReminders(){
+                print("reminders: \(reminders.count)")
+                promise.fulfill(reminders)
+            }else{
+                print("reminders: nil")
+                promise.fulfill([])
+            }
+        }
+    }
     
     func removeReminder(at index: Int) {
         print("remove \(index)/\(self.reminders.count)")
         let id = self.reminders[index].id
         self.reminders.remove(at: index)
         StopReminderManager.removeStopReminder(id)
-        
     }
     
     func rearrangeReminder(at pos1: Int, to pos2: Int) {
@@ -151,7 +261,6 @@ extension MainPageInteractor {
             StopReminderManager.rearrangeStopReminder(at: pos1, to: pos2)
         }
     }
-    
 }
 
 
@@ -166,37 +275,23 @@ extension MainPageInteractor{
         if (self.reminders.count >= index){
             return self.reminders[index]
         }
-        print("getStopReminder: nil")
         return nil
     }
 }
 
-// MARK: - Logic
+// MARK: - ETA Timer
 extension MainPageInteractor {
-    private func startETATimer(){
+    private func startETATimer(tab: MainPage.Tab){
         self.dismissETATimer()
         
-        self.requestETA(nil)
-        self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestETA), userInfo: nil, repeats: true)
-    }
-    @objc
-    private func requestETA(_ timer: Timer?)
-    {
-        for bookmark in self.bookmarks{
-            var query: APIQuery?
-            if (bookmark.company == .KMB){
-                query = KmbETAQuery(stopId: bookmark.stopId, route: bookmark.routeNum, serviceType: bookmark.serviceType)
-            }else if (bookmark.company == .CTB){
-                query = CtbNwfbETAQuery(company: .CTB, stopId: bookmark.stopId, routeNum: bookmark.routeNum)
-            }else if (bookmark.company == .NWFB){
-                query = CtbNwfbETAQuery(company: .NWFB, stopId: bookmark.stopId, routeNum: bookmark.routeNum)
-            }else if (bookmark.company == .NLB){
-                query = NlbETAQuery(routeId: bookmark.routeId, routeNum: bookmark.routeNum, stopId: bookmark.stopId)
-            }
-            if let query = query{
-                self.requestOneStopETA(query: query, bound: bookmark.bound)
-            }
+        if (tab == .Bookmarks){
+            self.requestBookmarkETA(nil)
+            self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestBookmarkETA), userInfo: nil, repeats: true)
+        }else if (tab == .Upcoming){
+            self.requestUpcomingETA(nil)
+            self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestUpcomingETA), userInfo: nil, repeats: true)
         }
+        
     }
     
     private func requestOneStopETA(query: APIQuery, bound: String){

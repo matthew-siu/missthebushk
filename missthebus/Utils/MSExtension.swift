@@ -564,12 +564,10 @@ extension UIDatePicker{
 // Date
 extension Date {
     /*
-     original: 1-7, 1->Sun, 7->Sat
-     new: 1->Mon, 7->Sun
+     1-7, 1->Sun, 7->Sat
      */
     func dayNumberOfWeek() -> Int? {
-        let day = Calendar.current.dateComponents([.weekday], from: self).weekday
-        return (day == 1) ? 7 : day! - 1
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }
 

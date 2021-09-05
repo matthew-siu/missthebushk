@@ -13,7 +13,7 @@ protocol MainPagePresentationLogic
 {
     func displayBookmarks(bookmarks: [StopBookmark])
     func displayReminders(reminders: [StopReminder])
-    func displayUpcoming(reminder: StopReminder?)
+//    func displayUpcoming(reminder: StopReminder?)
     func updateETAs(query: KmbETAQuery?, bound: String, data: [KmbETAResponse.KmbETAData])
     func updateETAs(query: CtbNwfbETAQuery?, bound: String, data: [CtbNwfbETAResponse.CtbNwfbETAData])
     func updateETAs(query: NlbETAQuery?, bound: String, data: [NlbETAResponse.NlbETAData])
@@ -58,28 +58,8 @@ extension MainPagePresenter {
         self.viewController?.displayReminders(viewModel: viewModel)
     }
     
-    func displayUpcoming(reminder: StopReminder?){
-        Log.d(.RUNTIME, "presenter: displayUpcoming")
-        if let reminder = reminder{
-            var routes = [MainPage.UpcomingReminderItem.ReminderRouteItem]()
-            for route in reminder.routes{
-                Log.d(.RUNTIME, "presenter: appending route \(route.routeNum)")
-                if let oneRoute = route.getRoute(){
-                    var stops = [MainPage.UpcomingReminderItem.ReminderRouteStopItem]()
-                    for routeStop in route.getStops(){
-                        stops.append(MainPage.UpcomingReminderItem.ReminderRouteStopItem(stop: routeStop?.stop?.name ?? ""))
-                    }
-                    routes.append(MainPage.UpcomingReminderItem.ReminderRouteItem(company: oneRoute.company, routeNum: route.routeNum, destStop: oneRoute.destStop, stops: stops))
-                }
-            }
-            let reminderItem = MainPage.UpcomingReminderItem(header: MainPage.UpcomingReminderItem.UpcomingHeader(id: reminder.id, name: reminder.name ?? "", period: reminder.displayPeriod, startTime: reminder.startTime, type: reminder.type ?? .OTHER), routes: routes)
-            let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: reminderItem)
-            self.viewController?.displayUpcoming(viewModel: viewModel)
-        }else{
-            let viewModel = MainPage.DisplayItem.UpcomingReminders.ViewModel(upcomingReminder: nil)
-            self.viewController?.displayUpcoming(viewModel: viewModel)
-        }
-    }
+//    func displayUpcoming(reminder: StopReminder?){
+//    }
     
     func displayUpcoming(viewModel: MainPage.DisplayItem.UpcomingReminders.ViewModel){
         self.viewController?.displayUpcoming(viewModel: viewModel)
