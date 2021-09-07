@@ -11,11 +11,11 @@ import UIKit
 // MARK: - Display logic, receive view model from presenter and present
 protocol AboutUsPageDisplayLogic: class
 {
-
+	
 }
 
 // MARK: - View Controller body
-class AboutUsPageViewController: BaseViewController, AboutUsPageDisplayLogic
+class AboutUsPageViewController: BaseTableViewController, AboutUsPageDisplayLogic
 {
     // VIP
     var interactor: AboutUsPageBusinessLogic?
