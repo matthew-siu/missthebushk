@@ -28,6 +28,11 @@ extension Configs {
         static var nlbURL: String{
             return "https://rt.data.gov.hk/v1/transport"
         }
+        
+        // matthew siu's app store
+        static var developerAppStoreLink: String{
+            return "https://apps.apple.com/hk/developer/pongyin-siu/id1536337835"
+        }
     }
     
     // local storage key

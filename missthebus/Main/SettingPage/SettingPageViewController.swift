@@ -25,7 +25,6 @@ class SettingPageViewController: BaseTableViewController, SettingPageDisplayLogi
     @IBOutlet weak var clearMemoryTitle: UILabel!
     @IBOutlet weak var aboutUsTitle: UILabel!
     @IBOutlet var reloadInfoTitle: UILabel!
-    @IBOutlet var helpTitle: UILabel!
     
     @IBOutlet weak var languageLabel: UILabel!
     
@@ -83,8 +82,6 @@ extension SettingPageViewController{
             self.onClickReload()
         }else if (indexPath.section == 2 && indexPath.row == 0){ // about us
             self.router?.routeToAboutUsPage()
-        }else if (indexPath.section == 2 && indexPath.row == 1){ // help
-            self.router?.routeToAboutUsPage()
         }
     }
     
@@ -114,7 +111,6 @@ extension SettingPageViewController {
         self.clearMemoryTitle.text = "setting_clear_memory".localized()
         self.reloadInfoTitle.text = "setting_redownload_info".localized()
         self.aboutUsTitle.text = "setting_about_us".localized()
-        self.helpTitle.text = "setting_help".localized()
         self.languageLabel.text = ""
         self.tableView.backgroundColor = UIColor.SoftUI.major
         

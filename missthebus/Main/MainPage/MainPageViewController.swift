@@ -83,11 +83,27 @@ extension MainPageViewController {
         self.initUI()
         self.initBanner(self.adsBannerView, heightConstaint: self.adsBannerHeightConstraint)
         
-        self.currentTab = self.interactor?.loadFirstTab() ?? .Bookmarks
+        self.interactor?.loadFirstTab()
+            .done{result in
+                self.currentTab = result
+                self.initTab()
+            }.catch{_ in
+                self.currentTab = .Bookmarks
+                self.initTab()
+            }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.interactor?.dismissETATimer()
+    }
+    
+    private func initTab(){
+        
         switch self.currentTab{
             case .Bookmarks:
                 self.interactor?.loadAllBookmarksOfRoute()
@@ -103,13 +119,6 @@ extension MainPageViewController {
                 return
             case .Search: return
         }
-        
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.interactor?.dismissETATimer()
     }
     
     private func initUI(){
@@ -276,10 +285,13 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource, UI
         let dragItem = UIDragItem(itemProvider: NSItemProvider())
         if (self.currentTab == .Bookmarks){
             dragItem.localObject = self.bookmarkItems[indexPath.row]
+            return [dragItem]
         }else if (self.currentTab == .Reminders){
             dragItem.localObject = self.reminderItems[indexPath.row]
+            return [dragItem]
+        }else{
+            return [UIDragItem]()
         }
-        return [ dragItem ]
     }
     
     // on drop
@@ -308,20 +320,19 @@ extension MainPageViewController: ShowUpcomingNotiDelegate{
     
     func createNotification(){
         DispatchQueue.main.async {
-            let content = UNMutableNotificationContent()
-            content.title = "app_name".localized()
-            content.subtitle = self.upcomingReminderItem?.header.name ?? ""
-            content.body = "Test Notification"
-            content.sound = UNNotificationSound.default
+            if let content = self.interactor?.createNotificationContent(etaVM: self.bookmarkETAViewModel){
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+
+                let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
+                    DispatchQueue.main.async {
+                        self.showToast(message: "general_done".localized())
+                    }
+                })
+            }
             
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: {error in
-                print("成功建立通知...")
-            })
         }
     }
     
@@ -353,6 +364,7 @@ extension MainPageViewController {
         self.bookmarkItems = viewModel.bookmarkItems
         self.basicViewModel = viewModel.title
         self.createBtn.isEnabled = true
+        self.tableView.dragInteractionEnabled = true
         self.tableView.reloadData()
     }
     
@@ -361,6 +373,7 @@ extension MainPageViewController {
         self.reminderItems = viewModel.reminderItems
         self.basicViewModel = viewModel.title
         self.createBtn.isEnabled = true
+        self.tableView.dragInteractionEnabled = true
         self.tableView.reloadData()
     }
     
@@ -370,6 +383,7 @@ extension MainPageViewController {
             self.upcomingReminderItem = viewModel.upcomingReminder
             self.basicViewModel = viewModel.title
             self.createBtn.isEnabled = false
+            self.tableView.dragInteractionEnabled = false
             self.tableView.reloadData()
         }
     }

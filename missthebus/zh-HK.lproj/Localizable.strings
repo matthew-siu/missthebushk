@@ -28,6 +28,9 @@
 "main_search" = "搜索";
 "main_upcoming_pin_noti" = "在通知中顯示";
 
+// Notification
+"noti_msg_route" = "%@ 號巴士約於 %@ 到達 %@";
+
 // Setting Page
 "setting_section_general" = "一般";
 "setting_section_about" = "關於";
@@ -42,6 +45,7 @@
 "setting_redownload_info" = "重新加載所有資訊";
 "setting_redownload_info_confirm" = "您確定要重新加載所有資訊嗎？";
 "setting_help" = "幫助";
+"setting_copied_to_board" = "複製到剪貼板";
 
 // Search Page
 "search_label" = "搜尋巴士";
@@ -75,6 +79,7 @@
 "reminder_update_succeed" = "更新成功";
 "reminder_err_at_most_route" = "您最多只能設置 5 條路線";
 "reminder_err_at_least_route" = "您最少要設置 1 條路線";
+"reminder_err_day_of_week" = "請選擇星期幾";
 
 "reminder_tag_work" = "上班";
 "reminder_tag_school" = "上學";
@@ -104,11 +109,6 @@
 "general_error" = "錯誤";
 "general_remind" = "提醒";
 "general_attention" = "注意";
-
-
-
-
-
 
 
 

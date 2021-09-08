@@ -28,6 +28,9 @@
 "main_search" = "Search";
 "main_upcoming_pin_noti" = "Show on Notification";
 
+// Notification
+"noti_msg_route" = "Bus #%@ will depart at %@ around %@";
+
 // Setting Page
 "setting_section_general" = "General";
 "setting_section_about" = "About";
@@ -42,6 +45,7 @@
 "setting_redownload_info" = "Reload all information";
 "setting_redownload_info_confirm" = "Are you sure to reload all information?";
 "setting_help" = "Help";
+"setting_copied_to_board" = "Copied to clipboard";
 
 // Search Page
 "search_label" = "Search Bus";
@@ -74,7 +78,8 @@
 "reminder_create_succeed" = "Create succeed.";
 "reminder_update_succeed" = "Update succeed.";
 "reminder_err_at_most_route" = "You can only set at most five routes.";
-"reminder_err_at_least_route" = "You have to set at lease one routes.";
+"reminder_err_at_least_route" = "You have to set at least one routes.";
+"reminder_err_day_of_week" = "You have to set at least one day of week.";
 
 "reminder_tag_work" = "Work";
 "reminder_tag_school" = "School";
@@ -104,11 +109,6 @@
 "general_error" = "Error";
 "general_remind" = "Remind";
 "general_attention" = "Attention";
-
-
-
-
-
 
 
 

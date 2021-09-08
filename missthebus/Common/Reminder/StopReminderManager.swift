@@ -39,7 +39,7 @@ class StopReminderManager {
     static func addStopReminder(_ reminder: StopReminder){
         self.removeStopReminder(reminder.id) // remove reminderId
         if var reminders = self.getStopReminders(){
-            reminders.append(reminder)
+            reminders.insert(reminder, at: 0)
             self.saveStopReminders(reminders)
         }else{
             self.saveStopReminders([reminder])
@@ -84,7 +84,7 @@ class StopReminderManager {
                 if let reminderDateTime = calendar.date(from: dateComponents){
                     let diff = Calendar.current.dateComponents([.minute], from: reminderDateTime, to: nowDate)
                     if let diffMin = diff.minute{
-                        Log.d(.RUNTIME, "\(reminder.name) diff = \(diffMin)")
+                        Log.d(.RUNTIME, "\(reminder.name ?? "") diff = \(diffMin)")
                         if (diffMin >= 0 && diffMin < maxMinutes){
                             Log.d(.RUNTIME, "Closest reminder is \(reminder.name ?? "")")
                             maxMinutes = diffMin

@@ -346,6 +346,9 @@ extension SetReminderPageViewController{
                 period.append(index)
             }
         }
+        if (period.count == 0){
+            self.showAlert("general_remind".localized(), "reminder_err_day_of_week".localized()) { (_) in}
+        }
         var name = self.nameTextfield.text ?? ""
         if (name.count == 0){
             name = SetReminderPage.DisplayItem.ViewModel.nameSamples.first(where: {$0.type == self.reminderType})?.name ?? "reminder_tag_other".localized()

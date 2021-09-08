@@ -13,7 +13,7 @@ import SVProgressHUD
 // MARK: - Requests from view
 protocol MainPageBusinessLogic
 {
-    func loadFirstTab() -> MainPage.Tab
+    func loadFirstTab() -> Promise<MainPage.Tab>
     func loadAllBookmarksOfRoute()
     func loadAllRemindersOfRoute()
     func loadOneUpcomingReminder()
@@ -23,6 +23,8 @@ protocol MainPageBusinessLogic
     func rearrangeBookmark(at pos1: Int, to pos2: Int)
     func removeReminder(at index: Int)
     func rearrangeReminder(at pos1: Int, to pos2: Int)
+    
+    func createNotificationContent(etaVM: MainPage.DisplayItem.Bookmarks.ETAViewModel) -> UNMutableNotificationContent
 }
 
 // MARK: - Datas retain in interactor defines here
@@ -55,12 +57,24 @@ class MainPageInteractor: MainPageBusinessLogic, MainPageDataStore
 // MARK: - Business
 extension MainPageInteractor {
     
-    func loadFirstTab() -> MainPage.Tab{
+    func loadFirstTab() -> Promise<MainPage.Tab>{
+        return Promise { promise in
+            self.getUpcomingStopReminder()
+                .done{viewModel in
+                    if let _ = viewModel{
+                        promise.fulfill(.Upcoming)
+                    }else{
+                        promise.fulfill(.Bookmarks)
+                    }
+                    
+                }.catch{_ in
+                    promise.fulfill(.Bookmarks)
+                }
+        }
         /* TODO:
             1. If have upcoming reminder, -> upcoming
             2. Else, -> bookmarks
          */
-        return .Upcoming
     }
     
     func dismissETATimer(){
@@ -156,6 +170,52 @@ extension MainPageInteractor{
             promise.fulfill(StopReminderManager.getUpcomingStopReminder())
         }
     }
+    
+    
+    
+    func createNotificationContent(etaVM: MainPage.DisplayItem.Bookmarks.ETAViewModel) -> UNMutableNotificationContent{
+        let content = UNMutableNotificationContent()
+        content.title = "\("app_name".localized()): \(self.upcomingReminder?.upcomingReminder?.header.name ?? "")"
+//        content.subtitle = self.upcomingReminderItem?.title.headerLabel ?? ""
+        content.sound = UNNotificationSound.default
+        
+        var msg = ""
+        if let routes = self.upcomingReminder?.upcomingReminder?.routes{
+            for route in routes{
+                if let eta = etaVM.etaList.first(where: {$0.stopId == route.stops[0].stopId}){
+                    
+                    let calendar = Calendar.current
+                    if let dateComponents = calendar.date(byAdding: .minute, value: eta.eta1?.integer ?? 0, to: Date()){
+                        let displayTime = Utils.convertTime(time: dateComponents, toPattern: "HH:mm")
+                        var routeMsg = ""
+                        if currentLanguage == .english{
+                            routeMsg = String.localizedStringWithFormat("noti_msg_route".localized(), route.route.routeNum, route.stops[0].stop, displayTime)
+                        }else{
+                            routeMsg = String.localizedStringWithFormat("noti_msg_route".localized(), route.route.routeNum, displayTime, route.stops[0].stop)
+                        }
+                        
+                        msg += "\(routeMsg)\n"
+                    }
+                }
+                
+                if (route.stops.count > 1){
+                    if let eta = etaVM.etaList.first(where: {$0.stopId == route.stops[1].stopId}){
+                        
+                        let calendar = Calendar.current
+                        if let dateComponents = calendar.date(byAdding: .minute, value: eta.eta1?.integer ?? 0, to: Date()){
+                            let displayTime = Utils.convertTime(time: dateComponents, toPattern: "HH:mm")
+                            let routeMsg = "\(route.route.routeNum) will depart at \(route.stops[0].stop) around \(displayTime)"
+                            msg += "\(routeMsg)\n"
+                        }
+                    }
+                }
+            }
+        }
+        print(msg)
+        content.body = msg
+        return content
+    }
+    
     
 }
 
