@@ -32,6 +32,8 @@ class UpcomingStopReminderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = UIColor.SoftUI.major
+        
         
         self.bgSoftUIView.setThemeColor(UIColor.SoftUI.major, UIColor.SoftUI.dark, UIColor.SoftUI.light)
         self.bgSoftUIView.cornerRadius = 10

@@ -35,6 +35,7 @@ class MainPageViewController: BaseViewController, MainPageDisplayLogic
     
     @IBOutlet weak var tableView: UITableView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
+    let refreshControl = UIRefreshControl()
     
     
     @IBOutlet weak var adsBannerView: GADBannerView!
@@ -78,6 +79,9 @@ extension MainPageViewController {
         self.tableView.register(TableViewCell.noItemCell.nib, forCellReuseIdentifier: TableViewCell.noItemCell.reuseId)
         self.tableView.register(TableViewCell.upcomingHeader.nib, forHeaderFooterViewReuseIdentifier: TableViewCell.upcomingHeader.reuseId)
         
+        self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        self.tableView.addSubview(self.refreshControl)
+        
         self.tabBar.delegate = self
         
         self.initUI()
@@ -102,22 +106,30 @@ extension MainPageViewController {
         self.interactor?.dismissETATimer()
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        self.initTab()
+    }
+    
     private func initTab(){
         
-        switch self.currentTab{
-            case .Bookmarks:
-                self.interactor?.loadAllBookmarksOfRoute()
-                self.tabBar.selectedItem = self.bookmarksTabBarItem
-                return
-            case .Reminders:
-                self.interactor?.loadAllRemindersOfRoute()
-                self.tabBar.selectedItem = self.remindersTabBarItem
-                return
-            case .Upcoming:
-                self.interactor?.loadOneUpcomingReminder()
-                self.tabBar.selectedItem = self.upcomingTabBarItem
-                return
-            case .Search: return
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                switch self.currentTab{
+                    case .Bookmarks:
+                        self.interactor?.loadAllBookmarksOfRoute()
+                        self.tabBar.selectedItem = self.bookmarksTabBarItem
+                        return
+                    case .Reminders:
+                        self.interactor?.loadAllRemindersOfRoute()
+                        self.tabBar.selectedItem = self.remindersTabBarItem
+                        return
+                    case .Upcoming:
+                        self.interactor?.loadOneUpcomingReminder()
+                        self.tabBar.selectedItem = self.upcomingTabBarItem
+                        return
+                    case .Search: return
+                }
+            })
         }
     }
     
@@ -366,6 +378,7 @@ extension MainPageViewController {
         self.createBtn.isEnabled = true
         self.tableView.dragInteractionEnabled = true
         self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     func displayReminders(viewModel: MainPage.DisplayItem.Reminders.ViewModel){
@@ -375,6 +388,7 @@ extension MainPageViewController {
         self.createBtn.isEnabled = true
         self.tableView.dragInteractionEnabled = true
         self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     func displayUpcoming(viewModel: MainPage.DisplayItem.UpcomingReminders.ViewModel){
@@ -385,6 +399,7 @@ extension MainPageViewController {
             self.createBtn.isEnabled = false
             self.tableView.dragInteractionEnabled = false
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     

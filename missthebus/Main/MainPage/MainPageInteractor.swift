@@ -193,7 +193,6 @@ extension MainPageInteractor{
                         }else{
                             routeMsg = String.localizedStringWithFormat("noti_msg_route".localized(), route.route.routeNum, displayTime, route.stops[0].stop)
                         }
-                        
                         msg += "\(routeMsg)\n"
                     }
                 }
@@ -204,7 +203,12 @@ extension MainPageInteractor{
                         let calendar = Calendar.current
                         if let dateComponents = calendar.date(byAdding: .minute, value: eta.eta1?.integer ?? 0, to: Date()){
                             let displayTime = Utils.convertTime(time: dateComponents, toPattern: "HH:mm")
-                            let routeMsg = "\(route.route.routeNum) will depart at \(route.stops[0].stop) around \(displayTime)"
+                            var routeMsg = ""
+                            if currentLanguage == .english{
+                                routeMsg = String.localizedStringWithFormat("noti_msg_route".localized(), route.route.routeNum, route.stops[1].stop, displayTime)
+                            }else{
+                                routeMsg = String.localizedStringWithFormat("noti_msg_route".localized(), route.route.routeNum, displayTime, route.stops[1].stop)
+                            }
                             msg += "\(routeMsg)\n"
                         }
                     }

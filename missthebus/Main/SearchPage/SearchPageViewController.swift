@@ -28,6 +28,7 @@ class SearchPageViewController: BaseViewController, SearchPageDisplayLogic
     @IBOutlet weak var searchTextfield: SoftUITextfield!
     @IBOutlet weak var tableView: UITableView!
     let gradientLayer = CAGradientLayer() // TableView Faded Edges
+    let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var adsBannerView: GADBannerView!
     @IBOutlet weak var adsBannerHeightConstraint: NSLayoutConstraint!
@@ -54,6 +55,10 @@ extension SearchPageViewController {
         self.tableView.register(TableViewCell.itemCell.nib, forCellReuseIdentifier: TableViewCell.itemCell.reuseId)
         self.tableView.estimatedRowHeight = 200
         
+        self.refreshControl.attributedTitle = NSAttributedString(string: "loading_default".localized())
+        self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        self.tableView.addSubview(self.refreshControl)
+        
         // hide keyboard when tap anywhere
         self.hideKeyboardWhenTappedAround()
         
@@ -67,6 +72,10 @@ extension SearchPageViewController {
         
         // auto open keyboard
         self.searchTextfield.becomeFirstResponder()
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        self.requestKmbRouteList()
     }
     
     private func initUI(){
@@ -131,7 +140,6 @@ extension SearchPageViewController: UITextFieldDelegate{
     
     // on text change, execute filtering
     @objc func textFieldDidChange(_ textField: UITextField) {
-        print("changing.")
         if (self.searchTextfield.text?.count ?? "".count > 0){
             
             self.filteredRouteList = self.routeList.filter{$0.routeNum.contains(self.searchTextfield.text?.uppercased() ?? "")}
@@ -208,11 +216,17 @@ extension SearchPageViewController {
     }
     
     func requestKmbRouteList(){
-        self.interactor?.requestKmbRouteList()
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                self.interactor?.requestKmbRouteList()
+            })
+        }
     }
     
     
     func presentTableView(viewModel: SearchPage.DisplayItem.ViewModel){
+        self.refreshControl.endRefreshing()
+        
         self.routeList = viewModel.routeList
         self.filteredRouteList = self.routeList
         self.tableView.reloadData()

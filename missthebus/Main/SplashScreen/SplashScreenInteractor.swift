@@ -100,6 +100,7 @@ extension SplashScreenInteractor {
         return Promise{ promise in
             NSLog("[API] Get all routes")
             self.initKmb()
+                .done{_ in promise.fulfill(true)}
                 .then{_ in self.initCtbNwfb()}
                 .then{_ in self.initNlb()}
                 .then{_ in self.saveRoutes()}
