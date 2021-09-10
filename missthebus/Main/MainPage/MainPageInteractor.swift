@@ -23,6 +23,7 @@ protocol MainPageBusinessLogic
     func rearrangeBookmark(at pos1: Int, to pos2: Int)
     func removeReminder(at index: Int)
     func rearrangeReminder(at pos1: Int, to pos2: Int)
+    func downloadAllInfo()
     
     func createNotificationContent(etaVM: MainPage.DisplayItem.Bookmarks.ETAViewModel) -> UNMutableNotificationContent
 }
@@ -94,6 +95,18 @@ extension MainPageInteractor {
             self.dismissETATimer()
             self.loadOneUpcomingReminder()
         }
+    }
+    
+    func downloadAllInfo(){
+        Storage.remove(Configs.Storage.KEY_LAST_UPDATE)
+        
+        let request = SplashScreenBuilder.BuildRequest()
+        let vc = SplashScreenBuilder.createScene(request: request)
+        guard let window = UIApplication.shared.windows.first else{
+            return
+        }
+        let navVC = NavigationController(rootViewController: vc)
+        window.rootViewController = navVC
     }
 }
 

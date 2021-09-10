@@ -135,6 +135,7 @@ class Route: Codable {
 }
 
 
+
 enum BusCompany: String, Codable{
     case KMB = "KMB"
     case CTB = "CTB"

@@ -27,6 +27,9 @@
 "main_reminders" = "我的提醒";
 "main_search" = "搜索";
 "main_upcoming_pin_noti" = "在通知中显示";
+"main_alert_download" = "请问你需要加载城巴、新巴和新大屿山巴的资讯吗？ \n(下载将在背景自动完全。)";
+"main_remind_wait" = "该过程将在一分钟内完成。 您可以刷新以查看新的总线列表。";
+"main_remind_download" = "您可以通过点击「设定」>「重新加载所有资讯」以下载全部资讯。";
 
 // Notification
 "noti_msg_route" = "# %@ 号巴士约于 %@ 到达%@";
@@ -43,7 +46,7 @@
 "setting_languges_title" = "选择语言";
 "setting_section_if_outdated" = "如果您发现巴士资讯已过时，您可以点击下面的按钮手动更新所有资讯。";
 "setting_redownload_info" = "重新加载所有资讯";
-"setting_redownload_info_confirm" = "您确定要重新加载所有资讯吗？";
+"setting_redownload_info_confirm" = "您确定要重新加载所有信息吗，包括九巴、城巴、新巴和新大屿山巴士？";
 "setting_help" = "帮助";
 "setting_copied_to_board" = "复制到剪贴板";
 
@@ -109,9 +112,6 @@
 "general_error" = "错误";
 "general_remind" = "提醒";
 "general_attention" = "注意";
-
-
-
 
 
 

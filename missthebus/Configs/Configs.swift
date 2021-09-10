@@ -37,7 +37,8 @@ extension Configs {
     
     // local storage key
     enum Storage {
-        static let KEY_FIRST_TIME = "KEY_FIRST_TIME" // save custom language
+        static let KEY_ALREADY_INIT = "KEY_ALREADY_INIT" // is already init
+        static let KEY_ABLE_NON_KMB = "KEY_ABLE_NON_KMB" // allow download non-kmb info
         static let KEY_LANGUAGE = "KEY_LANGUAGE" // save custom language
         static let KEY_ROUTES = "KEY_ROUTES" // save all routes
         static let KEY_STOPS = "KEY_STOPS" // save all stops

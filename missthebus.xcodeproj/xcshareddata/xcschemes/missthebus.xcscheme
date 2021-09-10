@@ -93,7 +93,7 @@
       buildConfiguration = "PROD">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "DEV"
+      buildConfiguration = "PROD"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

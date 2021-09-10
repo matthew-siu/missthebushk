@@ -11,7 +11,7 @@ import UIKit
 import GoogleMobileAds
 
 // MARK: - Display logic, receive view model from presenter and present
-protocol MainPageDisplayLogic: class
+protocol MainPageDisplayLogic: AnyObject
 {
     func displayBookmarks(viewModel: MainPage.DisplayItem.Bookmarks.ViewModel)
     func displayReminders(viewModel: MainPage.DisplayItem.Reminders.ViewModel)
@@ -99,6 +99,21 @@ extension MainPageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if (!Storage.getBool(Configs.Storage.KEY_ALREADY_INIT)){
+            self.showYesNoAlert("general_remind".localized(), "main_alert_download".localized()) { willDownload in
+                if (willDownload){
+                    self.showAlert("general_remind".localized(), "main_remind_wait".localized()) { _ in
+                        Storage.save(Configs.Storage.KEY_ABLE_NON_KMB, true)
+                        self.interactor?.downloadAllInfo()
+                    }
+                }else{
+                    self.showAlert("general_remind".localized(), "main_remind_download".localized()) { _ in
+                        Storage.save(Configs.Storage.KEY_ABLE_NON_KMB, false)
+                    }
+                }
+                Storage.save(Configs.Storage.KEY_ALREADY_INIT, true)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

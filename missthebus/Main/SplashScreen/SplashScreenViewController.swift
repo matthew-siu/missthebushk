@@ -9,7 +9,7 @@
 import UIKit
                                                                               
 // MARK: - Display logic, receive view model from presenter and present
-protocol SplashScreenDisplayLogic: class
+protocol SplashScreenDisplayLogic: AnyObject
 {
     func displayLoadingMsg(msg: String)
     func updateProgressBar(to percentage: Float)
@@ -35,6 +35,11 @@ extension SplashScreenViewController {
     {
         super.viewDidLoad()
         self.initUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.requestAllKmbStaticInfo()
     }
 }
@@ -49,16 +54,18 @@ extension SplashScreenViewController {
         self.softIconView.cornerRadius = 20
         self.softIconView.type = .staticView
         self.progressView.progress = 0
+        self.progressView.isHidden = true
+        self.loadingMsgLabel.isHidden = true
         self.loadingMsgLabel.useTextStyle(.label_sub)
         self.loadingMsgLabel.textColor = .lightGray
         self.loadingMsgLabel.text = "loading_default".localized()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.iconImg.fade(true, 0.5)
         }
     }
     
     func displayLoadingMsg(msg: String){
-        print("[API] displayLoadingMsg: \(msg)")
+//        print("[API] displayLoadingMsg: \(msg)")
         self.loadingMsgLabel.text = msg
     }
     
@@ -71,18 +78,26 @@ extension SplashScreenViewController {
     }
     
     func requestAllKmbStaticInfo(){
-        self.interactor?.requestAllBusStaticInfo()
-            .done{ instant in
-                self.gotoMainPage(!instant)
-            }
-            .catch{ _ in
-                self.gotoMainPage(true)
-            }
+        
+        NSLog("requestAllKmbStaticInfo")
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                
+                self.interactor?.requestAllBusStaticInfo()
+                    .done{ instant in
+                        self.gotoMainPage(!instant)
+                    }
+                    .catch{ _ in
+                        self.gotoMainPage(true)
+                    }
+            })
+        }
     }
     
     func gotoMainPage(_ delay: Bool){
         let sec: Double = delay ? 1 : 0
         DispatchQueue.main.asyncAfter(deadline: .now() + sec) {
+            NSLog("gotoMainPage")
             self.router?.routeToMainPage()
         }
     }

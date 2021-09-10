@@ -69,11 +69,13 @@ extension SplashScreenInteractor {
     func requestAllBusStaticInfo() -> Promise<Bool>{
         
         return Promise { promise in
+            
             if (!self.needUpdate()) {
                 self.updateProgress("loading_check_update".localized(), to: 1)
                 promise.fulfill(false)
                 return
             }
+
             self.isUpdateAtBackground = (KmbManager.getAllRoutes()?.count ?? 0 > 0) // if has loaded route data already, can update at background.
             if (self.isUpdateAtBackground){
                 self.isUpdateAtBackground = true
@@ -88,8 +90,12 @@ extension SplashScreenInteractor {
                 }
             }else{
                 DispatchQueue.main.async {
-                    self.updateAllBusInfo()
+                    promise.fulfill(true) // false = give some delay
+
+                    self.loadKmbFromFile()
                         .done{_ in promise.fulfill(true)}
+//                        .then{_ in self.updateAllBusInfo()}
+//                        .done{_ in promise.fulfill(true)}
                         .catch{err in promise.reject(err)}
                 }
             }
@@ -163,7 +169,7 @@ extension SplashScreenInteractor {
     func saveRoutes() -> Promise<Any>{
         return Promise{promise in
             
-            self.updateProgress("loading_default".localized(), to: Progress.Sort.rawValue)
+//            self.updateProgress("loading_default".localized(), to: Progress.Sort.rawValue)
             self.allBusInfo.routes = []
             self.allBusInfo.routes += self.kmbInfo.routes
             self.allBusInfo.routes += self.ctbInfo.routes
@@ -171,6 +177,7 @@ extension SplashScreenInteractor {
             self.allBusInfo.routes += self.nlbInfo.routes
             
             // sort routes
+            NSLog("sorting bus")
             self.allBusInfo.routes = self.allBusInfo.routes.sorted{
                 if $0.routeNumParser[0] != $1.routeNumParser[0]{
                     return $0.routeNumParser[0] < $1.routeNumParser[0]
@@ -180,6 +187,8 @@ extension SplashScreenInteractor {
                 }
                 return $0.routeNumParser[2] < $1.routeNumParser[2]
             }
+            NSLog("sorted bus")
+            
             KmbManager.saveAllRoutes(self.allBusInfo.routes)
             
             promise.fulfill(true)
@@ -209,6 +218,106 @@ extension SplashScreenInteractor {
 // MARK: KmbAPI
 
 extension SplashScreenInteractor{
+    
+    // for apple approval
+    func loadKmbFromFile() -> Promise<Any>{
+        return Promise { promise in
+            self.loadKmbRouteFromFile()
+                .done{result in self.deserializeRoutes(result)}
+                .then{_ in self.loadKmbStopFromFile()}
+                .done{ data in self.saveKmbStops(data) }
+                .then{_ in self.loadKmbRouteStopFromFile()}
+                .done{ data in self.saveKmbRouteStops(data) }
+                .then{_ in self.saveRoutes()}
+                .done{_ in
+                    self.saveStops()
+                    promise.fulfill(true)
+                }
+                .catch{err in promise.reject(err)}
+        }
+    }
+    
+    func loadKmbRouteFromFile() -> Promise<KmbRouteResponse?>{
+        NSLog("loadKmbRouteFromFile")
+        return Promise { promise in
+            if let path = Bundle.main.path(forResource: "kmb_routes", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    if let response = self.parseKmbRoute(json: data){
+                        promise.fulfill(response)
+                    }
+                  } catch {
+                    promise.fulfill(nil)
+                  }
+            }
+            promise.fulfill(nil)
+        }
+    }
+    
+    func loadKmbStopFromFile() -> Promise<KmbStopResponse?>{
+        NSLog("loadKmbStopFromFile")
+        return Promise { promise in
+            if let path = Bundle.main.path(forResource: "kmb_stops", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    if let response = self.parseKmbStop(json: data){
+                        promise.fulfill(response)
+                    }
+                } catch {
+                    promise.fulfill(nil)
+                }
+            }
+            promise.fulfill(nil)
+        }
+    }
+    
+    func loadKmbRouteStopFromFile() -> Promise<KmbRouteStopResponse?>{
+        NSLog("loadKmbRouteStopFromFile")
+        return Promise { promise in
+            if let path = Bundle.main.path(forResource: "kmb_routeStops", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    if let response = self.parseKmbRouteStop(json: data){
+                        promise.fulfill(response)
+                    }
+                } catch {
+                    promise.fulfill(nil)
+                }
+            }
+            promise.fulfill(nil)
+        }
+    }
+    
+    private func parseKmbRoute(json: Data) -> KmbRouteResponse?{
+        let decoder = JSONDecoder()
+
+        if let kmbRouteResponse = try? decoder.decode(KmbRouteResponse.self, from: json) {
+            return kmbRouteResponse
+        }else{
+            return nil
+        }
+    }
+    
+    private func parseKmbStop(json: Data) -> KmbStopResponse?{
+        let decoder = JSONDecoder()
+
+        if let kmbStopResponse = try? decoder.decode(KmbStopResponse.self, from: json) {
+            return kmbStopResponse
+        }else{
+            return nil
+        }
+    }
+    
+    private func parseKmbRouteStop(json: Data) -> KmbRouteStopResponse?{
+        let decoder = JSONDecoder()
+
+        if let kmbRouteStopResponse = try? decoder.decode(KmbRouteStopResponse.self, from: json) {
+            return kmbRouteStopResponse
+        }else{
+            return nil
+        }
+    }
+    
     /* initKmb:
         1. get all routes
         2. get all stops
@@ -234,22 +343,27 @@ extension SplashScreenInteractor{
     
     func saveKmbStops(_ response: KmbStopResponse?){
         if let resp = response?.data{
+            NSLog("[API] KMB stops = \(resp.count)")
             self.kmbInfo.stops = resp.map{ Stop(data: $0)}
         }
     }
     
     func saveKmbRouteStops(_ response: KmbRouteStopResponse?){
         
-        if let resp = response?.data{
-            let routeStops = resp.map {RouteStop(data: $0)}
-            for routeStop in routeStops{
-                self.kmbInfo.routes.first(where: {
-                    $0.route == routeStop.route &&
-                    $0.bound == routeStop.bound &&
-                    $0.serviceType == routeStop.serviceType
-                })?.appendStopList(routeStop)
-            }
-        }
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                
+                if let resp = response?.data{
+                    NSLog("[API] KMB route stops = \(resp.count)")
+                    let routeStops = resp.map {RouteStop(data: $0)}
+                    for routeStop in routeStops{
+                        self.kmbInfo.routes.first(where: {
+                            $0.route == routeStop.route &&
+                            $0.bound == routeStop.bound &&
+                            $0.serviceType == routeStop.serviceType
+                        })?.appendStopList(routeStop)
+                    }
+                }
+            })
     }
     
     func updateProgress(_ msg: String? = nil, to percentage: Float){
@@ -272,6 +386,11 @@ extension SplashScreenInteractor{
      */
     func initCtbNwfb() -> Promise<Any>{
         return Promise{ promise in
+            if (!Storage.getBool(Configs.Storage.KEY_ABLE_NON_KMB)){
+                promise.fulfill(true)
+                return
+            }
+            
             self.updateProgress("loading_ctb".localized(), to: Progress.CtbRoute.rawValue)
             // part 1: CTB
             KmbManager.requestAllCtbRoutes()
@@ -385,6 +504,11 @@ extension SplashScreenInteractor{
     func initNlb() -> Promise<Any>{
         NSLog("[API] init NLB")
         return Promise{ promise in
+            if (!Storage.getBool(Configs.Storage.KEY_ABLE_NON_KMB)){
+                promise.fulfill(true)
+                return
+            }
+            
             self.updateProgress("loading_nlb".localized(), to: Progress.NlbRoute.rawValue)
             KmbManager.requestAllNlbRoutes()
                 .done{data in self.deserializeRoutes(data)}

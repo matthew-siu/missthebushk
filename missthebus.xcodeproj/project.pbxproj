@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E496A7726EAE9D9002FE3B3 /* kmb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E496A7626EAE9D9002FE3B3 /* kmb_routes.json */; };
+		2E496A7926EAEB2D002FE3B3 /* kmb_stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E496A7826EAEB2D002FE3B3 /* kmb_stops.json */; };
+		2E496A7D26EAEB57002FE3B3 /* kmb_routeStops.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E496A7C26EAEB57002FE3B3 /* kmb_routeStops.json */; };
 		4392F3A126D18E3200A0E6D7 /* nlb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4392F3A026D18E3200A0E6D7 /* nlb_routes.json */; };
 		4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */; };
 		4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */; };
@@ -186,6 +189,9 @@
 		1D927B0F1285E2E8EB506B2C /* Pods-missthebusTests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.prod.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.prod.xcconfig"; sourceTree = "<group>"; };
 		1FAC3DFD914DADF3CB93CD2E /* Pods-missthebus-missthebusUITests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.dev.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.dev.xcconfig"; sourceTree = "<group>"; };
 		24D63641BCA0F1273102A670 /* Pods_missthebus_missthebusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebus_missthebusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E496A7626EAE9D9002FE3B3 /* kmb_routes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kmb_routes.json; sourceTree = "<group>"; };
+		2E496A7826EAEB2D002FE3B3 /* kmb_stops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kmb_stops.json; sourceTree = "<group>"; };
+		2E496A7C26EAEB57002FE3B3 /* kmb_routeStops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kmb_routeStops.json; sourceTree = "<group>"; };
 		4392F3A026D18E3200A0E6D7 /* nlb_routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nlb_routes.json; sourceTree = "<group>"; };
 		4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbRouteAPIRepository.swift; sourceTree = "<group>"; };
 		4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbRouteAPIRepository.swift; sourceTree = "<group>"; };
@@ -403,6 +409,9 @@
 			isa = PBXGroup;
 			children = (
 				4392F3A026D18E3200A0E6D7 /* nlb_routes.json */,
+				2E496A7626EAE9D9002FE3B3 /* kmb_routes.json */,
+				2E496A7826EAEB2D002FE3B3 /* kmb_stops.json */,
+				2E496A7C26EAEB57002FE3B3 /* kmb_routeStops.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1063,6 +1072,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E496A7D26EAEB57002FE3B3 /* kmb_routeStops.json in Resources */,
 				8F56613926B3A866005AB134 /* SplashScreenViewController.storyboard in Resources */,
 				8F89B5AD26941201006312EA /* LaunchScreen.storyboard in Resources */,
 				8F93D13F26CD056C0007601C /* SimpleStopReminderRouteCollectionViewCell.xib in Resources */,
@@ -1070,6 +1080,7 @@
 				8FD1B84426E0C1E10050D53D /* UpcomingStopReminderHeaderView.xib in Resources */,
 				8F5660F026B13672005AB134 /* ReminderNameCollectionViewCell.xib in Resources */,
 				8F9905D226CFB46900D6541C /* UpcomingStopReminderTableViewCell.xib in Resources */,
+				2E496A7926EAEB2D002FE3B3 /* kmb_stops.json in Resources */,
 				8F89B5AA26941201006312EA /* Assets.xcassets in Resources */,
 				8F695B8526AE99CA00518622 /* SetReminderPageViewController.storyboard in Resources */,
 				8FB5A05826A6B38F0013540D /* StopListPageViewController.storyboard in Resources */,
@@ -1077,6 +1088,7 @@
 				8FFF6CB6269D89640033D2CE /* RouteItemTableViewCell.xib in Resources */,
 				8FC67B4926BB989600BEE56D /* NoItemTableViewCell.xib in Resources */,
 				8F56618126B3F9E7005AB134 /* StopBookmarkTableViewCell.xib in Resources */,
+				2E496A7726EAE9D9002FE3B3 /* kmb_routes.json in Resources */,
 				8F9905AC26CFA67700D6541C /* AboutUsPageViewController.storyboard in Resources */,
 				8FB5A0BA26AA7A860013540D /* StopETAItemCollectionViewCell.xib in Resources */,
 				8FFF6CE3269FDE1F0033D2CE /* Localizable.strings in Resources */,
@@ -1511,7 +1523,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = missthebus/Info.plist;
@@ -1638,7 +1650,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 2878VNJAM4;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = missthebus/Info.plist;

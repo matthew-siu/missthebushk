@@ -27,6 +27,9 @@
 "main_reminders" = "我的提醒";
 "main_search" = "搜索";
 "main_upcoming_pin_noti" = "在通知中顯示";
+"main_alert_download" = "請問你需要加載城巴、新巴和新大嶼山巴的資訊嗎？\n(下載將在背景自動完全。)";
+"main_remind_wait" = "該過程將在一分鐘內完成。 您可以刷新以查看新的總線列表。";
+"main_remind_download" = "您可以通過點擊「設定」>「重新加載所有資訊」以下載全部資訊。";
 
 // Notification
 "noti_msg_route" = "%@ 號巴士約於 %@ 到達 %@";
@@ -43,7 +46,7 @@
 "setting_languges_title" = "選擇語言";
 "setting_section_if_outdated" = "如果您發現巴士資訊已過時，您可以點擊下面的按鈕手動更新所有資訊。";
 "setting_redownload_info" = "重新加載所有資訊";
-"setting_redownload_info_confirm" = "您確定要重新加載所有資訊嗎？";
+"setting_redownload_info_confirm" = "您確定要重新加載所有資訊嗎，包括九巴、城巴、新巴和新大嶼山巴士？";
 "setting_help" = "幫助";
 "setting_copied_to_board" = "複製到剪貼板";
 
@@ -109,9 +112,6 @@
 "general_error" = "錯誤";
 "general_remind" = "提醒";
 "general_attention" = "注意";
-
-
-
 
 
 

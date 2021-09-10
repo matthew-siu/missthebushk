@@ -138,8 +138,11 @@ extension SettingPageViewController {
     private func onClickReload(){
         self.showYesNoAlert("general_remind".localized(), "setting_redownload_info_confirm".localized()) { (isConfirm) in
             if (isConfirm){
-                self.interactor?.reloadInfo()
-                self.router?.restartApp()
+                self.showAlert("general_remind".localized(), "main_remind_wait".localized()) { _ in
+                    Storage.save(Configs.Storage.KEY_ABLE_NON_KMB, true)
+                    self.interactor?.reloadInfo()
+                    self.router?.restartApp()
+                }
             }
         }
     }
