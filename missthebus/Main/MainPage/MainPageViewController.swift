@@ -95,6 +95,9 @@ extension MainPageViewController {
                 self.currentTab = .Bookmarks
                 self.initTab()
             }
+        
+//            let size = self.getSizeOfUserDefaults()
+//            print("getSizeOfUserDefaults: \(String(describing: size))bytes")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,7 +145,8 @@ extension MainPageViewController {
                         self.interactor?.loadOneUpcomingReminder()
                         self.tabBar.selectedItem = self.upcomingTabBarItem
                         return
-                    case .Search: return
+                    case .Search:
+                        return
                 }
             })
         }

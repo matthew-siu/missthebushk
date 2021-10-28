@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - Display logic, receive view model from presenter and present
-protocol AboutUsPageDisplayLogic: class
+protocol AboutUsPageDisplayLogic: AnyObject
 {
 	
 }
@@ -21,18 +21,22 @@ class AboutUsPageViewController: BaseTableViewController, AboutUsPageDisplayLogi
     var interactor: AboutUsPageBusinessLogic?
     var router: (NSObjectProtocol & AboutUsPageRoutingLogic & AboutUsPageDataPassing)?
     
+    @IBOutlet weak var companyBtn: UIButton!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
-    let email = "krescendo.studio@gmail.com"
-    
     @IBAction func onClickCopyEmail(_ sender: Any) {
-        UIPasteboard.general.string = self.email
+        UIPasteboard.general.string = Configs.Info.email
         self.showToast(message: "setting_copied_to_board".localized())
     }
     
     @IBAction func exploreMore(_ sender: Any) {
-        guard let url = URL(string: Configs.Network.developerAppStoreLink) else { return }
+        guard let url = URL(string: Configs.Info.developerAppStoreLink) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func browseCompanyWebsite(_ sender: Any) {
+        guard let url = URL(string: Configs.Info.companyLink) else { return }
         UIApplication.shared.open(url)
     }
 }
@@ -43,7 +47,8 @@ extension AboutUsPageViewController {
     {
         super.viewDidLoad()
         self.title = "setting_about_us".localized()
-        self.emailLabel.text = email
+        self.companyBtn.setTitle(Configs.Info.companyName, for: .normal)
+        self.emailLabel.text = Configs.Info.email
         if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String{
             self.versionLabel.text = "v\(appVersion)"
         }

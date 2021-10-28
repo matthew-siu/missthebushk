@@ -27,7 +27,7 @@
 "main_reminders" = "My Reminders";
 "main_search" = "Search";
 "main_upcoming_pin_noti" = "Show on Notification";
-"main_alert_download" = "Would you like to download the information about CityBus, New World First Bus and New Lantao Bus?\n(The download will run on the background.)";
+"main_alert_download" = "Would you like to download the information(~6MB) about CityBus, New World First Bus and New Lantao Bus?\n(The download will run on the background.)";
 "main_remind_wait" = "The process will finish within one minute. You can refresh to see the new bus list.";
 "main_remind_download" = "You can download them anytime by clicking \"Setting\" > \"Reload all information\".";
 

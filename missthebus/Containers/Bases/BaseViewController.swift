@@ -90,6 +90,21 @@ extension BaseViewController{
 
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    func getSizeOfUserDefaults() -> Int? {
+        guard let libraryDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first else {
+            return nil
+        }
+
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
+            return nil
+        }
+
+        let filepath = "\(libraryDir)/Preferences/\(bundleIdentifier).plist"
+        let filesize = try? FileManager.default.attributesOfItem(atPath: filepath)
+        let retVal = filesize?[FileAttributeKey.size]
+        return retVal as? Int
+    }
 }
 
 // Admob

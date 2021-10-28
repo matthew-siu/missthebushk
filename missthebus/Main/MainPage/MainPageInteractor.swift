@@ -358,18 +358,18 @@ extension MainPageInteractor{
 
 // MARK: - ETA Timer
 extension MainPageInteractor {
-    private func startETATimer(tab: MainPage.Tab){
-        self.dismissETATimer()
-        
-        if (tab == .Bookmarks){
-            self.requestBookmarkETA(nil)
-            self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestBookmarkETA), userInfo: nil, repeats: true)
-        }else if (tab == .Upcoming){
-            self.requestUpcomingETA(nil)
-            self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestUpcomingETA), userInfo: nil, repeats: true)
+        private func startETATimer(tab: MainPage.Tab){
+            self.dismissETATimer()
+            
+            if (tab == .Bookmarks){
+                self.requestBookmarkETA(nil)
+                self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestBookmarkETA), userInfo: nil, repeats: true)
+            }else if (tab == .Upcoming){
+                self.requestUpcomingETA(nil)
+                self.etaTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(requestUpcomingETA), userInfo: nil, repeats: true)
+            }
+            
         }
-        
-    }
     
     private func requestOneStopETA(query: APIQuery, bound: String){
         DispatchQueue.main.async {
