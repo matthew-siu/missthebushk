@@ -10,6 +10,12 @@
 		2E496A7726EAE9D9002FE3B3 /* kmb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E496A7626EAE9D9002FE3B3 /* kmb_routes.json */; };
 		2E496A7926EAEB2D002FE3B3 /* kmb_stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E496A7826EAEB2D002FE3B3 /* kmb_stops.json */; };
 		2E496A7D26EAEB57002FE3B3 /* kmb_routeStops.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E496A7C26EAEB57002FE3B3 /* kmb_routeStops.json */; };
+		2E4F79F528210E1E00F12600 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E4F79F428210E1E00F12600 /* WidgetKit.framework */; };
+		2E4F79F728210E1E00F12600 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E4F79F628210E1E00F12600 /* SwiftUI.framework */; };
+		2E4F79FA28210E1E00F12600 /* missthebus_widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4F79F928210E1E00F12600 /* missthebus_widget.swift */; };
+		2E4F79FC28210E2100F12600 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E4F79FB28210E2100F12600 /* Assets.xcassets */; };
+		2E4F7A0028210E2100F12600 /* missthebus widgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2E4F79F328210E1E00F12600 /* missthebus widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2EAFCC4528238AE30021A0F2 /* ETAWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAFCC4428238AE30021A0F2 /* ETAWidgetView.swift */; };
 		4392F3A126D18E3200A0E6D7 /* nlb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4392F3A026D18E3200A0E6D7 /* nlb_routes.json */; };
 		4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */; };
 		4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */; };
@@ -167,6 +173,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2E4F79FE28210E2100F12600 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F89B595269411FF006312EA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E4F79F228210E1E00F12600;
+			remoteInfo = "missthebus widgetExtension";
+		};
 		8F89B5B426941201006312EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8F89B595269411FF006312EA /* Project object */;
@@ -183,6 +196,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2E4F7A0128210E2100F12600 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2E4F7A0028210E2100F12600 /* missthebus widgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAA535F1D675EA0E2879F74 /* Pods-missthebusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.release.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +219,13 @@
 		2E496A7626EAE9D9002FE3B3 /* kmb_routes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kmb_routes.json; sourceTree = "<group>"; };
 		2E496A7826EAEB2D002FE3B3 /* kmb_stops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kmb_stops.json; sourceTree = "<group>"; };
 		2E496A7C26EAEB57002FE3B3 /* kmb_routeStops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kmb_routeStops.json; sourceTree = "<group>"; };
+		2E4F79F328210E1E00F12600 /* missthebus widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "missthebus widgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E4F79F428210E1E00F12600 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		2E4F79F628210E1E00F12600 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		2E4F79F928210E1E00F12600 /* missthebus_widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = missthebus_widget.swift; sourceTree = "<group>"; };
+		2E4F79FB28210E2100F12600 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2E4F79FD28210E2100F12600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EAFCC4428238AE30021A0F2 /* ETAWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETAWidgetView.swift; sourceTree = "<group>"; };
 		4392F3A026D18E3200A0E6D7 /* nlb_routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nlb_routes.json; sourceTree = "<group>"; };
 		4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbRouteAPIRepository.swift; sourceTree = "<group>"; };
 		4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbRouteAPIRepository.swift; sourceTree = "<group>"; };
@@ -368,6 +402,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2E4F79F028210E1E00F12600 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E4F79F728210E1E00F12600 /* SwiftUI.framework in Frameworks */,
+				2E4F79F528210E1E00F12600 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F89B59A269411FF006312EA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,8 +444,21 @@
 				D8093F8CC47B9CB9151224AF /* Pods_missthebus.framework */,
 				24D63641BCA0F1273102A670 /* Pods_missthebus_missthebusUITests.framework */,
 				181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */,
+				2E4F79F428210E1E00F12600 /* WidgetKit.framework */,
+				2E4F79F628210E1E00F12600 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2E4F79F828210E1E00F12600 /* missthebus widget */ = {
+			isa = PBXGroup;
+			children = (
+				2E4F79F928210E1E00F12600 /* missthebus_widget.swift */,
+				2E4F79FB28210E2100F12600 /* Assets.xcassets */,
+				2E4F79FD28210E2100F12600 /* Info.plist */,
+				2EAFCC4428238AE30021A0F2 /* ETAWidgetView.swift */,
+			);
+			path = "missthebus widget";
 			sourceTree = "<group>";
 		};
 		4392F39F26D18E0500A0E6D7 /* Resources */ = {
@@ -568,6 +624,7 @@
 				8F89B59F269411FF006312EA /* missthebus */,
 				8F89B5B626941201006312EA /* missthebusTests */,
 				8F89B5C126941201006312EA /* missthebusUITests */,
+				2E4F79F828210E1E00F12600 /* missthebus widget */,
 				8F89B59E269411FF006312EA /* Products */,
 				E0639187C479280D3D0CED02 /* Pods */,
 				2132E6A7F6B72E0924AE7395 /* Frameworks */,
@@ -580,6 +637,7 @@
 				8F89B59D269411FF006312EA /* missthebus.app */,
 				8F89B5B326941201006312EA /* missthebusTests.xctest */,
 				8F89B5BE26941201006312EA /* missthebusUITests.xctest */,
+				2E4F79F328210E1E00F12600 /* missthebus widgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -963,6 +1021,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2E4F79F228210E1E00F12600 /* missthebus widgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E4F7A0428210E2100F12600 /* Build configuration list for PBXNativeTarget "missthebus widgetExtension" */;
+			buildPhases = (
+				2E4F79EF28210E1E00F12600 /* Sources */,
+				2E4F79F028210E1E00F12600 /* Frameworks */,
+				2E4F79F128210E1E00F12600 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "missthebus widgetExtension";
+			productName = "missthebus widgetExtension";
+			productReference = 2E4F79F328210E1E00F12600 /* missthebus widgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8F89B59C269411FF006312EA /* missthebus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F89B5C726941201006312EA /* Build configuration list for PBXNativeTarget "missthebus" */;
@@ -973,10 +1048,12 @@
 				8F89B59B269411FF006312EA /* Resources */,
 				8862C84AAEC0A88DD79AD597 /* [CP] Embed Pods Frameworks */,
 				59A000038E4DFB6ECBBE5956 /* [CP] Copy Pods Resources */,
+				2E4F7A0128210E2100F12600 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2E4F79FF28210E2100F12600 /* PBXTargetDependency */,
 			);
 			name = missthebus;
 			productName = missthebus;
@@ -1029,9 +1106,12 @@
 		8F89B595269411FF006312EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
+					2E4F79F228210E1E00F12600 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 					8F89B59C269411FF006312EA = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -1063,11 +1143,20 @@
 				8F89B59C269411FF006312EA /* missthebus */,
 				8F89B5B226941201006312EA /* missthebusTests */,
 				8F89B5BD26941201006312EA /* missthebusUITests */,
+				2E4F79F228210E1E00F12600 /* missthebus widgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2E4F79F128210E1E00F12600 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E4F79FC28210E2100F12600 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F89B59B269411FF006312EA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1257,6 +1346,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2E4F79EF28210E1E00F12600 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E4F79FA28210E1E00F12600 /* missthebus_widget.swift in Sources */,
+				2EAFCC4528238AE30021A0F2 /* ETAWidgetView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F89B599269411FF006312EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1407,6 +1505,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2E4F79FF28210E2100F12600 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E4F79F228210E1E00F12600 /* missthebus widgetExtension */;
+			targetProxy = 2E4F79FE28210E2100F12600 /* PBXContainerItemProxy */;
+		};
 		8F89B5B526941201006312EA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8F89B59C269411FF006312EA /* missthebus */;
@@ -1453,6 +1556,166 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2E4F7A0228210E2100F12600 /* DEV */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2878VNJAM4;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "missthebus widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "missthebus widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nipohc.missthebus.missthebus-widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DEV;
+		};
+		2E4F7A0328210E2100F12600 /* PROD */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2878VNJAM4;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "missthebus widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "missthebus widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nipohc.missthebus.missthebus-widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = PROD;
+		};
 		8F5661AB26B79F21005AB134 /* DEV */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1519,6 +1782,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5571D37DBB5802259EE4B549 /* Pods-missthebus.dev.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1646,6 +1910,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA98B8FFA57C7355C63C3526 /* Pods-missthebus.prod.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1716,6 +1981,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2E4F7A0428210E2100F12600 /* Build configuration list for PBXNativeTarget "missthebus widgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E4F7A0228210E2100F12600 /* DEV */,
+				2E4F7A0328210E2100F12600 /* PROD */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = DEV;
+		};
 		8F89B598269411FF006312EA /* Build configuration list for PBXProject "missthebus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
