@@ -20,6 +20,10 @@ class Storage{
         UserDefaults.standard.set(param, forKey: key)
     }
     
+    static func save(suiteName: String, _ key: String, _ param: Any){
+        UserDefaults(suiteName: suiteName)?.set(param, forKey: key)
+    }
+    
     // save img
     static func save(img: UIImage,
                         forKey key: String,
@@ -87,6 +91,12 @@ class Storage{
         return UserDefaults.standard.string(forKey: key)!
     }
     
+    static func getString(suiteName: String, _ key: String) -> String{
+        let dic = [key: ""]
+        UserDefaults(suiteName: suiteName)?.register(defaults: dic)
+        return UserDefaults(suiteName: suiteName)!.string(forKey: key)!
+    }
+    
     static func getDict(_ key: String) -> [String: Any]{
         let dic = [key: ["": ""]]
         UserDefaults.standard.register(defaults: dic)
@@ -103,8 +113,16 @@ class Storage{
         return UserDefaults.standard.data(forKey: key)
     }
     
+    static func getObject(suiteName: String, _ key: String) -> Data?{
+        return UserDefaults(suiteName: suiteName)?.data(forKey: key)
+    }
+    
     static func remove(_ key: String){
         UserDefaults.standard.removeObject(forKey: key)
+    }
+    
+    static func remove(suiteName: String, _ key: String){
+        UserDefaults(suiteName: suiteName)?.removeObject(forKey: key)
     }
     
     static func removeAll(){

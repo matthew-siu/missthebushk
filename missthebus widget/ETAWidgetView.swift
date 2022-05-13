@@ -8,54 +8,50 @@
 import SwiftUI
 
 struct ETAWidgetView: View {
-    let etaList = ["277X", "T277", "215X"]
+    var entry: Provider.Entry
 
     var body: some View {
-        VStack(spacing: 5){
-            ForEach(etaList, id: \.self){ eta in
-                VStack(alignment: .leading, spacing: 5){
+        VStack(spacing: 0){
+            
+            ForEach(entry.etaList){ stop in
+                VStack(alignment: .leading, spacing: 0){
                     HStack{
-                        Text(eta)
+                        Text(stop.busNum)
                             .font(.headline)
                         Spacer()
-                        Text("1")
-                            .font(.body)
-                        Text("12")
-                            .font(.caption)
+                        if let eta1 = stop.eta1{
+                            Text(eta1)
+                                .font(.caption)
+                        }
+                        if let eta2 = stop.eta2{
+                            Text(eta2)
+                                .font(.caption)
+                        }
+                        
                     }
-                    HStack(spacing: 0){
-                        Text("AAA stop")
+                    .padding(0)
+                    HStack(){
+                        Text(stop.stopName)
                             .font(.caption2)
                     }
                     Divider()
                 }
             }
+            .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+            
+//            Spacer()
+            
+            HStack{
+                Text("Updates:")
+                    .font(.caption2)
+                Spacer()
+                Text(Utils.convertTime(time: entry.date, toPattern: "HH:mm:ss"))
+                    .font(.caption2)
+            }
+            .padding(.init(top: 5, leading: 10, bottom: 0, trailing: 10))
         }
-        .padding(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
+        .padding(.init(top: 10, leading: 0, bottom: 10, trailing: 0))
         
         
     }
 }
-
-
-//struct ETAWidgetView: View {
-//    let name: String
-//
-//    var body: some View {
-//          VStack {
-//            Text("Hello! \(name)!")
-//              .font(.system(size: 20))
-//              .font(.headline)
-//              Text("Welcome \(name) with our widget!")
-//              .multilineTextAlignment(.center)
-//              .padding(.top, 5)
-//              .padding([.leading, .trailing])
-//      }
-//    }
-//}
-
-//struct ETAWidgetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ETAWidgetView(name: "Tony")
-//    }
-//}

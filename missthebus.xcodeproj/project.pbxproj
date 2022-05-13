@@ -16,6 +16,54 @@
 		2E4F79FC28210E2100F12600 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E4F79FB28210E2100F12600 /* Assets.xcassets */; };
 		2E4F7A0028210E2100F12600 /* missthebus widgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2E4F79F328210E1E00F12600 /* missthebus widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2EAFCC4528238AE30021A0F2 /* ETAWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAFCC4428238AE30021A0F2 /* ETAWidgetView.swift */; };
+		2EB5890E282CF918005740CF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A09826A909BF0013540D /* Utils.swift */; };
+		2EB58911282D0BB8005740CF /* WidgetBusStopETA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58910282D0BB8005740CF /* WidgetBusStopETA.swift */; };
+		2EB58912282D0C09005740CF /* WidgetBusStopETA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58910282D0BB8005740CF /* WidgetBusStopETA.swift */; };
+		2EB58914282D1046005740CF /* WidgetBusStopETAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58913282D1046005740CF /* WidgetBusStopETAManager.swift */; };
+		2EB58915282D1125005740CF /* WidgetBusStopETAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58913282D1046005740CF /* WidgetBusStopETAManager.swift */; };
+		2EB58916282DEEB9005740CF /* StopBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67B5826BBD07800BEE56D /* StopBookmark.swift */; };
+		2EB58917282DEEC0005740CF /* StopBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67B5D26BBD23200BEE56D /* StopBookmarkManager.swift */; };
+		2EB58918282DEECA005740CF /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C7F2697F1130033D2CE /* RequestProtocol.swift */; };
+		2EB58919282DEEE3005740CF /* KmbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */; };
+		2EB5891A282DEEEB005740CF /* CtbNwfbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3CE26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift */; };
+		2EB5891B282DEEF8005740CF /* NlbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3DD26D243CD00A0E6D7 /* NlbETAAPIRepository.swift */; };
+		2EB5891C282DEF05005740CF /* BusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07D26A80F3E0013540D /* BusManager.swift */; };
+		2EB5891D282DEF15005740CF /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CAA269D815A0033D2CE /* Route.swift */; };
+		2EB5891E282DF077005740CF /* KmbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C8F26983BCA0033D2CE /* KmbRouteAPIRepository.swift */; };
+		2EB5891F282DF07E005740CF /* CtbNwfbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */; };
+		2EB58920282DF087005740CF /* NlbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */; };
+		2EB58921282DF08F005740CF /* KmbStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C9A269D4D8A0033D2CE /* KmbStopAPIRepository.swift */; };
+		2EB58922282DF098005740CF /* CtbNwfbStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3C926D2399000A0E6D7 /* CtbNwfbStopAPIRepository.swift */; };
+		2EB58923282DF0A0005740CF /* KmbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C9F269D4E2F0033D2CE /* KmbRouteStopAPIRepository.swift */; };
+		2EB58924282DF0A7005740CF /* CtbNwfbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3C426D237EA00A0E6D7 /* CtbNwfbRouteStopAPIRepository.swift */; };
+		2EB58925282DF0AE005740CF /* NlbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3D526D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift */; };
+		2EB58926282DF0D9005740CF /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C7D2697F1130033D2CE /* ResponseProtocol.swift */; };
+		2EB58927282DF0E1005740CF /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F846FDB26A167E0007FBDCD /* Storage.swift */; };
+		2EB58928282DF0EB005740CF /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B5FD26943466006312EA /* Configs.swift */; };
+		2EB58929282DF10C005740CF /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A06326A6B9F80013540D /* Stop.swift */; };
+		2EB5892A282DF118005740CF /* RouteStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07426A8027C0013540D /* RouteStop.swift */; };
+		2EB5892B282DF12E005740CF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6A2697F0720033D2CE /* APIManager.swift */; };
+		2EB5892C282DF142005740CF /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C7E2697F1130033D2CE /* RepositoryProtocol.swift */; };
+		2EB58933282DF1BC005740CF /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6C2697F0720033D2CE /* NetworkOperation.swift */; };
+		2EB58934282DF1BC005740CF /* NetworkAsyncQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6F2697F0720033D2CE /* NetworkAsyncQueue.swift */; };
+		2EB58935282DF1BC005740CF /* BaseAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C702697F0720033D2CE /* BaseAPIResponse.swift */; };
+		2EB58936282DF1BC005740CF /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6D2697F0720033D2CE /* APIRepository.swift */; };
+		2EB58937282DF1BC005740CF /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C6E2697F0720033D2CE /* APIResult.swift */; };
+		2EB58938282DF1BC005740CF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C712697F0720033D2CE /* NetworkError.swift */; };
+		2EB5893A282DF205005740CF /* MSExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B63E26944E5B006312EA /* MSExtension.swift */; };
+		2EB5893B282DF25B005740CF /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6C862697FEE20033D2CE /* CodableExtension.swift */; };
+		2EB5893C282DF267005740CF /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B61926943BDB006312EA /* UIImageExtension.swift */; };
+		2EB5893D282DF267005740CF /* TableViewCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CBA269D93950033D2CE /* TableViewCellHelper.swift */; };
+		2EB5893E282DF267005740CF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B61826943BDB006312EA /* StringExtension.swift */; };
+		2EB5893F282DF267005740CF /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B61526943BDB006312EA /* ArrayExtension.swift */; };
+		2EB58940282DF267005740CF /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B61626943BDB006312EA /* UIStoryboardExtension.swift */; };
+		2EB58941282DF267005740CF /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B6492694504C006312EA /* UIColorExtension.swift */; };
+		2EB58942282DF267005740CF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B61726943BDB006312EA /* UIViewExtension.swift */; };
+		2EB58945282DF2AE005740CF /* FontConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B5FB26943466006312EA /* FontConfigs.swift */; };
+		2EB58946282DF2AE005740CF /* ColorConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F89B5FC26943466006312EA /* ColorConfigs.swift */; };
+		2EB58947282DF2AE005740CF /* LanguageConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CEE269FE2920033D2CE /* LanguageConfigs.swift */; };
+		2EB5894A282DF446005740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58949282DF446005740CF /* ViewController.swift */; };
+		2EB5894B282DF46A005740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58949282DF446005740CF /* ViewController.swift */; };
 		4392F3A126D18E3200A0E6D7 /* nlb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4392F3A026D18E3200A0E6D7 /* nlb_routes.json */; };
 		4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */; };
 		4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */; };
@@ -25,6 +73,7 @@
 		4392F3D626D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3D526D2409600A0E6D7 /* NlbRouteStopAPIRepository.swift */; };
 		4392F3DE26D243CD00A0E6D7 /* NlbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3DD26D243CD00A0E6D7 /* NlbETAAPIRepository.swift */; };
 		574B3EB72772DA813A9CBE11 /* Pods_missthebusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */; };
+		597D6BD0FCD8B7F73560B2B2 /* Pods_missthebus_widgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C54AAADF3C656A01E16679 /* Pods_missthebus_widgetExtension.framework */; };
 		5F77A262C9001D1B1FA1275F /* Pods_missthebus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8093F8CC47B9CB9151224AF /* Pods_missthebus.framework */; };
 		8F09F2AE269693C70083B2CD /* SoftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F2AD269693C70083B2CD /* SoftUIView.swift */; };
 		8F09F2B6269694250083B2CD /* SoftUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F2B5269694250083B2CD /* SoftUIButton.swift */; };
@@ -135,7 +184,7 @@
 		8FB5A05C26A6B38F0013540D /* StopListPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A05426A6B38F0013540D /* StopListPageInteractor.swift */; };
 		8FB5A06426A6B9F80013540D /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A06326A6B9F80013540D /* Stop.swift */; };
 		8FB5A07526A8027C0013540D /* RouteStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07426A8027C0013540D /* RouteStop.swift */; };
-		8FB5A07E26A80F3E0013540D /* KmbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07D26A80F3E0013540D /* KmbManager.swift */; };
+		8FB5A07E26A80F3E0013540D /* BusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A07D26A80F3E0013540D /* BusManager.swift */; };
 		8FB5A08626A8193F0013540D /* KmbETAAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */; };
 		8FB5A08C26A81E180013540D /* StopItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FB5A08B26A81E180013540D /* StopItemTableViewCell.xib */; };
 		8FB5A09126A820420013540D /* StopItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5A09026A820420013540D /* StopItemTableViewCell.swift */; };
@@ -226,6 +275,12 @@
 		2E4F79FB28210E2100F12600 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E4F79FD28210E2100F12600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EAFCC4428238AE30021A0F2 /* ETAWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETAWidgetView.swift; sourceTree = "<group>"; };
+		2EB58910282D0BB8005740CF /* WidgetBusStopETA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusStopETA.swift; sourceTree = "<group>"; };
+		2EB58913282D1046005740CF /* WidgetBusStopETAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusStopETAManager.swift; sourceTree = "<group>"; };
+		2EB58949282DF446005740CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2EB5894C282DFCD2005740CF /* missthebus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = missthebus.entitlements; sourceTree = "<group>"; };
+		2EB5894D282E0393005740CF /* missthebus widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "missthebus widgetExtension.entitlements"; sourceTree = "<group>"; };
+		3B16FF7B8AE5C4FB4187DCEB /* Pods-missthebus widgetExtension.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus widgetExtension.dev.xcconfig"; path = "Target Support Files/Pods-missthebus widgetExtension/Pods-missthebus widgetExtension.dev.xcconfig"; sourceTree = "<group>"; };
 		4392F3A026D18E3200A0E6D7 /* nlb_routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nlb_routes.json; sourceTree = "<group>"; };
 		4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbRouteAPIRepository.swift; sourceTree = "<group>"; };
 		4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtbNwfbRouteAPIRepository.swift; sourceTree = "<group>"; };
@@ -236,6 +291,7 @@
 		4392F3DD26D243CD00A0E6D7 /* NlbETAAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NlbETAAPIRepository.swift; sourceTree = "<group>"; };
 		4E13968637DFE3136EC8B868 /* Pods-missthebusTests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebusTests.dev.xcconfig"; path = "Target Support Files/Pods-missthebusTests/Pods-missthebusTests.dev.xcconfig"; sourceTree = "<group>"; };
 		5571D37DBB5802259EE4B549 /* Pods-missthebus.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus.dev.xcconfig"; path = "Target Support Files/Pods-missthebus/Pods-missthebus.dev.xcconfig"; sourceTree = "<group>"; };
+		55C54AAADF3C656A01E16679 /* Pods_missthebus_widgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_missthebus_widgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62881CEB96DBB62B92F1D681 /* Pods-missthebus-missthebusUITests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.prod.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.prod.xcconfig"; sourceTree = "<group>"; };
 		8F09F2AD269693C70083B2CD /* SoftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUIView.swift; sourceTree = "<group>"; };
 		8F09F2B5269694250083B2CD /* SoftUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftUIButton.swift; sourceTree = "<group>"; };
@@ -351,7 +407,7 @@
 		8FB5A05426A6B38F0013540D /* StopListPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopListPageInteractor.swift; sourceTree = "<group>"; };
 		8FB5A06326A6B9F80013540D /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		8FB5A07426A8027C0013540D /* RouteStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStop.swift; sourceTree = "<group>"; };
-		8FB5A07D26A80F3E0013540D /* KmbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbManager.swift; sourceTree = "<group>"; };
+		8FB5A07D26A80F3E0013540D /* BusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusManager.swift; sourceTree = "<group>"; };
 		8FB5A08526A8193F0013540D /* KmbETAAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmbETAAPIRepository.swift; sourceTree = "<group>"; };
 		8FB5A08B26A81E180013540D /* StopItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopItemTableViewCell.xib; sourceTree = "<group>"; };
 		8FB5A09026A820420013540D /* StopItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -392,6 +448,7 @@
 		8FFF6CE9269FDE290033D2CE /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8FFF6CEA269FDE2D0033D2CE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8FFF6CEE269FE2920033D2CE /* LanguageConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageConfigs.swift; sourceTree = "<group>"; };
+		9C39F015F8AA4DFC580047BE /* Pods-missthebus widgetExtension.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus widgetExtension.prod.xcconfig"; path = "Target Support Files/Pods-missthebus widgetExtension/Pods-missthebus widgetExtension.prod.xcconfig"; sourceTree = "<group>"; };
 		C2D9AB089D4AC05E4DCC9DDC /* Pods-missthebus-missthebusUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.debug.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CBEBB3ADF2EDEA0D18B53898 /* Pods-missthebus-missthebusUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus-missthebusUITests.release.xcconfig"; path = "Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D4F3B26E280927D33FFFB669 /* Pods-missthebus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-missthebus.release.xcconfig"; path = "Target Support Files/Pods-missthebus/Pods-missthebus.release.xcconfig"; sourceTree = "<group>"; };
@@ -408,6 +465,7 @@
 			files = (
 				2E4F79F728210E1E00F12600 /* SwiftUI.framework in Frameworks */,
 				2E4F79F528210E1E00F12600 /* WidgetKit.framework in Frameworks */,
+				597D6BD0FCD8B7F73560B2B2 /* Pods_missthebus_widgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +504,7 @@
 				181795C22EE4D8438285CF22 /* Pods_missthebusTests.framework */,
 				2E4F79F428210E1E00F12600 /* WidgetKit.framework */,
 				2E4F79F628210E1E00F12600 /* SwiftUI.framework */,
+				55C54AAADF3C656A01E16679 /* Pods_missthebus_widgetExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -459,6 +518,15 @@
 				2EAFCC4428238AE30021A0F2 /* ETAWidgetView.swift */,
 			);
 			path = "missthebus widget";
+			sourceTree = "<group>";
+		};
+		2EB5890F282D0B91005740CF /* WidgetModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EB58910282D0BB8005740CF /* WidgetBusStopETA.swift */,
+				2EB58913282D1046005740CF /* WidgetBusStopETAManager.swift */,
+			);
+			path = WidgetModel;
 			sourceTree = "<group>";
 		};
 		4392F39F26D18E0500A0E6D7 /* Resources */ = {
@@ -621,6 +689,7 @@
 		8F89B594269411FF006312EA = {
 			isa = PBXGroup;
 			children = (
+				2EB5894D282E0393005740CF /* missthebus widgetExtension.entitlements */,
 				8F89B59F269411FF006312EA /* missthebus */,
 				8F89B5B626941201006312EA /* missthebusTests */,
 				8F89B5C126941201006312EA /* missthebusUITests */,
@@ -645,6 +714,7 @@
 		8F89B59F269411FF006312EA /* missthebus */ = {
 			isa = PBXGroup;
 			children = (
+				2EB5894C282DFCD2005740CF /* missthebus.entitlements */,
 				8F89B5FA2694341D006312EA /* Configs */,
 				8FFF6CA4269D6F6E0033D2CE /* Common */,
 				8F89B5F8269433E7006312EA /* Containers */,
@@ -682,6 +752,7 @@
 		8F89B5E0269432E9006312EA /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2EB58949282DF446005740CF /* ViewController.swift */,
 				8F56614126B3A8CD005AB134 /* SplashScreen */,
 				8F89B5E12694333D006312EA /* MainPage */,
 				8F803F7926CF540200E03EF1 /* SettingPage */,
@@ -897,7 +968,7 @@
 				8FFF6CAA269D815A0033D2CE /* Route.swift */,
 				8FB5A06326A6B9F80013540D /* Stop.swift */,
 				8FB5A07426A8027C0013540D /* RouteStop.swift */,
-				8FB5A07D26A80F3E0013540D /* KmbManager.swift */,
+				8FB5A07D26A80F3E0013540D /* BusManager.swift */,
 			);
 			path = KMB;
 			sourceTree = "<group>";
@@ -983,6 +1054,7 @@
 		8FFF6CA4269D6F6E0033D2CE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2EB5890F282D0B91005740CF /* WidgetModel */,
 				8FC67B5726BBD03B00BEE56D /* StopBookmark */,
 				8F5660F826B1506E005AB134 /* Reminder */,
 				8FB5A07C26A80F160013540D /* KMB */,
@@ -1014,6 +1086,8 @@
 				62881CEB96DBB62B92F1D681 /* Pods-missthebus-missthebusUITests.prod.xcconfig */,
 				4E13968637DFE3136EC8B868 /* Pods-missthebusTests.dev.xcconfig */,
 				1D927B0F1285E2E8EB506B2C /* Pods-missthebusTests.prod.xcconfig */,
+				3B16FF7B8AE5C4FB4187DCEB /* Pods-missthebus widgetExtension.dev.xcconfig */,
+				9C39F015F8AA4DFC580047BE /* Pods-missthebus widgetExtension.prod.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1025,6 +1099,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E4F7A0428210E2100F12600 /* Build configuration list for PBXNativeTarget "missthebus widgetExtension" */;
 			buildPhases = (
+				DD3CC55D2705D441F95BCB2B /* [CP] Check Pods Manifest.lock */,
 				2E4F79EF28210E1E00F12600 /* Sources */,
 				2E4F79F028210E1E00F12600 /* Frameworks */,
 				2E4F79F128210E1E00F12600 /* Resources */,
@@ -1321,6 +1396,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-missthebus-missthebusUITests/Pods-missthebus-missthebusUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DD3CC55D2705D441F95BCB2B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-missthebus widgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DE925EBA9865AFAF09812B63 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1350,8 +1447,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB58946282DF2AE005740CF /* ColorConfigs.swift in Sources */,
+				2EB58921282DF08F005740CF /* KmbStopAPIRepository.swift in Sources */,
+				2EB5893A282DF205005740CF /* MSExtension.swift in Sources */,
+				2EB58942282DF267005740CF /* UIViewExtension.swift in Sources */,
+				2EB58925282DF0AE005740CF /* NlbRouteStopAPIRepository.swift in Sources */,
+				2EB58922282DF098005740CF /* CtbNwfbStopAPIRepository.swift in Sources */,
+				2EB58937282DF1BC005740CF /* APIResult.swift in Sources */,
+				2EB5892B282DF12E005740CF /* APIManager.swift in Sources */,
+				2EB58919282DEEE3005740CF /* KmbETAAPIRepository.swift in Sources */,
+				2EB58924282DF0A7005740CF /* CtbNwfbRouteStopAPIRepository.swift in Sources */,
 				2E4F79FA28210E1E00F12600 /* missthebus_widget.swift in Sources */,
+				2EB5891A282DEEEB005740CF /* CtbNwfbETAAPIRepository.swift in Sources */,
+				2EB58936282DF1BC005740CF /* APIRepository.swift in Sources */,
+				2EB5893F282DF267005740CF /* ArrayExtension.swift in Sources */,
+				2EB58929282DF10C005740CF /* Stop.swift in Sources */,
+				2EB5893E282DF267005740CF /* StringExtension.swift in Sources */,
+				2EB5893D282DF267005740CF /* TableViewCellHelper.swift in Sources */,
+				2EB58916282DEEB9005740CF /* StopBookmark.swift in Sources */,
+				2EB5893C282DF267005740CF /* UIImageExtension.swift in Sources */,
+				2EB58923282DF0A0005740CF /* KmbRouteStopAPIRepository.swift in Sources */,
+				2EB5891D282DEF15005740CF /* Route.swift in Sources */,
+				2EB58941282DF267005740CF /* UIColorExtension.swift in Sources */,
+				2EB5891B282DEEF8005740CF /* NlbETAAPIRepository.swift in Sources */,
+				2EB5892C282DF142005740CF /* RepositoryProtocol.swift in Sources */,
 				2EAFCC4528238AE30021A0F2 /* ETAWidgetView.swift in Sources */,
+				2EB58938282DF1BC005740CF /* NetworkError.swift in Sources */,
+				2EB5891E282DF077005740CF /* KmbRouteAPIRepository.swift in Sources */,
+				2EB58947282DF2AE005740CF /* LanguageConfigs.swift in Sources */,
+				2EB58933282DF1BC005740CF /* NetworkOperation.swift in Sources */,
+				2EB58918282DEECA005740CF /* RequestProtocol.swift in Sources */,
+				2EB58945282DF2AE005740CF /* FontConfigs.swift in Sources */,
+				2EB5894B282DF46A005740CF /* ViewController.swift in Sources */,
+				2EB58912282D0C09005740CF /* WidgetBusStopETA.swift in Sources */,
+				2EB58927282DF0E1005740CF /* Storage.swift in Sources */,
+				2EB5891C282DEF05005740CF /* BusManager.swift in Sources */,
+				2EB58928282DF0EB005740CF /* Configs.swift in Sources */,
+				2EB5893B282DF25B005740CF /* CodableExtension.swift in Sources */,
+				2EB58935282DF1BC005740CF /* BaseAPIResponse.swift in Sources */,
+				2EB58920282DF087005740CF /* NlbRouteAPIRepository.swift in Sources */,
+				2EB58940282DF267005740CF /* UIStoryboardExtension.swift in Sources */,
+				2EB58917282DEEC0005740CF /* StopBookmarkManager.swift in Sources */,
+				2EB58926282DF0D9005740CF /* ResponseProtocol.swift in Sources */,
+				2EB5891F282DF07E005740CF /* CtbNwfbRouteAPIRepository.swift in Sources */,
+				2EB5890E282CF918005740CF /* Utils.swift in Sources */,
+				2EB58934282DF1BC005740CF /* NetworkAsyncQueue.swift in Sources */,
+				2EB58915282D1125005740CF /* WidgetBusStopETAManager.swift in Sources */,
+				2EB5892A282DF118005740CF /* RouteStop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1360,6 +1502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F56613C26B3A866005AB134 /* SplashScreenBuilder.swift in Sources */,
+				2EB58914282D1046005740CF /* WidgetBusStopETAManager.swift in Sources */,
 				4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */,
 				8FFF6C722697F0720033D2CE /* APIManager.swift in Sources */,
 				8F803F8726CF542300E03EF1 /* SettingPageViewController.swift in Sources */,
@@ -1445,7 +1588,7 @@
 				8F9905AD26CFA67700D6541C /* AboutUsPageModels.swift in Sources */,
 				8F09F2BC2696967C0083B2CD /* SoftUITextfield.swift in Sources */,
 				8F89B5F12694337A006312EA /* MainPageInteractor.swift in Sources */,
-				8FB5A07E26A80F3E0013540D /* KmbManager.swift in Sources */,
+				8FB5A07E26A80F3E0013540D /* BusManager.swift in Sources */,
 				4392F3CF26D23B0600A0E6D7 /* CtbNwfbETAAPIRepository.swift in Sources */,
 				8F89B61B26943BDB006312EA /* ArrayExtension.swift in Sources */,
 				8F89B5A5269411FF006312EA /* BaseViewController.swift in Sources */,
@@ -1457,11 +1600,13 @@
 				8FB5A06426A6B9F80013540D /* Stop.swift in Sources */,
 				8F89B66C269598A7006312EA /* SearchPagePresenter.swift in Sources */,
 				8F695B8326AE99CA00518622 /* SetReminderPageWorker.swift in Sources */,
+				2EB5894A282DF446005740CF /* ViewController.swift in Sources */,
 				8FFF6CBB269D93950033D2CE /* TableViewCellHelper.swift in Sources */,
 				8F9905AA26CFA67700D6541C /* AboutUsPageWorker.swift in Sources */,
 				8F9905C126CFA69900D6541C /* LanguagePageModels.swift in Sources */,
 				8F695B8926AE99CA00518622 /* SetReminderPageInteractor.swift in Sources */,
 				8F89B61C26943BDB006312EA /* UIStoryboardExtension.swift in Sources */,
+				2EB58911282D0BB8005740CF /* WidgetBusStopETA.swift in Sources */,
 				8F803F8426CF542300E03EF1 /* SettingPageRouter.swift in Sources */,
 				8F93D12926CCC1040007601C /* SimpleStopReminderTableViewCell.swift in Sources */,
 				8FC67B5E26BBD23200BEE56D /* StopBookmarkManager.swift in Sources */,
@@ -1558,6 +1703,7 @@
 /* Begin XCBuildConfiguration section */
 		2E4F7A0228210E2100F12600 /* DEV */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B16FF7B8AE5C4FB4187DCEB /* Pods-missthebus widgetExtension.dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1591,6 +1737,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "missthebus widgetExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1641,6 +1788,7 @@
 		};
 		2E4F7A0328210E2100F12600 /* PROD */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C39F015F8AA4DFC580047BE /* Pods-missthebus widgetExtension.prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1674,6 +1822,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "missthebus widgetExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1785,6 +1934,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = missthebus/missthebus.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 31;
@@ -1913,6 +2063,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = missthebus/missthebus.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 31;

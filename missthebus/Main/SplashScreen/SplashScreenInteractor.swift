@@ -76,7 +76,7 @@ extension SplashScreenInteractor {
                 return
             }
 
-            self.isUpdateAtBackground = (KmbManager.getAllRoutes()?.count ?? 0 > 0) // if has loaded route data already, can update at background.
+            self.isUpdateAtBackground = (BusManager.getAllRoutes()?.count ?? 0 > 0) // if has loaded route data already, can update at background.
             if (self.isUpdateAtBackground){
                 self.isUpdateAtBackground = true
                 DispatchQueue.global(qos: .userInitiated).async {
@@ -189,7 +189,7 @@ extension SplashScreenInteractor {
             }
             NSLog("sorted bus")
             
-            KmbManager.saveAllRoutes(self.allBusInfo.routes)
+            BusManager.saveAllRoutes(self.allBusInfo.routes)
             
             promise.fulfill(true)
         }
@@ -201,7 +201,7 @@ extension SplashScreenInteractor {
         self.allBusInfo.stops += self.ctbInfo.stops
         self.allBusInfo.stops += self.nwfbInfo.stops
         self.allBusInfo.stops += self.nlbInfo.stops
-        KmbManager.saveAllStops(self.allBusInfo.stops)
+        BusManager.saveAllStops(self.allBusInfo.stops)
     }
     
     func needUpdate() -> Bool{
@@ -326,12 +326,12 @@ extension SplashScreenInteractor{
     func initKmb() -> Promise<Any>{
         return Promise{ promise in
             self.updateProgress("loading_kmb".localized(), to: Progress.KmbRoute.rawValue)
-            KmbManager.requestAllKmbRoutes()
+            BusManager.requestAllKmbRoutes()
                 .done { data in self.deserializeRoutes(data) }
                 .done { _ in self.updateProgress(to: Progress.KmbStop.rawValue)}
-                .then{ _ in KmbManager.requestAllKmbStops() }
+                .then{ _ in BusManager.requestAllKmbStops() }
                 .done{ data in self.saveKmbStops(data) }
-                .then{ _ in KmbManager.requestAllKmbRouteStops() }
+                .then{ _ in BusManager.requestAllKmbRouteStops() }
                 .done{ data in self.saveKmbRouteStops(data) }
                 .done { _ in
                     NSLog("[API] init KMB completed")
@@ -393,7 +393,7 @@ extension SplashScreenInteractor{
             
             self.updateProgress("loading_ctb".localized(), to: Progress.CtbRoute.rawValue)
             // part 1: CTB
-            KmbManager.requestAllCtbRoutes()
+            BusManager.requestAllCtbRoutes()
                 .done { data in self.deserializeRoutes(data) }
                 .done { _ in self.updateProgress(to: Progress.CtbStop1.rawValue)}
                 .then{ _ in self.requestAllRouteStops(company: .CTB) }
@@ -401,7 +401,7 @@ extension SplashScreenInteractor{
                 .then{ _ in self.requestAllStops(company: .CTB) }
                 .done{ _ in self.updateProgress("loading_nwfb".localized(), to: Progress.NwfbRoute.rawValue)}
                 // part 2: NWFB
-                .then{ _ in KmbManager.requestAllNwfbRoutes() }
+                .then{ _ in BusManager.requestAllNwfbRoutes() }
                 .done { data in self.deserializeRoutes(data) }
                 .done { _ in self.updateProgress(to: Progress.NwfbStop1.rawValue)}
                 .then{ _ in self.requestAllRouteStops(company: .NWFB) }
@@ -426,7 +426,7 @@ extension SplashScreenInteractor{
             let busInfo = (company == .CTB) ? self.ctbInfo : self.nwfbInfo
             var routeRequestList = [Promise<CtbNwfbRouteStopResponse?>]()
             for route in busInfo.routes{
-                routeRequestList.append(KmbManager.requestAllCtbNwfbRouteStops(busCompany: company, routeNum: route.route, bound: route.bound))
+                routeRequestList.append(BusManager.requestAllCtbNwfbRouteStops(busCompany: company, routeNum: route.route, bound: route.bound))
             }
             when(fulfilled: routeRequestList)
                 .done{routeResponses in
@@ -472,7 +472,7 @@ extension SplashScreenInteractor{
                 }
             }
             for stopId in stopIdList{
-                stopRequestList.append(KmbManager.requestCtbNwfbStop(stopId: stopId))
+                stopRequestList.append(BusManager.requestCtbNwfbStop(stopId: stopId))
             }
             when(fulfilled: stopRequestList)
                 .done{stopResponses in
@@ -510,7 +510,7 @@ extension SplashScreenInteractor{
             }
             
             self.updateProgress("loading_nlb".localized(), to: Progress.NlbRoute.rawValue)
-            KmbManager.requestAllNlbRoutes()
+            BusManager.requestAllNlbRoutes()
                 .done{data in self.deserializeRoutes(data)}
                 .done { _ in self.updateProgress(to: Progress.NlbStop.rawValue)}
                 .then{_ in self.requestAllNlbRouteStops() }
@@ -529,7 +529,7 @@ extension SplashScreenInteractor{
             var stopRequestList = [Promise<NlbRouteStopResponse?>]()
             let routeIdList: [String] = self.nlbInfo.routes.map{$0.routeId}
             for routeId in routeIdList{
-                stopRequestList.append(KmbManager.requestAllNlbRouteStops(routeId: routeId))
+                stopRequestList.append(BusManager.requestAllNlbRouteStops(routeId: routeId))
             }
             when(fulfilled: stopRequestList)
                 .done{data in

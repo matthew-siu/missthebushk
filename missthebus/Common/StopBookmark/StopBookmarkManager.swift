@@ -22,10 +22,11 @@ class StopBookmarkManager{
 extension StopBookmarkManager{
     
     static func getStopBookmarks() -> [StopBookmark]?{
-        if let data = Storage.getObject(Configs.Storage.KEY_BOOKMARKS){
+        if let data = Storage.getObject(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_BOOKMARKS){
             do {
                 let decoder = JSONDecoder()
                 let stops = try decoder.decode([StopBookmark].self, from: data)
+                print("stops: \(stops.count)")
                 return stops
 
             } catch {
@@ -33,6 +34,7 @@ extension StopBookmarkManager{
                 return nil
             }
         }
+        print("stops: nil")
         return nil
     }
     
@@ -40,7 +42,7 @@ extension StopBookmarkManager{
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(bookmarks)
-            Storage.save(Configs.Storage.KEY_BOOKMARKS, data)
+            Storage.save(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_BOOKMARKS, data)
         } catch {
             print("StopBookmarks: Unable to Encode Note (\(error))")
         }

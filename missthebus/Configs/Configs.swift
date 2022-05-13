@@ -50,6 +50,10 @@ extension Configs {
         static let KEY_BOOKMARKS = "KEY_BOOKMARKS"
     }
     
+    enum SuiteName{
+        static let AppGroup = "group.com.nipohc.missthebus"
+    }
+    
     // admob
     enum Admob{
         static let appId: String = "ca-app-pub-8400536240691918~9985074453"

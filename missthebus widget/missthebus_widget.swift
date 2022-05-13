@@ -9,6 +9,8 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
+    let etaManager = WidgetBusStopETAManager()
+    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
     }
@@ -18,32 +20,43 @@ struct Provider: TimelineProvider {
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+        let second = 30
+        let loop = 10
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
-        }
+        
+        self.etaManager.requestETA()
+            .done{body in
+                for offset in 0 ..< loop {
+                    let entryDate = Calendar.current.date(byAdding: .second, value: offset * second, to: currentDate)!
+                    let entry = SimpleEntry(date: entryDate, etaList: body)
+                    entries.append(entry)
+                }
+                let timeline = Timeline(entries: entries, policy: .atEnd)
+                completion(timeline)
+            }
+            .catch{err in
+                let timeline = Timeline(entries: entries, policy: .atEnd)
+                completion(timeline)
+            }
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let name: String = "Matthew"
+    var etaList: [WidgetBusStopETA] = []
 }
 
 struct missthebus_widgetEntryView : View {
     var entry: Provider.Entry
+    
 
     var body: some View {
-        ETAWidgetView()
+        ETAWidgetView(entry: self.entry)
     }
 }
 

@@ -26,7 +26,7 @@ extension AppLanguage {
     
     static var currentLanguage: AppLanguage {
         get {
-            var lang = Storage.getString(Configs.Storage.KEY_LANGUAGE)
+            var lang = Storage.getString(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_LANGUAGE)
             if (lang == "") {
                 lang = NSLocale.preferredLanguages[0]
             }
@@ -42,7 +42,7 @@ extension AppLanguage {
         set {
             // update app language through legacy Language Handler
             if self.currentLanguage == newValue { return }
-            Storage.save(Configs.Storage.KEY_LANGUAGE, self.currentLanguage.rawValue)
+            Storage.save(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_LANGUAGE, self.currentLanguage.rawValue)
         }
 
     }
@@ -51,7 +51,7 @@ extension AppLanguage {
 extension String {
     
     func localized() ->String {
-        let path = Bundle(for: BaseViewController.self).path(forResource: currentLanguage.rawValue, ofType: "lproj")
+        let path = Bundle(for: ViewController.self).path(forResource: currentLanguage.rawValue, ofType: "lproj")
 
         let bundle = Bundle(path: path!)
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")

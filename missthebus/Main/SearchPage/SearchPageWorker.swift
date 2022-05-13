@@ -18,7 +18,7 @@ class SearchPageWorker
         SVProgressHUD.show()
         
         let repo = KmbRouteAPIRepository()
-        KMBAPI.send(repository: repo)
+        BusAPI.send(repository: repo)
             .done { (response) in
                 SVProgressHUD.dismiss()
                 if let ref = response.body  {

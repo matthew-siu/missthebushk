@@ -53,7 +53,7 @@ extension LanguagePageViewController {
         
         self.showYesNoAlert("general_remind".localized(), "setting_languages_confirm".localized() + " \("setting_languages_confirm".localized()) \(lang)?") { (isConfirm) in
                 if (isConfirm){
-                    Storage.save(Configs.Storage.KEY_LANGUAGE, lang)
+                    Storage.save(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_LANGUAGE, lang)
                     self.router?.restartApp()
                 }
             }

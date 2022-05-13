@@ -56,7 +56,7 @@ extension StopListPagePresenter {
             print("ETA count: \(data.count)")
             for eta in data{
                 if (eta.route == route.route && eta.dir == route.bound && String(eta.service_type ?? -1) == route.serviceType){
-                    if let display = KmbManager.getETA(raw: eta.eta){
+                    if let display = BusManager.getETA(raw: eta.eta){
                         
                         etaList.append(StopListPage.ETA(company: .KMB, seq: eta.seq ?? -1, display: display, remark: eta.rmk))
                     }
@@ -74,13 +74,13 @@ extension StopListPagePresenter {
             for (_, eta) in data.enumerated(){
                 if (eta.co == BusCompany.CTB.rawValue){
                     if (eta.route == route.route && eta.dir == route.bound){
-                        if let display = KmbManager.getETA(raw: eta.eta){
+                        if let display = BusManager.getETA(raw: eta.eta){
                             etaList.append(StopListPage.ETA(company: .CTB, seq: eta.seq ?? -1, display: display, remark: eta.rmk))
                         }
                     }
                 }else if (eta.co == BusCompany.NWFB.rawValue){
                     if (eta.route == route.route && eta.dir == route.bound){
-                        if let display = KmbManager.getETA(raw: eta.eta){
+                        if let display = BusManager.getETA(raw: eta.eta){
                             etaList.append(StopListPage.ETA(company: .NWFB, seq: eta.seq ?? -1, display: display, remark: eta.rmk))
                         }
                     }
@@ -97,7 +97,7 @@ extension StopListPagePresenter {
             print("ETA count: \(data.count)")
             for eta in data{
                 
-                if let display = KmbManager.getETA(raw: eta.estimatedArrivalTime, format: "yyyy-MM-dd HH:mm:ss"){
+                if let display = BusManager.getETA(raw: eta.estimatedArrivalTime, format: "yyyy-MM-dd HH:mm:ss"){
                     if let stop = self.route?.stopList.first(where: {$0.routeId == query.routeId && $0.stopId == query.stopId}){
                         etaList.append(StopListPage.ETA(company: .NLB, seq: stop.seq.integer ?? -1, display: display, remark: nil))
                     }

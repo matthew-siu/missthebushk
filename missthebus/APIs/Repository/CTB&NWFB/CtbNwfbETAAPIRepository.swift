@@ -59,6 +59,7 @@ struct CtbNwfbETAQuery: APIQuery{
     let company: BusCompany
     let stopId: String
     let routeNum: String
+    var stopName: String? = nil
 }
 
 struct CtbNwfbETAResponse: APIResponse {

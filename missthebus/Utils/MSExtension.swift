@@ -30,47 +30,47 @@ extension UIViewController{
         view.endEditing(true)
     }
     
-    func showToast(message : String) {
-        var height = UIScreen.main.bounds.height
-        let width = UIScreen.main.bounds.width
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        height -= (window?.safeAreaInsets.bottom)!
-        
-        let toastLabel = UILabel(frame: CGRect(x: width - 80, y: height - 100, width: 250, height: 30))
-        toastLabel.backgroundColor = .clear
-        toastLabel.textColor = UIColor.white
-        toastLabel.textAlignment = .center;
-        toastLabel.font = toastLabel.font.withSize(15.0)
-        toastLabel.numberOfLines = 0
-        toastLabel.text = message
-        
-        
-        // autosizing after entering text
-        toastLabel.clipsToBounds  =  true
-        toastLabel.sizeToFit()
-        toastLabel.center.x = self.view.center.x
-        
-        // resize frame
-        let toast = UIView(frame: CGRect(origin: toastLabel.frame.origin, size: CGSize(width: toastLabel.frame.width + 40, height: toastLabel.frame.height + 20)))
-        toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toast.layer.cornerRadius = 15
-        toast.center = toastLabel.center
-        toastLabel.center = CGPoint(x: toast.frame.width/2, y: toast.frame.height/2)
-        
-        toast.addSubview(toastLabel)
-        self.view.addSubview(toast)
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            toast.alpha = 1.0
-        }, completion: {(isCompleted) in
-            UIView.animate(withDuration: 1.0, delay: 2.0, options: .curveEaseOut, animations: {
-                toast.alpha = 0.0
-            }, completion: {(isCompleted) in
-                toast.removeFromSuperview()
-            })
-        })
-        
-    }
+//    func showToast(message : String) {
+//        var height = UIScreen.main.bounds.height
+//        let width = UIScreen.main.bounds.width
+//        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+//        height -= (window?.safeAreaInsets.bottom)!
+//
+//        let toastLabel = UILabel(frame: CGRect(x: width - 80, y: height - 100, width: 250, height: 30))
+//        toastLabel.backgroundColor = .clear
+//        toastLabel.textColor = UIColor.white
+//        toastLabel.textAlignment = .center;
+//        toastLabel.font = toastLabel.font.withSize(15.0)
+//        toastLabel.numberOfLines = 0
+//        toastLabel.text = message
+//
+//
+//        // autosizing after entering text
+//        toastLabel.clipsToBounds  =  true
+//        toastLabel.sizeToFit()
+//        toastLabel.center.x = self.view.center.x
+//
+//        // resize frame
+//        let toast = UIView(frame: CGRect(origin: toastLabel.frame.origin, size: CGSize(width: toastLabel.frame.width + 40, height: toastLabel.frame.height + 20)))
+//        toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+//        toast.layer.cornerRadius = 15
+//        toast.center = toastLabel.center
+//        toastLabel.center = CGPoint(x: toast.frame.width/2, y: toast.frame.height/2)
+//
+//        toast.addSubview(toastLabel)
+//        self.view.addSubview(toast)
+//
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+//            toast.alpha = 1.0
+//        }, completion: {(isCompleted) in
+//            UIView.animate(withDuration: 1.0, delay: 2.0, options: .curveEaseOut, animations: {
+//                toast.alpha = 0.0
+//            }, completion: {(isCompleted) in
+//                toast.removeFromSuperview()
+//            })
+//        })
+//
+//    }
     
 }
 // check String can convert to Double / Float / Int
@@ -407,7 +407,7 @@ extension UIView{
 extension String {
     
     func localized(lang: String) ->String {
-        let path = Bundle(for: BaseViewController.self).path(forResource: lang, ofType: "lproj")
+        let path = Bundle(for: ViewController.self).path(forResource: lang, ofType: "lproj")
         let bundle = Bundle(path: path!)
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }

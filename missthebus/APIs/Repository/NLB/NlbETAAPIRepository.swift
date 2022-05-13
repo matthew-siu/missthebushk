@@ -72,6 +72,7 @@ struct NlbETAQuery: APIQuery{
     let routeId: String
     let routeNum: String
     let stopId: String
+    var stopName: String? = nil
 }
 
 struct NlbETAResponse: APIResponse {

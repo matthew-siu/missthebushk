@@ -49,6 +49,7 @@ struct KmbETAQuery: APIQuery{
     let stopId: String
     let route: String
     let serviceType: String
+    var stopName: String? = nil
 }
 
 

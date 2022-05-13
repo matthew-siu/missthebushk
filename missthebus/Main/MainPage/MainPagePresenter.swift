@@ -71,7 +71,7 @@ extension MainPagePresenter {
         guard let query = query else {return}
         for eta in data{
             if (eta.route == query.route && eta.dir == bound && String(eta.service_type ?? -1) == query.serviceType){
-                if let display = KmbManager.getETA(raw: eta.eta){
+                if let display = BusManager.getETA(raw: eta.eta){
                     etas.append(display)
                 }
             }
@@ -98,14 +98,14 @@ extension MainPagePresenter {
             if (eta.co == BusCompany.CTB.rawValue){
                 company = .CTB
                 if (eta.route == query.routeNum && eta.dir == bound){
-                    if let display = KmbManager.getETA(raw: eta.eta){
+                    if let display = BusManager.getETA(raw: eta.eta){
                         etas.append(display)
                     }
                 }
             }else if (eta.co == BusCompany.NWFB.rawValue){
                 company = .NWFB
                 if (eta.route == query.routeNum && eta.dir == bound){
-                    if let display = KmbManager.getETA(raw: eta.eta){
+                    if let display = BusManager.getETA(raw: eta.eta){
                         etas.append(display)
                     }
                 }
@@ -129,7 +129,7 @@ extension MainPagePresenter {
         var etas = [String]()
         guard let query = query else {return}
         for eta in data{
-            if let display = KmbManager.getETA(raw: eta.estimatedArrivalTime, format: "yyyy-MM-dd HH:mm:ss"){
+            if let display = BusManager.getETA(raw: eta.estimatedArrivalTime, format: "yyyy-MM-dd HH:mm:ss"){
                 etas.append(display)
             }
         }

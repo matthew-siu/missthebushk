@@ -29,18 +29,18 @@ class StopBookmark: Codable{
     }
     
     var currentStop: String?{
-        return KmbManager.getStop(stopId: self.stopId)?.name
+        return BusManager.getStop(stopId: self.stopId)?.name
     }
     
     var destStop: String?{
-        return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)?.destStop
+        return BusManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)?.destStop
     }
     
     var stop: Stop?{
-        return KmbManager.getStop(stopId: self.stopId)
+        return BusManager.getStop(stopId: self.stopId)
     }
     var route: Route?{
-        return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
+        return BusManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
     }
     var routeMetadata: RouteMetadata{
         return RouteMetadata(self.routeNum, self.bound, self.serviceType)

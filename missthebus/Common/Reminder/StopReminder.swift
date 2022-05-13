@@ -36,7 +36,7 @@ class StopReminder: Codable{
         }
         
         func getRoute() -> Route?{
-            return KmbManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
+            return BusManager.getRoute(route: self.routeNum, bound: self.bound, serviceType: self.serviceType)
         }
         
         func getStop(at index: Int) -> RouteStop?{

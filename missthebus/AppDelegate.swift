@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMobileAds
 import GoogleMaps
+import WidgetKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -29,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
         
+        print("enter foreground (first)")
+        self.reloadWidget()
+        
         return true
         
         
@@ -40,6 +44,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("在前景收到通知...")
         completionHandler([.badge, .sound, .alert])
     }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print("enter foreground")
+        self.reloadWidget()
+    }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("enter background")
+    }
+    
+    private func reloadWidget(){
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 }
 

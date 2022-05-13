@@ -204,7 +204,7 @@ extension StopListPageViewController: StopItemCellDelegate{
         
         self.interactor?.bookmark(stop: stop, isMarked: isMarked)
         let msg = (isMarked) ? "stop_bookmark_succeed".localized() : "stop_unbookmark_succeed".localized()
-        self.showToast(message: msg)
+//        self.showToast(message: msg)
     }
 }
 

@@ -68,26 +68,26 @@ class Utils{
         return error
     }
     
-    static func handleError(_ response: Dictionary<String, Any>) -> Error{
-        print("handleError: \(response)")
-        let codeStr = response["code"] as! String
-        let code:Int? = Int(codeStr)
-        guard let msg = response["msg"] as? String else{
-            return error(msg: "smc_msg_err_404".localized(), code: code ?? 404)
-        }
-        switch code {
-        case 401:
-            return error(msg: "smc_msg_err_unauthorized".localized(), code: 401)
-        case 404:
-            return error(msg: "smc_msg_err_404".localized(), code: 401)
-        case 504:
-            return error(msg: "msg_err_timeout".localized(), code: 504)
-        case -1004:
-            return error(msg: "msg_err_no_connection".localized(), code: -1004)
-        default:
-            return error(msg: msg, code: code ?? 404)
-        }
-    }
+//    static func handleError(_ response: Dictionary<String, Any>) -> Error{
+//        print("handleError: \(response)")
+//        let codeStr = response["code"] as! String
+//        let code:Int? = Int(codeStr)
+//        guard let msg = response["msg"] as? String else{
+//            return error(msg: "smc_msg_err_404".localized(), code: code ?? 404)
+//        }
+//        switch code {
+//        case 401:
+//            return error(msg: "smc_msg_err_unauthorized".localized(), code: 401)
+//        case 404:
+//            return error(msg: "smc_msg_err_404".localized(), code: 401)
+//        case 504:
+//            return error(msg: "msg_err_timeout".localized(), code: 504)
+//        case -1004:
+//            return error(msg: "msg_err_no_connection".localized(), code: -1004)
+//        default:
+//            return error(msg: msg, code: code ?? 404)
+//        }
+//    }
     
     // for swift 4
     static func hexStringToUIColor (_ hex:String) -> UIColor {

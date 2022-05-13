@@ -65,7 +65,7 @@ public class API {
 }
 
 // MARK: - API extension - KMB
-class KMBAPI {
+class BusAPI {
     public static func send<R: Repository>(repository: R, usingQueue queue: OperationQueue? = nil) -> Promise<SuccessResponse<R.ResponseType?>> {
         
         let repo: Promise<(R.ResponseType?, ResponseHeaders?)> = API.send(repository: repository, usingQueue: queue)

@@ -53,6 +53,6 @@ class RouteStop: Codable{
     }
     
     var stop: Stop?{
-        return KmbManager.getStop(stopId: self.stopId)
+        return BusManager.getStop(stopId: self.stopId)
     }
 }

@@ -67,7 +67,7 @@ extension StopListPageInteractor {
     func loadAllStopsFromRoute(){
         // load all stops
         var stopList = [Stop]()
-        guard let allStopList = KmbManager.getAllStops() else {return}
+        guard let allStopList = BusManager.getAllStops() else {return}
         for stop in self.route.stopList{
             if let targetStop = allStopList.first(where: {$0.stopId == stop.stopId}){
                 stopList.append(targetStop)
@@ -175,7 +175,7 @@ extension StopListPageInteractor{
     private func requestOneStopETA(query: APIQuery){
         DispatchQueue.main.async {
             print("requestOneStopETA")
-            KmbManager.requestOneStopETA(query: query)
+            BusManager.requestOneStopETA(query: query)
                 .done{response in
                     if let response = response as? KmbETAResponse, let resp = response.data{
                         self.presenter?.displayETA(data: resp)

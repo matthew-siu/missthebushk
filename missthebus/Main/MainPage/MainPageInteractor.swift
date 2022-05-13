@@ -152,6 +152,7 @@ extension MainPageInteractor{
     
     @objc
     private func requestUpcomingETA(_ timer: Timer?){
+        print("requestUpcomingETA")
         if let upcoming = self.upcomingReminder?.upcomingReminder?.routes{
             for route in upcoming{
                 for stop in route.stops {
@@ -261,6 +262,7 @@ extension MainPageInteractor{
     
     @objc
     private func requestBookmarkETA(_ timer: Timer?){
+        print("requestOneStopETA")
         for bookmark in self.bookmarks{
             let query = self.createBookmarkETAQuery(bookmark: bookmark)
             if let query = query{
@@ -374,7 +376,7 @@ extension MainPageInteractor {
     private func requestOneStopETA(query: APIQuery, bound: String){
         DispatchQueue.main.async {
             
-            KmbManager.requestOneStopETA(query: query)
+            BusManager.requestOneStopETA(query: query)
                 .done{response in
                     if let response = response as? KmbETAResponse, let resp = response.data{
                         self.presenter?.updateETAs(query: query as? KmbETAQuery, bound: bound, data: resp)

@@ -51,7 +51,7 @@ class SearchPageInteractor: SearchPageBusinessLogic, SearchPageDataStore
         self.presenter?.displayInitialState(type: self.type)
         
         DispatchQueue.main.async {
-            if let routes = KmbManager.getAllRoutes(){
+            if let routes = BusManager.getAllRoutes(){
                 self.routes = routes
                 self.presenter?.presentTableView(routes: routes)
             }else{

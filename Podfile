@@ -22,4 +22,9 @@ target 'missthebus' do
     # Pods for testing
   end
 
+  target 'missthebus widgetExtension' do
+    # Pods for widget
+    inherit! :search_paths
+  end
+
 end

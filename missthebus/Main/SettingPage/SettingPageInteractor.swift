@@ -41,14 +41,14 @@ class SettingPageInteractor: SettingPageBusinessLogic, SettingPageDataStore
 extension SettingPageInteractor {
     func clearMemoryCache() {
         Storage.remove(Configs.Storage.KEY_REMINDERS)
-        Storage.remove(Configs.Storage.KEY_BOOKMARKS)
+        Storage.remove(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_BOOKMARKS)
     }
     
     func reloadInfo(){
         Storage.remove(Configs.Storage.KEY_LAST_UPDATE)
         Storage.remove(Configs.Storage.KEY_ROUTES)
         Storage.remove(Configs.Storage.KEY_ROUTESTOPS)
-        Storage.remove(Configs.Storage.KEY_STOPS)
+        Storage.remove(suiteName: Configs.SuiteName.AppGroup, Configs.Storage.KEY_STOPS)
         
         let request = SplashScreenBuilder.BuildRequest()
         let vc = SplashScreenBuilder.createScene(request: request)
