@@ -64,6 +64,7 @@
 		2EB58947282DF2AE005740CF /* LanguageConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF6CEE269FE2920033D2CE /* LanguageConfigs.swift */; };
 		2EB5894A282DF446005740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58949282DF446005740CF /* ViewController.swift */; };
 		2EB5894B282DF46A005740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB58949282DF446005740CF /* ViewController.swift */; };
+		2EB5894E2831F9AB005740CF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF6CE5269FDE1F0033D2CE /* Localizable.strings */; };
 		4392F3A126D18E3200A0E6D7 /* nlb_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4392F3A026D18E3200A0E6D7 /* nlb_routes.json */; };
 		4392F3AE26D1921100A0E6D7 /* NlbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3AD26D1921100A0E6D7 /* NlbRouteAPIRepository.swift */; };
 		4392F3BD26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4392F3BC26D21BB500A0E6D7 /* CtbNwfbRouteAPIRepository.swift */; };
@@ -1229,6 +1230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E4F79FC28210E2100F12600 /* Assets.xcassets in Resources */,
+				2EB5894E2831F9AB005740CF /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,7 +5,7 @@
 
 
 // i18n-translator
-// Created by Matthew Siu on 23/4/2021
+// Created by Matthew Siu on 23/4/2021.
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
 // Splash Screen
@@ -113,17 +113,17 @@
 "general_remind" = "Remind";
 "general_attention" = "Attention";
 
-
-
-
-
-
-
-
-
-
-
-
+// Widget
+"widget_app_name1" = "Bus (1st-4th)";
+"widget_app_name2" = "Bus (5th-8th)";
+"widget_app_name3" = "Bus (9th-12th)";
+"widget_description1" = "Show you the Estimated Time Arrived";
+"widget_description2" = "Estimated Time Arrived";
+"widget_description3" = "Estimated Time Arrived";
+"widget_update_label" = "Updated at:";
+"widget_no_stops1" = "Display 1st to 4th bookmarked bus stops.";
+"widget_no_stops2" = "Display 5th to 8th bookmarked bus stops.";
+"widget_no_stops3" = "Display 9th to 12th bookmarked bus stops.";
 
 
 

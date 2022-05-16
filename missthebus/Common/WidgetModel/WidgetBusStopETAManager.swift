@@ -15,15 +15,24 @@ class WidgetBusStopETAManager{
     init() {
     }
     
-    func requestETA() -> Promise<[WidgetBusStopETA]>{
+    func requestETA(_ index: Int = 0) -> Promise<[WidgetBusStopETA]>{
         return Promise { promise in
             self.bookmarks = self.getStopBookmarks() ?? []
-            self.bookmarks = Array(self.bookmarks.prefix(4))
-            print("requestETA: \(self.bookmarks.count)")
+            let total = self.bookmarks.count
+            var fromIndex = 0, toIndex = 0
+            if (total > 4 * index){
+                fromIndex = 4 * index
+            }else{
+                promise.fulfill([])
+                return
+            }
+            toIndex = 4 * index + ((total > 4 * (index + 1)) ? 4 : total % 4) - 1
+            print("Widget ID = \(index), display \(fromIndex) to \(toIndex)")
+            self.bookmarks = Array(self.bookmarks[fromIndex...toIndex])
+            print("requestETA count = \(self.bookmarks.count)")
             var etaRequestList = [Promise<WidgetBusStopETA>]()
             for bookmark in self.bookmarks {
                 if let query = self.createBookmarkETAQuery(bookmark: bookmark){
-                    print("query: \(bookmark.routeNum) \(bookmark.currentStop)")
                     etaRequestList.append(self.requestOneStopETA(query: query, bound: bookmark.bound))
                 }
             }
@@ -46,7 +55,7 @@ class WidgetBusStopETAManager{
             do {
                 let decoder = JSONDecoder()
                 let stops = try decoder.decode([StopBookmark].self, from: data)
-                print("stops: \(stops.count)")
+                print("total bookmarked stops = \(stops.count)")
                 return stops
 
             } catch {

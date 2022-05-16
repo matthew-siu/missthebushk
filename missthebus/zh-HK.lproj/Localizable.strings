@@ -5,7 +5,7 @@
 
 
 // i18n-translator
-// Created by Matthew Siu on 23/4/2021
+// Created by Matthew Siu on 23/4/2021.
 // Copyright © 2021 Matthew Siu. All rights reserved.
 
 // Splash Screen
@@ -113,17 +113,17 @@
 "general_remind" = "提醒";
 "general_attention" = "注意";
 
-
-
-
-
-
-
-
-
-
-
-
+// Widget
+"widget_app_name1" = "巴士（第1-4）";
+"widget_app_name2" = "巴士（第5-8）";
+"widget_app_name3" = "巴士（第9-12）";
+"widget_description1" = "顯示預計到達時間";
+"widget_description2" = "顯示預計到達時間";
+"widget_description3" = "顯示預計到達時間";
+"widget_update_label" = "更新於：";
+"widget_no_stops1" = "顯示第 1 到第 4 個已書籤的巴士站";
+"widget_no_stops2" = "顯示第 5 到第 8 個已書籤的巴士站";
+"widget_no_stops3" = "顯示第 9 到第 12 個已書籤的巴士站";
 
 
 
